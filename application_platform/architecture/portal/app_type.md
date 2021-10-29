@@ -5,7 +5,7 @@
 <br><br>
 
 ## 시스템 구성도
-App TYPE의 AP Portal은 Portal Infra와 Portal APP으로 나뉘어있다.  
+APP TYPE의 AP Portal은 Portal Infra와 Portal APP으로 나뉘어있다.  
 Portal Infra, Portal APP의 구성과 스펙은 다음과 같다.  
 <br>
 
