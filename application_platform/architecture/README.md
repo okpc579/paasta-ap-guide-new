@@ -1,27 +1,29 @@
 ### [Index](../../README.md) > AP - Architecture
 
 ## AP - Architecture
-* Application (Platform OR Core) Architecture  
-  * [BOSH](./application_platform/architecture/README.md)  
-  * [PaaS-TA AP](./application_platform/install/README.md)  
-  * [PaaS-TA AP - min](./application_platform/user_guide/README.md)  
-  * [cf-for-k8s (가칭) ](./application_platform/user_guide/README.md)  
+- Application (Platform OR Core) Architecture  
+  - VM Type
+    - [BOSH](./core/README.md)  
+    - [PaaS-TA AP](./core/README.md)  
+    - [PaaS-TA AP - min](./core/README.md)  
+  - Container Type
+    - [cf-for-k8s (가칭)](./core/README.md)  
 
-* Portal Architecture
-  * [VM TYPE](./application_platform/architecture/README.md)   
-  * [APP TYPE](./application_platform/user_guide/README.md)   -
++ Portal Architecture
+  + [VM TYPE](./portal/README.md)   
+  + [APP TYPE](./portal/README.md)   
 
-- Portal Architecture
-  - [VM TYPE](./application_platform/architecture/README.md)
-    * 파랑
-    
-
-
-
-+ 빨강
-  + 녹색
-    + 파랑
-
-- 빨강
-  - 녹색
-    - 파랑
+- Service Architecture
+  - [Cubrid](./service/README.md)
+  - [MySQL](./service/README.md)
+  - [MongoDB](./service/README.md)
+  - [Redis](./service/README.md)
+  - [GlusterFS](./service/README.md)
+  - [RabbitMQ](./service/README.md)
+  - [WEB IDE](./service/README.md)
+  - [Pinpoint APM](./service/README.md)
+  - [배포파이프라인](./service/README.md)
+  - [형상관리](./service/README.md)
+  - [Logging](./service/README.md)
+  - [Gateway](./service/README.md)
+  - [Lifecycle](./service/README.md)
