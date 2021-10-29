@@ -2,7 +2,7 @@
 
 ## 목적
 본 문서(Portal Architecture - VM Type)는 AP Portal - VM TYPE의 Architecture를 제공한다.
-<br>
+<br><br>
 
 ## 시스템 구성도
 VM TYPE의 AP Portal은 Portal API와 Portal UI로 나뉘어있다.  
