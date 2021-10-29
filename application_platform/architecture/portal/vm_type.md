@@ -1,10 +1,5 @@
 ### [Index](../../../README.md) > [AP - Architecture](../README.md) > Portal Architecture - VM Type
 
-## Table of Contents
-- [목적]()
-- [시스템 구성도]()
-<br>
-
 ## 목적
 본 문서(Portal Architecture - VM Type)는 AP Portal - VM TYPE의 Architecture를 제공한다.
 <br>
