@@ -11,7 +11,7 @@
 
 + Portal Architecture
   + [VM TYPE](./portal/vm_type.md)   
-  + [APP TYPE](./portal/README.md)   
+  + [APP TYPE](./portal/app_type.md)   
 
 - Service Architecture
   - [Cubrid](./service/README.md)
