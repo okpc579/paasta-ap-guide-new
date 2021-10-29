@@ -10,7 +10,7 @@
     - [cf-for-k8s (가칭)](./core/README.md)  
 
 + Portal Architecture
-  + [VM TYPE](./portal/README.md)   
+  + [VM TYPE](./portal/vm_type.md)   
   + [APP TYPE](./portal/README.md)   
 
 - Service Architecture
