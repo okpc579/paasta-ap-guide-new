@@ -1,4 +1,4 @@
-### [Index](../../) > AP - Architecture
+### [Index](../../README.md) > AP - Architecture
 
 ## AP - Architecture
 1. Application Platform  
