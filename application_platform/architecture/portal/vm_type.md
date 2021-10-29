@@ -7,7 +7,7 @@
 ## 시스템 구성도
 VM TYPE의 AP Portal은 Portal API와 Portal UI로 나뉘어있다.  
 Portal API, Portal UI의 구성과 스펙은 다음과 같다.  
-
+<br>
 | Deployment | 구분  | 스펙 |
 |------------|-------|-----|
 | portal-api | binary_storage | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
