@@ -8,6 +8,13 @@
 VM TYPE의 AP Portal은 Portal API와 Portal UI로 나뉘어있다.  
 Portal API, Portal UI의 구성과 스펙은 다음과 같다.  
 <br>
+
+
+
+![Portal Architecture - VM Type](image/portal_architecture_vm.png)
+
+<br>
+
 | Deployment | 구분  | 스펙 |
 |------------|-------|-----|
 | portal-api | binary_storage | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
@@ -24,12 +31,6 @@ Portal API, Portal UI의 구성과 스펙은 다음과 같다.
 | portal-ui | paas-ta-portal-webadmin | 1vCPU / 512MB RAM / 4GB Disk |
 | portal-ui | paas-ta-portal-webuser | 1vCPU / 512MB RAM / 4GB Disk|
 <br>
-
-
-![Portal Architecture - VM Type](image/portal_architecture_vm.png)
-
-
-
 
 
 
