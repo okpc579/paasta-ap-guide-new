@@ -18,6 +18,7 @@
 내용 ~~~~~~~~~~~~
 내용 ~~~~~~~~~~~~
 
+![Portal Architecture - VM Type](image/portal_architecture_vm.png)
 
 
 
