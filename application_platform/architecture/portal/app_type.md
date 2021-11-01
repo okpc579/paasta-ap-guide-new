@@ -26,12 +26,12 @@ Portal Infra, Portal APP의 구성과 스펙은 다음과 같다.
 
 | App명 | 인스턴스 수 | 메모리 | 디스크 |
 |--------|-------|-------|-------|
-| portal-registration | 1 | 1G | 1G|
-| portal-gateway | 1 | 1G | 1G|
+| portal-registration | N | 1G | 1G|
+| portal-gateway | N | 1G | 1G|
 | portal-api | N | 2G | 2G|
 | portal-common-api | N | 1G | 1G|
 | portal-storage-api | N | 1G | 1G|
-| portal-log-api | N | 1G | 1G|
+| portal-log-api | 1 | 1G | 1G|
 | portal-web-admin | N | 1G | 1G|
 | portal-web-user | N | 1G | 1G|  
 | ssh-app | 1 | 1G | 1G|  
