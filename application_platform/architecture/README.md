@@ -10,8 +10,8 @@
     - [cf-for-k8s (가칭)](./core/README.md)  
 
 + Portal Architecture
-  + [BOSH를 이용한 포탈 VM Type 배포](./portal/vm_type.md)   
-  + [PaaS-TA AP에 포탈 Container Type 배포](./portal/app_type.md)   
+  + [BOSH를 이용한 포탈 VM Type](./portal/vm_type.md)   
+  + [PaaS-TA AP에 포탈 Container Type](./portal/app_type.md)   
 
 - Service Architecture
   - [Cubrid](./service/README.md)
