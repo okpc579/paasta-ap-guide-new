@@ -11,7 +11,7 @@
 
 + Portal Architecture
   + [BOSH를 이용한 포탈 VM Type](./portal/vm_type.md)   
-  + [PaaS-TA AP에 포탈 Container Type](./portal/app_type.md)   
+  + [PaaS-TA AP를 이용한 포탈 Container Type](./portal/app_type.md)   
 
 - Service Architecture
   - [Cubrid](./service/README.md)
