@@ -1,4 +1,4 @@
-### [Index](../../README.md) > AP - Architecture
+### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > AP - Architecture
 
 ## Application Platform (AP) - Architecture
 - Application Platform Architecture  
@@ -28,4 +28,4 @@
   - [Gateway](./service/README.md)
   - [Lifecycle](./service/README.md)
 
-### [Index](../../README.md) > AP - Architecture
+### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > AP - Architecture
