@@ -34,6 +34,7 @@ Portal Infra, Portal APP의 구성과 스펙은 다음과 같다.
 | portal-log-api | N | 1G | 1G|
 | portal-web-admin | N | 1G | 1G|
 | portal-web-user | N | 1G | 1G|  
+| ssh-app | 1 | 1G | 1G|  
 
 
 ### [Index](../../../README.md) > [AP - Architecture](../README.md) > Portal Architecture - Container Type
