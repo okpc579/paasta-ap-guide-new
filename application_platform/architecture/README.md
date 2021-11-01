@@ -1,6 +1,6 @@
 ### [Index](../../README.md) > AP - Architecture
 
-## Application Platform - Architecture
+## Application Platform (AP) - Architecture
 - Application Platform Architecture  
   - BOSH를 이용한 VM Type 배포
     - [BOSH](./core/README.md)  
