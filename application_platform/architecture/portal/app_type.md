@@ -1,17 +1,17 @@
-### [Index](../../../README.md) > [AP - Architecture](../README.md) > Portal Architecture - APP Type
+### [Index](../../../README.md) > [AP - Architecture](../README.md) > Portal Architecture - Container Type
 
 ## 목적
-본 문서(Portal Architecture - APP Type)는 AP Portal - APP TYPE의 Architecture를 제공한다.
+본 문서(Portal Architecture - Container Type)는 AP Portal - Container Type의 Architecture를 제공한다.
 <br><br>
 
 ## 시스템 구성도
-APP TYPE의 AP Portal은 Portal Infra와 Portal APP으로 나뉘어있다.  
+Container Type의 AP Portal은 Portal Infra와 Portal APP으로 나뉘어있다.  
 Portal Infra, Portal APP의 구성과 스펙은 다음과 같다.  
 <br>
 
 
 
-![Portal Architecture - APP Type](./image/portal_architecture_app.png)
+![Portal Architecture - Container Type](./image/portal_architecture_app.png)
 
 <br>
 
