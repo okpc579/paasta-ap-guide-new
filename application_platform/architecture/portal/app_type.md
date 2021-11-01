@@ -6,8 +6,7 @@
 
 ## 시스템 구성도
 Container Type의 AP Portal은 Portal Infra와 Portal APP으로 나뉘어있다.  
-Portal Infra는 Binary storage와 Database로 구성되어 있으며 BOSH로 배포된다.
-Portal APP은 PaaS-TA AP로 배포된다.
+Portal Infra는 BOSH로 배포되고, Portal APP은 PaaS-TA AP로 배포된다.  
 Portal Infra, Portal APP의 구성과 스펙은 다음과 같다.  
 <br>
 
