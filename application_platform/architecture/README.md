@@ -1,17 +1,17 @@
 ### [Index](../../README.md) > AP - Architecture
 
-## AP - Architecture
-- Application (Platform OR Core) Architecture  
-  - VM Type
+## Application Platform - Architecture
+- Application Platform Architecture  
+  - BOSH를 이용한 VM Type 배포
     - [BOSH](./core/README.md)  
     - [PaaS-TA AP](./core/README.md)  
     - [PaaS-TA AP - min](./core/README.md)  
-  - Container Type
+  - Kubernetes를 이용한 Container Type 배포
     - [cf-for-k8s (가칭)](./core/README.md)  
 
 + Portal Architecture
-  + [VM TYPE](./portal/vm_type.md)   
-  + [APP TYPE](./portal/app_type.md)   
+  + [BOSH를 이용한 포탈 VM Type 배포](./portal/vm_type.md)   
+  + [PaaS-TA AP에 포탈 Container Type 배포](./portal/app_type.md)   
 
 - Service Architecture
   - [Cubrid](./service/README.md)
