@@ -1,4 +1,4 @@
-### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Architecture](../README.md) > Portal Architecture-Container Type
+### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Architecture](../README.md) > Portal Container Type
 
 ## 목적
 본 문서(Portal Architecture - Container Type)는 AP Portal - Container Type의 Architecture를 제공한다.
