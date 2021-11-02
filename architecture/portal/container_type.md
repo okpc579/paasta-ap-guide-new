@@ -37,4 +37,4 @@ Portal Infra, Portal APP의 구성과 스펙은 다음과 같다.
 | ssh-app | 1 | 1G | 1G|  
 
 
-### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Architecture](../README.md) > Portal Architecture - Container Type
+### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Architecture](../README.md) > Portal Container Type
