@@ -1,7 +1,7 @@
-### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP - Architecture](../README.md) > Portal Architecture - VM Type
+### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Architecture](../README.md) > Portal VM Type
 
 ## 목적
-본 문서(Portal Architecture - VM Type)는 AP Portal - VM TYPE의 Architecture를 제공한다.
+본 문서(Portal Architecture - VM Type)는 AP Portal - VM Type의 Architecture를 제공한다.
 <br><br>
 
 ## 시스템 구성도
@@ -35,4 +35,4 @@ Portal API, Portal UI의 구성과 스펙은 다음과 같다.
 
 
 
-### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP - Architecture](../README.md) > Portal Architecture - VM Type
+### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Architecture](../README.md) > Portal VM Type
