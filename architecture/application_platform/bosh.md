@@ -1,7 +1,7 @@
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Architecture](../README.md) > BOSH
 
 ## 목적
-본 문서(BOSH)는 BOSH의 Architecture를 제공한다.
+본 문서는 BOSH의 Architecture를 제공한다.
 <br><br>
 
 ## 시스템 구성도
