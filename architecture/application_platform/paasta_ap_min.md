@@ -1,7 +1,7 @@
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Architecture](../README.md) > PaaS-TA AP - min
 
 ## 목적
-본 문서는 PaaS-TA AP - min의 Architecture를 제공한다.
+본 문서는 PaaS-TA Application Platform (AP) - min의 Architecture를 제공한다.
 <br><br>
 
 ## 시스템 구성도
