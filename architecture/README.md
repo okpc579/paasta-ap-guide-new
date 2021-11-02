@@ -3,11 +3,11 @@
 ## Application Platform (AP) - Architecture
 - Application Platform Architecture  
   - BOSH를 이용한 VM Type 배포
-    - [BOSH](./core/README.md)  
-    - [PaaS-TA AP](./core/README.md)  
-    - [PaaS-TA AP - min](./core/README.md)  
+    - [BOSH](./application_platform/bosh.md)  
+    - [PaaS-TA AP](./application_platform/paasta_ap.md)  
+    - [PaaS-TA AP - min](./application_platform/paasta_ap_min.md)  
   - Kubernetes를 이용한 Container Type 배포
-    - [cf-for-k8s (가칭)](./core/README.md)  
+    - [cf-for-k8s (가칭, md파일 미생성)](./core/README.md)  
 
 + Portal Architecture
   + [BOSH를 이용한 포탈 VM Type](./portal/vm_type.md)   
