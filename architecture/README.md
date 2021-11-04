@@ -6,7 +6,7 @@
     - [BOSH](./application_platform/bosh.md)  
     - [PaaS-TA AP](./application_platform/paasta_ap.md)  
     - [PaaS-TA AP - min](./application_platform/paasta_ap_min.md)  
-    - [PaaS-TA Multi CPI (md파일 미생성)](./application_platform/paasta_ap_min.md)  
+    - [PaaS-TA Multi CPI](./application_platform/paasta_multi_cpi.md)  
   - Kubernetes를 이용한 Container Type 배포
     - [cf-for-k8s (가칭, md파일 미생성)](./core/README.md)  
 
