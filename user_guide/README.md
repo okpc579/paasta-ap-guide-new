@@ -15,14 +15,14 @@
   - [Source Control Service User Guide](./service/cubrid.md)
   - [Logging Service User Guide](./service/cubrid.md)
 
-- AP Application Development Guide
-  - [Eclipse Plugin Development Tool Guide](./service/cubrid.md)
-  - [Node.js](./service/cubrid.md)
-  - [PHP](./service/cubrid.md)
-  - [Python](./service/cubrid.md)
-  - [Ruby](./service/cubrid.md)
-  - [Java](./service/cubrid.md)
-  - [Go](./service/cubrid.md)
++ AP Application Development Guide
+  + [Eclipse Plugin Development Tool Guide](./service/cubrid.md)
+  + [Node.js](./service/cubrid.md)
+  + [PHP](./service/cubrid.md)
+  + [Python](./service/cubrid.md)
+  + [Ruby](./service/cubrid.md)
+  + [Java](./service/cubrid.md)
+  + [Go](./service/cubrid.md)
 
 
 - AP Platform Development Guide
