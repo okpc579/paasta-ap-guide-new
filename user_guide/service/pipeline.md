@@ -1,4 +1,4 @@
-### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Pipeline Service Guide
+### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Pipeline Service
 
 
 # [PaaS-TA 배포 파이프라인 서비스 사용자 가이드]
@@ -944,4 +944,4 @@
 [178]:/use-guide/images/pipeline/image178.png
 [179]:/use-guide/images/pipeline/image179.png
 
-### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Pipeline Service Guide
+### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Pipeline Service 
