@@ -879,4 +879,4 @@ PaaS-TA 사용자 포탈은 조직, 공간, 애플리케이션을 관리하는 �
 [cass-dashboard4]:../images/user-portal/cass-dashboard4.png
 
 
-### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Portal User Guide
+### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > User Portal
