@@ -10,7 +10,7 @@
 
 
 
-![Portal Architecture - VM Type](image/portal_architecture_vm.png)
+![RabbitMQ Service Architecture](image/rabbitmq_architecture.png)
 
 <br>
 
