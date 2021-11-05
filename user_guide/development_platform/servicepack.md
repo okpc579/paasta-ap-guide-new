@@ -1,4 +1,4 @@
-### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Development Service Pack
+### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Servicepack Development
 
 
 ## Table of Contents
@@ -1938,4 +1938,4 @@ Software(서비스팩 software)를 배포하는 bosh deploy CLI 명령어를 제
  [openpaas-servicepack-48]:/images/openpaas-servicepack/openpaas-servicepack-48.png
 
 
-### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Development Service Pack
+### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Servicepack Development
