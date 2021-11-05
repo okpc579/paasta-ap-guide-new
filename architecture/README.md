@@ -29,8 +29,8 @@
     - [WEB IDE](./service/webide.md)
   - 통합 개발 도구 설치
     - [Pinpoint APM](./service/pinpoint.md)
-    - [배포파이프라인 OR Pipeline](./service/pipeline.md)
-    - [형상관리 OR Source Control](./service/source_control.md)
+    - [Pipeline](./service/pipeline.md)
+    - [Source Control](./service/source_control.md)
     - [Logging](./service/logging.md)
     - [Gateway](./service/gateway.md)
     - [Lifecycle](./service/lifecycle.md)
