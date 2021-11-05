@@ -2,7 +2,7 @@
 
 ## Application Platform (AP) - User Guide
 - Application Platform User Guide  
-  - [BOSH Extra 사용 가이드????? (가칭)](./application_platform/bosh.md)  
+  - [BOSH Extra 사용 가이드????? (가칭, md 파일 미생성)](./application_platform/bosh.md)  
   - [BOSH CLI 사용 가이드](./application_platform/bosh.md)  
   - [CF CLI 사용 가이드](./application_platform/bosh.md)  
 
