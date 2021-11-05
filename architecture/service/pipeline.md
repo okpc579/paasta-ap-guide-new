@@ -10,7 +10,7 @@
 
 
 
-![Portal Architecture - VM Type](image/portal_architecture_vm.png)
+![Pipeline Service Architecture](image/pipeline_architecture.png)
 
 <br>
 
