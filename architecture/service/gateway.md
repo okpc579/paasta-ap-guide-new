@@ -10,7 +10,7 @@
 
 
 
-![Portal Architecture - VM Type](image/portal_architecture_vm.png)
+![Gateway Service Architecture](image/gateway_architecture.png)
 
 <br>
 
