@@ -10,7 +10,7 @@
 
 
 
-![Portal Architecture - VM Type](image/portal_architecture_vm.png)
+![PaaS-TA AP - min Architecture](image/ap_architecture_min.png)
 
 <br>
 
