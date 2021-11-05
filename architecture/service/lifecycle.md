@@ -10,7 +10,7 @@
 
 
 
-![Portal Architecture - VM Type](image/portal_architecture_vm.png)
+![Lifecycle Service Architecture](image/lifecycle_architecture.png)
 
 <br>
 
