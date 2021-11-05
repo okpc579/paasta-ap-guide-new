@@ -11,7 +11,7 @@
     - [cf-for-k8s (가칭, md파일 미생성)](./core/README.md)  
     - [cf-for-k8s - local (가칭, md파일 미생성)](./core/README.md)  
   - 기타 가이드
-    - [Migration 가이드 (3.1 to 4.0)](./core/README.md)  
+    - [Migration 가이드 (3.1 to 4.0)](./application_platform/4.0_migration.md)  
 
 + Portal Install
   + BOSH를 이용한 포탈 VM Type
