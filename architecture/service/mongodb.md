@@ -10,7 +10,7 @@
 
 
 
-![Portal Architecture - VM Type](image/portal_architecture_vm.png)
+![MongoDB Service Architecture](image/mongodb_architecture.png)
 
 <br>
 
