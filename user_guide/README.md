@@ -7,8 +7,8 @@
   - [cf CLI 사용 가이드](./application_platform/cf_cli.md)  
 
 + Portal User Guide
-  + [PaaS-TA 사용자 포털 가이드](./portal/admin.md)   
-  + [PaaS-TA 운영자 포털 가이드](./portal/user.md)   
+  + [PaaS-TA 사용자 포털 가이드](./portal/user.md)   
+  + [PaaS-TA 운영자 포털 가이드](./portal/admin.md)   
 
 - Service User Guide
   - [Pipeline 사용 가이드](./service/pipeline.md)
