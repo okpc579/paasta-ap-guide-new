@@ -10,7 +10,7 @@
 
 
 
-![Portal Architecture - VM Type](image/portal_architecture_vm.png)
+![Source Control Service Architecture](image/source_control_architecture.png)
 
 <br>
 
