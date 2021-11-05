@@ -15,8 +15,8 @@
 
 + Portal Install
   + BOSH를 이용한 포탈 VM Type
-    + [PaaS-TA AP - Portal UI](./portal/vm_type.md)   
-    + [PaaS-TA AP - Portal API](./portal/vm_type.md)   
+    + [PaaS-TA AP - Portal UI](./portal/vm_type_ui.md)   
+    + [PaaS-TA AP - Portal API](./portal/vm_type_api.md)   
   + PaaS-TA AP를 이용한 포탈 Container Type
     + [PaaS-TA AP - Portal infra & Portal APP](./portal/container_type.md)   
 
@@ -41,4 +41,4 @@
     - [Gateway](./service/gateway.md)
     - [Lifecycle](./service/lifecycle.md)
 
-### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > AP Architecture
+### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > AP Install
