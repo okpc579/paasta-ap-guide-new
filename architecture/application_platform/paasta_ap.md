@@ -10,7 +10,9 @@
 
 
 
-![Portal Architecture - VM Type](image/portal_architecture_vm.png)
+![PaaS-TA AP Component](image/ap_architecture_component.png)
+
+![PaaS-TA AP run_map](image/ap_architecture_run_map.png)
 
 <br>
 
