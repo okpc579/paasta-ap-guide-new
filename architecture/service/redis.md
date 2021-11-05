@@ -10,7 +10,7 @@
 
 
 
-![Portal Architecture - VM Type](image/portal_architecture_vm.png)
+![Redis Service Architecture](image/redis_architecture.png)
 
 <br>
 
