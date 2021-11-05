@@ -10,7 +10,7 @@
 
 
 
-![Portal Architecture - VM Type](image/portal_architecture_vm.png)
+![WEB IDE Service Architecture](image/webide_architecture.png)
 
 <br>
 
