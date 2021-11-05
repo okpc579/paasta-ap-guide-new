@@ -10,7 +10,7 @@
 
 
 
-![Portal Architecture - VM Type](image/portal_architecture_vm.png)
+![GlusterFS Service Architecture](image/glusterfs_architecture.png)
 
 <br>
 
