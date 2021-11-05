@@ -8,9 +8,7 @@
 ``` 수정중 ```
 <br>
 
-
-
-![Portal Architecture - VM Type](image/portal_architecture_vm.png)
+![MySQL Service Architecture](image/mysql_architecture.png)
 
 <br>
 
