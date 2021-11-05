@@ -10,7 +10,7 @@
 
 
 
-![Portal Architecture - VM Type](image/portal_architecture_vm.png)
+![Pinpoint APM Service Architecture](image/pinpoint_architecture.png)
 
 <br>
 
