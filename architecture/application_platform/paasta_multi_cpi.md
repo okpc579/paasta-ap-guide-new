@@ -10,7 +10,7 @@
 
 
 
-![Portal Architecture - VM Type](image/portal_architecture_vm.png)
+![PaaS-TA Multi CPI Architecture](image/ap_architecture_multi_cpi.png)
 
 <br>
 
