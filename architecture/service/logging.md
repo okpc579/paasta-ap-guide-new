@@ -10,7 +10,7 @@
 
 
 
-![Portal Architecture - VM Type](image/portal_architecture_vm.png)
+![Logging Service Architecture](image/logging_architecture.png)
 
 <br>
 
