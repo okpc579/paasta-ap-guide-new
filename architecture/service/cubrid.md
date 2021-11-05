@@ -10,7 +10,7 @@
 
 
 
-![Portal Architecture - VM Type](image/portal_architecture_vm.png)
+![Cubrid Service Architecture](image/cubrid_architecture.png)
 
 <br>
 
