@@ -5,8 +5,6 @@
 <br><br>
 
 ## 시스템 구성도
-``` 수정중 ```
-<br>
 
 
 
@@ -14,9 +12,10 @@
 
 <br>
 
-| Deployment |  스펙 |
-|------------|------|
-| BOSH | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| 구분  | 인스턴스 수| 스펙 |
+|-------|----|-----|
+| openvpn | 2 | 1vCPU / 0.5GB RAM |
+| BOSH | 1 | 4vCPU / 16GB RAM / (25GB + 64GB) 추가 디스크 |
 
 
 
