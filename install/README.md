@@ -15,10 +15,10 @@
 
 + Portal
   + BOSH를 이용한 포탈 VM Type
-    + [PaaS-TA AP - Portal UI](./portal/vm_type_ui.md)   
-    + [PaaS-TA AP - Portal API](./portal/vm_type_api.md)   
+    + [Portal UI](./portal/vm_type_ui.md)   
+    + [Portal API](./portal/vm_type_api.md)   
   + PaaS-TA AP를 이용한 포탈 Container Type
-    + [PaaS-TA AP - Portal infra & Portal APP](./portal/container_type.md)   
+    + [Portal infra & Portal APP](./portal/container_type.md)   
 
 - Service
   - [Cubrid](./service/cubrid.md)
