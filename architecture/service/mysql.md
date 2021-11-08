@@ -11,12 +11,12 @@
 
 <br>
 
-| 구분  | 인스턴스 수| 스펙 |
-|-------|----|-----|
-| arbitrator | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
-| arbitrator | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
-| arbitrator | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
-| arbitrator | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| 구분  | 스펙 |
+|-------|----|
+| arbitrator | 1vCPU / 512MB RAM / 64GB 추가 디스크 |
+| arbitrator | 1vCPU / 512MB RAM / 64GB 추가 디스크 |
+| arbitrator | 1vCPU / 512MB RAM / 64GB 추가 디스크 |
+| arbitrator | 1vCPU / 512MB RAM / 64GB 추가 디스크 |
 
 
 
