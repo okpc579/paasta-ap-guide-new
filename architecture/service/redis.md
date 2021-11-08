@@ -14,9 +14,11 @@
 
 <br>
 
-| 구분  | 인스턴스 수| 스펙 |
-|-------|----|-----|
-| api | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| 구분  | 스펙 |
+|-------|-----|
+| mariadb | 2vCPU / 4GB RAM / 2GB 추가 디스크 |
+| paas-ta-on-demand-broker | 2vCPU / 4GB RAM |
+| redis | 2vCPU / 4GB RAM / 1GB 추가 디스크 |
 
 
 
