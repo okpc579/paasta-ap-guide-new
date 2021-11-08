@@ -32,7 +32,7 @@
 
 ## 설명
 PaaS-TA AP - min은 PaaS-TA AP의 경량화 버전이다.  
-필요에 따라 4VM이나 7VM로 배포가 가능하다.
+기존 15~16VM 구성요소를 필요에 따라 4VM이나 7VM로 배포가 가능하다.
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Architecture](../README.md) > PaaS-TA AP - min
