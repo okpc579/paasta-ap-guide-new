@@ -12,30 +12,24 @@
 | 구분  | 인스턴스 수| 스펙 |
 |-------|----|-----|
 | api | N | 1vCPU / 2GB RAM / 50GB 추가 디스크 |
-| cc-worker | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
-| credhub | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
-| database | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
-| diego-api | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
-| diego-cell | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
-| doppler | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
-| haproxy | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
-| nats | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
-| router | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
-| scheduler | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
-| singleton-blobstore | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
-| tcp-router | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
-| uaa | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| cc-worker | N | 1vCPU / 2GB RAM |
+| credhub | N | 1vCPU / 2GB RAM |
+| database | N | 1vCPU / 2GB RAM / 10GB 추가 디스크 |
+| diego-api | N | 1vCPU / 2GB RAM |
+| diego-cell | N | 4vCPU / 16GB RAM / 100GB 추가 디스크 |
+| doppler | N | 1vCPU / 2GB RAM |
+| haproxy | N | 1vCPU / 2GB RAM |
+| nats | N | 1vCPU / 2GB RAM |
+| router | N | 1vCPU / 2GB RAM |
+| scheduler | N | 1vCPU / 2GB RAM |
+| singleton-blobstore | N | 1vCPU / 2GB RAM / 100GB 추가 디스크 |
+| tcp-router | N | 1vCPU / 2GB RAM |
+| uaa | N | 1vCPU / 2GB RAM |
 
 
 ## 설명
 PaaS-TA AP는 개발자 프레임워크 및 앱 서비스를 선택할 수 있는 PaaS(Platform as a Service) 플랫폼이다.  
 PaaS-TA AP를 사용하면 어플리케이션을 더 빠르고 쉽게 구축, 테스트 배포 및 확장할 수 있다.
-
-다음은 어플리케이션 배포 흐름이다.
-<br>  
-
-![PaaS-TA AP run_map](image/ap_architecture_run_map.png)
-![PaaS-TA AP run_map_detail](image/ap_architecture_run_map_detail.png)
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Architecture](../README.md) > PaaS-TA AP
