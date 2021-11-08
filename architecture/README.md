@@ -15,7 +15,6 @@
   + [PaaS-TA AP를 이용한 포탈 Container Type](./portal/container_type.md)   
 
 - Service
-  - [Cubrid](./service/cubrid.md)
   - [MySQL -> 향후 MariaDB](./service/mysql.md)
   - [MongoDB](./service/mongodb.md)
   - [Redis](./service/redis.md)
