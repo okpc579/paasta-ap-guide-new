@@ -26,7 +26,7 @@ PaaS-TA AP BOSH는 VMware vSphere, Google Cloud Platform, Amazon Web Services EC
 - Director: Director는 VM 생성 또는 수정 시 설정 정보를 레지스트리에 저장한다.  
 저장된 레지스트리 정보는 VM의 Bootstrapping Stage에서 이용된다.
 
-- Cloud Provider Interface (CPI) : CPI는 Dirctor가 IaaS와 상호 작용 하여 Stemcell, VM, Disk를 생성하고 관리하는데 사용되는 API 이다.
+- Cloud Provider Interface (CPI) : CPI는 Director가 IaaS와 상호 작용 하여 Stemcell, VM, Disk를 생성하고 관리하는데 사용되는 API 이다.
 
 - Health Monitor: Health Monitor는 Agent에서 수신한 상태 및 라이프사이클 이벤트를 사용하여 VM의 상태를 모니터링 한다.  
 Health Monitor가 VM의 문제를 감지하면 알림 플러그인을 통하여 경고를 보내거나 Resurrector를 트리거 할 수 있다.
