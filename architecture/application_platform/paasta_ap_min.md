@@ -23,7 +23,7 @@
 | compute | N | 4vCPU / 16GB RAM / 100GB 추가 디스크 |
 | control | N | 4vCPU / 16GB RAM / 30GB 추가 디스크 |
 | database | 1(PostgreSQL) or N(MySQL) | 1vCPU / 2GB RAM / 10GB 추가 디스크 |
-| haproxy | N | 1vCPU / 2GB RAM |
+| haproxy | N? | 1vCPU / 2GB RAM |
 | router | 1? | 1vCPU / 2GB RAM  |
 | singleton-blobstore | 1 | 1vCPU / 2GB RAM / 100GB 추가 디스크 |
 | tcp-router | N? | 1vCPU / 2GB RAM |
