@@ -10,8 +10,8 @@
 
 <br>
 
-| 구분  | 인스턴스 수| 스펙 |
-|-------|----|-----|
+| 구분  | 스펙 |
+|--------|-----|
 | mariadb | 2vCPU / 4GB RAM / 10GB 추가 디스크 |
 | service-broker | 2vCPU / 4GB RAM |
 | api-gateway | 2vCPU / 4GB RAM / 20GB 추가 디스크 |
