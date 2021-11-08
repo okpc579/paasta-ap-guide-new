@@ -11,8 +11,8 @@
 
 <br>
 
-| 구분  | 인스턴스 수| 스펙 |
-|-------|----|-----|
+| 구분 | 스펙 |
+|-------|------|
 | mariadb | 1vCPU / 2GB RAM / 2GB 추가 디스크 |
 | postgres | 1vCPU / 2GB RAM / 2GB 추가 디스크 |
 | inspection | 1vCPU / 2GB RAM |
