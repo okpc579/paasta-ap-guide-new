@@ -18,7 +18,7 @@
 | diego-api | N | 1vCPU / 2GB RAM |
 | diego-cell | N | 4vCPU / 16GB RAM / 100GB 추가 디스크 |
 | doppler | N | 1vCPU / 2GB RAM |
-| haproxy | N | 1vCPU / 2GB RAM |
+| haproxy | 1 | 1vCPU / 2GB RAM |
 | nats | N | 1vCPU / 2GB RAM |
 | router | N | 1vCPU / 2GB RAM |
 | scheduler | N | 1vCPU / 2GB RAM |
