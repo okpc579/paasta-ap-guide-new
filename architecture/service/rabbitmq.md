@@ -5,18 +5,15 @@
 <br><br>
 
 ## 시스템 구성도
-``` 수정중 ```
-<br>
-
-
-
 ![RabbitMQ Service Architecture](image/rabbitmq_architecture.png)
 
 <br>
 
-| 구분  | 인스턴스 수| 스펙 |
-|-------|----|-----|
-| api | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| 구분  | 스펙 |
+|-------|-----|
+| rmq-broker | 1vCPU / 2GB RAM  |
+| rmq | 1vCPU / 2GB RAM  |
+| haproxy | 1vCPU / 2GB RAM |
 
 
 
