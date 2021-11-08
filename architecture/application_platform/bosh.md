@@ -1,4 +1,4 @@
-### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Architecture](../README.md) > BOSH
+vv### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Architecture](../README.md) > BOSH
 
 ## 목적
 본 문서는 BOSH의 Architecture를 제공한다.
@@ -16,7 +16,7 @@
 
 | Deployment |  스펙 |
 |------------|------|
-| BOSH | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| BOSH | 4vCPU / 16GB RAM / 25GB + 64GB 추가 디스크 |
 
 
 
