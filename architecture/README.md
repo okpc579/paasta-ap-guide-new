@@ -15,24 +15,18 @@
   + [PaaS-TA AP를 이용한 포탈 Container Type](./portal/container_type.md)   
 
 - Service
-  - DBMS
-    - [Cubrid](./service/cubrid.md)
-    - [MySQL -> 향후 MariaDB](./service/mysql.md)
-  - NOSQL
-    - [MongoDB](./service/mongodb.md)
-    - [Redis](./service/redis.md)
-  - Storage
-    - [GlusterFS](./service/glusterfs.md)
-  - MessageQueue 
-    - [RabbitMQ](./service/rabbitmq.md)
-  - Web IDE
-    - [WEB IDE](./service/webide.md)
-  - 통합 개발 도구 설치
-    - [Pinpoint APM](./service/pinpoint.md)
-    - [Pipeline](./service/pipeline.md)
-    - [Source Control](./service/source_control.md)
-    - [Logging](./service/logging.md)
-    - [Gateway](./service/gateway.md)
-    - [Lifecycle](./service/lifecycle.md)
+  - [Cubrid](./service/cubrid.md)
+  - [MySQL -> 향후 MariaDB](./service/mysql.md)
+  - [MongoDB](./service/mongodb.md)
+  - [Redis](./service/redis.md)
+  - [GlusterFS](./service/glusterfs.md)
+  - [RabbitMQ](./service/rabbitmq.md)
+  - [WEB IDE](./service/webide.md)
+  - [Pinpoint APM](./service/pinpoint.md)
+  - [Pipeline](./service/pipeline.md)
+  - [Source Control](./service/source_control.md)
+  - [Logging](./service/logging.md)
+  - [Gateway](./service/gateway.md)
+  - [Lifecycle](./service/lifecycle.md)
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > AP Architecture
