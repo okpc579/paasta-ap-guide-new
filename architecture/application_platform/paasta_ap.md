@@ -14,9 +14,12 @@
 | api | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
 
 ## 설명
+PaaS-TA AP는 개발자 프레임워크 및 앱 서비스를 선택할 수 있는 PaaS(Platform as a Service) 플랫폼이다.  
+PaaS-TA AP를 사용하면 어플리케이션을 더 빠르고 쉽게 구축, 테스트 배포 및 확장할 수 있다.
 
 다음은 어플리케이션 배포 흐름이다.
-<br>
+<br>  
+
 ![PaaS-TA AP run_map](image/ap_architecture_run_map.png)
 ![PaaS-TA AP run_map_detail](image/ap_architecture_run_map_detail.png)
 
