@@ -1,4 +1,4 @@
-vv### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Architecture](../README.md) > BOSH
+### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Architecture](../README.md) > BOSH
 
 ## 목적
 본 문서는 BOSH의 Architecture를 제공한다.
