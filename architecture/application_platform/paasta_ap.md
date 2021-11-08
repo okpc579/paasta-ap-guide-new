@@ -14,6 +14,9 @@
 | api | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
 
 ## 설명
+
+다음은 어플리케이션 배포 흐름이다.
+<br>
 ![PaaS-TA AP run_map](image/ap_architecture_run_map.png)
 ![PaaS-TA AP run_map_detail](image/ap_architecture_run_map_detail.png)
 
