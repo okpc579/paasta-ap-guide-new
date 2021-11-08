@@ -11,7 +11,21 @@
 
 | 구분  | 인스턴스 수| 스펙 |
 |-------|----|-----|
-| api | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| api | N | 1vCPU / 2GB RAM / 50GB 추가 디스크 |
+| cc-worker | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| credhub | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| database | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| diego-api | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| diego-cell | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| doppler | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| haproxy | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| nats | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| router | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| scheduler | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| singleton-blobstore | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| tcp-router | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| uaa | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+
 
 ## 설명
 PaaS-TA AP는 개발자 프레임워크 및 앱 서비스를 선택할 수 있는 PaaS(Platform as a Service) 플랫폼이다.  
