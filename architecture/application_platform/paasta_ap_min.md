@@ -13,20 +13,20 @@
 |-------|----|-----|
 | compute | N | 4vCPU / 16GB RAM / 100GB 추가 디스크 |
 | control | N | 4vCPU / 16GB RAM / 30GB 추가 디스크 |
-| database | 1 | 1vCPU / 2GB RAM / 10GB 추가 디스크 |
+| database | 1 | 1vCPU / 2GB RAM / 100GB 추가 디스크 |
 | router | 1 | 1vCPU / 2GB RAM |
 
 - 7VM 배포 시
 
 | 구분  | 인스턴스 수| 스펙 |
 |-------|----|-----|
-| compute | N | 1vCPU / 2GB RAM |
-| control | N | 1vCPU / 2GB RAM / 50GB 추가 디스크 |
-| database | 1(PostgreSQL) or N(MySQL) | 1vCPU / 2GB RAM |
+| compute | N | 4vCPU / 16GB RAM / 100GB 추가 디스크 |
+| control | N | 4vCPU / 16GB RAM / 30GB 추가 디스크 |
+| database | 1(PostgreSQL) or N(MySQL) | 1vCPU / 2GB RAM / 10GB 추가 디스크 |
 | haproxy | N | 1vCPU / 2GB RAM |
-| router | 1(PostgreSQL) or N(MySQL) | 1vCPU / 2GB RAM / 10GB 추가 디스크 |
-| singleton-blobstore | N | 1vCPU / 2GB RAM |
-| tcp | N | 1vCPU / 2GB RAM / 50GB 추가 디스크 |
+| router | 1? | 1vCPU / 2GB RAM  |
+| singleton-blobstore | 1 | 1vCPU / 2GB RAM / 100GB 추가 디스크 |
+| tcp-router | N? | 1vCPU / 2GB RAM |
 
 
 
