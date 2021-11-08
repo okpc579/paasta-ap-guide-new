@@ -1,4 +1,4 @@
-### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Python Development
+### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Python 개발
 
 ## Table of Contents
 
@@ -1009,4 +1009,4 @@ $ cf bind-service python-sample-app python-rabbitmq
 [python-36]:/Sample-App-Guide/image/python/image36.png
 
 
-### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Python Development
+### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Python 개발
