@@ -5,7 +5,6 @@
 <br><br>
 
 ## 시스템 구성도
-``` 수정중 ```
 <br>
 
 ![MySQL Service Architecture](image/mysql_architecture.png)
@@ -14,7 +13,10 @@
 
 | 구분  | 인스턴스 수| 스펙 |
 |-------|----|-----|
-| api | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| arbitrator | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| arbitrator | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| arbitrator | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| arbitrator | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
 
 
 
