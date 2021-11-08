@@ -5,18 +5,19 @@
 <br><br>
 
 ## 시스템 구성도
-``` 수정중 ```
-<br>
-
 
 
 ![Pinpoint APM Service Architecture](image/pinpoint_architecture.png)
 
 <br>
 
-| 구분  | 인스턴스 수| 스펙 |
-|-------|----|-----|
-| api | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| 구분  | 스펙 |
+|-------|------|
+| collector | 2vCPU / 8GB RAM / 30GB 추가 디스크 |
+| h_master | 2vCPU / 8GB RAM / 30GB 추가 디스크 |
+| pinpoint_web | 2vCPU / 8GB RAM / 30GB 추가 디스크 |
+| broker | 2vCPU / 8GB RAM / 30GB 추가 디스크 |
+| haproxy_webui | 2vCPU / 8GB RAM / 30GB 추가 디스크 |
 
 
 
