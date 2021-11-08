@@ -5,10 +5,6 @@
 <br><br>
 
 ## 시스템 구성도
-``` 수정중 ```
-<br>
-
-
 
 ![Gateway Service Architecture](image/gateway_architecture.png)
 
@@ -16,7 +12,9 @@
 
 | 구분  | 인스턴스 수| 스펙 |
 |-------|----|-----|
-| api | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| mariadb | 2vCPU / 4GB RAM / 10GB 추가 디스크 |
+| service-broker | 2vCPU / 4GB RAM |
+| api-gateway | 2vCPU / 4GB RAM / 20GB 추가 디스크 |
 
 
 
