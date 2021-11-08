@@ -9,13 +9,13 @@
 
 <br>
 
-| 구분  | 인스턴스 수| 스펙 |
-|-------|----|-----|
-| mongodb-broker | 1 | 2vCPU / 4GB RAM |
-| mongodb_shard | 1 | 2vCPU / 4GB RAM |
-| mongodb_config | N | 2vCPU / 4GB RAM / 10GB 추가 디스크 |
-| mongodb_master | N | 2vCPU / 4GB RAM / 10GB 추가 디스크 |
-| mongodb_worker | N | 2vCPU / 4GB RAM / 10GB 추가 디스크 |
+| 구분  | 스펙 |
+|-------|----|
+| mongodb-broker | 2vCPU / 4GB RAM |
+| mongodb_shard | 2vCPU / 4GB RAM |
+| mongodb_config | 2vCPU / 4GB RAM / 10GB 추가 디스크 |
+| mongodb_master | 2vCPU / 4GB RAM / 10GB 추가 디스크 |
+| mongodb_worker | 2vCPU / 4GB RAM / 10GB 추가 디스크 |
 
 
 
