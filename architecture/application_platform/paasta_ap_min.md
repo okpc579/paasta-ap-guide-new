@@ -5,19 +5,34 @@
 <br><br>
 
 ## 시스템 구성도
-``` 수정중 ```
-<br>
-
-
-
 ![PaaS-TA AP - min Architecture](image/ap_architecture_min.png)
 
-<br>
+- 4VM 배포 시
 
 | 구분  | 인스턴스 수| 스펙 |
 |-------|----|-----|
-| api | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| compute | N | 4vCPU / 16GB RAM / 100GB 추가 디스크 |
+| control | N | 4vCPU / 16GB RAM / 30GB 추가 디스크 |
+| database | 1 | 1vCPU / 2GB RAM / 10GB 추가 디스크 |
+| router | 1 | 1vCPU / 2GB RAM |
 
+- 7VM 배포 시
+
+| 구분  | 인스턴스 수| 스펙 |
+|-------|----|-----|
+| compute | N | 1vCPU / 2GB RAM |
+| control | N | 1vCPU / 2GB RAM / 50GB 추가 디스크 |
+| database | 1(PostgreSQL) or N(MySQL) | 1vCPU / 2GB RAM |
+| haproxy | N | 1vCPU / 2GB RAM |
+| router | 1(PostgreSQL) or N(MySQL) | 1vCPU / 2GB RAM / 10GB 추가 디스크 |
+| singleton-blobstore | N | 1vCPU / 2GB RAM |
+| tcp | N | 1vCPU / 2GB RAM / 50GB 추가 디스크 |
+
+
+
+## 설명
+PaaS-TA AP - min은 PaaS-TA AP의 경량화 버전이다.  
+필요에 따라 4VM이나 7VM로 배포가 가능하다.
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Architecture](../README.md) > PaaS-TA AP - min
