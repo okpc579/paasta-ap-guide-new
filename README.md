@@ -1,6 +1,6 @@
 # PaaS-TA Application Platform (AP) Guide
 
-|Deployment?|Current Version| 
+|Deployment|Current Version| 
 |-------------|-------------|
 |paasta-deployment| [5.6.0](https://github.com/PaaS-TA/paasta-deployment/releases/tag/v5.6.0) | 
 |portal-deployment| [5.2.0](https://github.com/PaaS-TA/portal-deployment/releases/tag/v5.2.0) | 
