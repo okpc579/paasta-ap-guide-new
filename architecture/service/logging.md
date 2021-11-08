@@ -5,18 +5,22 @@
 <br><br>
 
 ## 시스템 구성도
-``` 수정중 ```
-<br>
-
 
 
 ![Logging Service Architecture](image/logging_architecture.png)
 
 <br>
 
-| 구분  | 인스턴스 수| 스펙 |
-|-------|----|-----|
-| api | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| 구분  | 스펙 |
+|-------|----|
+| elasticsearch_master | 1vCPU / 2GB RAM / 10GB 추가 디스크 |
+| queue | 1vCPU / 2GB RAM / 10GB 추가 디스크 |
+| maintenance | 1vCPU / 2GB RAM |
+| elasticsearch_data | 2vCPU / 4GB RAM / 20GB 추가 디스크 |
+| visualization | 1vCPU / 2GB RAM |
+| collector | 1vCPU / 2GB RAM |
+| parser | 1vCPU / 2GB RAM |
+| router | 1vCPU / 2GB RAM |
 
 
 
