@@ -1,4 +1,4 @@
-### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Ruby Development
+### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Ruby 개발
 
 
 ## Table of Contents
@@ -1179,4 +1179,4 @@ Rspec을 이용한 Ruby 애플리케이션 테스트
 [ruby16]:/Sample-App-Guide/image/ruby/ruby_16.png
 
 
-### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Ruby Development
+### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Ruby 개발
