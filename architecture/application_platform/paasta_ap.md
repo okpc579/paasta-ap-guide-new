@@ -14,7 +14,7 @@
 | api | N | 1vCPU / 2GB RAM / 50GB 추가 디스크 |
 | cc-worker | N | 1vCPU / 2GB RAM |
 | credhub | N | 1vCPU / 2GB RAM |
-| database | N | 1vCPU / 2GB RAM / 10GB 추가 디스크 |
+| database | 1(PostgreSQL) or N(MySQL) | 1vCPU / 2GB RAM / 10GB 추가 디스크 |
 | diego-api | N | 1vCPU / 2GB RAM |
 | diego-cell | N | 4vCPU / 16GB RAM / 100GB 추가 디스크 |
 | doppler | N | 1vCPU / 2GB RAM |
@@ -22,7 +22,7 @@
 | nats | N | 1vCPU / 2GB RAM |
 | router | N | 1vCPU / 2GB RAM |
 | scheduler | N | 1vCPU / 2GB RAM |
-| singleton-blobstore | N | 1vCPU / 2GB RAM / 100GB 추가 디스크 |
+| singleton-blobstore | 1 | 1vCPU / 2GB RAM / 100GB 추가 디스크 |
 | tcp-router | N | 1vCPU / 2GB RAM |
 | uaa | N | 1vCPU / 2GB RAM |
 
