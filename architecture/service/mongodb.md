@@ -5,18 +5,17 @@
 <br><br>
 
 ## 시스템 구성도
-``` 수정중 ```
-<br>
-
-
-
 ![MongoDB Service Architecture](image/mongodb_architecture.png)
 
 <br>
 
 | 구분  | 인스턴스 수| 스펙 |
 |-------|----|-----|
-| api | N | 1vCPU / 512MB RAM / 4GB Disk 10GB(영구적 Disk) |
+| mongodb-broker | 1 | 2vCPU / 4GB RAM |
+| mongodb_shard | 1 | 2vCPU / 4GB RAM |
+| mongodb_config | N | 2vCPU / 4GB RAM / 10GB 추가 디스크 |
+| mongodb_master | N | 2vCPU / 4GB RAM / 10GB 추가 디스크 |
+| mongodb_worker | N | 2vCPU / 4GB RAM / 10GB 추가 디스크 |
 
 
 
