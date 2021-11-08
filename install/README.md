@@ -1,7 +1,7 @@
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > AP Install
 
 ## Application Platform (AP) - Install
-- Application Platform Install  
+- Application Platform  
   - BOSH를 이용한 VM Type 배포
     - [BOSH](./application_platform/bosh.md)  
     - [PaaS-TA AP](./application_platform/paasta_ap.md)  
@@ -13,32 +13,26 @@
   - 기타 가이드
     - [Migration 가이드 (3.1 to 4.0)](./application_platform/4.0_migration.md)  
 
-+ Portal Install
++ Portal
   + BOSH를 이용한 포탈 VM Type
     + [PaaS-TA AP - Portal UI](./portal/vm_type_ui.md)   
     + [PaaS-TA AP - Portal API](./portal/vm_type_api.md)   
   + PaaS-TA AP를 이용한 포탈 Container Type
     + [PaaS-TA AP - Portal infra & Portal APP](./portal/container_type.md)   
 
-- Service Install
-  - DBMS
-    - [Cubrid](./service/cubrid.md)
-    - [MySQL -> 향후 MariaDB](./service/mysql.md)
-  - NOSQL
-    - [MongoDB](./service/mongodb.md)
-    - [Redis](./service/redis.md)
-  - Storage
-    - [GlusterFS](./service/glusterfs.md)
-  - MessageQueue 
-    - [RabbitMQ](./service/rabbitmq.md)
-  - Web IDE
-    - [WEB IDE](./service/webide.md)
-  - 통합 개발 도구 설치
-    - [Pinpoint APM](./service/pinpoint.md)
-    - [Pipeline](./service/pipeline.md)
-    - [Source Control](./service/source_control.md)
-    - [Logging](./service/logging.md)
-    - [Gateway](./service/gateway.md)
-    - [Lifecycle](./service/lifecycle.md)
+- Service
+  - [Cubrid](./service/cubrid.md)
+  - [MySQL -> 향후 MariaDB](./service/mysql.md)
+  - [MongoDB](./service/mongodb.md)
+  - [Redis](./service/redis.md)
+  - [GlusterFS](./service/glusterfs.md)
+  - [RabbitMQ](./service/rabbitmq.md)
+  - [WEB IDE](./service/webide.md)
+  - [Pinpoint APM](./service/pinpoint.md)
+  - [Pipeline](./service/pipeline.md)
+  - [Source Control](./service/source_control.md)
+  - [Logging](./service/logging.md)
+  - [Gateway](./service/gateway.md)
+  - [Lifecycle](./service/lifecycle.md)
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > AP Install
