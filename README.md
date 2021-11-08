@@ -1,4 +1,4 @@
-# PaaS-TA Application Platform (AP) Guide
+## PaaS-TA Application Platform (AP) Guide
 
 |Deployment|Current Version| 
 |-------------|-------------|
