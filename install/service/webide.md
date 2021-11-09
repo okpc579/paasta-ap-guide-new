@@ -80,8 +80,8 @@ Succeeded
 
 ```
 # Deployment 다운로드 파일 위치 경로 생성 및 설치 경로 이동
-$ mkdir -p ~/workspace/paasta-5.5.2/deployment
-$ cd ~/workspace/paasta-5.5.2/deployment
+$ mkdir -p ~/workspace
+$ cd ~/workspace
 
 # Deployment 파일 다운로드
 $ git clone https://github.com/PaaS-TA/service-deployment.git -b v5.1.0
@@ -157,13 +157,13 @@ Succeeded
 - common_vars.yml을 서버 환경에 맞게 수정한다. 
 - WEB IDE에서 사용하는 변수는 bosh_url, bosh_client_admin_id, bosh_client_admin_secret, bosh_director_port,  bosh_oauth_port, bosh_version, system_domain, paasta_admin_username, paasta_admin_password 이다.
 
-> $ vi ~/workspace/paasta-5.5.2/deployment/common/common_vars.yml
+> $ vi ~/workspace/common/common_vars.yml
 ```
 # BOSH INFO
 bosh_ip: "10.0.1.6"				# BOSH IP
 bosh_url: "https://10.0.1.6"			# BOSH URL (e.g. "https://00.000.0.0")
 bosh_client_admin_id: "admin"			# BOSH Client Admin ID
-bosh_client_admin_secret: "ert7na4jpew"		# BOSH Client Admin Secret('echo $(bosh int ~/workspace/paasta-5.5.2/deployment/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
+bosh_client_admin_secret: "ert7na4jpew"		# BOSH Client Admin Secret('echo $(bosh int ~/workspace/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
 bosh_director_port: 25555			# BOSH director port
 bosh_oauth_port: 8443				# BOSH oauth port
 bosh_version: 271.2				# BOSH version('bosh env' 명령어를 통해 확인 가능, on-demand service용, e.g. "271.2")
@@ -215,7 +215,7 @@ abacus_url: "http://abacus.61.252.53.248.nip.io"	# abacus url (e.g. "http://abac
 
 - Deployment YAML에서 사용하는 변수 파일을 서버 환경에 맞게 수정한다.
 
-> $ vi ~/workspace/paasta-5.5.2/deployment/service-deployment/web-ide/vars.yml
+> $ vi ~/workspace/service-deployment/web-ide/vars.yml
 
 ```
 deployment_name: "web-ide"                                                # 서비스 배포 명
@@ -269,7 +269,7 @@ cloudfoundry_sslSkipValidation: "true"
 - 서버 환경에 맞추어 Deploy 스크립트 파일의 VARIABLES 설정을 수정한다.  
   (선택) -o operations/cce.yml (CCE 조치를 적용하여 설치) 
 
-> $ vi ~/workspace/paasta-5.5.2/deployment/service-deployment/web-ide/deploy.sh
+> $ vi ~/workspace/service-deployment/web-ide/deploy.sh
 
 ```
 #!/bin/bash
@@ -289,7 +289,7 @@ bosh -e ${BOSH_NAME} -n -d web-ide deploy --no-redact web-ide.yml \
 
 - 서비스를 설치한다.  
 ```
-$ cd ~/workspace/paasta-5.5.2/deployment/service-deployment/web-ide
+$ cd ~/workspace/service-deployment/web-ide
 $ sh ./deploy.sh  
 ```  
 
@@ -518,7 +518,7 @@ Succeeded
 기존 설치할때 사용했던 Deployment YAML에서 eclipse_che_instances의 값을 배포된 eclipse-che의 수만큼 변경을 해주고 eclipse_che_public_ips에 설치된 public ip를 입력한다.  
 그리고 WEB-IDE에 추가시킬 IP를 eclipse_che_buffer_ips에 추가한다.
 
-> $ vi ~/workspace/paasta-5.5.2/deployment/service-deployment/web-ide/vars.yml
+> $ vi ~/workspace/service-deployment/web-ide/vars.yml
 
 ```
 .....
@@ -540,7 +540,7 @@ eclipse_che_instance_name: "eclipse-che"                                # eclips
 
 - 서비스를 재 설치한다.  
 ```
-$ cd ~/workspace/paasta-5.5.2/deployment/service-deployment/web-ide
+$ cd ~/workspace/service-deployment/web-ide
 $ sh ./deploy.sh  
 
 Using environment '10.0.1.6' as client 'admin'
