@@ -5,8 +5,7 @@
 1. [문서 개요](#1)  
   1.1. [목적](#1.1)  
   1.2. [범위](#1.2)  
-  1.3. [시스템 구성도](#1.3)  
-  1.4. [참고자료](#1.4)  
+  1.3. [참고자료](#1.3)  
 
 2. [PaaS-TA Portal 설치](#2)  
   2.1. [Prerequisite](#2.1)   
@@ -36,7 +35,7 @@ PaaS-TA 3.5 버전부터는 Bosh2.0 기반으로 deploy를 진행하며 내부 �
 ### <div id="1.2"/> 1.2. 범위
 설치 범위는 PaaS-TA Portal Release를 검증하기 위한 기본 설치를 기준으로 작성하였다.
 
-### <div id="1.4"/> 1.4. 참고자료
+### <div id="1.3"/> 1.3. 참고자료
 [**http://bosh.io/docs**](http://bosh.io/docs)  
 [**http://docs.cloudfoundry.org/**](http://docs.cloudfoundry.org/)
 
