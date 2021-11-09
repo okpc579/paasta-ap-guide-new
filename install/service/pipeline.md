@@ -13,8 +13,7 @@
   2.3. [Deployment 다운로드](#2.3)  
   2.4. [Deployment 파일 수정](#2.4)  
   2.5. [서비스 설치](#2.5)    
-  2.6. [서비스 설치 - 다운로드 된 PaaS-TA Release 파일 이용 방식](#2.6)   
-  2.7. [서비스 설치 확인](#2.7)  
+  2.6. [서비스 설치 확인](#2.6)  
     
 3. [배포 파이프라인 서비스 관리 및 신청](#3)  
   3.1. [서비스 브로커 등록](#3.1)  
@@ -361,50 +360,7 @@ $ sh ./deploy.sh
 ```
 
 
-### <div id='2.6'/> 2.6. 서비스 설치 - 다운로드 된 PaaS-TA Release 파일 이용 방식
-
-- 서비스 설치에 필요한 릴리즈 파일을 다운로드 받아 Local machine의 서비스 설치 작업 경로로 위치시킨다.  
-  
-  - 설치 릴리즈 파일 다운로드 : [paasta-delivery-pipeline-release-1.0.2.tgz](http://45.248.73.44/index.php/s/maQQNLmYNEAG78y/download)
-
-```
-# 릴리즈 다운로드 파일 위치 경로 생성
-$ mkdir -p ~/workspace/paasta-5.5.1/release/service
-
-# 릴리즈 파일 다운로드(paasta-delivery-pipeline-release.tgz) 및 파일 경로 확인
-$ ls ~/workspace/paasta-5.5.1/release/service
-paasta-delivery-pipeline-release-1.0.2.tgz
-```
-  
-- 서버 환경에 맞추어 Deploy 스크립트 파일의 VARIABLES 설정을 수정하고 Option file 및 변수를 추가한다.  
-     (추가) -o operations/use-offline-releases.yml (미리 다운받은 offline 릴리즈 사용)  
-     (추가) -v releases_dir="<RELEASE_DIRECTORY>"  
-     
-> $ vi ~/workspace/paasta-5.5.1/deployment/service-deployment/pipeline-service/deploy.sh
-  
-```
-#!/bin/bash
-
-# VARIABLES
-COMMON_VARS_PATH="<COMMON_VARS_FILE_PATH>"	# common_vars.yml File Path (e.g. ../../common/common_vars.yml)
-CURRENT_IAAS="${CURRENT_IAAS}"			# IaaS Information (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 aws/azure/gcp/openstack/vsphere 입력)
-BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"		# bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
-
-# DEPLOY
-bosh -e ${BOSH_ENVIRONMENT} -n -d pipeline-service deploy --no-redact pipeline-service.yml \
-    -o operations/${CURRENT_IAAS}-network.yml \
-    -l ${COMMON_VARS_PATH} \
-    -l vars.yml \
-    -v releases_dir="/home/ubuntu/workspace/paasta-5.5.1/release"  
-```  
-
-- 서비스를 설치한다.  
-```
-$ cd ~/workspace/paasta-5.5.1/deployment/service-deployment/pipeline-service  
-$ sh ./deploy.sh  
-```
-
-### <div id='2.7'/> 2.7. 서비스 설치 확인
+### <div id='2.6'/> 2.6. 서비스 설치 확인
 
 설치 된 서비스를 확인한다.  
 
