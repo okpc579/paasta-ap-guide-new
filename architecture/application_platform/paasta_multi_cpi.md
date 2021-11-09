@@ -18,6 +18,7 @@
 | BOSH | 1 | 4vCPU / 16GB RAM / (25GB + 64GB) 추가 디스크 |
 
 <br><br>
+
 ## 참고자료
 BOSH Document: [http://bosh.io](http://bosh.io)  
 BOSH Deployment: [https://github.com/cloudfoundry/bosh-deployment](https://github.com/cloudfoundry/bosh-deployment)  
