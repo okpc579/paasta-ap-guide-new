@@ -42,7 +42,7 @@ PaaS-TA 3.5 버전부터는 Bosh2.0 기반으로 deploy를 진행하며 기존 B
 본 설치 가이드는 Linux 환경에서 설치하는 것을 기준으로 하였다. 서비스 설치를 위해서는 BOSH 2.0과 PaaS-TA 5.0 이상, PaaS-TA 포털이 설치되어 있어야 한다. 
 
 - bosh runtime-config를 확인하여 bosh-dns include deployments 에 pinpoint가 있는지 확인한다.  
- ※ bosh-dns include deployments에 pinpoint가 없다면 ~/workspace/paasta-5.5.2/deployment/paasta-deployment/bosh/runtime-configs 의 dns.yml 을 열어서 pinpoint를 추가하고, bosh runtime-config를 업데이트 해준다.    
+ ※ bosh-dns include deployments에 pinpoint가 없다면 ~/workspace/paasta-deployment/bosh/runtime-configs 의 dns.yml 을 열어서 pinpoint를 추가하고, bosh runtime-config를 업데이트 해준다.    
 
 > $ bosh -e micro-bosh runtime-config
 ```
@@ -108,8 +108,8 @@ Succeeded
 
 ```
 # Deployment 다운로드 파일 위치 경로 생성 및 설치 경로 이동
-$ mkdir -p ~/workspace/paasta-5.5.2/deployment
-$ cd ~/workspace/paasta-5.5.2/deployment
+$ mkdir -p ~/workspace
+$ cd ~/workspace
 
 # Deployment 파일 다운로드
 $ git clone https://github.com/PaaS-TA/service-deployment.git -b v5.1.0
@@ -184,7 +184,7 @@ Succeeded
 
 - Deployment YAML에서 사용하는 변수 파일을 서버 환경에 맞게 수정한다.
 
-> $ vi ~/workspace/paasta-5.5.2/deployment/service-deployment/pinpoint/vars.yml
+> $ vi ~/workspace/service-deployment/pinpoint/vars.yml
 ```
 # STEMCELL
 stemcell_os: "ubuntu-xenial"                                     # stemcell os
@@ -243,7 +243,7 @@ resourcemanager_port: 8040                                       # resourcemanag
 - 서버 환경에 맞추어 Deploy 스크립트 파일의 VARIABLES 설정을 수정하고, Option file을 추가할지 선택한다.  
      (선택) -o operations/cce.yml (CCE 조치를 적용하여 설치)
 
-> $ vi ~/workspace/paasta-5.5.2/deployment/service-deployment/pinpoint/deploy.sh
+> $ vi ~/workspace/service-deployment/pinpoint/deploy.sh
 
 ```
 #!/bin/bash
@@ -263,7 +263,7 @@ bosh -e ${BOSH_ENVIRONMENT} -n -d pinpoint deploy --no-redact pinpoint.yml \
 
 - 서비스를 설치한다.  
 ```
-$ cd ~/workspace/paasta-5.5.2/deployment/service-deployment/pinpoint  
+$ cd ~/workspace/service-deployment/pinpoint  
 $ sh ./deploy.sh  
 ```  
 
