@@ -41,18 +41,6 @@ PaaS-TA 3.5 버전부터는 Bosh2.0 기반으로 deploy를 진행하며 기존 B
 ### <div id='1.2'/> 1.2. 범위
 설치 범위는 WEB-IDE 사용을 검증하기 위한 기본 설치를 기준으로 작성하였다.
 
-### <div id='1.3'/> 1.3. 시스템 구성도
-본 장에서는 WEB-IDE의 시스템 구성에 대해 기술하였다. Browser(PaaS-TA Portal), WEB IDE Server, Workspace, Desktop IDE로 최소사항을 구성하였다.<br />
-WEB-IDE 는 0개 부터 N개 까지 VM INSTANCE 를 생성, 삭제 할 수 있다. <br />
-(설치시 확보된 PUBLIC IP 갯수 안에서 가능함)
-
-![](/service-guide/images/webide/web-ide-on-01.png)
-
-| 구분 | Resource Pool | 스펙 |
-|--------|-------|-------|
-| web-ide | resource\_pools | 1vCPU / 2GB RAM / 10GB Disk |
-
-
 
 ### <div id='1.4'/>1.4. 참고자료
 
