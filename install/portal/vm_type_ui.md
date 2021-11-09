@@ -288,7 +288,7 @@ $ cd ~/workspace/paasta-5.5.4/deployment/portal-deployment/portal-ui
 $ sh ./deploy.sh  
 ```
 
-### <div id="2.7"/> 2.7. 서비스 설치 확인
+### <div id="2.6"/> 2.6. 서비스 설치 확인
 
 설치 완료된 서비스를 확인한다.  
 
@@ -313,7 +313,7 @@ paas-ta-portal-webuser/409c038b-d013-41d3-b6b2-aebb4a02d908   running        z6 
 Succeeded
 ```
 
-### <div id="2.8"/> 2.8. Portal SSH 설치
+### <div id="2.7"/> 2.7. Portal SSH 설치
 
 Portal 5.1.0 버전 이상부터는 배포된 어플리케이션의 SSH 접속이 가능하다.
 
