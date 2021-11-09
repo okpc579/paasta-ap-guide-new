@@ -36,28 +36,6 @@ PaaS-TA 3.5 버전부터는 Bosh2.0 기반으로 deploy를 진행하며 내부 �
 ### <div id="1.2"/> 1.2. 범위
 설치 범위는 PaaS-TA Portal Release를 검증하기 위한 기본 설치를 기준으로 작성하였다.
 
-### <div id="1.3"/> 1.3. 시스템 구성도
-본 문서의 설치된 시스템 구성도이다. Binary Storage, Mariadb, Proxy, Gateway Api, Registration Api, Portal Api, Common Api, Log Api, Storage Api, Webadmin, Webuser로 최소사항을 구성하였다.
-
-![시스템구성도][paas-ta-portal-01]
-* Paas-TA Portal 설치할때 cloud config에 추가적으로 정의한 VM_Tpye명과 스펙
-
-| VM_Type | 스펙 |
-|--------|-------|
-|portal_tiny| 1vCPU / 256MB RAM / 4GB Disk|
-|portal_medium| 1vCPU / 1GB RAM / 4GB Disk|
-|portal_small| 1vCPU / 512MB RAM / 4GB Disk|
-
-
-* Paas-TA Portal각 Instance의 Resource Pool과 스펙
-
-| 구분 | Resource Pool | 스펙 |
-|--------|-------|-------|
-| haproxy |portal_small| 1vCPU / 512MB RAM / 4GB Disk|
-| mariadb | portal_small | 1vCPU / 512MB RAM / 4GB Disk +10GB(영구적 Disk) |
-| paas-ta-portal-webadmin | portal_small | 1vCPU / 512MB RAM / 4GB Disk |
-| paas-ta-portal-webuser |portal_small| 1vCPU / 512MB RAM / 4GB Disk|
-
 ### <div id="1.4"/> 1.4. 참고자료
 [**http://bosh.io/docs**](http://bosh.io/docs)  
 [**http://docs.cloudfoundry.org/**](http://docs.cloudfoundry.org/)
