@@ -33,22 +33,6 @@ PaaS-TA 3.5 버전부터는 Bosh2.0 기반으로 deploy를 진행하며 기존 B
 ### <div id="1.2"/> 1.2. 범위
 설치 범위는 GlusterFS 서비스팩을 검증하기 위한 기본 설치를 기준으로 작성하였다.
 
-### <div id="1.3"/>1.3. 시스템 구성도
-본 문서의 설치된 시스템 구성도이다. Mysql Server, GlusterFS 서비스 브로커로 최소사항을 구성하였고 서비스 백엔드는 외부에 구성되어 있다.
-![시스템 구성도][glusterfs_image_01]
-
-* 설치할때 cloud config에서 사용하는 VM_Tpye명과 스펙 
-
-| VM_Type | 스펙 |
-|--------|-------|
-|minimal| 1vCPU / 1GB RAM / 8GB Disk|
-
-* 각 Instance의 Resource Pool과 스펙
-
-| 구분 | Resource Pool | 스펙 |
-|--------|-------|-------|
-| paasta-glusterfs-broker | minimal | 1vCPU / 1GB RAM / 8GB Disk |
-| mysql | minimal | 1vCPU / 1GB RAM / 8GB Disk |
 
 <br>
 
