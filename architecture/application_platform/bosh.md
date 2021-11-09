@@ -13,6 +13,7 @@
 | Deployment |  스펙 |
 |------------|------|
 | BOSH | 4vCPU / 16GB RAM / (25GB + 64GB) 추가 디스크 |
+<br><br>
 
 ## 설명
 BOSH는 초기에 Cloud Foundry PaaS를 위해 개발되었지만, 현재는 Jenkins, Hadoop 등 Yaml 파일 형식으로 소프트웨어를 쉽게 배포할 수 있으며, 수백 가지의 VM을 설치할 수 있고, 각각의 VM에 대해 모니터링, 장애 복구 등 라이프 사이클을 관리할 수 있는 통합 프로젝트이다.  
