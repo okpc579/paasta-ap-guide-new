@@ -3,9 +3,8 @@
 ## Table of Contents
 1. [문서 개요](#1)  
   1.1. [목적](#1.1)  
-  1.2. [범위](#1.2)  
-  1.3. [시스템 구성도](#1.3)  
-  1.4. [참고자료](#1.4)  
+  1.2. [범위](#1.2)    
+  1.3. [참고자료](#1.3)  
 
 2. [WEB IDE 설치](#2)  
   2.1. [Prerequisite](#2.1)   
@@ -42,7 +41,7 @@ PaaS-TA 3.5 버전부터는 Bosh2.0 기반으로 deploy를 진행하며 기존 B
 설치 범위는 WEB-IDE 사용을 검증하기 위한 기본 설치를 기준으로 작성하였다.
 
 
-### <div id='1.4'/>1.4. 참고자료
+### <div id='1.3'/>1.3. 참고자료
 
 > [**http://bosh.io/docs**](http://bosh.io/docs) <br>
 > [**http://docs.cloudfoundry.org/**](http://docs.cloudfoundry.org/) <br>
