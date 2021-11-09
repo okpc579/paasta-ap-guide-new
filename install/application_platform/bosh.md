@@ -35,7 +35,7 @@
 
 ## Executive Summary
 
-본 문서는 BOSH2(이하 BOSH)의 설명 및 설치 가이드 문서로, BOSH를 실행할 수 있는 환경을 구성하고 사용하는 방법에 관해서 설명하였다.
+본 문서는 BOSH2(이하 BOSH)의 설치 가이드 문서로, BOSH를 실행할 수 있는 환경을 구성하고 사용하는 방법에 관해서 설명하였다.
 
 # <div id='1'/>1. 문서 개요
 
@@ -55,39 +55,6 @@ BOSH Deployment: [https://github.com/cloudfoundry/bosh-deployment](https://githu
 
 Cloud Foundry Document: [https://docs.cloudfoundry.org](https://docs.cloudfoundry.org)
 
-# <div id='2'/>2. BOSH
-BOSH는 초기에 Cloud Foundry PaaS를 위해 개발되었지만, 현재는 Jenkins, Hadoop 등 Yaml 파일 형식으로 소프트웨어를 쉽게 배포할 수 있으며, 수백 가지의 VM을 설치할 수 있고, 각각의 VM에 대해 모니터링, 장애 복구 등 라이프 사이클을 관리할 수 있는 통합 프로젝트이다.
-
-BOSH가 지원하는 IaaS는 VMware vSphere, Google Cloud Platform, Amazon Web Services EC2, Microsoft Azure, OpenStack, Alibaba Cloud가 있다.  
-PaaS-TA는 VMware vSphere, Google Cloud Platform, Amazon Web Services EC2, OpenStack, Microsoft Azure 등의 IaaS를 지원한다.  
-
-현재 PaaS-TA 5.5.4에서 BOSH를 검증한 IaaS 환경은 AWS, OpenStack 환경이다.
-
-PaaS-TA 3.1 버전까지는 Cloud Foundry BOSH1을 기준으로 설치했지만, PaaS-TA 3.5 버전부터 BOSH2를 기준으로 설치하였다.  
-PaaS-TA 5.5.4는 Cloud Foundry에서 제공하는 bosh-deployment를 활용하여 BOSH를 설치한다.
-
-
-BOSH2는 BOSH2 CLI를 통하여 BOSH와 PaaS-TA를 모두 생성한다.  
-bosh-deployment를 이용하여 BOSH를 생성한 후, paasta-deployment로 PaaS-TA를 설치한다.  
-PaaS-TA 3.1 버전까지는 PaaS-TA Container, Controller를 별도의 deployment로 설치했지만, PaaS-TA 3.5 버전부터는 paasta-deployment 하나로 통합되어 한 번에 PaaS-TA를 설치한다.
-
-![PaaSTa_BOSH_Use_Guide_Image2](https://github.com/PaaS-TA/Guide/blob/v5.5.0/install-guide/bosh/images/bosh2.png)
-
-## <div id='2.1'/>● BOSH 컴포넌트 구성
-
-BOSH의 컴포넌트 구성은 다음과 같다.
-
-![PaaSTa_BOSH_Use_Guide_Image3](https://github.com/PaaS-TA/Guide/blob/v5.5.0/install-guide/bosh/images/bosh3.png)
-
-- Director: Director는 VM 생성 또는 수정 시 설정 정보를 레지스트리에 저장한다.  
-저장된 레지스트리 정보는 VM의 Bootstrapping Stage에서 이용된다.
-- Health Monitor: Health Monitor는 BOSH Agent로부터 클라우드 상태 정보를 수집한다.  
-클라우드로부터 특정 Alert이 발생하면, Resurrector를 하거나 Notification Plug-in을 통해 Alert Message를 전송할 수도 있다.
-- Blobstore: Blobstore는 Release, Compilation Package Data를 저장하는 저장소이다.
-- UAA: UAA는 BOSH 사용자 인증 인가 처리를 한다.
-- Database: Director가 사용하는 Postgres 데이터베이스로, Deployment에 필요한 Stemcell, Release, Deployment의 메타 정보를 저장한다.
-- Message Bus(Nats): Message Bus는 Director와 Agent 간 통신을 위한 Publish-Subscribe 방식의 Message System으로, VM 모니터링과 특정 명령을 수행하기 위해 사용된다.
-- Agent: Agent는 클라우드에 배포되는 모든 VM에 설치되고, Director로부터 특정 명령을 받고 수행하는 역할을 한다. Agent는 Director로부터 수신받은 Job Specification(설치할 패키지 및 구성 방법) 정보로 해당 VM에 Director의 지시대로 지정된 패키지를 설치하고, 필요한 구성 정보를 설정한다.
 
 # <div id='3'/>3. BOSH 설치 환경 구성 및 설치
 
