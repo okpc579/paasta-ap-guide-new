@@ -63,14 +63,6 @@ BOSH Deployment: [https://github.com/cloudfoundry/bosh-deployment](https://githu
 
 CF Deployment: [https://github.com/cloudfoundry/cf-deployment](https://github.com/cloudfoundry/cf-deployment)
 
-# <div id='2'/>2. PaaS-TA 5.5.2
-
-PaaS-TA는 BOSH를 기반으로 설치된다. BOSH CLI를 사용하여 BOSH를 생성한 후, paasta-deployment로 PaaS-TA를 배포한다. 
-
-PaaS-TA 3.1 버전까지는 PaaS-TA Container, Controller를 각각의 deployment로 설치했지만, PaaS-TA 3.5 버전부터 paasta-deployment 하나로 통합되었으며, 한 번에 PaaS-TA를 설치한다. 
-
-![PaaSTa_BOSH_Use_Guide_Image2]  
-
 # <div id='3'/>3. PaaS-TA 5.5.2 설치
 
 ## <div id='3.1'/>3.1. Prerequisite
