@@ -32,11 +32,6 @@ PaaS-TA 3.5 버전부터는 Bosh2.0 기반으로 deploy를 진행하며 기존 B
 ### <div id='1.2'/> 1.2. 범위
 설치 범위는 형상관리 서비스 Release를 검증하기 위한 기본 설치를 기준으로 작성하였다.
 
-### <div id='1.3'/> 1.3. 시스템 구성도
-
-본 장에서는 형상관리 서비스의 시스템 구성에 대해 기술하였다. 형상관리 서비스의 시스템은 service-broker, mariadb, 형상관리 Server의 최소 사항을 구성하였다.  
-![source_controller_service_guide01]
-
 ### <div id='1.4'/> 1.4. 참고 자료
 > http://bosh.io/docs <br>
 > http://docs.cloudfoundry.org/
