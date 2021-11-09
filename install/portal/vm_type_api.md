@@ -78,8 +78,8 @@ Succeeded
 
 ```
 # Deployment 다운로드 파일 위치 경로 생성 및 설치 경로 이동
-$ mkdir -p ~/workspace/paasta-5.5.4/deployment
-$ cd ~/workspace/paasta-5.5.4/deployment
+$ mkdir -p ~/workspace
+$ cd ~/workspace
 
 # Deployment 파일 다운로드
 $ git clone https://github.com/PaaS-TA/portal-deployment.git -b v5.2.1
@@ -155,13 +155,13 @@ Succeeded
 - common_vars.yml을 서버 환경에 맞게 수정한다.
 - Portal-API에서 사용하는 변수는 system_domain, paasta_admin_username, paasta_admin_password, paasta_database_ips, paasta_database_port, paasta_database_type, paasta_database_driver_class, paasta_cc_db_id, paasta_cc_db_password, paasta_uaa_db_id, paasta_uaa_db_password, uaa_client_admin_id, uaa_client_admin_secret, monitoring_api_url, portal_web_user_url이다.
 
-> $ vi ~/workspace/paasta-5.5.4/deployment/common/common_vars.yml
+> $ vi ~/workspace/common/common_vars.yml
 ```
 # BOSH INFO
 bosh_ip: "10.0.1.6"				# BOSH IP
 bosh_url: "https://10.0.1.6"			# BOSH URL (e.g. "https://00.000.0.0")
 bosh_client_admin_id: "admin"			# BOSH Client Admin ID
-bosh_client_admin_secret: "ert7na4jpew"		# BOSH Client Admin Secret('echo $(bosh int ~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
+bosh_client_admin_secret: "ert7na4jpew"		# BOSH Client Admin Secret('echo $(bosh int ~/workspace/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
 bosh_director_port: 25555			# BOSH director port
 bosh_oauth_port: 8443				# BOSH oauth port
 bosh_version: 271.2				# BOSH version('bosh env' 명령어를 통해 확인 가능, on-demand service용, e.g. "271.2")
@@ -213,7 +213,7 @@ abacus_url: "http://abacus.61.252.53.248.nip.io"	# abacus url (e.g. "http://abac
 
 - Deployment YAML에서 사용하는 변수 파일을 서버 환경에 맞게 수정한다.
 
-> $ vi ~/workspace/paasta-5.5.4/deployment/portal-deployment/portal-api/vars.yml
+> $ vi ~/workspace/portal-deployment/portal-api/vars.yml
 
 ```
 # STEMCELL INFO
@@ -302,7 +302,7 @@ mail_smtp_properties_subject: "<MAIL_SMTP_PROPERTIES_SUBJECT>"  # mail-smtp : pr
 - 서버 환경에 맞추어 Deploy 스크립트 파일의 VARIABLES 설정을 수정하고, Option file을 추가할지 선택한다.  
   (선택) -o operations/cce.yml (CCE 조치를 적용하여 설치)
 
-> $ vi ~/workspace/paasta-5.5.4/deployment/portal-deployment/portal-api/deploy.sh
+> $ vi ~/workspace/portal-deployment/portal-api/deploy.sh
 ```
 #!/bin/bash
 
@@ -321,7 +321,7 @@ bosh -e ${BOSH_ENVIRONMENT} -n -d portal-api deploy --no-redact portal-api.yml \
 
 - 서비스를 설치한다.  
 ```
-$ cd ~/workspace/paasta-5.5.4/deployment/portal-deployment/portal-api   
+$ cd ~/workspace/portal-deployment/portal-api   
 $ sh ./deploy.sh  
 ```  
 
