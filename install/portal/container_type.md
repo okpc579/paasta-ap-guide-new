@@ -39,29 +39,6 @@
 ### <div id="1.2"/> 1.2. 범위
 설치 범위는 PaaS-TA Portal을 검증하기 위한 Portal infra Release 설치 및 Portal App 배포를 기준으로 작성하였다.
 
-### <div id="1.3"/> 1.3. 시스템 구성
-본 문서의 설치된 시스템 구성도이다. Binary Storage, Mariadb, Gateway Api, Registration Api, Portal Api, Common Api, Log Api, Storage Api, Webadmin, Webuser로 최소사항을 구성하였다.
-
-![시스템구성도][paas-ta-portal-01]
-* Paas-TA Portal infra VM   
-
-| 구분 | Resource Pool | 스펙 |
-|--------|-------|-------|
-| infra (mariadb / binary storage) | small | 1vCPU / 512MB RAM / 10GB Disk 20GB(영구적 Disk) |
-
-* Paas-TA Portal App
-
-| App명 | 인스턴스 수 | 메모리 | 디스크 |
-|--------|-------|-------|-------|
-| portal-registration | 1 | 1G | 1G|
-| portal-gateway | 1 | 1G | 1G|
-| portal-api | N | 2G | 2G|
-| portal-common-api | N | 1G | 1G|
-| portal-storage-api | N | 1G | 1G|
-| portal-log-api | N | 1G | 1G|
-| portal-web-admin | N | 1G | 1G|
-| portal-web-user | N | 1G | 1G|  
-
 ### <div id="1.4"/> 1.4. 참고자료
 [**http://bosh.io/docs**](http://bosh.io/docs)  
 [**http://docs.cloudfoundry.org/**](http://docs.cloudfoundry.org/)
