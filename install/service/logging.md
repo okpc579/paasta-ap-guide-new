@@ -33,22 +33,6 @@
 
 설치 범위는 Logging 서비스 Release를 검증하기 위한 기본 설치를 기준으로 작성하였다.
 
-### <div id="1.3"/> 1.3. 시스템 구성
-
-본 장에서는 Logging 서비스의 시스템 구성에 대해 기술하였다. Logging 서비스 시스템은 Router, Collector, Queue, Parser, Elasticsearch, Visualization의 최소사항을 구성하였다.  
-![001]
-
-VM명 | 인스턴스 수 | vCPU수 | 메모리(GB) | 디스크(GB)
-:--- | :---: | :---: | :---:| :---
-Router | 1 | 1 |1 | Root 8G
-Collector | 1 | 1 | 2 | Root 10G
-Queue | 1 | 1 | 2 |  Root 10G + Persistent disk 10G
-Parser | N | 1 | 2 | Root 10G
-Elasticsearch Master | 1 | 1 | 2 | Root 10G + Persistent disk 10G
-Elasticsearch Data | N | 2 | 4 | Root 20G + Persistent disk 30G
-Visualization | 1 |  1 | 2 | Root 10G
-maintenance | 1 | 1 | 1 | Root 8G
-
 ### <div id="1.4"/> 1.4. 참고자료
 > http://bosh.io/docs  
 > http://docs.cloudfoundry.org/  
