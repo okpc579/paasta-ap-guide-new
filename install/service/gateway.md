@@ -34,17 +34,6 @@
 
 설치 범위는 애플리케이션 Gateway 서비스 Release를 검증하기 위한 기본 설치를 기준으로 작성하였다.
 
-### <div id="1.3"/> 1.3. 시스템 구성
-
-본 장에서는 애플리케이션 Gateway 서비스의 시스템 구성에 대해 기술하였다. 애플리케이션 Gateway 서비스 시스템은 service-broker, mariadb, api-gateway(WSO2)서비스의 최소사항을 구성하였다.  
-![001]
-
-VM명 | 인스턴스 수 | vCPU수 | 메모리(GB) | 디스크(GB)
-:--- | :---: | :---: | :---:| :---
-service-broker | 1 | 1 |1 |
-mariadb | 1 | 1 | 2 | Root 8G + Persistent disk 10G
-api-gateway | N | 2 | 4 |  Root 10G + Persistent disk 20G
-
 ### <div id="1.4"/> 1.4. 참고자료
 > http://bosh.io/docs  
 > http://docs.cloudfoundry.org/  
