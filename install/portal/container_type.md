@@ -72,8 +72,8 @@ Succeeded
 
 ```
 # Deployment 다운로드 파일 위치 경로 생성 및 설치 경로 이동
-$ mkdir -p ~/workspace/paasta-5.5.4/deployment
-$ cd ~/workspace/paasta-5.5.4/deployment
+$ mkdir -p ~/workspace
+$ cd ~/workspace
 
 # Deployment 파일 다운로드
 $ git clone https://github.com/PaaS-TA/portal-deployment.git -b v5.2.1
@@ -146,7 +146,7 @@ Succeeded
 
 - Deployment YAML에서 사용하는 변수 파일을 서버 환경에 맞게 수정한다.
 
-> $ vi ~/workspace/paasta-5.5.4/deployment/portal-deployment/portal-container-infra/vars.yml
+> $ vi ~/workspace/portal-deployment/portal-container-infra/vars.yml
 
 ```
 # STEMCELL INFO
@@ -185,7 +185,7 @@ binary_storage_email: "<BINARY_STORAGE_EMAIL>"                  # binary storage
 - 서버 환경에 맞추어 Deploy 스크립트 파일의 VARIABLES 설정을 수정하고, Option file을 추가할지 선택한다.  
      (선택) -o operations/cce.yml (CCE 조치를 적용하여 설치)
 
-> $ vi ~/workspace/paasta-5.5.4/deployment/portal-deployment/portal-container-infra/deploy.sh
+> $ vi ~/workspace/portal-deployment/portal-container-infra/deploy.sh
 ```
 #!/bin/bash
 
@@ -202,7 +202,7 @@ bosh -e ${BOSH_ENVIRONMENT} -n -d portal-container-infra deploy --no-redact port
 
 - 서비스를 설치한다.  
 ```
-$ cd ~/workspace/paasta-5.5.4/deployment/portal-deployment/portal-container-infra    
+$ cd ~/workspace/portal-deployment/portal-container-infra    
 $ sh ./deploy.sh  
 ```  
 
@@ -235,7 +235,7 @@ Portal 설치에 필요한 App 파일 및 Manifest 파일을 다운로드 받아
 
 ```
 ### 설치 작업 경로  
-$ cd ~/workspace/paasta-5.5.4/release/portal
+$ cd ~/workspace/portal-deployment/portal-container-infra
 
 ### portal app 파일을 다운로드한다
 $ wget --content-disposition https://nextcloud.paas-ta.org/index.php/s/LmZTEiJn6NcJoiY/download
