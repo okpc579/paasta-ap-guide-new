@@ -32,40 +32,6 @@ PaaS-TA 3.5 버전부터는 Bosh2.0 기반으로 deploy를 진행하며 기존 B
 ### <div id='1.2'> 1.2. 범위
 설치 범위는 Pinpoint 서비스팩을 검증하기 위한 기본 설치를 기준으로 작성하였다.
 
-### <div id='1.3'> 1.3. 시스템 구성도
-
-본 문서의 설치된 시스템 구성도이다. Pinpoint Server, HBase의 HBase Master2, HBase Slave2, Collector 2, Pinpoint 서비스 브로커, WebUI3로 최소사항을 구성하였다.
-
-![시스템구성도][pinpoint_image_01-1]
-
-<table>
-  <tr>
-    <th>구분</th>
-    <th>Resource Pool</th>
-    <th>스펙</th>
-  </tr>
-  <tr>
-  <td>Collector/0      </td><td>pinpoint_medium</td><td>2vCPU / 2GB RAM / 8GB Disk</td>
-  </tr>
-  <tr>
-  <td>Collector/1      </td><td>pinpoint_medium</td><td>2vCPU / 2GB RAM / 8GB Disk</td>
-  </tr>
-  <tr>
-  <td>h_master/0      </td><td>pinpoint_medium</td><td>2vCPU / 2GB RAM / 8GB Disk</td>
-  </tr>
-  <tr>
-  <td>haproxy_webui/0 </td><td>services-small </td><td>1vCPU / 1GB RAM / 4GB Disk</td>
-  </tr>
-  <tr>
-  <td>pinpoint_broker/0</<td><td>services-small </td><td>1vCPU / 1GB RAM / 4GB Disk</td>
-  </tr>
-  <tr>
-  <td>webui/0          </0><td>services-small </td><td>1vCPU / 1GB RAM / 4GB Disk</td>
-  </tr>
-  <tr>
-  <td>webui/1          </td><td>services-small </td><td>1vCPU / 1GB RAM / 4GB Disk</td>
-  </tr>
-</table>
 
 ### <div id='1.4'> 1.4. 참고자료
 [**http://bosh.io/docs**](http://bosh.io/docs)<br>
