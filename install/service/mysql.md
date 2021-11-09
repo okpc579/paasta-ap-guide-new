@@ -36,25 +36,6 @@ PaaS-TA 3.5 버전부터는 Bosh2.0 기반으로 deploy를 진행하며 기존 B
 ### <div id='1.2'> 1.2. 범위
 설치 범위는 MySQL 서비스팩을 검증하기 위한 기본 설치를 기준으로 작성하였다.
 
-### <div id='1.3'> 1.3. 시스템 구성도
-본 문서의 설치된 시스템 구성도이다. MySQL Server, MySQL 서비스 브로커, Proxy로 최소사항을 구성하였다.
-
-![시스템구성도][mysql_vsphere_1.3.01]
-* 설치할때 cloud config에서 사용하는 VM_Tpye명과 스펙
-
-| VM_Type | 스펙 |
-|--------|-------|
-|minimal| 1vCPU / 1GB RAM / 8GB Disk|
-
-* 각 Instance의 Resource Pool과 스펙
-
-| 구분 | Resource Pool | 스펙 |
-|--------|-------|-------|
-| mysql-broker | minimal | 1vCPU / 1GB RAM / 8GB Disk |
-| proxy | minimal | 1vCPU / 1GB RAM / 8GB Disk |
-| mysql | minimal | 1vCPU / 1GB RAM / 8GB Disk +8GB(영구적 Disk) |
-| arbitrator | minimal | 1vCPU / 1GB RAM / 8GB Disk |
-
 ### <div id='1.4'> 1.4. 참고자료
 [**http://bosh.io/docs**](http://bosh.io/docs)  
 [**http://docs.cloudfoundry.org/**](http://docs.cloudfoundry.org/)
