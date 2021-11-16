@@ -1161,22 +1161,22 @@ Rspec을 이용한 Ruby 애플리케이션 테스트
       
 
 
-[ruby01]:/Sample-App-Guide/image/ruby/ruby_01.png
-[ruby02]:/Sample-App-Guide/image/ruby/ruby_02.png
-[ruby03]:/Sample-App-Guide/image/ruby/ruby_03.png
-[ruby04]:/Sample-App-Guide/image/ruby/ruby_04.png
-[ruby05]:/Sample-App-Guide/image/ruby/ruby_05.png
-[ruby06]:/Sample-App-Guide/image/ruby/ruby_06.png
-[ruby07]:/Sample-App-Guide/image/ruby/ruby_07.png
-[ruby08]:/Sample-App-Guide/image/ruby/ruby_08.png
-[ruby09]:/Sample-App-Guide/image/ruby/ruby_09.png
-[ruby10]:/Sample-App-Guide/image/ruby/ruby_10.png
-[ruby11]:/Sample-App-Guide/image/ruby/ruby_11.png
-[ruby12]:/Sample-App-Guide/image/ruby/ruby_12.png
-[ruby13]:/Sample-App-Guide/image/ruby/ruby_13.png
-[ruby14]:/Sample-App-Guide/image/ruby/ruby_14.png
-[ruby15]:/Sample-App-Guide/image/ruby/ruby_15.png
-[ruby16]:/Sample-App-Guide/image/ruby/ruby_16.png
+[ruby01]:./images/ruby/ruby_01.png
+[ruby02]:./images/ruby/ruby_02.png
+[ruby03]:./images/ruby/ruby_03.png
+[ruby04]:./images/ruby/ruby_04.png
+[ruby05]:./images/ruby/ruby_05.png
+[ruby06]:./images/ruby/ruby_06.png
+[ruby07]:./images/ruby/ruby_07.png
+[ruby08]:./images/ruby/ruby_08.png
+[ruby09]:./images/ruby/ruby_09.png
+[ruby10]:./images/ruby/ruby_10.png
+[ruby11]:./images/ruby/ruby_11.png
+[ruby12]:./images/ruby/ruby_12.png
+[ruby13]:./images/ruby/ruby_13.png
+[ruby14]:./images/ruby/ruby_14.png
+[ruby15]:./images/ruby/ruby_15.png
+[ruby16]:./images/ruby/ruby_16.png
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Ruby 개발
