@@ -463,11 +463,10 @@ laasclient
 
 ![005]
 
-[001]:/service-guide/images/logging-service/image001.png
-[002]:/service-guide/images/logging-service/image002.png
-[003]:/service-guide/images/logging-service/image003.png
-[004]:/service-guide/images/logging-service/image004.png
-[005]:/service-guide/images/logging-service/image005.png
-
+[001]:./images/logging-service/image001.png
+[002]:./images/logging-service/image002.png
+[003]:./images/logging-service/image003.png
+[004]:./images/logging-service/image004.png
+[005]:./images/logging-service/image005.png
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Install](../README.md) > Logging Service
