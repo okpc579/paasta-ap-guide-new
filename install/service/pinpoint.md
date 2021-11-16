@@ -707,10 +707,10 @@ $ cf restage spring-music-pinpoint
 
 	
 
-[pinpoint_image_01]:/service-guide/images/pinpoint/pinpoint-image1.png
-[pinpoint_image_01-1]:/service-guide/images/pinpoint/pinpoint-image1-1.png
-[pinpoint_image_02]:/service-guide/images/pinpoint/pinpoint-image2.png
-[pinpoint_image_03]:/service-guide/images/pinpoint/pinpoint-image3.png
+[pinpoint_image_01]:./images/pinpoint/pinpoint-image1.png
+[pinpoint_image_01-1]:./images/pinpoint/pinpoint-image1-1.png
+[pinpoint_image_02]:./images/pinpoint/pinpoint-image2.png
+[pinpoint_image_03]:./images/pinpoint/pinpoint-image3.png
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Install](../README.md) > Pinpoint APM Service
