@@ -1,7 +1,5 @@
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Logging Service
 
-
-
 # Table Of Contents
 
 1. [문서 개요](#1)
