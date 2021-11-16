@@ -451,7 +451,7 @@ webide   webide    dedicated-vm                create succeeded   webide-service
 
 - 사용할 언어를 선택하고 Create workspace and project 로 새로운 프로젝트를 시작한다.
 
-![](/service-guide/images/webide/web-ide-08-1.png)
+![](./images/webide/web-ide-08-1.png)
 
 <br>
 
@@ -460,11 +460,11 @@ webide   webide    dedicated-vm                create succeeded   webide-service
 
 - WEB-IDE를 처음 생성 시 Workspace를 새로 생성하는 화면이 열리고 프로젝트를 설정에 맞게 생성하여 작업을 진행한다.
 
-![](/service-guide/images/webide/web-ide-on-02.jpeg)
+![](./images/webide/web-ide-on-02.jpeg)
 
-![](/service-guide/images/webide/web-ide-on-03.jpeg)
+![](./images/webide/web-ide-on-03.jpeg)
 
-![](/service-guide/images/webide/web-ide-on-04.jpeg)
+![](./images/webide/web-ide-on-04.jpeg)
 
 <br>
 
@@ -472,15 +472,15 @@ webide   webide    dedicated-vm                create succeeded   webide-service
 
 ##### -cf api 명령을 이용해 endpoint를 지정한다.
 
-> ![](/service-guide/images/webide/web-ide-12.png)
+> ![](./images/webide/web-ide-12.png)
 
 ##### cf login 명령어로 로그인하고 조직과 공간을 선택한다.
 
-> ![](/service-guide/images/webide/web-ide-13.png)
+> ![](./images/webide/web-ide-13.png)
 
 ##### cf push 를 이용해 cf에 앱을 업로드한다.
 
-> ![](/service-guide/images/webide/web-ide-14.png)
+> ![](./images/webide/web-ide-14.png)
 
 
 
