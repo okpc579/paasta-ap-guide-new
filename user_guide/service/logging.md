@@ -1,5 +1,6 @@
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Logging Service
 
+
 # Table Of Contents
 
 1. [문서 개요](#1)
@@ -320,7 +321,7 @@ Add Panels의 "Visualization" / "Saved Search" 을 클릭하여 저장된 객체
 
 
 
-[001]./images/logging-service/image001.png
+[001]:./images/logging-service/image001.png
 [002]:./images/logging-service/image002.png
 [003]:./images/logging-service/image003.png
 [004]:./images/logging-service/image004.png
@@ -379,8 +380,6 @@ Add Panels의 "Visualization" / "Saved Search" 을 클릭하여 저장된 객체
 [057]:./images/logging-service/image057.png
 [058]:./images/logging-service/image058.png
 [059]:./images/logging-service/image059.png
-
-
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Logging Service
