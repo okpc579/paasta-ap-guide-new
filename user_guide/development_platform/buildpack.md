@@ -1361,8 +1361,8 @@ https://username:password@github.com/johndoe/my-buildpack.git\#my-branch-name
 
 [^10]: Rspec, 루비를 위한 BDD(behavior-driven development) 프레임워크[***http://rspec.info/***](http://rspec.info/)
 
-[buildpack_develope_guide_01]:/images/openpaas-buildpack-devolpe-guide/buildpack_develope_guide_01.png
-[buildpack_develope_guide_02]:/images/openpaas-buildpack-devolpe-guide/buildpack_develope_guide_02.png
+[buildpack_develope_guide_01]:./images/openpaas-buildpack-devolpe-guide/buildpack_develope_guide_01.png
+[buildpack_develope_guide_02]:./images/openpaas-buildpack-devolpe-guide/buildpack_develope_guide_02.png
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Buildpack 개발
