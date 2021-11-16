@@ -1096,30 +1096,30 @@ test:
 ><div>$ make test
 ![2-5-0-0]
 
-[2-2-1-0]:/Sample-App-Guide/image/nodejs/2-2-1-0.png
-[2-2-1-1]:/Sample-App-Guide/image/nodejs/2-2-1-1.png
-[2-2-1-2]:/Sample-App-Guide/image/nodejs/2-2-1-2.png
-[2-2-1-3]:/Sample-App-Guide/image/nodejs/2-2-1-3.png
-[2-2-1-4]:/Sample-App-Guide/image/nodejs/2-2-1-4.png
-[2-2-1-5]:/Sample-App-Guide/image/nodejs/2-2-1-5.png
-[2-2-1-6]:/Sample-App-Guide/image/nodejs/2-2-1-6.png
-[2-2-1-7]:/Sample-App-Guide/image/nodejs/2-2-1-7.png
-[2-2-1-8]:/Sample-App-Guide/image/nodejs/2-2-1-8.png
-[2-2-1-9]:/Sample-App-Guide/image/nodejs/2-2-1-9.png
-[2-2-1-10]:/Sample-App-Guide/image/nodejs/2-2-1-10.png
-[2-3-1-0]:/Sample-App-Guide/image/nodejs/2-3-1-0.png
-[2-3-1-1]:/Sample-App-Guide/image/nodejs/2-3-1-1.png
-[2-3-1-2]:/Sample-App-Guide/image/nodejs/2-3-1-2.png
-[2-3-1-3]:/Sample-App-Guide/image/nodejs/2-3-1-3.png
-[2-3-1-4]:/Sample-App-Guide/image/nodejs/2-3-1-4.png
-[2-3-2-0]:/Sample-App-Guide/image/nodejs/2-3-2-0.png
-[2-3-2-1]:/Sample-App-Guide/image/nodejs/2-3-2-1.png
-[2-4-1-0]:/Sample-App-Guide/image/nodejs/2-4-1-0.png
-[2-4-2-0]:/Sample-App-Guide/image/nodejs/2-4-2-0.png
-[2-4-3-0]:/Sample-App-Guide/image/nodejs/2-4-3-0.png
-[2-4-4-0]:/Sample-App-Guide/image/nodejs/2-4-4-0.png
-[2-4-4-1]:/Sample-App-Guide/image/nodejs/2-4-4-1.png
-[2-4-5-0]:/Sample-App-Guide/image/nodejs/2-4-5-0.png
-[2-5-0-0]:/Sample-App-Guide/image/nodejs/2-5-0-0.png
+[2-2-1-0]:./image/nodejs/2-2-1-0.png
+[2-2-1-1]:./image/nodejs/2-2-1-1.png
+[2-2-1-2]:./image/nodejs/2-2-1-2.png
+[2-2-1-3]:./image/nodejs/2-2-1-3.png
+[2-2-1-4]:./image/nodejs/2-2-1-4.png
+[2-2-1-5]:./image/nodejs/2-2-1-5.png
+[2-2-1-6]:./image/nodejs/2-2-1-6.png
+[2-2-1-7]:./image/nodejs/2-2-1-7.png
+[2-2-1-8]:./image/nodejs/2-2-1-8.png
+[2-2-1-9]:./image/nodejs/2-2-1-9.png
+[2-2-1-10]:./image/nodejs/2-2-1-10.png
+[2-3-1-0]:./image/nodejs/2-3-1-0.png
+[2-3-1-1]:./image/nodejs/2-3-1-1.png
+[2-3-1-2]:./image/nodejs/2-3-1-2.png
+[2-3-1-3]:./image/nodejs/2-3-1-3.png
+[2-3-1-4]:./image/nodejs/2-3-1-4.png
+[2-3-2-0]:./image/nodejs/2-3-2-0.png
+[2-3-2-1]:./image/nodejs/2-3-2-1.png
+[2-4-1-0]:./image/nodejs/2-4-1-0.png
+[2-4-2-0]:./image/nodejs/2-4-2-0.png
+[2-4-3-0]:./image/nodejs/2-4-3-0.png
+[2-4-4-0]:./image/nodejs/2-4-4-0.png
+[2-4-4-1]:./image/nodejs/2-4-4-1.png
+[2-4-5-0]:./image/nodejs/2-4-5-0.png
+[2-5-0-0]:./image/nodejs/2-5-0-0.png
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Node.js 개발
