@@ -37,32 +37,32 @@ Java 애플리케이션 개발을 위해 다음과 같은 환경으로 개발환
 
 1.   다운로드 JDK1.8
 
-    <img src="./image/java/image1.png" width="612" height="151" />
+    <img src="./images/java/image1.png" width="612" height="151" />
 
 2. JDK 설치
 
   -  jdk-8u65-windows-x64.exe 더블클릭하여 설치를 실행한다.
 
-<img src="./image/java/image2.png" width="612" height="300" />
+<img src="./images/java/image2.png" width="612" height="300" />
 
   -  next 버튼 클릭하여 진행한다.
 
-<img src="./image/java/image3.png" width="400" height="250" />
+<img src="./images/java/image3.png" width="400" height="250" />
 
   -  설치가 진행된다.
 
-<img src="./image/java/image4.png" width="400" height="300" />
+<img src="./images/java/image4.png" width="400" height="300" />
   -   Close 버튼 클릭하여 설치를 종료한다.
 
 3. JDK  환경설정
 
   -   내컴퓨터에서 우측 버튼을 클릭하여 속성을 클릭한다.
 
-<img src="./image/java/image5.png" width="400" height="150" />
+<img src="./images/java/image5.png" width="400" height="150" />
 
   -   고급 시스템설정>고급 텝 > 환경변수 버튼 클릭
   -   시스템 변수 영역 > path 클릭 > jdk설치된 디렉토리의 bin을 path로 추가한다.
-<img src="./image/java/image6.png" width="400" height="150" />
+<img src="./images/java/image6.png" width="400" height="150" />
 
 4.  eclipse 설치
 
@@ -73,32 +73,32 @@ Java 애플리케이션 개발을 위해 다음과 같은 환경으로 개발환
 
   - eclipse-jee-mars-1-win32-x86_64.zip을 선택하여 압축해제한다.
 
-<img src="./image/java/image7.png" width="400" height="150" />
+<img src="./images/java/image7.png" width="400" height="150" />
 
   - eclipse.exe 를 클릭한다.  
-<img src="./image/java/image9.png" width="400" height="150" />
+<img src="./images/java/image9.png" width="400" height="150" />
 
   - eclipse 초기화면이 나타난다.  
-<img src="./image/java/image10.png" width="400" height="150" />
+<img src="./images/java/image10.png" width="400" height="150" />
 
   - 좌측 Project Explore.에서 import를 클릭한다.  
-<img src="./image/java/image11.png" width="400" height="150" />
+<img src="./images/java/image11.png" width="400" height="150" />
 
   - Existing Maven Project를 클릭한다.  
-<img src="./image/java/image12.png" width="400" height="150" />
+<img src="./images/java/image12.png" width="400" height="150" />
 
   - Browse  버튼을 클릭하여 java-sample 프로제트가있는 폴더를 선택한다. Finish 버튼을 클릭한다.
-<img src="./image/java/image13.png" width="400" height="150" />
+<img src="./images/java/image13.png" width="400" height="150" />
 
   - java sample Application이 추가 된것을 확인한다.  
-<img src="./image/java/image14.png" width="400" height="150" />
+<img src="./images/java/image14.png" width="400" height="150" />
 
 
 #### 2.3. 개발
   - OpenPaas Java Sample Application은 다음과 같은 구조를 지닌다. Spring-Boot library를 사용하여
 별도의 Tomcat설정 없이 구동이 가능합니다. 샘플 애플리케이션에의 데이터 관리는 MySQL, CubridDB, MongoDB 중에 하나를 이용하기 때문에 API 요청시 요청 본문에 DBType 값을 가지고 결정합니다.
 
-<img src="./image/java/image15.png" width="500" height="500" />
+<img src="./images/java/image15.png" width="500" height="500" />
 
 
 
@@ -127,7 +127,7 @@ Java 애플리케이션 개발을 위해 다음과 같은 환경으로 개발환
 
 1)   manifest.yml
   - Cloud  
-<img src="./image/java/image1-1.png" width="350" height="300" />
+<img src="./images/java/image1-1.png" width="350" height="300" />
 
 2) resource/application-cloud.properties (application.properties는 Local환경용)
   - Cloud환경에서 적용될 프로퍼티로 Application이 사용할 서비스 명이 설정되어 있습니다.
@@ -452,7 +452,7 @@ public class CloudDataConfig extends AbstractCloudConfig {
   - Java Sample Application은 Spring Boot으로 구성되어 있어 별도의 Tomcat 설정이 필요하지 않습니다.
 java package Root에 있는 Application.java 우측 버튼을 클릭 --> Run As --> Java Application실행하면 Sample Application이 실행됩니다.
 
-<img src="./image/java/image17.png" width="350" height="400" />
+<img src="./images/java/image17.png" width="350" height="400" />
 
 
 #### 2.4. 배포
@@ -566,11 +566,11 @@ java-sample              started           1/1         512M     1G     java-samp
 1) 브라우저에서 java-sample.52.71.31.153.xip.io 에 접속하면 로그인 화면이 나타납니다.
 admin/admin 입력후 로그인 합니다.
 
-<img src="./image/java/image18.png" width="350" height="300" />
+<img src="./images/java/image18.png" width="350" height="300" />
 
 2) 로그인이 완료되면 다음 조직 화면이 나타납니다. 화면 하단에 집 아이콘을 클릭하면 해당 조직의 상세 조직 화면이 나타납니다. 조직명을 클릭하면 조직의 에하 조직 목록을 조회 할 수 있습니다.
 
-<img src="./image/java/image19.png" width="350" height="150" />
+<img src="./images/java/image19.png" width="350" height="150" />
 ```
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Java 개발
