@@ -459,19 +459,19 @@ Sample App에서 GlusterFS 서비스를 사용하기 위해서는 서비스 신�
 
 > ![glusterfs_image_17]
 
-[glusterfs_image_01]:/service-guide/images/glusterfs/glusterfs_image_01.png
+[glusterfs_image_01]:./images/glusterfs/glusterfs_image_01.png
 
-[glusterfs_image_07]:/service-guide/images/glusterfs/glusterfs_image_07.png
-[glusterfs_image_08]:/service-guide/images/glusterfs/glusterfs_image_08.png
-[glusterfs_image_09]:/service-guide/images/glusterfs/glusterfs_image_09.png
-[glusterfs_image_10]:/service-guide/images/glusterfs/glusterfs_image_10.png
-[glusterfs_image_11]:/service-guide/images/glusterfs/glusterfs_image_11.png
-[glusterfs_image_12]:/service-guide/images/glusterfs/glusterfs_image_12.png
-[glusterfs_image_13]:/service-guide/images/glusterfs/glusterfs_image_13.png
-[glusterfs_image_14]:/service-guide/images/glusterfs/glusterfs_image_14.png
-[glusterfs_image_15]:/service-guide/images/glusterfs/glusterfs_image_15.png
-[glusterfs_image_16]:/service-guide/images/glusterfs/glusterfs_image_16.png
-[glusterfs_image_17]:/service-guide/images/glusterfs/glusterfs_image_17.jpeg
+[glusterfs_image_07]:./images/glusterfs/glusterfs_image_07.png
+[glusterfs_image_08]:./images/glusterfs/glusterfs_image_08.png
+[glusterfs_image_09]:./images/glusterfs/glusterfs_image_09.png
+[glusterfs_image_10]:./images/glusterfs/glusterfs_image_10.png
+[glusterfs_image_11]:./images/glusterfs/glusterfs_image_11.png
+[glusterfs_image_12]:./images/glusterfs/glusterfs_image_12.png
+[glusterfs_image_13]:./images/glusterfs/glusterfs_image_13.png
+[glusterfs_image_14]:./images/glusterfs/glusterfs_image_14.png
+[glusterfs_image_15]:./images/glusterfs/glusterfs_image_15.png
+[glusterfs_image_16]:./images/glusterfs/glusterfs_image_16.png
+[glusterfs_image_17]:./images/glusterfs/glusterfs_image_17.jpeg
 
 
 
