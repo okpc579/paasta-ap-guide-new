@@ -549,16 +549,16 @@ memory usage:   256M
 
 
 
-[rabbitmq_image_01]:/service-guide/images/rabbitmq/rabbitmq_image_01.png
+[rabbitmq_image_01]:./images/rabbitmq/rabbitmq_image_01.png
 
-[rabbitmq_image_12]:/service-guide/images/rabbitmq/rabbitmq_image_12.png
-[rabbitmq_image_13]:/service-guide/images/rabbitmq/rabbitmq_image_13.png
-[rabbitmq_image_14]:/service-guide/images/rabbitmq/rabbitmq_image_14.png
-[rabbitmq_image_15]:/service-guide/images/rabbitmq/rabbitmq_image_15.png
-[rabbitmq_image_16]:/service-guide/images/rabbitmq/rabbitmq_image_16.png
-[rabbitmq_image_17]:/service-guide/images/rabbitmq/rabbitmq_image_17.png
-[rabbitmq_image_18]:/service-guide/images/rabbitmq/rabbitmq_image_18.png
-[rabbitmq_image_19]:/service-guide/images/rabbitmq/rabbitmq_image_19.png
+[rabbitmq_image_12]:./images/rabbitmq/rabbitmq_image_12.png
+[rabbitmq_image_13]:./images/rabbitmq/rabbitmq_image_13.png
+[rabbitmq_image_14]:./images/rabbitmq/rabbitmq_image_14.png
+[rabbitmq_image_15]:./images/rabbitmq/rabbitmq_image_15.png
+[rabbitmq_image_16]:./images/rabbitmq/rabbitmq_image_16.png
+[rabbitmq_image_17]:./images/rabbitmq/rabbitmq_image_17.png
+[rabbitmq_image_18]:./images/rabbitmq/rabbitmq_image_18.png
+[rabbitmq_image_19]:./images/rabbitmq/rabbitmq_image_19.png
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Install](../README.md) > RabbitMQ Service
