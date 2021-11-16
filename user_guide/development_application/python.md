@@ -972,41 +972,41 @@ $ cf bind-service python-sample-app python-rabbitmq
 
 
 
-[python-2]:/Sample-App-Guide/image/python/image2.png
-[python-3]:/Sample-App-Guide/image/python/image3.png
-[python-4]:/Sample-App-Guide/image/python/image4.png
-[python-5]:/Sample-App-Guide/image/python/image5.png
-[python-6]:/Sample-App-Guide/image/python/image6.png
-[python-7]:/Sample-App-Guide/image/python/image7.png
-[python-8]:/Sample-App-Guide/image/python/image8.png
-[python-9]:/Sample-App-Guide/image/python/image9.png
-[python-10]:/Sample-App-Guide/image/python/image10.png
-[python-11]:/Sample-App-Guide/image/python/image11.png
-[python-12]:/Sample-App-Guide/image/python/image12.png
-[python-13]:/Sample-App-Guide/image/python/image13.png
-[python-14]:/Sample-App-Guide/image/python/image14.png
-[python-15]:/Sample-App-Guide/image/python/image15.png
-[python-16]:/Sample-App-Guide/image/python/image16.png
-[python-17]:/Sample-App-Guide/image/python/image17.png
-[python-18]:/Sample-App-Guide/image/python/image18.png
-[python-19]:/Sample-App-Guide/image/python/image19.png
-[python-20]:/Sample-App-Guide/image/python/image20.png
-[python-21]:/Sample-App-Guide/image/python/image21.png
-[python-22]:/Sample-App-Guide/image/python/image22.png
-[python-23]:/Sample-App-Guide/image/python/image23.png
-[python-24]:/Sample-App-Guide/image/python/image24.png
-[python-25]:/Sample-App-Guide/image/python/image25.png
-[python-26]:/Sample-App-Guide/image/python/image26.png
-[python-27]:/Sample-App-Guide/image/python/image27.png
-[python-28]:/Sample-App-Guide/image/python/image28.png
-[python-29]:/Sample-App-Guide/image/python/image29.png
-[python-30]:/Sample-App-Guide/image/python/image30.png
-[python-31]:/Sample-App-Guide/image/python/image31.png
-[python-32]:/Sample-App-Guide/image/python/image32.png
-[python-33]:/Sample-App-Guide/image/python/image33.png
-[python-34]:/Sample-App-Guide/image/python/image34.png
-[python-35]:/Sample-App-Guide/image/python/image35.png
-[python-36]:/Sample-App-Guide/image/python/image36.png
+[python-2]:./images/python/image2.png
+[python-3]:./images/python/image3.png
+[python-4]:./images/python/image4.png
+[python-5]:./images/python/image5.png
+[python-6]:./images/python/image6.png
+[python-7]:./images/python/image7.png
+[python-8]:./images/python/image8.png
+[python-9]:./images/python/image9.png
+[python-10]:./images/python/image10.png
+[python-11]:./images/python/image11.png
+[python-12]:./images/python/image12.png
+[python-13]:./images/python/image13.png
+[python-14]:./images/python/image14.png
+[python-15]:./images/python/image15.png
+[python-16]:./images/python/image16.png
+[python-17]:./images/python/image17.png
+[python-18]:./images/python/image18.png
+[python-19]:./images/python/image19.png
+[python-20]:./images/python/image20.png
+[python-21]:./images/python/image21.png
+[python-22]:./images/python/image22.png
+[python-23]:./images/python/image23.png
+[python-24]:./images/python/image24.png
+[python-25]:./images/python/image25.png
+[python-26]:./images/python/image26.png
+[python-27]:./images/python/image27.png
+[python-28]:./images/python/image28.png
+[python-29]:./images/python/image29.png
+[python-30]:./images/python/image30.png
+[python-31]:./images/python/image31.png
+[python-32]:./images/python/image32.png
+[python-33]:./images/python/image33.png
+[python-34]:./images/python/image34.png
+[python-35]:./images/python/image35.png
+[python-36]:./images/python/image36.png
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Python 개발
