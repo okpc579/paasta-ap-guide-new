@@ -536,11 +536,11 @@ Paas-TA Portal 설치 후에 관리자 포탈에서 빌드팩, 서비스팩을 �
 5. 사용자포탈에서 변경된값이 적용되어있는지 확인한다.  
 ![paas-ta-portal-19]   
 
-[paas-ta-portal-01]:../../install-guide/portal/images/Paas-TA-Portal_App_01.png
-[paas-ta-portal-15]:../../install-guide/portal/images/Paas-TA-Portal_15.png
-[paas-ta-portal-16]:../../install-guide/portal/images/Paas-TA-Portal_16.png
-[paas-ta-portal-17]:../../install-guide/portal/images/Paas-TA-Portal_17.png
-[paas-ta-portal-18]:../../install-guide/portal/images/Paas-TA-Portal_18.png
-[paas-ta-portal-19]:../../install-guide/portal/images/Paas-TA-Portal_19.png
-[paas-ta-portal-31]:../../install-guide/portal/images/Paas-TA-Portal_27.jpg
-[paas-ta-portal-32]:../../install-guide/portal/images/Paas-TA-Portal_28.jpg
+[paas-ta-portal-01]:./images/Paas-TA-Portal_App_01.png
+[paas-ta-portal-15]:./images/Paas-TA-Portal_15.png
+[paas-ta-portal-16]:./images/Paas-TA-Portal_16.png
+[paas-ta-portal-17]:./images/Paas-TA-Portal_17.png
+[paas-ta-portal-18]:./images/Paas-TA-Portal_18.png
+[paas-ta-portal-19]:./images/Paas-TA-Portal_19.png
+[paas-ta-portal-31]:./images/Paas-TA-Portal_27.jpg
+[paas-ta-portal-32]:./images/Paas-TA-Portal_28.jpg
