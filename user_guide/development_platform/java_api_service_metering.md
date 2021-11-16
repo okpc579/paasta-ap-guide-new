@@ -1057,8 +1057,8 @@ API 연동 샘플 애플리케이션의 url을 통해 웹 브라우저에서 접
 
 [다운로드](https://paas-ta.kr/data/packages/2.0/PaaSTA-Metering.zip)
 
-[Java_Api_Service_Metering_Image01]:images/Java_Api_Service_Metering/meteringAPI_development_range.png
-[Java_Api_Service_Metering_Image02]:images/Java_Api_Service_Metering/sampleAPI_Service.png
+[Java_Api_Service_Metering_Image01]:./images/Java_Api_Service_Metering/meteringAPI_development_range.png
+[Java_Api_Service_Metering_Image02]:./images/Java_Api_Service_Metering/sampleAPI_Service.png
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Java API Service Metering 개발
