@@ -614,13 +614,12 @@ pipeline        delivery-pipeline        delivery-pipeline-shared               
  ```
 
 
-[1-1-3]:/service-guide/images/pipeline/Delivery_Pipeline_Architecture.jpg
-[3-1-1]:/service-guide/images/pipeline/adminPortal_login.png
-[3-1-2]:/service-guide/images/pipeline/adminPortal_serviceBroker.png
-[3-1-3]:/service-guide/images/pipeline/adminPortal_serviceControl.png
-[3-2-1]:/service-guide/images/pipeline/adminPortal_catalog.png
-[3-2-2]:/service-guide/images/pipeline/adminPortal_catalogDetail.png
-
+[1-1-3]:./images/pipeline/Delivery_Pipeline_Architecture.jpg
+[3-1-1]:./images/pipeline/adminPortal_login.png
+[3-1-2]:./images/pipeline/adminPortal_serviceBroker.png
+[3-1-3]:./images/pipeline/adminPortal_serviceControl.png
+[3-2-1]:./images/pipeline/adminPortal_catalog.png
+[3-2-2]:./images/pipeline/adminPortal_catalogDetail.png
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Install](../README.md) > Pipeline Service
