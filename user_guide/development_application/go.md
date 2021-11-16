@@ -35,7 +35,7 @@ Intellij IDEA 는 Commnuity와 Ultimate 버전이 있는데, Community 버전은
 | <span id="__DdeLink__2953_294360055" class="anchor"></span>https://golang.org/dl/ |
 |-----------------------------------------------------------------------------------|
 
-<img src="./image/go/image2.png" width="612" height="151" />
+<img src="./images/go/image2.png" width="612" height="151" />
 
 -   다운로드
 
@@ -45,29 +45,29 @@ Go SDK : go1.5.2.windows-amd64.msi
 
 -   go1.5.2.windows-amd64.msi 더블클릭하여 설치를 실행한다.
 
-<img src="./image/go/image3.png" width="297" height="170" />
+<img src="./images/go/image3.png" width="297" height="170" />
 
 -   “실행” 버튼 클릭
 
-<img src="./image/go/image4.png" width="351" height="275" />
+<img src="./images/go/image4.png" width="351" height="275" />
 
 -   “Next” 버튼을 클릭
 
-<img src="./image/go/image5.png" width="330" height="258" />
+<img src="./images/go/image5.png" width="330" height="258" />
 
 -   “Next” 버튼을 클릭
 
-<img src="./image/go/image6.png" width="324" height="254" />
+<img src="./images/go/image6.png" width="324" height="254" />
 
 -   Go SDK가 설치될 디렉토리 선택 후 “Next” 버튼 클릭
 
-<img src="./image/go/image7.png" width="330" height="258" />
+<img src="./images/go/image7.png" width="330" height="258" />
 
 -   “Install” 버튼 클릭
 
-<img src="./image/go/image8.png" width="317" height="247" />
+<img src="./images/go/image8.png" width="317" height="247" />
 
-<img src="./image/go/image9.png" width="323" height="252" />
+<img src="./images/go/image9.png" width="323" height="252" />
 
 -   “Finish” 버튼 클릭
 
@@ -77,11 +77,11 @@ Go SDK : go1.5.2.windows-amd64.msi
 | http://www.jetbrains.com/idea/ |
 |--------------------------------|
 
-<img src="./image/go/image10.png" width="601" height="272" />
+<img src="./images/go/image10.png" width="601" height="272" />
 
-<img src="./image/go/image11.png" width="499" height="400" />
+<img src="./images/go/image11.png" width="499" height="400" />
 
-<img src="./image/go/image12.png" width="559" height="138" />
+<img src="./images/go/image12.png" width="559" height="138" />
 
 -   다운로드 : ideaIC-15.0.2.exe
 
@@ -89,25 +89,25 @@ Go SDK : go1.5.2.windows-amd64.msi
 
 -   ideaIC-15.0.2.exe 더블클릭하여 설치를 실행한다.
 
-<img src="./image/go/image13.png" width="290" height="225" />
+<img src="./images/go/image13.png" width="290" height="225" />
 
 -   “Next” 버튼 클릭
 
-<img src="./image/go/image14.png" width="315" height="245" />
+<img src="./images/go/image14.png" width="315" height="245" />
 
 -   설치위치 지정 후 “Next” 버튼 클릭
 
-<img src="./image/go/image15.png" width="315" height="245" />
+<img src="./images/go/image15.png" width="315" height="245" />
 
 -   “Next” 버튼 클릭
 
-<img src="./image/go/image16.png" width="315" height="245" />
+<img src="./images/go/image16.png" width="315" height="245" />
 
 -   “Install” 버튼 클릭
 
-<img src="./image/go/image17.png" width="308" height="240" />
+<img src="./images/go/image17.png" width="308" height="240" />
 
-<img src="./image/go/image18.png" width="309" height="240" />
+<img src="./images/go/image18.png" width="309" height="240" />
 
 -   “Run IntelliJ IDEA Community Edition” 체크 선택
 
@@ -121,25 +121,25 @@ Go SDK : go1.5.2.windows-amd64.msi
 
 1.  Go 샘플 프로젝트 연결
 
-<img src="./image/go/image19.png" width="315" height="219" />
+<img src="./images/go/image19.png" width="315" height="219" />
 
 -   “Import Project” 선택
 
-<img src="./image/go/image20.png" width="315" height="418" />
+<img src="./images/go/image20.png" width="315" height="418" />
 
 -   다운로드 받은 Go 샘플 어플리케이션의 위치를 지정
 
 -   “Ok” 버튼을 클릭
 
-<img src="./image/go/image21.png" width="275" height="269" /> <img src="./image/go/image22.png" width="284" height="278" />
+<img src="./images/go/image21.png" width="275" height="269" /> <img src="./images/go/image22.png" width="284" height="278" />
 
 -   “Next” 버튼 클릭 - “Next” 버튼 클릭
 
-<img src="./image/go/image23.png" width="353" height="345" />
+<img src="./images/go/image23.png" width="353" height="345" />
 
 -   “Next” 버튼 클릭
 
-<img src="./image/go/image24.png" width="339" height="331" />
+<img src="./images/go/image24.png" width="339" height="331" />
 
 -   “Finish” 버튼 클릭
 
@@ -147,53 +147,53 @@ Go SDK : go1.5.2.windows-amd64.msi
 
 -   IntelliJ IDEA 환경에 Go Plugin 설치 및 Go 샘플 어플리케이션의 환결설정
 
-<img src="./image/go/image25.png" width="535" height="359" />
+<img src="./images/go/image25.png" width="535" height="359" />
 
 -   File &gt; Settings 선택
 
-<img src="./image/go/image26.png" width="541" height="366" />
+<img src="./images/go/image26.png" width="541" height="366" />
 
 -   Plugins &gt; Browse repositories 선택
 
-<img src="./image/go/image27.png" width="549" height="459" />
+<img src="./images/go/image27.png" width="549" height="459" />
 
 -   “Go” 를 검색 후, 조회된 결과에서 Go 를 선택 후 Install 버튼을 클릭
 
-<img src="./image/go/image28.png" width="556" height="466" />
+<img src="./images/go/image28.png" width="556" height="466" />
 
 -   “Restart IntelliJ IDEA” 선택
 
-<img src="./image/go/image29.png" width="366" height="135" />
+<img src="./images/go/image29.png" width="366" height="135" />
 
 -   “Restart” 버튼 클릭
 
-<img src="./image/go/image30.png" width="459" height="308" />
+<img src="./images/go/image30.png" width="459" height="308" />
 
 -   File &gt; Project Structure... 선택
 
-<img src="./image/go/image31.png" width="462" height="384" />
+<img src="./images/go/image31.png" width="462" height="384" />
 
 -   Project SDK 영역의 “New” 버튼 클릭
 
-<img src="./image/go/image32.png" width="451" height="375" />
+<img src="./images/go/image32.png" width="451" height="375" />
 
 -   “Go SDK” 선택
 
-<img src="./image/go/image33.png" width="321" height="368" />
+<img src="./images/go/image33.png" width="321" height="368" />
 
 -   “Go SDK” 설치된 디렉토리 선택 후 “OK” 버튼 클릭
 
-<img src="./image/go/image34.png" width="442" height="368" />
+<img src="./images/go/image34.png" width="442" height="368" />
 
 -   “OK” 선택
 
-<img src="./image/go/image35.png" width="573" height="312" />
+<img src="./images/go/image35.png" width="573" height="312" />
 
 -   go-sample-app 프로젝트에서 “main.go” 파일을 선택
 
 -   오른쪽 상단에 “Configure Go Libraries” 선택
 
-<img src="./image/go/image36.png" width="266" height="445" /> <img src="./image/go/image37.png" width="264" height="443" />
+<img src="./images/go/image36.png" width="266" height="445" /> <img src="./images/go/image37.png" width="264" height="443" />
 
 -   Global libraries 영역에는 Go SDK 디렉토리 선택
 
@@ -201,15 +201,15 @@ Go SDK : go1.5.2.windows-amd64.msi
 
 -   “OK” 버튼 클릭
 
-<img src="./image/go/image38.png" width="571" height="310" />
+<img src="./images/go/image38.png" width="571" height="310" />
 
 -   오른쪽 상단의 “Change module type to Go and reload project” 선택
 
-<img src="./image/go/image39.png" width="347" height="126" />
+<img src="./images/go/image39.png" width="347" height="126" />
 
 -   “Reload project” 선택
 
-<img src="./image/go/image40.png" width="560" height="305" />
+<img src="./images/go/image40.png" width="560" height="305" />
 
 ##### 2.3.3. VCAP\_SERVICES 환경설정 정보를 통한 연동 
 
