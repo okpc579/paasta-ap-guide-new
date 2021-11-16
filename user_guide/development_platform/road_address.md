@@ -1256,22 +1256,22 @@ Accept : application/json
 }
 ````
 
-[api_platform_dorojuso_01]:/images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_01.png
-[api_platform_dorojuso_02]:/images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_02.png
-[api_platform_dorojuso_03]:/images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_03.png
-[api_platform_dorojuso_04]:/images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_04.png
-[api_platform_dorojuso_05]:/images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_05.png
-[api_platform_dorojuso_06]:/images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_06.png
-[api_platform_dorojuso_07]:/images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_07.png
-[api_platform_dorojuso_08]:/images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_08.png
-[api_platform_dorojuso_09]:/images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_09.png
-[api_platform_dorojuso_10]:/images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_10.png
-[api_platform_dorojuso_11]:/images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_11.png
-[api_platform_dorojuso_12]:/images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_12.png
-[api_platform_dorojuso_13]:/images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_13.png
-[api_platform_dorojuso_14]:/images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_14.png
-[api_platform_dorojuso_15]:/images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_15.png
-[api_platform_dorojuso_16]:/images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_16.png
+[api_platform_dorojuso_01]:./images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_01.png
+[api_platform_dorojuso_02]:./images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_02.png
+[api_platform_dorojuso_03]:./images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_03.png
+[api_platform_dorojuso_04]:./images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_04.png
+[api_platform_dorojuso_05]:./images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_05.png
+[api_platform_dorojuso_06]:./images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_06.png
+[api_platform_dorojuso_07]:./images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_07.png
+[api_platform_dorojuso_08]:./images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_08.png
+[api_platform_dorojuso_09]:./images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_09.png
+[api_platform_dorojuso_10]:./images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_10.png
+[api_platform_dorojuso_11]:./images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_11.png
+[api_platform_dorojuso_12]:./images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_12.png
+[api_platform_dorojuso_13]:./images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_13.png
+[api_platform_dorojuso_14]:./images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_14.png
+[api_platform_dorojuso_15]:./images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_15.png
+[api_platform_dorojuso_16]:./images/openpaas-application-apiplatform-dorojuso/api_platform_dorojuso_16.png
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > API Platform 도로주소 개발
