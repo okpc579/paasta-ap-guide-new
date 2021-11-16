@@ -415,12 +415,12 @@ broker: app-lifecycle-service-broker
 - 라이프사이클 관리 서비스(TAIGA) 참고 자료  
   https://tree.taiga.io/support/
 
-[001]:/service-guide/images/applifecycle-service/image001.png
-[002]:/service-guide/images/applifecycle-service/image002.png
-[003]:/service-guide/images/applifecycle-service/image003.png
-[004]:/service-guide/images/applifecycle-service/image004.png
-[005]:/service-guide/images/applifecycle-service/image005.png
-[006]:/service-guide/images/applifecycle-service/image006.png
+[001]:./images/applifecycle-service/image001.png
+[002]:./images/applifecycle-service/image002.png
+[003]:./images/applifecycle-service/image003.png
+[004]:./images/applifecycle-service/image004.png
+[005]:./images/applifecycle-service/image005.png
+[006]:./images/applifecycle-service/image006.png
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Install](../README.md) > Lifecycle Service
