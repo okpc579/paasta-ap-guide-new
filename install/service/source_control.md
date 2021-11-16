@@ -479,7 +479,7 @@ paasta-sourcecontrol    p-paasta-sourcecontrol   Default                      cr
  ... (생략) ...
  ```
  
-[source_controller_service_guide01]:/service-guide/images/source-control/source_controller_service_guide01.PNG
+[source_controller_service_guide01]:.images/source-control/source_controller_service_guide01.PNG
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Install](../README.md) > Source Control Service
