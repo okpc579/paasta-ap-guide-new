@@ -1,5 +1,7 @@
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Logging Service
 
+
+
 # Table Of Contents
 
 1. [문서 개요](#1)
@@ -317,6 +319,68 @@ Add Panels의 "Visualization" / "Saved Search" 을 클릭하여 저장된 객체
 
 객체 상세 페이지에서 상단의 "Delete dashboard/search/visualization" 버튼(①)을 클릭한다.
 ![059]
+
+
+
+[001]./images/logging-service/image001.png
+[002]:./images/logging-service/image002.png
+[003]:./images/logging-service/image003.png
+[004]:./images/logging-service/image004.png
+[005]:./images/logging-service/image005.png
+[006]:./images/logging-service/image006.png
+[007]:./images/logging-service/image007.png
+[008]:./images/logging-service/image008.png
+[009]:./images/logging-service/image009.png
+[010]:./images/logging-service/image010.png
+[011]:./images/logging-service/image011.png
+[012]:./images/logging-service/image012.png
+[013]:./images/logging-service/image013.png
+[014]:./images/logging-service/image014.png
+[015]:./images/logging-service/image015.png
+[016]:./images/logging-service/image016.png
+[017]:./images/logging-service/image017.png
+[018]:./images/logging-service/image018.png
+[019]:./images/logging-service/image019.png
+[020]:./images/logging-service/image020.png
+[021]:./images/logging-service/image021.png
+[022]:./images/logging-service/image022.png
+[023]:./images/logging-service/image023.png
+[024]:./images/logging-service/image024.png
+[025]:./images/logging-service/image025.png
+[026]:./images/logging-service/image026.png
+[027]:./images/logging-service/image027.png
+[028]:./images/logging-service/image028.png
+[029]:./images/logging-service/image029.png
+[030]:./images/logging-service/image030.png
+[031]:./images/logging-service/image031.png
+[032]:./images/logging-service/image032.png
+[033]:./images/logging-service/image033.png
+[034]:./images/logging-service/image034.png
+[035]:./images/logging-service/image035.png
+[036]:./images/logging-service/image036.png
+[037]:./images/logging-service/image037.png
+[038]:./images/logging-service/image038.png
+[039]:./images/logging-service/image039.png
+[040]:./images/logging-service/image040.png
+[041]:./images/logging-service/image041.png
+[042]:./images/logging-service/image042.png
+[043]:./images/logging-service/image043.png
+[044]:./images/logging-service/image044.png
+[045]:./images/logging-service/image045.png
+[046]:./images/logging-service/image046.png
+[047]:./images/logging-service/image047.png
+[048]:./images/logging-service/image048.png
+[049]:./images/logging-service/image049.png
+[050]:./images/logging-service/image050.png
+[051]:./images/logging-service/image051.png
+[052]:./images/logging-service/image052.png
+[053]:./images/logging-service/image053.png
+[054]:./images/logging-service/image054.png
+[055]:./images/logging-service/image055.png
+[056]:./images/logging-service/image056.png
+[057]:./images/logging-service/image057.png
+[058]:./images/logging-service/image058.png
+[059]:./images/logging-service/image059.png
 
 
 
