@@ -415,16 +415,16 @@ PaaS-TA 운영자 포탈에 접속하여 서비스를 등록한다.
 - 애플리케이션 Gateway 서비스(WSO2) 참고 자료  
   https://docs.wso2.com/display/AM260/Introduction
 
-[001]:/service-guide/images/apigateway-service/image001.png
-[002]:/service-guide/images/apigateway-service/image002.png
-[003]:/service-guide/images/apigateway-service/image003.png
-[004]:/service-guide/images/apigateway-service/image004.png
-[005]:/service-guide/images/apigateway-service/image005.png
-[006]:/service-guide/images/apigateway-service/image006.png
-[007]:/service-guide/images/apigateway-service/image007.png
-[011]:/service-guide/images/apigateway-service/image011.jpeg
-[012]:/service-guide/images/apigateway-service/image012.jpeg
-[013]:/service-guide/images/apigateway-service/image013.jpeg
+[001]:./images/apigateway-service/image001.png
+[002]:./images/apigateway-service/image002.png
+[003]:./images/apigateway-service/image003.png
+[004]:./images/apigateway-service/image004.png
+[005]:./images/apigateway-service/image005.png
+[006]:./images/apigateway-service/image006.png
+[007]:./images/apigateway-service/image007.png
+[011]:./images/apigateway-service/image011.jpeg
+[012]:./images/apigateway-service/image012.jpeg
+[013]:./images/apigateway-service/image013.jpeg
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Install](../README.md) > Gateway Service
