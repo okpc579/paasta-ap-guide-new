@@ -504,38 +504,38 @@ Paas-TA Portal 설치 후에 관리자 포탈에서 빌드팩, 서비스팩을 �
 
  5. 추이차트 탭에서 디스크 메모리 네트워크 사용량을 인스턴스 별로 확인이 가능하다.        
 
-[paas-ta-portal-01]:../../install-guide/portal/images/Paas-TA-Portal_01.png
-[paas-ta-portal-02]:../../install-guide/portal/images/Paas-TA-Portal_02.png
-[paas-ta-portal-03]:../../install-guide/portal/images/Paas-TA-Portal_03.png
-[paas-ta-portal-04]:../../install-guide/portal/images/Paas-TA-Portal_04.png
-[paas-ta-portal-05]:../../install-guide/portal/images/Paas-TA-Portal_05.png
-[paas-ta-portal-06]:../../install-guide/portal/images/Paas-TA-Portal_06.png
-[paas-ta-portal-07]:../../install-guide/portal/images/Paas-TA-Portal_07.png
-[paas-ta-portal-08]:../../install-guide/portal/images/Paas-TA-Portal_08.png
-[paas-ta-portal-09]:../../install-guide/portal/images/Paas-TA-Portal_09.png
-[paas-ta-portal-10]:../../install-guide/portal/images/Paas-TA-Portal_10.png
-[paas-ta-portal-11]:../../install-guide/portal/images/Paas-TA-Portal_11.png
-[paas-ta-portal-12]:../../install-guide/portal/images/Paas-TA-Portal_12.png
-[paas-ta-portal-13]:../../install-guide/portal/images/Paas-TA-Portal_13.png
-[paas-ta-portal-14]:../../install-guide/portal/images/Paas-TA-Portal_14.png
-[paas-ta-portal-15]:../../install-guide/portal/images/Paas-TA-Portal_15.png
-[paas-ta-portal-16]:../../install-guide/portal/images/Paas-TA-Portal_16.png
-[paas-ta-portal-17]:../../install-guide/portal/images/Paas-TA-Portal_17.png
-[paas-ta-portal-18]:../../install-guide/portal/images/Paas-TA-Portal_18.png
-[paas-ta-portal-19]:../../install-guide/portal/images/Paas-TA-Portal_19.png
-[paas-ta-portal-20]:../../install-guide/portal/images/Paas-TA-Portal_20.png
-[paas-ta-portal-21]:../../install-guide/portal/images/Paas-TA-Portal_21.png
-[paas-ta-portal-22]:../../install-guide/portal/images/Paas-TA-Portal_22.png
-[paas-ta-portal-23]:../../install-guide/portal/images/Paas-TA-Portal_23.png
-[paas-ta-portal-24]:../../install-guide/portal/images/Paas-TA-Portal_24.png
-[paas-ta-portal-25]:../../install-guide/portal/images/Paas-TA-Portal_25.png
-[paas-ta-portal-26]:../../install-guide/portal/images/Paas-TA-Portal_26.png
-[paas-ta-portal-27]:../../install-guide/portal/images/Paas-TA-Portal_27.PNG
-[paas-ta-portal-28]:../../install-guide/portal/images/Paas-TA-Portal_28.PNG
-[paas-ta-portal-29]:../../install-guide/portal/images/Paas-TA-Portal_29.png
-[paas-ta-portal-30]:../../install-guide/portal/images/Paas-TA-Portal_30.png
-[paas-ta-portal-31]:../../install-guide/portal/images/Paas-TA-Portal_27.jpg
-[paas-ta-portal-32]:../../install-guide/portal/images/Paas-TA-Portal_28.jpg
+[paas-ta-portal-01]:./images/Paas-TA-Portal_01.png
+[paas-ta-portal-02]:./images/Paas-TA-Portal_02.png
+[paas-ta-portal-03]:./images/Paas-TA-Portal_03.png
+[paas-ta-portal-04]:./images/Paas-TA-Portal_04.png
+[paas-ta-portal-05]:./images/Paas-TA-Portal_05.png
+[paas-ta-portal-06]:./images/Paas-TA-Portal_06.png
+[paas-ta-portal-07]:./images/Paas-TA-Portal_07.png
+[paas-ta-portal-08]:./images/Paas-TA-Portal_08.png
+[paas-ta-portal-09]:./images/Paas-TA-Portal_09.png
+[paas-ta-portal-10]:./images/Paas-TA-Portal_10.png
+[paas-ta-portal-11]:./images/Paas-TA-Portal_11.png
+[paas-ta-portal-12]:./images/Paas-TA-Portal_12.png
+[paas-ta-portal-13]:./images/Paas-TA-Portal_13.png
+[paas-ta-portal-14]:./images/Paas-TA-Portal_14.png
+[paas-ta-portal-15]:./images/Paas-TA-Portal_15.png
+[paas-ta-portal-16]:./images/Paas-TA-Portal_16.png
+[paas-ta-portal-17]:./images/Paas-TA-Portal_17.png
+[paas-ta-portal-18]:./images/Paas-TA-Portal_18.png
+[paas-ta-portal-19]:./images/Paas-TA-Portal_19.png
+[paas-ta-portal-20]:./images/Paas-TA-Portal_20.png
+[paas-ta-portal-21]:./images/Paas-TA-Portal_21.png
+[paas-ta-portal-22]:./images/Paas-TA-Portal_22.png
+[paas-ta-portal-23]:./images/Paas-TA-Portal_23.png
+[paas-ta-portal-24]:./images/Paas-TA-Portal_24.png
+[paas-ta-portal-25]:./images/Paas-TA-Portal_25.png
+[paas-ta-portal-26]:./images/Paas-TA-Portal_26.png
+[paas-ta-portal-27]:./images/Paas-TA-Portal_27.PNG
+[paas-ta-portal-28]:./images/Paas-TA-Portal_28.PNG
+[paas-ta-portal-29]:./images/Paas-TA-Portal_29.png
+[paas-ta-portal-30]:./images/Paas-TA-Portal_30.png
+[paas-ta-portal-31]:./images/Paas-TA-Portal_27.jpg
+[paas-ta-portal-32]:./images/Paas-TA-Portal_28.jpg
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Install](../README.md) > Portal VM Type UI
