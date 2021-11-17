@@ -7,7 +7,7 @@
   1.2. [범위](#1.2)  
   1.3. [참고자료](#1.3)  
 
-2. [PaaS-TA Portal infra 설치](#2)  
+2. [PaaS-TA AP Portal infra 설치](#2)  
   2.1. [Prerequisite](#2.1)   
   2.2. [Stemcell 확인](#2.2)    
   2.3. [Deployment 다운로드](#2.3)   
@@ -15,7 +15,7 @@
   2.5. [서비스 설치](#2.5)    
   2.6. [서비스 설치 확인](#2.6)  
 
-3. [PaaS-TA Portal 설치](#3)  
+3. [PaaS-TA AP Portal 설치](#3)  
   3.1. [Prerequisite](#3.1)  
     3.1.1. [App 파일 및 Manifest 파일 다운로드](#3.1.1)  
     3.1.2. [Portal App Manifest 변경 Script 변수 설정](#3.1.2)  
@@ -23,7 +23,7 @@
     3.1.4. [Portal App 배포 Script 변수 설정](#3.1.4)  
     3.1.5. [Portal App 배포 Script 실행](#3.1.5)  
 
-4. [PaaS-TA Portal 운영](#4)  
+4. [PaaS-TA AP Portal 운영](#4)  
   4.1. [사용자의 조직 생성 Flag 활성화](#4.1)  
   4.2. [사용자포탈 UAA 페이지 오류](#4.2)  
   4.3. [카탈로그 적용](#4.3)  
@@ -32,22 +32,23 @@
 ## <div id="1"/> 1. 문서 개요
 ### <div id="1.1"/> 1.1. 목적
 
-본 문서(PaaS-TA Portal 배포 가이드)는 PaaS-TA에서 배포되는 Portal을 PaaS-TA를 이용하여 설치 하는 방법을 기술하였다.
+본 문서(PaaS-TA AP Portal Container Type 설치 가이드)는 PaaS-TA AP Portal을 BOSH와 PaaS-TA AP를 이용하여 설치 하는 방법을 기술하였다.
 
 ### <div id="1.2"/> 1.2. 범위
-설치 범위는 PaaS-TA Portal을 검증하기 위한 Portal infra Release 설치 및 Portal App 배포를 기준으로 작성하였다.
+설치 범위는 PaaS-TA AP Portal을 검증하기 위한 Portal infra 설치 및 Portal App 배포를 기준으로 작성하였다.
 
 ### <div id="1.3"/> 1.3. 참고자료
 [**http://bosh.io/docs**](http://bosh.io/docs)  
 [**http://docs.cloudfoundry.org/**](http://docs.cloudfoundry.org/)
 
-## <div id="2"/> 2. PaaS-TA Portal infra 설치  
+## <div id="2"/> 2. PaaS-TA AP Portal infra 설치  
 
 ### <div id="2.1"/> 2.1. Prerequisite
 본 설치 가이드는 Linux 환경에서 설치하는 것을 기준으로 하였다. 서비스 설치를 위해서는 BOSH 2.0과 5.0 이상의 PaaS-TA가 설치 되어 있어야 한다.
 
 ### <div id="2.2"/> 2.2. Stemcell 확인
-Stemcell 목록을 확인하여 서비스 설치에 필요한 Stemcell이 업로드 되어 있는 것을 확인한다.  (PaaS-TA 5.5.4 과 동일 stemcell 사용)  
+Stemcell 목록을 확인하여 서비스 설치에 필요한 Stemcell이 업로드 되어 있는 것을 확인한다.  
+본 가이드의 Stemcell은 ubuntu-bionic 1.34를 사용한다.  
 
 > $ bosh -e ${BOSH_ENVIRONMENT} stemcells
 
@@ -64,11 +65,19 @@ bosh-openstack-kvm-ubuntu-bionic-go_agent  1.34      ubuntu-bionic  -    ce507ae
 Succeeded
 ```
 
+만약 해당 Stemcell이 업로드 되어 있지 않다면 [bosh.io 스템셀](https://bosh.io/stemcells/) 에서 해당되는 IaaS환경과 버전에 해당되는 스템셀 링크를 복사 후 다음과 같은 명령어를 실행한다.
+
+```
+# Stemcell 업로드 명령어 예제
+bosh -e ${BOSH_ENVIRONMENT} upload-stemcell https://storage.googleapis.com/bosh-core-stemcells/${STEMCELL_VERSION}/bosh-stemcell-${STEMCELL_VERSION}-openstack-kvm-ubuntu-bionic-go_agent.tgz -n
+```
+
+
 ### <div id="2.3"/> 2.3. Deployment 다운로드
 
 서비스 설치에 필요한 Deployment를 Git Repository에서 받아 서비스 설치 작업 경로로 위치시킨다.  
 
-- Portal Deployment Git Repository URL : https://github.com/PaaS-TA/portal-deployment/tree/v5.2.1
+- Portal Deployment Git Repository URL : https://github.com/PaaS-TA/portal-deployment/tree/v5.2.2
 
 ```
 # Deployment 다운로드 파일 위치 경로 생성 및 설치 경로 이동
@@ -76,11 +85,11 @@ $ mkdir -p ~/workspace
 $ cd ~/workspace
 
 # Deployment 파일 다운로드
-$ git clone https://github.com/PaaS-TA/portal-deployment.git -b v5.2.1
+$ git clone https://github.com/PaaS-TA/portal-deployment.git -b v5.2.2
 ```
 
 ### <div id="2.4"/> 2.4. Deployment 파일 수정  
-BOSH Deployment manifest는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다. Deployment 파일에서 사용하는 network, vm_type, disk_type 등은 Cloud config를 활용하고, 활용 방법은 BOSH 2.0 가이드를 참고한다.
+BOSH Deployment manifest는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다. Deployment 파일에서 사용하는 network, vm_type, disk_type 등은 Cloud config를 활용하고, 활용 방법은 PaaS-TA AP 설치 가이드를 참고한다.
 
 - Cloud config 설정 내용을 확인한다.   
 
@@ -143,6 +152,19 @@ vm_types:
 
 Succeeded
 ```
+
+- common_vars.yml을 서버 환경에 맞게 수정한다.
+- PaaS-TA AP Portal infra에서 사용하는 변수는 system_domain이다.
+
+> $ vi ~/workspace/common/common_vars.yml
+```
+... ((생략)) ...
+
+system_domain: "61.252.53.246.nip.io"		# Domain (nip.io를 사용하는 경우 HAProxy Public IP와 동일)
+
+... ((생략)) ...
+```
+
 
 - Deployment YAML에서 사용하는 변수 파일을 서버 환경에 맞게 수정한다.
 
@@ -227,7 +249,7 @@ infra/3193a1fa-156d-4dd9-935d-4b67cdcc1182  running        z3  10.0.81.121  i-09
 Succeeded
 ```
 
-## <div id="3"/> 3. PaaS-TA Portal 설치
+## <div id="3"/> 3. PaaS-TA AP Portal 설치
 
 ### <div id="3.1"/> 3.1. Prerequisite  
 ### <div id="3.1.1"/> 3.1.1. App 파일 및 Manifest 파일 다운로드
@@ -460,7 +482,7 @@ ssh-app               started           web:1/1             ssh-app.61.252.53.24
 ```
 
 
-## <div id="4"/>4. PaaS-TA Portal 운영
+## <div id="4"/>4. PaaS-TA AP Portal 운영
 
 ### <div id="4.1"/> 4.1. 사용자의 조직 생성 Flag 활성화
 
