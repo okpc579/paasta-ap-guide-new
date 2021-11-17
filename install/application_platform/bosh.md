@@ -3,35 +3,30 @@
 ## Table of Contents
 
 1. [개요](#1)  
-　● [목적](#1.1)  
-　● [범위](#1.2)  
-　● [참고 자료](#1.3)  
-2. [BOSH](#2)  
-　● [BOSH 컴포넌트 구성](#2.1)  
-3. [BOSH 설치 환경 구성 및 설치](#3)  
-　3.1. [BOSH 설치 절차](#3.1)  
-　3.2. [Inception 서버 구성](#3.2)  
-　3.3. [BOSH 설치](#3.3)  
-　　3.3.1. [Prerequisite](#3.3.1)  
-　　3.3.2. [BOSH CLI 및 Dependency 설치](#3.3.2)  
-　　3.3.3. [설치 파일 다운로드](#3.3.3)  
-　　3.3.4. [BOSH 설치](#3.3.4)  
-　　　3.3.4.1. [BOSH 설치 Variable 파일](#3.3.4.1)  
-　　　　● [aws-vars.yml](#3.3.4.1.1)  
-　　　　● [openstack-vars.yml](#3.3.4.1.2)  
-　　　3.3.4.2. [BOSH 설치 Option 파일](#3.3.4.2)  
-　　　　● [BOSH Optional 파일](#3.3.4.2.1)  
-　　　3.3.4.3. [BOSH 설치 Shell Script](#3.3.4.3)  
+　1.1. [목적](#1.1)  
+　1.2. [범위](#1.2)  
+　1.3. [참고 자료](#1.3)  
+2. [BOSH 설치 환경 구성 및 설치](#2)  
+　2.1. [BOSH 설치 절차](#2.1)  
+　2.2. [Inception 서버 구성](#2.2)  
+　2.3. [BOSH 설치](#2.3)  
+　　2.3.1. [Prerequisite](#2.3.1)  
+　　2.3.2. [BOSH CLI 및 Dependency 설치](#2.3.2)  
+　　2.3.3. [설치 파일 다운로드](#2.3.3)  
+　　2.3.4. [BOSH 설치](#2.3.4)  
+　　　2.3.4.1. [BOSH 설치 Variable 파일](#2.3.4.1)  
+　　　2.3.4.2. [BOSH 설치 Option 파일](#3.3.4.2)  
+　　　2.3.4.3. [BOSH 설치 Shell Script](#3.3.4.3)  
 　　　　● [deploy-aws.sh](#3.3.4.3.1)  
 　　　　● [deploy-openstack.sh](#3.3.4.3.2)  
-　　3.3.5. [BOSH 설치](#3.3.5)  
-　　3.3.6. [BOSH 설치 - 다운로드 된 Release 파일 이용 방식](#3.3.6)  
-　　3.3.7. [BOSH 로그인](#3.3.7)  
-　　3.3.8. [CredHub](#3.3.8)  
-　　　3.3.8.1. [CredHub CLI 설치](#3.3.8.1)  
-　　　3.3.8.2. [CredHub 로그인](#3.3.8.2)  
-　　3.3.9. [Jumpbox](#3.3.9)  
-　　3.3.10. [BOSH 로그인 생성 스크립트](#3.3.10)
+　　2.3.5. [BOSH 설치](#3.3.5)  
+　　2.3.6. [BOSH 설치 - 다운로드 된 Release 파일 이용 방식](#3.3.6)  
+　　2.3.7. [BOSH 로그인](#3.3.7)  
+　　2.3.8. [CredHub](#3.3.8)  
+　　　2.3.8.1. [CredHub CLI 설치](#3.3.8.1)  
+　　　2.3.8.2. [CredHub 로그인](#3.3.8.2)  
+　　2.3.9. [Jumpbox](#3.3.9)  
+　　2.3.10. [BOSH 로그인 생성 스크립트](#3.3.10)
 
 ## Executive Summary
 
@@ -201,11 +196,15 @@ Shell Script 파일을 이용하여 BOSH를 설치한다.
 
 
 
-#### <div id='3.3.4.1'/>3.3.4.1. BOSH 설치 Variable File
+#### <div id='3.3.4.1'/>3.3.4.1. BOSH 설치 Variable File 설정
 
-##### <div id='3.3.4.1.1'/>● aws-vars.yml
+BOSH를 설치하는 IaaS환경에 맞춰서 Variable File을 설정한다.
+
+- AWS 환경 설치 시 
 
 ```
+$ vi ~/workspace/paasta-deployment/bosh/aws-vars.yml
+
 # BOSH VARIABLE
 bosh_client_admin_id: "admin"				# Bosh Client Admin ID
 private_cidr: "10.0.1.0/24"				# Private IP Range
@@ -228,9 +227,11 @@ syslog_port: "2514"					# Logsearch의 ls-router Port
 syslog_transport: "relp"				# Logsearch Protocol
 ```
 
-##### <div id='3.3.4.1.2'/>● openstack-vars.yml
+- OpenStack 환경 설치 시
 
 ```
+$ vi ~/workspace/paasta-deployment/bosh/openstack-vars.yml
+
 # BOSH VARIABLE
 bosh_client_admin_id: "admin"				# Bosh Client Admin ID
 director_name: "micro-bosh"				# BOSH Director Name
@@ -318,23 +319,28 @@ BOSH 설치 Option은 아래와 같다.
 </tr>
 </table>
 
-##### <div id='3.3.4.3.1'/>● deploy-aws.sh
+설치 Shell Script에 Option을 변경필요가 있다면 해당 명령어를 실행하여 변경한다.
+
+- AWS 환경 설치 시 
 
 ```
+$ vi ~/workspace/paasta-deployment/bosh/deploy-aws.sh
+
 bosh create-env bosh.yml \                         
 	--state=aws/state.json \			# BOSH Latest Running State, 설치 시 생성, Backup 필요
 	--vars-store=aws/creds.yml \			# BOSH Credentials and Certs, 설치 시 생성, Backup 필요
 	-o aws/cpi.yml \				# AWS CPI 적용
 	-o uaa.yml \					# UAA 적용      
-	-o cce.yml \					# CCE 조치 적용
 	-o credhub.yml \				# CredHub 적용    
 	-o jumpbox-user.yml \				# Jumpbox-user 적용  
+	-o cce.yml \					# CCE 조치 적용
  	-l aws-vars.yml					# AWS 환경에 BOSH 설치시 적용하는 변수 설정 파일
 ```
 
-##### <div id='3.3.4.3.2'/>● deploy-openstack.sh
+- OpenStack 환경 설치 시 
 
 ```
+$ vi ~/workspace/paasta-deployment/bosh/deploy-openstack.sh
 bosh create-env bosh.yml \                       
 	--state=openstack/state.json \			# BOSH Latest Running State, 설치 시 생성, Backup 필요
 	--vars-store=openstack/creds.yml \		# BOSH Credentials and Certs, 설치 시 생성, Backup 필요
@@ -342,6 +348,7 @@ bosh create-env bosh.yml \
 	-o uaa.yml \					# UAA 적용
 	-o credhub.yml \				# CredHub 적용
 	-o jumpbox-user.yml \				# Jumpbox-user 적용
+	-o cce.yml \					# CCE 조치 적용
 	-o openstack/disable-readable-vm-names.yml \	# VM 명을 UUIDs로 적용
 	-l openstack-vars.yml				# OpenStack 환경에 BOSH 설치시 적용하는 변수 설정 파일
 ```
@@ -356,41 +363,13 @@ $ chmod +x ~/workspace/paasta-deployment/bosh/*.sh
 
 ### <div id='3.3.5'/>3.3.5. BOSH 설치
 
-- 서버 환경에 맞추어 Deploy 스크립트 파일의 설정을 수정한다.
-
-> $ vi ~/workspace/paasta-deployment/bosh/deploy-aws.sh
-```                     
-bosh create-env bosh.yml \                         
-	--state=aws/state.json \
-	--vars-store=aws/creds.yml \
-	-o aws/cpi.yml \
-	-o uaa.yml \
-	-o cce.yml \
-	-o credhub.yml \
-	-o jumpbox-user.yml \
- 	-l aws-vars.yml
-```
+Variable File과 설치 Shell Script의 설정이 완료되었으면 다음 명령어를 이용하여 설치를 진행한다.  
 
 - BOSH 설치 Shell Script 파일 실행
 
 ```
 $ cd ~/workspace/paasta-deployment/bosh
 $ ./deploy-{iaas}.sh
-```
-
-- BOSH 설치 중
-
-```
-ubuntu@inception:~/workspace/paasta-deployment/bosh$ ./deploy-aws.sh
-Deployment manifest: '/home/ubuntu/workspace/paasta-deployment/bosh/bosh.yml'
-Deployment state: 'aws/state.json'
-
-Started validating
-  Validating release 'bosh'... Finished (00:00:01)
-  Validating release 'bpm'... Finished (00:00:01)
-  Validating release 'bosh-aws-cpi'... Finished (00:00:00)
-  Validating release 'uaa'... Finished (00:00:03)
-  Validating release 'credhub'...
 ```
 
 - BOSH 설치 완료
