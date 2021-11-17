@@ -25,7 +25,7 @@
 본 문서는 Monitoring을 적용하지 않은 PaaS-TA Application Platform(이하 PaaS-TA AP)을 수동으로 설치하기 위한 가이드를 제공하는 데 그 목적이 있다.
 
 ## <div id='1.2'/>1.2. 범위
-PaaS-TA AP는 bosh-deployment를 기반으로 한 BOSH 환경에서 설치하며 paasta-deployment v5.6.2의 설치를 기준으로 가이드를 작성하였다.
+PaaS-TA AP는 bosh-deployment를 기반으로 한 BOSH 환경에서 설치하며 paasta-deployment v5.6.2의 설치를 기준으로 가이드를 작성하였다.  
 PaaS-TA AP는 VMware vSphere, Google Cloud Platform, Amazon Web Services EC2, OpenStack, Microsoft Azure 등의 IaaS를 지원하며,  paasta-deployment v5.6.2에서 검증한 IaaS 환경은 AWS, OpenStack 환경이다.
 
 ## <div id='1.3'/>1.3. 참고 자료
