@@ -248,7 +248,7 @@ vm_types:
 
 - AZs
 
-PaaS-TA AP에서 제공되는 Cloud Config 예제는 z1 ~ z6까지 설정되어 있다.  
+PaaS-TA에서 제공되는 Cloud Config 예제는 z1 ~ z6까지 설정되어 있다.  
 z1 ~ z3까지는 PaaS-TA AP VM이 설치되는 Zone이며, z4 ~ z6까지는 서비스가 설치되는 Zone으로 정의한다.   
 3개 단위로 설정하는 이유는 서비스 3중화를 위해서이며, 설치하는 환경에 따라 다르게 설정해도 무방하다.  
 
