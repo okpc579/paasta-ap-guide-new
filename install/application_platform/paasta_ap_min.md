@@ -22,13 +22,13 @@
 # <div id='1'/>1.  문서 개요
 
 ## <div id='1.1'/>1.1. 목적
-본 문서는 Monitoring을 적용하지 않은 PaaS-TA Application Platform(이하 PaaS-TA AP)을 수동으로 설치하기 위한 가이드를 제공하는 데 그 목적이 있다.
+본 문서는 Monitoring을 적용하지 않은 PaaS-TA Application Platform 경량화(이하 PaaS-TA AP min)을 수동으로 설치하기 위한 가이드를 제공하는 데 그 목적이 있다.
 
 <br>
 
 ## <div id='1.2'/>1.2. 범위
-PaaS-TA AP는 bosh-deployment를 기반으로 한 BOSH 환경에서 설치하며 paasta-deployment v5.6.2의 설치를 기준으로 가이드를 작성하였다.  
-PaaS-TA AP는 VMware vSphere, Google Cloud Platform, Amazon Web Services EC2, OpenStack, Microsoft Azure 등의 IaaS를 지원하며,  paasta-deployment v5.6.2에서 검증한 IaaS 환경은 AWS, OpenStack 환경이다.
+PaaS-TA AP는 bosh-deployment를 기반으로 한 BOSH 환경에서 설치하며 paasta-deployment v5.6.2-min의 설치를 기준으로 가이드를 작성하였다.  
+PaaS-TA AP는 VMware vSphere, Google Cloud Platform, Amazon Web Services EC2, OpenStack, Microsoft Azure 등의 IaaS를 지원하며,  paasta-deployment v5.6.2-min에서 검증한 IaaS 환경은 AWS, OpenStack 환경이다.
 
 <br>
 
@@ -46,24 +46,25 @@ CF Deployment: [https://github.com/cloudfoundry/cf-deployment](https://github.co
 
 <br><br>
 
-# <div id='2'/>2. PaaS-TA AP 설치
+# <div id='2'/>2. PaaS-TA AP min 설치
 ## <div id='2.1'/>2.1. Prerequisite
 
 - BOSH2 기반의 BOSH를 설치한다.
-- PaaS-TA AP 설치는 BOSH를 설치한 Inception(설치 환경)에서 작업한다.
-- PaaS-TA AP 설치를 위해 BOSH LOGIN을 진행한다.
+- PaaS-TA AP min 설치는 BOSH를 설치한 Inception(설치 환경)에서 작업한다.
+- PaaS-TA AP min 설치를 위해 BOSH LOGIN을 진행한다.
+- 가이드 내에 BOSH 폴더에서 실행되는 작업은 BOSH 설치 가이드에서 다운받은 paasta-deployment를 이용한다.
 
 <br>
 
 ## <div id='2.2'/>2.2. 설치 파일 다운로드
-- PaaS-TA AP를 설치하기 위한 deployment가 존재하지 않는다면 다운로드 받는다
+- PaaS-TA AP min를 설치하기 위한 deployment가 존재하지 않는다면 다운로드 받는다
 
 ```
 $ mkdir -p ~/workspace
 $ cd ~/workspace
 $ git clone https://github.com/PaaS-TA/common.git
 $ cd ~/workspace
-$ git clone https://github.com/PaaS-TA/paasta-deployment.git -b v5.6.2
+$ git clone https://github.com/PaaS-TA/paasta-deployment.git -b v5.6.2-min paasta-deployment-min
 ```
 
 <br>
@@ -123,7 +124,7 @@ Runtime config는 BOSH로 배포되는 VM에 일괄 적용되는 설정이다.
 $ bosh -e ${BOSH_ENVIRONMENT} update-runtime-config {PATH} --name={NAME}
 ```
 
-PaaS-TA AP에서 적용하는 Runtime Config는 다음과 같다.  
+PaaS-TA AP min에서 적용하는 Runtime Config는 다음과 같다.  
 
 - DNS Runtime Config  
   PaaS-TA 4.0부터 적용되는 부분으로 PaaS-TA Component에서 Consul이 대체된 Component이다.  
@@ -248,7 +249,7 @@ vm_types:
 
 - AZs
 
-PaaS-TA AP에서 제공되는 Cloud Config 예제는 z1 ~ z6까지 설정되어 있다.  
+PaaS-TA에서 제공되는 Cloud Config 예제는 z1 ~ z6까지 설정되어 있다.  
 z1 ~ z3까지는 PaaS-TA AP VM이 설치되는 Zone이며, z4 ~ z6까지는 서비스가 설치되는 Zone으로 정의한다.   
 3개 단위로 설정하는 이유는 서비스 3중화를 위해서이며, 설치하는 환경에 따라 다르게 설정해도 무방하다.  
 
@@ -302,22 +303,30 @@ common_vars.yml파일과 vars.yml을 수정하여 PaaS-TA AP 설치시 적용하
 <td>PaaS-TA AP 설치시 적용하는 변수 설정 파일</td>
 </tr>
 <tr>
-<td>deploy-aws.sh</td>
-<td>AWS 환경에 PaaS-TA AP 설치를 위한 Shell Script 파일</td>
+<td>deploy-aws-4vms.sh</td>
+<td>AWS 환경에 PaaS-TA AP min 4vm 설치를 위한 Shell Script 파일</td>
 </tr>
 <tr>
-<td>deploy-openstack.sh</td>
-<td>OpenStack 환경에 PaaS-TA AP 설치를 위한 Shell Script 파일</td>
+<td>deploy-aws-7vms.sh</td>
+<td>AWS 환경에 PaaS-TA AP min 7vm 설치를 위한 Shell Script 파일</td>
 </tr>
 <tr>
-<td>paasta-deployment.yml</td>
-<td>PaaS-TA AP을 배포하는 Manifest 파일</td>
+<td>deploy-openstack-4vms.sh</td>
+<td>OpenStack 환경에 PaaS-TA AP min 4vm 설치를 위한 Shell Script 파일</td>
+</tr>
+<tr>
+<td>deploy-openstack-7vms.sh</td>
+<td>OpenStack 환경에 PaaS-TA AP min 7vm 설치를 위한 Shell Script 파일</td>
+</tr>
+<tr>
+<td>min-paasta-deployment.yml</td>
+<td>PaaS-TA AP min을 배포하는 Manifest 파일</td>
 </tr>
 </table>
 
 <br>
 
-### <div id='2.6.1'/>2.6.1. PaaS-TA AP 설치 Variable File
+### <div id='2.6.1'/>2.6.1. PaaS-TA AP min 설치 Variable File
 
 
 - common_vars.yml  
@@ -342,11 +351,11 @@ uaa_client_portal_secret: "clientsecret"		# UAAC Portal Client에 접근하기 �
 ... ((생략)) ...
 ```
 
-- vars.yml  
+- min-vars.yml
 
 PaaS-TA AP를 설치 할 때 적용되는 각종 변수값이나 배포 될 VM의 설정을 변경할 수 있다.
 
-> $ vi ~/workspace/paasta-deployment/paasta/vars.yml
+> $ vi ~/workspace/paasta-deployment-min/paasta/min-vars.yml
 ```
 # SERVICE VARIABLE
 deployment_name: "paasta"			# Deployment Name
@@ -541,15 +550,15 @@ PaaS-TA AP를 설치 후 UAAC의 활용 방법은 사용 가이드에 기타 CLI
 <td>요구사항</td>
 </tr>
 <tr>
-<td>operations/use-postgres.yml</td>
+<td>operations/min-use-postgres.yml</td>
 <td>Database를 Postgres로 설치 <br>
-    - use-postgres.yml 미적용 시 MySQL 설치  <br>
+    - min-use-postgres.yml 미적용 시 MySQL 설치  <br>
     - 3.5 이전 버전에서 Migration 시 필수  
 </td>
 <td></td>
 </tr>
 <tr>
-<td>operations/use-haproxy.yml</td>
+<td>operations/min-use-haproxy.yml</td>
 <td>HAProxy 적용 <br>
     - IaaS에서 제공하는 LB를 사용하여 PaaS-TA AP 설치 시, Operation 파일을 제거하고 설치한다.
 </td>
@@ -569,19 +578,24 @@ PaaS-TA AP를 설치 후 UAAC의 활용 방법은 사용 가이드에 기타 CLI
 </td>
 </tr>
 <tr>
-<td>operations/use-haproxy-public-network-vsphere.yml</td>
-<td>HAProxy Public Network 설정 <br>
-    - vsphere에서 사용하며, IaaS에서 제공하는 LB를 사용하여 PaaS-TA AP 설치 시, Operation 파일을 제거하고 설치한다.
-</td>
-<td>Requires: use-haproxy.yml <br>
-    Requires Value :  <br>
-    -v haproxy_public_ip <br>
-    -v haproxy_public_network_name <br>
-    -v haproxy_private_network_name
-</td>
+<td>operations/min-use-router-public-network.yml</td>
+<td>router를 외부 접근을 가능하게 수정한다.</td>
+<td>4VMs 배포시 사용</td>
 </tr>
 <tr>
-<td>operations/cce.yml</td>
+<td>operations/min-create-vm-singleton-blobstore.yml</td>
+<td>4VMs에서 사용되는 database의 singleton-blobstore를 단일 VM으로 배포한다.</td>
+<td>Requires: min-use-haproxy.yml <br>
+7VMs 배포시 사용 <br>
+Requires operation file: min-option-network-and-deployment.yml</td>
+</tr>
+<tr>
+<td>operations/min-create-vm-tcp-router.yml</td>
+<td>4VMs에서 사용되는 router의 tcp-router를 단일 VM으로 배포한다.</td>
+<td>7VMs 배포시 사용</td>
+</tr>
+<tr>
+<td>operations/min-cce.yml</td>
 <td>CCE 조치를 적용하여 설치한다.</td>
 <td></td>
 </tr>
@@ -589,19 +603,19 @@ PaaS-TA AP를 설치 후 UAAC의 활용 방법은 사용 가이드에 기타 CLI
 
 <br>
 
-### <div id='2.6.3'/>2.6.3.   PaaS-TA AP 설치 Shell Scripts
-paasta-deployment.yml 파일은 PaaS-TA AP를 배포하는 Manifest 파일이며, PaaS-TA AP VM에 대한 설치 정의를 하게 된다.  
+### <div id='2.6.3'/>2.6.3.   PaaS-TA AP min 설치 Shell Scripts
+min-paasta-deployment.yml 파일은 PaaS-TA AP min를 배포하는 Manifest 파일이며, PaaS-TA AP min VM에 대한 설치 정의를 하게 된다.  
 이미 설치된 PaaS-TA AP의 재배포 시, singleton-blobstore, database의 AZs(zone)을 변경하면 조직(ORG), 공간(SPACE), 앱(APP) 정보가 모두 삭제된다.
 
-**※ PaaS-TA AP 설치 시 명령어는 BOSH deploy를 사용한다. (IaaS 환경에 따라 Option이 다름)**
+**※ PaaS-TA AP min 설치 시 명령어는 BOSH deploy를 사용한다. (IaaS 환경에 따라 Option이 다름)**
 
-PaaS-TA AP 배포 BOSH 명령어 예시
+PaaS-TA AP min 배포 BOSH 명령어 예시
 
 ```
 $ bosh -e ${BOSH_ENVIRONMENT} -d paasta deploy paasta-deployment.yml
 ```
 
-PaaS-TA AP 배포 시, 설치 Option을 추가해야 한다. 설치 Option에 대한 설명은 아래와 같다.
+PaaS-TA AP min 배포 시, 설치 Option을 추가해야 한다. 설치 Option에 대한 설명은 아래와 같다.
 
 <table>
 <tr>
@@ -627,73 +641,137 @@ PaaS-TA AP 배포 시, 설치 Option을 추가해야 한다. 설치 Option에 �
 </tr>
 </table>
 
-- AWS 환경 설치 시
+- AWS 환경 4vm 설치 시
 
 ```
-$ vi ~/workspace/paasta-deployment/paasta/deploy-aws.sh
+$ vi ~/workspace/paasta-deployment/paasta/deploy-aws-4vms.sh
 
-BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"					 # bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
+BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"                   # bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
 
-bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy paasta-deployment.yml \	# PaaS-TA Manifest File
-	-o operations/aws.yml \						# AWS 설정
-	-o operations/use-haproxy.yml \					# HAProxy 적용
-	-o operations/use-haproxy-public-network.yml \			# HAProxy Public Network 적용
-	-o operations/use-postgres.yml \				# Database Type 설정 (3.5버전 이하에서 Migration 시 필수)
-	-o operations/cce.yml \						# CCE 조치 적용
-	-o operations/rename-network-and-deployment.yml \		# Rename Network and Deployment
-	-l vars.yml \							# 환경에 PaaS-TA 설치시 적용하는 변수 설정 파일
-	-l ../../common/common_vars.yml					# PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일
+bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy min-paasta-deployment.yml \	# PaaS-TA-min Manifest File
+        -o operations/min-aws.yml \					# AWS 설정
+	-o operations/min-use-router-public-network.yml \		# Router 외부 접근 설정
+	-o operations/min-use-router-public-network-aws.yml \
+        -o operations/min-use-postgres.yml \				# Database Type 설정 (3.5버전 이하에서 Migration 시 필수)
+        -o operations/min-rename-network-and-deployment.yml \		# Rename Network and Deployment
+	-o operations/min-cce.yml \					# CCE 조치 적용
+        -l min-vars.yml \						# PaaS-TA-min 설치시 적용하는 변수 설정 파일
+        -l ../../common/common_vars.yml					# PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일
 ```
 
-- OpenStack 환경 설치 시
+- AWS 환경 7vm 설치 시
+
 ```
-$ vi ~/workspace/paasta-deployment/paasta/deploy-openstack.sh
+$ vi ~/workspace/paasta-deployment/paasta/deploy-aws-7vms.sh
 
-BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"					 # bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
+BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"                   # bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
 
-bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy paasta-deployment.yml \	# PaaS-TA Manifest File
-	-o operations/openstack.yml \					# OpenStack 설정
-	-o operations/use-haproxy.yml \					# HAProxy 적용
-	-o operations/use-haproxy-public-network.yml \			# HAProxy Public Network 적용
-	-o operations/use-postgres.yml \				# Database Type 설정 (3.5버전 이하에서 Migration 시 필수)
-	-o operations/cce.yml \						# CCE 조치 적용
-	-o operations/rename-network-and-deployment.yml \		# Rename Network and Deployment
-	-l vars.yml \							# PaaS-TA 설치시 적용하는 변수 설정 파일
-	-l ../../common/common_vars.yml					# PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일
+bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy min-paasta-deployment.yml \	# PaaS-TA-min Manifest File
+        -o operations/min-aws.yml \					# AWS 설정
+        -o operations/min-create-vm-singleton-blobstore.yml \		# singleton-blobstore VM 배포
+        -o operations/min-create-vm-tcp-router.yml \			# tcp-router VM 배포
+        -o operations/min-use-haproxy.yml \				# HAProxy 적용
+        -o operations/use-haproxy-public-network.yml \			# HAProxy Public Network 적용
+        -o operations/min-use-postgres.yml \				# Database Type 설정 (3.5버전 이하에서 Migration 시 필수)
+        -o operations/min-rename-network-and-deployment.yml \		# Rename Network and Deployment
+        -o operations/min-option-network-and-deployment.yml \		# singleton-blobstore Rename Network and Deployment
+	-o operations/min-cce.yml \					# CCE 조치 설정
+        -l min-vars.yml \						# PaaS-TA-min 설치시 적용하는 변수 설정 파일
+        -l ../../common/common_vars.yml					# PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일
+```
+
+- Openstack 환경 4vm 설치 시
+
+```
+$ vi ~/workspace/paasta-deployment/paasta/deploy-openstack-4vms.sh
+
+BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"                   # bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
+
+bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy min-paasta-deployment.yml \	# PaaS-TA-min Manifest File
+        -o operations/min-openstack.yml \					# Openstack 설정
+	-o operations/min-use-router-public-network.yml \			# Router 외부 접근 설정
+        -o operations/min-use-postgres.yml \					# Database Type 설정 (3.5버전 이하에서 Migration 시 필수)
+        -o operations/min-rename-network-and-deployment.yml \			# Rename Network and Deployment
+	-o operations/min-cce.yml \						# CCE 조치 적용
+        -l min-vars.yml \							# PaaS-TA-min 설치시 적용하는 변수 설정 파일
+        -l ../../common/common_vars.yml						# PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일
+```
+
+- Openstack 환경 7vm 설치 시
+
+```
+$ vi ~/workspace/paasta-deployment/paasta/deploy-openstack-7vms.sh
+
+BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"                   # bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
+
+bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy min-paasta-deployment.yml \	# PaaS-TA-min Manifest File
+        -o operations/min-openstack.yml \					# Openstack 설정
+        -o operations/min-create-vm-singleton-blobstore.yml \		# singleton-blobstore VM 배포
+        -o operations/min-create-vm-tcp-router.yml \			# tcp-router VM 배포
+        -o operations/min-use-haproxy.yml \				# HAProxy 적용
+        -o operations/use-haproxy-public-network.yml \			# HAProxy Public Network 적용
+        -o operations/min-use-postgres.yml \				# Database Type 설정 (3.5버전 이하에서 Migration 시 필수)
+        -o operations/min-rename-network-and-deployment.yml \		# Rename Network and Deployment
+        -o operations/min-option-network-and-deployment.yml \		# singleton-blobstore Rename Network and Deployment
+	-o operations/min-cce.yml \					# CCE 조치 설정
+        -l min-vars.yml \						# PaaS-TA-min 설치시 적용하는 변수 설정 파일
+        -l ../../common/common_vars.yml					# PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일
 ```
 
 - Shell script 파일에 실행 권한 부여
 
 ```
-$ chmod +x ~/workspace/paasta-deployment/paasta/*.sh
+$ chmod +x ~/workspace/paasta-deployment-min/paasta/*.sh
 ```
 
 <br>
 
-## <div id='2.7'/>2.7.  PaaS-TA AP 설치
-- 서버 환경에 맞추어 common_vars.yml와 vars.yml를 수정 한 뒤, Deploy 스크립트 파일의 설정을 수정한다.
+## <div id='2.7'/>2.7.  PaaS-TA AP min 설치
+- 서버 환경에 맞추어 common_vars.yml와 min-vars.yml를 수정 한 뒤, Deploy 스크립트 파일의 설정을 수정한다.
 
+- 4VM 배포 시
 ```
-$ vi ~/workspace/paasta-deployment/paasta/deploy-aws.sh
+$ vi ~/workspace/paasta-deployment/paasta/deploy-aws-4vms.sh
 
-BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"			 		# bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
+BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"                   # bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
 
-bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy paasta-deployment.yml \	# PaaS-TA Manifest File
-	-o operations/aws.yml \						# AWS 설정
-	-o operations/use-haproxy.yml \					# HAProxy 적용
-	-o operations/use-haproxy-public-network.yml \			# HAProxy Public Network 적용
-	-o operations/use-postgres.yml \				# Database Type 설정 (3.5버전 이하에서 Migration 시 필수)
-	-o operations/cce.yml \						# CCE 조치 적용
-	-o operations/rename-network-and-deployment.yml \		# Rename Network and Deployment
-	-l vars.yml \							# 환경에 PaaS-TA 설치시 적용하는 변수 설정 파일
-	-l ../../common/common_vars.yml					# PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일
+bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy min-paasta-deployment.yml \	# PaaS-TA-min Manifest File
+        -o operations/min-aws.yml \					# AWS 설정
+	-o operations/min-use-router-public-network.yml \		# Router 외부 접근 설정
+	-o operations/min-use-router-public-network-aws.yml \
+        -o operations/min-use-postgres.yml \				# Database Type 설정 (3.5버전 이하에서 Migration 시 필수)
+        -o operations/min-rename-network-and-deployment.yml \		# Rename Network and Deployment
+	-o operations/min-cce.yml \					# CCE 조치 적용
+        -l min-vars.yml \						# PaaS-TA-min 설치시 적용하는 변수 설정 파일
+        -l ../../common/common_vars.yml					# PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일
+```
+
+
+- 7VM 배포 시
+```
+$ vi ~/workspace/paasta-deployment/paasta/deploy-aws-7vms.sh
+
+BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"                   # bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
+
+bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy min-paasta-deployment.yml \	# PaaS-TA-min Manifest File
+        -o operations/min-aws.yml \					# AWS 설정
+        -o operations/min-create-vm-singleton-blobstore.yml \		# singleton-blobstore VM 배포
+        -o operations/min-create-vm-tcp-router.yml \			# tcp-router VM 배포
+        -o operations/min-use-haproxy.yml \				# HAProxy 적용
+        -o operations/use-haproxy-public-network.yml \			# HAProxy Public Network 적용
+        -o operations/min-use-postgres.yml \				# Database Type 설정 (3.5버전 이하에서 Migration 시 필수)
+        -o operations/min-rename-network-and-deployment.yml \		# Rename Network and Deployment
+        -o operations/min-option-network-and-deployment.yml \		# singleton-blobstore Rename Network and Deployment
+	-o operations/min-cce.yml \					# CCE 조치 설정
+        -l min-vars.yml \						# PaaS-TA-min 설치시 적용하는 변수 설정 파일
+        -l ../../common/common_vars.yml					# PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일
 ```
 
 - PaaS-TA AP 설치 시 Shell Script 파일 실행 (BOSH 로그인 필요)
 
 ```
-$ cd ~/workspace/paasta-deployment/paasta
-$ ./deploy-{IaaS}.sh
+$ cd ~/workspace/paasta-deployment-min/paasta
+$ ./deploy-{IaaS}-{VMs_Number}.sh
 ```
 
 - PaaS-TA AP 설치 확인
@@ -708,49 +786,46 @@ Task 134. Done
 
 Deployment 'paasta'
 
-Instance                                                  Process State  AZ  IPs           VM CID               VM Type             Active  Stemcell  
-api/918da8e3-36c9-4144-b457-f48792041ece                  running        z1  10.0.31.206   i-093920c2caf43fe63  small               true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-api/c01d1a66-56c0-4dfb-87cd-b4e7323012ec                  running        z2  10.0.32.204   i-0bd6841ee37df618b  small               true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34
-cc-worker/30aa88de-8b5c-4e3a-a0ae-b2933f3af492            running        z1  10.0.31.207   i-02a7032164038f09b  minimal             true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-cc-worker/31a465bd-64af-49c6-a867-3439d98b2014            running        z2  10.0.32.205   i-0d8345c5348a42fdd  minimal             true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-credhub/0d2da1ef-dbdc-47d8-9514-69c1e0e83f82              running        z2  10.0.32.213   i-0f21b57a610868775  minimal             true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-credhub/a43132d5-ab04-4fe3-8b75-b8194f28678b              running        z1  10.0.31.216   i-0ea2f77eb95a32f21  minimal             true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-database/07b7ba09-7ace-4428-b4d4-a80163aaf82c             running        z1  10.0.31.202   i-0c532e0a7a53015c2  small               true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-diego-api/a05bbf7b-f513-48f0-8444-c90cd4b63ae2            running        z2  10.0.32.202   i-0b982d70a8debde41  small               true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-diego-api/ba388ba5-e6df-4d5e-9c6e-3af6b1fdc319            running        z1  10.0.31.203   i-0a5dfee4dc8ba1b68  small               true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-diego-cell/15378660-b457-4b6e-a9cb-5729b091c675           running        z1  10.0.31.213   i-095a00b9cb171c444  small-highmem-16GB  true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-diego-cell/7d7ed58e-c82e-429e-a6ce-18e4d70cca29           running        z2  10.0.32.211   i-02d836e28133368a1  small-highmem-16GB  true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-diego-cell/eb3b22f3-2905-4ef5-81d0-1ba6974b7316           running        z1  10.0.31.214   i-0a26ae4105e8ef6f4  small-highmem-16GB  true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-doppler/75577265-7f33-45c0-b4de-b24a881462bf              running        z1  10.0.31.211   i-01b19951e2ed96a55  minimal             true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-doppler/82956ad8-d103-4223-b426-cebc793c45ee              running        z2  10.0.32.209   i-01e7d7cf7d117bf96  minimal             true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-doppler/8d1fa381-c9d4-4b51-b195-c25d5d7a1a55              running        z1  10.0.31.212   i-048de3c6ad38a0184  minimal             true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-doppler/ece4a895-03b9-47a1-9b48-9eaabaf258ef              running        z2  10.0.32.210   i-09a3cf0e5ac171012  minimal             true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-haproxy/abb270ef-01e8-4d4c-941c-2187ca2cc8ad              running        z7  10.0.30.201   i-08af20c6712d54dd6  minimal             true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-                                                                             54.180.53.80                                                    
-log-api/7b45f808-22c4-45ff-a81c-74a20bac852a              running        z1  10.0.31.215   i-0b11b17bdbc23553e  minimal             true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-log-api/dac3304c-f0a2-4c20-999d-db08ee39c7a7              running        z2  10.0.32.212   i-0b8426cba9bc7db7a  minimal             true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-nats/35b3ab92-453f-4e9f-adf8-04477f41ee80                 running        z2  10.0.32.201   i-05a787d09b5a2df0a  minimal             true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-nats/d08e1c80-bdf4-40c8-9134-16fb4a34ee11                 running        z1  10.0.31.201   i-04eddc4dfa9f9793e  minimal             true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-router/0c77c858-f0c7-400c-868d-e96cd2dff4a9               running        z1  10.0.31.209   i-075290e50e0ef541d  minimal             true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-router/5458b789-8ed0-4ba8-8093-6155ba1fa9b1               running        z2  10.0.32.207   i-02bc3f58d3c0306c9  minimal             true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-scheduler/348e2a4e-2da7-47a3-92f8-8bf3b00e9bf0            running        z1  10.0.31.208   i-0a0b2bd3e712f0b26  minimal             true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-scheduler/f56a196b-1f76-4ecc-b721-9b7fd04b8a94            running        z2  10.0.32.206   i-0c0917f591ce872f5  minimal             true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-singleton-blobstore/af6b0c3a-27d0-46ef-b432-0b5c8e81519d  running        z1  10.0.31.205   i-0c519ef6d50d74d1e  small               true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-tcp-router/891c0b3e-4de6-44a5-a98b-96dd0490cac3           running        z2  10.0.32.208   i-084e044926e602669  minimal             true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-tcp-router/ff3e0a98-092c-4e4c-a20c-0c0abf094a44           running        z1  10.0.31.210   i-076ef16b4d4114f83  minimal             true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-uaa/3e0f17c1-cd11-4ce6-b3b8-bf1b0f45aa9f                  running        z1  10.0.31.204   i-0454401aa5fcf61fb  minimal             true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
-uaa/f8f6b0e8-2bbf-4be5-8f69-ac8dc7a3d943                  running        z2  10.0.32.203   i-0abd8df56336a799e  minimal             true    bosh-openstack-kvm-ubuntu-bionic-go_agent/1.34  
+Instance                                       Process State  AZ  IPs          VM CID               VM Type             Active  Stemcell  
+compute/e154dcdc-a2c1-4a85-86b7-607a02a30acf   running        z1  10.0.31.235  i-0f92f55575bf2567e  small-highmem-16GB  true    bosh-aws-xen-hvm-ubuntu-bionic-go_agent/1.34 
+control/a18f5e97-098c-47ab-9147-77f594571bd6   running        z1  10.0.31.234  i-053cd8f71d99f1a15  small-highmem-16GB  true    bosh-aws-xen-hvm-ubuntu-bionic-go_agent/1.34 
+database/7ea28d82-5d5b-471f-bde6-a65d4809062e  running        z1  10.0.31.233  i-0b2e54deaf0734f59  small               true    bosh-aws-xen-hvm-ubuntu-bionic-go_agent/1.34 
+router/c01b1aa4-43c9-42f6-9003-cf8f8664d142    running        z7  10.0.30.204  i-0a449def3351877b3  minimal             true    bosh-aws-xen-hvm-ubuntu-bionic-go_agent/1.34 
+                                                                  54.180.53.80                                                 
 
-30 vms
+4 vms
+
+Succeeded
+```
+```
+ubuntu@inception:~$ bosh -e micro-bosh vms -d paasta
+Using environment '10.0.1.6' as client 'admin'
+
+Task 134. Done
+
+Deployment 'paasta'
+
+Instance                                                  Process State  AZ  IPs             VM CID               VM Type             Active  Stemcell  
+compute/c3f53aed-469f-47ab-aa9b-94be30ca3687              running        z1  10.0.21.156     i-0617a496567bd859e  small-highmem-16GB  true    bosh-aws-xen-hvm-ubuntu-bionic-go_agent/1.34   
+control/acd880a6-b309-452e-b996-0ef4252f8dd3              running        z1  10.0.21.153     i-0d9fbf3f662dec9a0  small-highmem-16GB  true    bosh-aws-xen-hvm-ubuntu-bionic-go_agent/1.34   
+database/c92fd45f-1165-4d71-8df4-9b4270abdd0a             running        z1  10.0.21.151     i-0ead4f61c9be951b9  small               true    bosh-aws-xen-hvm-ubuntu-bionic-go_agent/1.34   
+haproxy/5ccc73dd-cf7e-4f4c-a204-1e933eddfcf8              running        z7  10.0.20.151     i-02e5277d6fd829f34  minimal             true    bosh-aws-xen-hvm-ubuntu-bionic-go_agent/1.34   
+                                                                             54.180.53.80                                             
+router/4f58af5a-529c-41f7-866c-e2327978ea99               running        z1  10.0.21.154     i-0b5f2d42d2c2b9d06  minimal             true    bosh-aws-xen-hvm-ubuntu-bionic-go_agent/1.34   
+singleton-blobstore/5ed376fe-1d84-45c8-a6e8-f938b7320a36  running        z1  10.0.21.152     i-08a432269ffb76663  small               true    bosh-aws-xen-hvm-ubuntu-bionic-go_agent/1.34   
+tcp-router/f8fe5974-8340-4d16-ae02-0b7150828388           running        z1  10.0.21.155     i-04a845c8e7fc7cfb4  minimal             true    bosh-aws-xen-hvm-ubuntu-bionic-go_agent/1.34   
+
+
+7 vms
 
 Succeeded
 ```
 
 <br>
 
-## <div id='2.8'/>2.8.  PaaS-TA AP 로그인
+## <div id='2.8'/>2.8.  PaaS-TA AP min 로그인
 
-CF CLI를 설치하고 PaaS-TA AP에 로그인한다.  
+CF CLI를 설치하고 PaaS-TA AP min에 로그인한다.  
 CF CLI는 v6과 v7중 선택해서 설치를 한다.  
 CF API는 PaaS-TA AP 배포 시 지정했던 System Domain 명을 사용한다.
 
