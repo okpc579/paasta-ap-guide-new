@@ -16,12 +16,9 @@
   2.6. [서비스 설치 확인](#2.6)  
 
 3. [PaaS-TA AP Portal 설치](#3)  
-  3.1. [Prerequisite](#3.1)  
-    3.1.1. [App 파일 및 Manifest 파일 다운로드](#3.1.1)  
-    3.1.2. [Portal App Manifest 변경 Script 변수 설정](#3.1.2)  
-    3.1.3. [Portal App Manifest 변경 Script 실행](#3.1.3)  
-    3.1.4. [Portal App 배포 Script 변수 설정](#3.1.4)  
-    3.1.5. [Portal App 배포 Script 실행](#3.1.5)  
+  3.1. [Portal App 구성](#3.1)  
+  3.2. [Portal App 배포 Script 변수 설정](#3.2)  
+  3.3. [Portal App 배포 Script 실행](#3.3)  
 
 4. [PaaS-TA AP Portal 운영](#4)  
   4.1. [사용자의 조직 생성 Flag 활성화](#4.1)  
@@ -250,221 +247,100 @@ Succeeded
 ```
 
 ## <div id="3"/> 3. PaaS-TA AP Portal 설치
-
-### <div id="3.1"/> 3.1. Prerequisite  
-### <div id="3.1.1"/> 3.1.1. App 파일 및 Manifest 파일 다운로드
-Portal 설치에 필요한 App 파일 및 Manifest 파일을 다운로드 받아 서비스 설치 작업 경로로 위치시킨다.
-
+### <div id="3.1"/> 3.1. Portal App 구성
+PaaS-TA AP에 Portal 관련 App이 9개 배포되며 구성은 다음과 같다.
 ```
-### 설치 작업 경로  
-$ cd ~/workspace/portal-deployment/portal-container-infra
-
-### portal app 파일을 다운로드한다
-$ wget --content-disposition https://nextcloud.paas-ta.org/index.php/s/LmZTEiJn6NcJoiY/download
-$ unzip portal-app-1.2.1.zip
-
-### 설치 디렉토리 (파일) 구성  
 portal-app-1.2.1
 ├── portal-api-2.4.0
-│   ├── manifest.yml
-│   └── paas-ta-portal-api.jar
 ├── portal-common-api-2.2.0
-│   ├── manifest.yml
-│   └── paas-ta-portal-common-api.jar
 ├── portal-gateway-2.1.0
-│   ├── manifest.yml
-│   └── paas-ta-portal-gateway.jar
 ├── portal-log-api-2.1.0
-│   ├── manifest.yml
-│   └── paas-ta-portal-log-api.jar
 ├── portal-registration-2.1.0
-│   ├── manifest.yml
-│   └── paas-ta-portal-registration.jar
 ├── portal-ssh-1.0.0
-│   ├── manifest.yml
-│   └── portal-ssh-package
 ├── portal-storage-api-2.2.1
-│   ├── manifest.yml
-│   └── paas-ta-portal-storage-api.jar
 ├── portal-web-admin-2.3.0
-│   ├── manifest.yml
-│   └── paas-ta-portal-webadmin.war
 └── portal-web-user-2.3.1
-│   ├── config
-│   ├── manifest.yml
-│   └── paas-ta-portal-webuser
-├── 1.applyChangeVariable.sh
-├── 2.portalContainerPush.sh
-└── portal-rule.json
- ```
-
-### <div id="3.1.2"/> 3.1.2. Portal App Manifest 변경 Script 변수 설정
-manifest는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다. manifest 파일에는 어떤 name, memory, instance, host, path, buildpack, env 등을 사용 할 것인지 정의가 되어 있다.
-
-- infra 정보 : [2.4. Deployment 파일 수정 - vars.yml](#2.4) 및 [2.7. 서비스 설치 확인](#2.7) 참조  
-- PaaS-TA 정보 : PaaS-TA 설치 시 사용한 common_vars.yml 파일을 참고한다.  
+```
+### <div id="3.2"/> 3.2. Portal App 배포 Script 변수 설정  
+Portal App 배포 Script 실행을 위하여 Script가 있는 위치로 이동한다.
 
 ```
-### e.g.) common_vars.yml의 PaaS-TA 정보
-# PAAS-TA INFO
-system_domain: "61.252.53.246.nip.io"                   # Domain (nip.io를 사용하는 경우 HAProxy Public IP와 동일)
-paasta_admin_username: "admin"                          # PaaS-TA Admin Username
-paasta_admin_password: "admin"                          # PaaS-TA Admin Password
-paasta_nats_ip: "10.0.1.121"
-paasta_nats_port: 4222
-paasta_nats_user: "nats"
-paasta_nats_password: "7EZB5ZkMLMqT73h2JtxPv1fvh3UsqO"  # PaaS-TA Nats Password (CredHub 로그인후 'credhub get -n /micro-bosh/paasta/nats_password' 명령어를 통해 확인 가능)
-paasta_nats_private_networks_name: "default"            # PaaS-TA Nats 의 Network 이름
-paasta_database_ips: "10.0.1.123"                       # PaaS-TA Database IP (e.g. "10.0.1.123")
-paasta_database_port: 5524                              # PaaS-TA Database Port (e.g. 5524)
-paasta_database_type: "postgresql"                      # PaaS-TA Database Type (e.g. "postgresql" or "mysql")
-paasta_database_driver_class: "org.postgresql.Driver"   # PaaS-TA Database driver-class (e.g. "org.postgresql.Driver" or "com.mysql.jdbc.Driver")
-paasta_cc_db_id: "cloud_controller"                     # CCDB ID (e.g. "cloud_controller")
-paasta_cc_db_password: "cc_admin"                       # CCDB Password (e.g. "cc_admin")
-paasta_uaa_db_id: "uaa"                                 # UAADB ID (e.g. "uaa")
-paasta_uaa_db_password: "uaa_admin"                     # UAADB Password (e.g. "uaa_admin")
-paasta_api_version: "v3"
-
-# UAAC INFO
-uaa_client_admin_id: "admin"                            # UAAC Admin Client Admin ID
-uaa_client_admin_secret: "admin-secret"                 # UAAC Admin Client에 접근하기 위한 Secret 변수
-uaa_client_portal_secret: "clientsecret"                # UAAC Portal Client에 접근하기 위한 Secret 변수
-
-# Monitoring INFO
-monitoring_api_url: "61.252.53.241"                     # Monitoring-WEB의 Public IP
-
-### ETC INFO
-abacus_url: "http://abacus.61.252.53.248.nip.io"        # abacus url (e.g. "http://abacus.xxx.xxx.xxx.xxx.nip.io")
+### 설치 작업 경로 이동
+$ cd ~/workspace/portal-deployment/portal-container-infra/scripts
 ```
 
-Portal을 PaaS-TA에 App으로 배포하기 전에 Portal App의 Manifest의 변수를 일괄 변경해주는 Script 동작을 위해 Portal 설치에 필요한 PaaS-TA 및 infra 정보를 확인하여 Script의 변수를 설정한다.
-
-> $ vi ~/workspace/paasta-5.5.4/release/portal/portal-app/1.applyChangeVariable.sh
+Script 변수를 설정한다. (FILE PATH 부분 변경 필수, 나머지 옵션)
 ```
+### 변수파일 설정
+$ vi portal-app-variable.yml
+
 #!/bin/bash
 
-# COMMON VARIABLE
-DOMAIN="xx.xxx.xx.xxx.nip.io"           # PaaS-TA System Domain
-CF_USER_ADMIN_USERNAME="admin"          # PaaS-TA Admin Username
-CF_USER_ADMIN_PASSWORD="admin"          # PaaS-TA Admin Password
-UAA_CLIENT_ID="admin"                   # UAA Client ID
-UAA_CLIENT_SECRET="admin-secret"        # UAA Cliant Secret
-UAA_ADMIN_CLIENT_ID="admin"             # UAA Admin Client ID
-UAA_ADMIN_CLIENT_SECRET="admin-secret"  # UAA Admin Client Secret
-UAA_LOGIN_CLIENT_ID="admin"             # UAA Login Client ID
-UAA_LOGIN_CLIENT_SECRET="admin-secret"  # UAA Login Client Secret
-PORTAL_DB_IP="10.0.41.101"              # portal-container-infra IP
-PORTAL_DB_PORT="13306"                  # portal-container-infra Port
-PORTAL_DB_USER_PASSWORD="Paasta@2019"   # portal-container-infra DB Password
+##FILE PATH
+COMMON_VARS_PATH=~/workspace/common/common_vars.yml	# common_vars.yml Path
+PORTAL_INFRA_VARS_PATH=~/workspace/portal-deployment/portal-container-infra/vars.yml	# portal_infra_vars.yml Path
+PORTAL_APP_WORKING_DIRECTORY=~/workspace/portal-deployment/portal-container-infra/portal-app # Portal APP Working Path
 
-# PORTAL-API
-ABACUS_URL=""                           # Abacus URL(Not required)
-MONITORING_API_URL=""                   # Monitoring API URL(Not required) (e.g. 45.55.120.54)
 
-# PORTAL-COMMON-API
-PAASTA_DB_DRIVER="org.postgresql.Driver"  # PaaS-TA DB Driver (e.g. org.postgresql.Driver OR com.mysql.jdbc.Driver)
-PAASTA_DATABASE="postgresql"              # PaaS-TA DB (e.g. postgresql OR mysql)
-PAASTA_DB_IP="10.0.1.123"`                # PaaS-TA DB IP
-PAASTA_DB_PORT="5524"                     # PaaS-TA DB Port (e.g. 5524(postgres) OR 13307(mysql))
-CC_DB_NAME="cloud_controller"             # PaaS-TA CCDB Name
-CC_DB_USER_NAME="cloud_controller"        # PaaS-TA CCDB ID
-CC_DB_USER_PASSWORD="cc_admin"            # PaaS-TA CCDB Password
-UAA_DB_NAME="uaa"                         # PaaS-TA UAA Name
-UAA_DB_USER_NAME="uaa"                    # PaaS-TA UAA ID
-UAA_DB_USER_PASSWORD="uaa_admin"          # PaaS-TA UAA Password
-MAIL_SMTP_HOST="smtp.gmail.com"           # Mail-SMTP Host
-MAIL_SMTP_PORT="465"                      # Mail-SMTP Port
-MAIL_SMTP_USERNAME="paasta"               # Mail-SMTP User Name
-MAIL_SMTP_PASSWORD="paasta"               # Mail-SMTP Password
-MAIL_SMTP_USEREMAIL="paas-ta@gmail.com"   # Mail-SMTP User Email
-MAIL_SMTP_PROPERTIES_AUTHURL="portal-web-user.<DOMAIN>"   # Mail-SMTP Properties Auth URL
+##PORTAL VARIABLE
+USER_APP_SIZE_MB=0					# USER My App size(MB), if value==0 -> unlimited
+MONITORING_ENABLE=false					# Monitoring Enable Option
 
-# PORTAL-STORAGE-API
-OBJECTSTORAGE_TENANTNAME="paasta-portal"  # portal-container-infra Binary Storage Tenant Name
-OBJECTSTORAGE_USERNAME="paasta-portal"    # portal-container-infra Binary Storage User Name
-OBJECTSTORAGE_PASSWORD="paasta"           # portal-container-infra Binary Storage Password
-OBJECTSTORAGE_IP="10.0.41.101"            # portal-container-infra IP
-OBJECTSTORAGE_PORT="15001"                # portal-container-infra Binary Storage Port
+PORTAL_ORG_NAME="portal"				# PaaS-TA Portal Org Name
+PORTAL_SPACE_NAME="system"				# PaaS-TA Portal Space Name
+PORTAL_QUOTA_NAME="portal_quota"			# PaaS-TA Portal Quota Name
+PORTAL_SECURITY_GROUP_NAME="portal"			# PaaS-TA Portal Security Group Name
 
-# PORTAL-WEBUSER
-UAAC_PORTAL_CLIENT_ID="portalclient"      # UAAC Portal Client ID
-UAAC_PORTAL_CLIENT_SECRET="clientsecret"  # UAAC Poral Client Secret
-USER_APP_SIZE_MB=0                        # USER My App size(MB), if value==0 -> unlimited
-MONITORING_ENABLE=false						        # Monitoring Enable Option
+MAIL_SMTP_HOST="smtp.gmail.com"				# Mail-SMTP Host
+MAIL_SMTP_PORT="465"					# Mail-SMTP Port
+MAIL_SMTP_USERNAME="paasta"				# Mail-SMTP User Name
+MAIL_SMTP_PASSWORD="paasta"				# Mail-SMTP Password
+MAIL_SMTP_USEREMAIL="paas-ta@gmail.com"			# Mail-SMTP User Email
 
-......
+##PORTAL APP INSTANCES
+PORTAL_API_INSTANCE=1					# PORTAL-API INSTANCES
+PORTAL_COMMON_API_INSTANCE=1				# PORTAL-COMMON-API INSTANCES
+PORTAL_GATEWAY_INSTANCE=1				# PORTAL-GATEWAY INSTANCES
+PORTAL_REGISTRATION_INSTANCE=1				# PORTAL-REGISTRATION INSTANCES
+PORTAL_STORAGE_API_INSTANCE=1				# PORTAL-STORAGE-API INSTANCES
+PORTAL_WEB_ADMIN_INSTANCE=1				# PORTAL-WEB-ADMIN INSTANCES
+PORTAL_WEB_USER_INSTANCE=1				# PORTAL-WEB-USER INSTANCES
 
+
+##UNCHANGE VARIABLE(if defulat install, don't change variable)
+PAASTA_CORE_DEPLOYMENT_NAME="paasta"			# PaaS TA AP Deployment Name
+PORTAL_INFRA_DEPLOYMENT_NAME="portal-container-infra"	# Portal Container Infra Deployment Name
+PAASTA_DATABASE_INSTANCE_NAME="database"		# PaaS TA AP Database Instance Name
+PORTAL_INFRA_DATABASE_NAME="infra"			# Portal Container Infra Database Name
+UAA_ADMIN_CLIENT_ID="admin"				# UAA Client ID
+CC_DB_NAME="cloud_controller"				# PaaS-TA AP CCDB Name
+CC_DB_USER_NAME="cloud_controller"			# PaaS-TA AP CCDB ID
+UAA_DB_NAME="uaa"					# PaaS-TA AP UAADB Name
+UAA_DB_USER_NAME="uaa"					# PaaS-TA AP UAADB ID
+UAAC_PORTAL_CLIENT_ID="portalclient"			# UAAC Portal Client ID
+
+IS_PAAS_TA_EXTERNAL_DB=false				# (true or false)
+PAAS_TA_EXTERNAL_DB_IP=					# PaaS-TA AP External DB IP
+PAAS_TA_EXTERNAL_DB_PORT=				# PaaS-TA AP External DB Port
+PAAS_TA_EXTERNAL_DB_KIND=				# PaaS-TA AP External DB Kind(IF USE e.g. postgres or mysql)
+IS_PORTAL_EXTERNAL_DB=false				# (true or false)
+PORTAL_EXTERNAL_DB_IP=					# Portal External DB IP
+PORTAL_EXTERNAL_DB_PORT=				# Portal External DB Port
+PORTAL_EXTERNAL_DB_PASSWORD=				# Portal External DB Password
+IS_PORTAL_EXTERNAL_STORAGE=false			# (true or false)
+PORTAL_EXTERNAL_STORAGE_IP=				# Portal External Storage IP
+PORTAL_EXTERNAL_STORAGE_PORT=				# Portal External Storage Port
+PORTAL_EXTERNAL_STORAGE_TENANTNAME=			# Portal External Storage Tenant Name
+PORTAL_EXTERNAL_STORAGE_USERNAME=			# Portal External Storage Username
+PORTAL_EXTERNAL_STORAGE_PASSWORD=			# Portal External Storage Password
 ```
 
 
-### <div id="3.1.3"/> 3.1.3. Portal App Manifest 변경 Script 실행
-Portal을 PaaS-TA에 App으로 배포하기 전에 Portal App의 Manifest의 변수를 일괄 변경해주는 Script를 실행한다.
+### <div id="3.3"/> 3.3. Portal App 배포 Script 실행
+변수 설정이 완료되었으면 배포 Script를 실행한다.
 
 ```
-$ cd ~/workspace/paasta-5.5.4/release/portal/portal-app
-$ source 1.applyChangeVariable.sh
-
-
-### 이후 각 Manifest.yml 파일을 확인하여 값이 정상적으로 바뀌었는지 확인한다.
-
-e.g.) portal-registration
-$ vi ~/workspace/paasta-5.5.4/release/portal/portal-app/portal-registration-2.1.0/manifest.yml
-
-applications:
-  - name: portal-registration
-    memory: 1G
-    instances: 1
-    buildpacks:
-    - java_buildpack
-    routes:
-    - route: portal-registration.xx.xxx.xxx.xxx.nip.io
-    path: paas-ta-portal-registration.jar
-    env:
-      server_port: 80
-
-      spring_application_name: PortalRegistration
-
-      eureka_server_enableSelfPreservation: true
-      eureka_instance_hostname: ${vcap.application.uris[0]}
-      eureka_instance_nonSecurePort: 80
-      eureka_client_registerWithEureka: false
-      eureka_client_fetchRegistry: false
-      eureka_server_maxThreadsForPeerReplication: 0
-      eureka_client_server_waitTimeInMsWhenSyncEmpty: 0
-      eureka_client_serviceUrl_defaultZone: http://${vcap.application.uris[0]}/eureka/
-
-
-
-```
-
-
-
-### <div id="3.1.4"/> 3.1.4. Portal App 배포 Script 변수 설정
-Portal을 PaaS-TA에 App으로 배포해주는 Script 동작을 위해 Script의 접속정보 변수를 설정한다.
-
-> $ vi ~/workspace/paasta-5.5.4/release/portal/portal-app/2.portalContainerPush.sh
-```
-#!/bin/bash
-
-#VARIABLE
-DOMAIN="xx.xxx.xx.xxx.nip.io"           # PaaS-TA System Domain
-PAASTA_USER_ADMIN_USERNAME="admin"      # PaaS-TA Admin Username
-PAASTA_USER_ADMIN_PASSWORD="admin"      # PaaS-TA Admin Password
-PORTAL_QUOTA_NAME="portal_quota"        # PaaS-TA Portal Quota Name
-PORTAL_ORG_NAME="portal"                # PaaS-TA Portal Org Name
-PORTAL_SPACE_NAME="system"              # PaaS-TA Portal Space Name
-PORTAL_SECURITY_GROUP_NAME="portal"     # PaaS-TA Portal Space Name
-
-......
-
-```
-
-### <div id="3.1.5"/> 3.1.5. Portal App 배포 Script 실행
-Portal을 PaaS-TA에 App으로 배포해주는 Script를 실행한다.
-
-```
-$ cd ~/workspace/paasta-5.5.4/release/portal/portal-app
-$ source 2.portalContainerPush.sh
+$ source deploy-portal-app.sh
 
 .....
 
@@ -478,8 +354,8 @@ portal-storage-api    started           web:1/1, task:0/0   portal-storage-api.6
 portal-web-admin      started           web:1/1, task:0/0   portal-web-admin.61.252.53.246.nip.io
 portal-web-user       started           web:1/1             portal-web-user.61.252.53.246.nip.io
 ssh-app               started           web:1/1             ssh-app.61.252.53.246.nip.io
-
 ```
+
 
 
 ## <div id="4"/>4. PaaS-TA AP Portal 운영
