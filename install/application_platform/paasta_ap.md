@@ -24,9 +24,13 @@
 ## <div id='1.1'/>1.1. 목적
 본 문서는 Monitoring을 적용하지 않은 PaaS-TA Application Platform(이하 PaaS-TA AP)을 수동으로 설치하기 위한 가이드를 제공하는 데 그 목적이 있다.
 
+<br>
+
 ## <div id='1.2'/>1.2. 범위
 PaaS-TA AP는 bosh-deployment를 기반으로 한 BOSH 환경에서 설치하며 paasta-deployment v5.6.2의 설치를 기준으로 가이드를 작성하였다.  
 PaaS-TA AP는 VMware vSphere, Google Cloud Platform, Amazon Web Services EC2, OpenStack, Microsoft Azure 등의 IaaS를 지원하며,  paasta-deployment v5.6.2에서 검증한 IaaS 환경은 AWS, OpenStack 환경이다.
+
+<br>
 
 ## <div id='1.3'/>1.3. 참고 자료
 
@@ -40,6 +44,7 @@ BOSH Deployment: [https://github.com/cloudfoundry/bosh-deployment](https://githu
 
 CF Deployment: [https://github.com/cloudfoundry/cf-deployment](https://github.com/cloudfoundry/cf-deployment)
 
+<br><br>
 
 # <div id='2'/>2. PaaS-TA AP 설치
 ## <div id='2.1'/>2.1. Prerequisite
@@ -47,6 +52,8 @@ CF Deployment: [https://github.com/cloudfoundry/cf-deployment](https://github.co
 - BOSH2 기반의 BOSH를 설치한다.
 - PaaS-TA AP 설치는 BOSH를 설치한 Inception(설치 환경)에서 작업한다.
 - PaaS-TA AP 설치를 위해 BOSH LOGIN을 진행한다.
+
+<br>
 
 ## <div id='2.2'/>2.2. 설치 파일 다운로드
 - PaaS-TA AP를 설치하기 위한 deployment가 존재하지 않는다면 다운로드 받는다
@@ -58,6 +65,8 @@ $ git clone https://github.com/PaaS-TA/common.git
 $ cd ~/workspace
 $ git clone https://github.com/PaaS-TA/paasta-deployment.git -b v5.6.2
 ```
+
+<br>
 
 ## <div id='2.3'/>2.3. Stemcell 업로드
 Stemcell은 배포 시 생성되는 PaaS-TA AP VM Base OS Image이다.  
@@ -105,6 +114,7 @@ $ cd ~/workspace/paasta-deployment/bosh
 $ source upload-stemcell.sh
 ```
 
+<br>
 
 ## <div id='2.4'/>2.4. Runtime Config 설정
 Runtime config는 BOSH로 배포되는 VM에 일괄 적용되는 설정이다.
@@ -146,6 +156,7 @@ $ source update-runtime-config.sh
   $ bosh -e ${BOSH_ENVIRONMENT} runtime-config --name=os-conf
   ```
 
+<br>
 
 ## <div id='2.5'/>2.5. Cloud Config 설정
 
@@ -272,6 +283,7 @@ $ bosh -e ${BOSH_ENVIRONMENT} update-cloud-config ~/workspace/paasta-deployment/
 $ bosh -e ${BOSH_ENVIRONMENT} cloud-config  
 ```
 
+<br>
 
 ## <div id='2.6'/>2.6.  PaaS-TA AP 설치 파일
 
@@ -300,7 +312,7 @@ common_vars.yml파일과 vars.yml을 수정하여 PaaS-TA AP 설치시 적용하
 </tr>
 </table>
 
-
+<br>
 
 ### <div id='2.6.1'/>2.6.1. PaaS-TA AP 설치 Variable File
 
@@ -515,6 +527,7 @@ ex) uaa_client_admin_secret="admin-secret"
 
 PaaS-TA AP를 설치 후 UAAC의 활용 방법은 사용 가이드에 기타 CLI를 참고한다.
 
+<br>
 
 ### <div id='2.6.2'/>2.6.2. PaaS-TA AP Operation 파일
 
@@ -570,6 +583,8 @@ PaaS-TA AP를 설치 후 UAAC의 활용 방법은 사용 가이드에 기타 CLI
 <td></td>
 </tr>
 </table>
+
+<br>
 
 ### <div id='2.6.3'/>2.6.3.   PaaS-TA AP 설치 Shell Scripts
 paasta-deployment.yml 파일은 PaaS-TA AP를 배포하는 Manifest 파일이며, PaaS-TA AP VM에 대한 설치 정의를 하게 된다.  
@@ -650,7 +665,7 @@ bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy paasta-deployment.yml \	# PaaS-T
 $ chmod +x ~/workspace/paasta-deployment/paasta/*.sh
 ```
 
-
+<br>
 
 ## <div id='2.7'/>2.7.  PaaS-TA AP 설치
 - 서버 환경에 맞추어 common_vars.yml와 vars.yml를 수정 한 뒤, Deploy 스크립트 파일의 설정을 수정한다.
@@ -728,6 +743,7 @@ uaa/f8f6b0e8-2bbf-4be5-8f69-ac8dc7a3d943                  running        z2  10.
 Succeeded
 ```
 
+<br>
 
 ## <div id='2.8'/>2.8.  PaaS-TA AP 로그인
 
