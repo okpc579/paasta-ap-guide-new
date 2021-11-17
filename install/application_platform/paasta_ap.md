@@ -260,12 +260,15 @@ VM Type은 IaaS에서 정의된 VM Type이다.
 ![PaaSTa_FLAVOR_Image]
 
 - Compilation
+
 PaaS-TA AP 및 서비스 설치 시, BOSH는 Compile 작업용 VM을 생성하여 소스를 컴파일하고, 이후 VM을 생성하여 컴파일된 파일을 대상 VM에 설치한 뒤 Compile 작업용 VM은 삭제된다. (Worker 수는 Compile VM의 수로, 많을수록 컴파일 속도가 빨라진다.)  
 
 - Disk Size
+
 PaaS-TA AP 및 서비스가 설치되는 VM의 Persistent Disk Size이다.
 
 - Networks
+
 Networks는 AZ 별 Subnet Network, DNS, Security Groups, Network ID를 정의한다.  
 보통 AZ 별로 256개의 IP를 정의할 수 있도록 Range Cider를 정의한다.
 
