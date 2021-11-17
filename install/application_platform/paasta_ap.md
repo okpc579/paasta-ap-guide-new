@@ -304,7 +304,8 @@ common_vars.yml파일과 vars.yml을 수정하여 PaaS-TA AP 설치시 적용하
 ### <div id='3.6.1'/>3.6.1. PaaS-TA AP 설치 Variable File
 
 
-- common_vars.yml
+- common_vars.yml  
+
 ~/workspace/common 폴더에 있는 [common_vars.yml](https://github.com/PaaS-TA/common/blob/master/common_vars.yml)에는 PaaS-TA AP 및 각종 Service 설치 시 적용하는 공통 변수 설정 파일이 존재한다.  
 PaaS-TA AP를 설치 시 system_domain, paasta_admin_username, paasta_admin_password, paasta_database_port, paasta_cc_db_password, paasta_uaa_db_password, uaa_client_admin_secret, uaa_client_portal_secret의 값을 변경 하여 설치 할 수 있다.
 
@@ -325,7 +326,7 @@ uaa_client_portal_secret: "clientsecret"		# UAAC Portal Client에 접근하기 �
 ... ((생략)) ...
 ```
 
-- vars.yml
+- vars.yml  
 
 PaaS-TA AP를 설치 할 때 적용되는 각종 변수값이나 배포 될 VM의 설정을 변경할 수 있다.
 
