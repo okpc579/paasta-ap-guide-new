@@ -74,7 +74,7 @@ BOSH 및 PaaS-TA 설치를 위해 Inception 서버에 구성해야 할 컴포넌
 - BOSH CLI 6.1.x 이상
 - BOSH Dependency : ruby, ruby-dev, openssl 등
 - BOSH Deployment: BOSH 설치를 위한 manifest deployment  
-- PaaS-TA Deployment : PaaS-TA 설치를 위한 manifest deployment (cf-deployment v16.14.0 기준)
+- PaaS-TA Deployment : PaaS-TA 설치를 위한 manifest deployment
 
 ## <div id='3.3'/>3.3.  BOSH 설치
 
@@ -131,52 +131,21 @@ $ bosh -v
 BOSH2 CLI는 BOSH 설치 시, BOSH certificate 정보를 생성해 주는 기능이 있다.  
 Cloud Foundry의 기본 BOSH CLI는 인증서가 1년으로 제한되어 있다.  
 BOSH 인증서는 BOSH 내부 Component 간의 통신 시 필요한 certificate이다.  
-만약 BOSH 설치 후 1년이 지나면 BOSH를 다시 설치해야 한다.
-
-BOSH2 CLI 6.1 이상 버전은 create-env의 config-server를 통해 생성된 인증서를 1년 이상 구성할 수 있다.
-
-BOSH2 CLI 6.0 이하 버전 사용 시, 인증서 기간을 늘리고 싶다면 BOSH CLI 소스를 다운로드해 컴파일하여 사용해야 한다.  
-BOSH2 CLI 버전은 bosh -v로 확인이 가능하다.   
-소스 컴파일 방법은 다음 가이드를 참고한다.  
-
-- 소스 build 전제 조건 :: Ubuntu, go 1.9.2 버전 이상
-
-```
-$ mkdir -p ~/workspace/bosh-cli/src/
-$ cd ~/workspace/bosh-cli
-
-$ export GOPATH=$PWD
-$ export PATH=$GOPATH/bin:$PATH
-
-$ go get -d github.com/cloudfoundry/bosh-cli
-$ cd $GOPATH/src/github.com/cloudfoundry/bosh-cli
-$ git checkout v5.5.1
-$ vi ./vendor/github.com/cloudfoundry/config-server/types/certificate_generator.go
-
-func generateCertTemplate 함수에 아래 내용 중 365(일)을 원하는 기간만큼 수정한다.
-
-  - notAfter := now.Add(365 * 24 * time.Hour)
-
-$ ./bin/build
-$ cd out
-$ sudo cp ./bosh /usr/local/bin/bosh
-
-$ bosh -version
-```
+만약 BOSH 설치 후 1년이 지나면 인증서의 교체가 필요하다.
 
 ### <div id='3.3.3'/>3.3.3.    설치 파일 다운로드
 
 - BOSH를 설치하기 위한 deployment가 존재하지 않는다면 다운로드 받는다
 ```
-$ mkdir -p ~/workspace/paasta-5.5.4/deployment
-$ cd ~/workspace/paasta-5.5.4/deployment
-$ git clone https://github.com/PaaS-TA/paasta-deployment.git -b v5.6.1
+$ mkdir -p ~/workspace
+$ cd ~/workspace
+$ git clone https://github.com/PaaS-TA/paasta-deployment.git -b v5.6.2
 ```
 
 - paasta/deployment/paasta-deployment 이하 폴더 확인
 
 ```
-$ cd ~/workspace/paasta-5.5.4/deployment/paasta-deployment
+$ cd ~/workspace/paasta-deployment
 $ ls
 README.md  bosh  cloud-config  paasta
 ```
@@ -188,18 +157,18 @@ README.md  bosh  cloud-config  paasta
 </tr>
 <tr>
 <td>cloud-config</td>
-<td>PaaS-TA 설치를 위한 IaaS network, storage, vm 관련 설정 파일이 존재하는 폴더</td>
+<td>VM 배포를 위한 IaaS network, storage, vm 관련 설정 파일이 존재하는 폴더</td>
 </tr>
 <tr>
 <td>paasta</td>
-<td>PaaS-TA 설치를 위한 manifest 및 설치 파일이 존재하는 폴더</td>
+<td>PaaS-TA AP 설치를 위한 manifest 및 설치 파일이 존재하는 폴더</td>
 </tr>
 </table>
 
 
 ### <div id='3.3.4'/>3.3.4.    BOSH 설치 파일
 
-~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh 폴더에는 BOSH 설치를 위한 IaaS별 Shell Script 파일이 존재한다.  
+~/workspace/paasta-deployment/bosh 폴더에는 BOSH 설치를 위한 IaaS별 Shell Script 파일이 존재한다.  
 
 Shell Script 파일을 이용하여 BOSH를 설치한다.
 파일명은 deploy-{IaaS}.sh 로 만들어졌다.  
@@ -315,26 +284,6 @@ syslog_transport: "relp"				# Logsearch Protocol
 <td>cce.yml</td>
 <td>CCE 조치 적용</td>
 </tr>
-<tr>
-<td>use-offline-release.yml</td>
-<td>bosh.yml 에서 사용되는 릴리즈를 오프라인에 저장된 릴리즈로 사용</td>
-</tr>
-<tr>
-<td>use-offline-release-{IaaS}.yml</td>
-<td>{IaaS}/cpi.yml에서 사용되는 릴리즈를 오프라인에 저장된 릴리즈로 사용</td>
-</tr>
-<tr>
-<td>use-offline-release-cce.yml</td>
-<td>cce.yml에서 사용되는 릴리즈를 오프라인에 저장된 릴리즈로 사용</td>
-</tr>
-<tr>
-<td>use-offline-release-jumpbox-user.yml</td>
-<td>jumpbox-user.yml에서 사용되는 릴리즈를 오프라인에 저장된 릴리즈로 사용</td>
-</tr>
-<tr>
-<td>use-offline-release-uaa.yml</td>
-<td>uaa.yml에서 사용되는 릴리즈를 오프라인에 저장된 릴리즈로 사용</td>
-</tr>
 </table>
 
 
@@ -358,11 +307,11 @@ BOSH 설치 Option은 아래와 같다.
 </tr>   
 <tr>
 <td>-o</td>
-<td>BOSH 설치 시 적용하는 Operation 파일을 설정할 경우 사용한다. IaaS별 CPI 또는 Jumpbox-user, CredHub 등의 설정을 적용할 수 있다.</td>
+<td>BOSH 설치 시 적용하는 Operation 파일을 설정할 경우 사용한다. <br>IaaS별 CPI 또는 Jumpbox-user, CredHub 등의 설정을 적용할 수 있다.</td>
 </tr>
 <tr>
 <td>-v</td>
-<td>BOSH 설치 시 적용하는 변수 또는 Operation 파일에 변수를 설정할 경우 사용한다. Operation 파일 속성에 따라 필수 또는 선택 항목으로 나뉜다.</td>
+<td>BOSH 설치 시 적용하는 변수 또는 Operation 파일에 변수를 설정할 경우 사용한다. <br>Operation 파일 속성에 따라 필수 또는 선택 항목으로 나뉜다.</td>
 </tr>
 <tr>
 <td>-l, --var-file</td>
@@ -402,7 +351,7 @@ bosh create-env bosh.yml \
 - Shell Script 파일에 실행 권한 부여
 
 ```
-$ chmod +x ~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh/*.sh  
+$ chmod +x ~/workspace/paasta-deployment/bosh/*.sh  
 ```
 
 
@@ -410,7 +359,7 @@ $ chmod +x ~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh/*.sh
 
 - 서버 환경에 맞추어 Deploy 스크립트 파일의 설정을 수정한다.
 
-> $ vi ~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh/deploy-aws.sh
+> $ vi ~/workspace/paasta-deployment/bosh/deploy-aws.sh
 ```                     
 bosh create-env bosh.yml \                         
 	--state=aws/state.json \
@@ -426,15 +375,15 @@ bosh create-env bosh.yml \
 - BOSH 설치 Shell Script 파일 실행
 
 ```
-$ cd ~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh
+$ cd ~/workspace/paasta-deployment/bosh
 $ ./deploy-{iaas}.sh
 ```
 
 - BOSH 설치 중
 
 ```
-ubuntu@inception:~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh$ ./deploy-aws.sh
-Deployment manifest: '/home/ubuntu/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh/bosh.yml'
+ubuntu@inception:~/workspace/paasta-deployment/bosh$ ./deploy-aws.sh
+Deployment manifest: '/home/ubuntu/workspace/paasta-deployment/bosh/bosh.yml'
 Deployment state: 'aws/state.json'
 
 Started validating
@@ -460,115 +409,6 @@ Cleaning up rendered CPI jobs... Finished (00:00:00)
 
 Succeeded
 ```
-
-
-### <div id='3.3.6'/>3.3.6. BOSH 설치 - 다운로드 된 Release 파일 이용 방식
-
-- 서비스 설치에 필요한 릴리즈 파일을 다운로드 받아 Local machine의 작업 경로로 위치시킨다.  
-
-  - PaaS-TA 5.5.4 BOSH 설치 릴리즈 파일 다운로드 : [bosh.zip](https://nextcloud.paas-ta.org/index.php/s/fA2ygPwT9zpnJTY/download)
-
-```
-# 릴리즈 다운로드 파일 위치 경로 생성
-$ mkdir -p ~/workspace/paasta-5.5.4/release
-
-# 릴리즈 파일 다운로드 및 파일 경로 확인
-$ cd ~/workspace/paasta-5.5.4/release
-$ wget https://nextcloud.paas-ta.org/index.php/s/fA2ygPwT9zpnJTY/download --content-disposition
-$ unzip bosh.zip
-$ cd ~/workspace/paasta-5.5.4/release/bosh
-
-# paasta-conf-release v1.0.2 다운로드
-$ wget https://nextcloud.paas-ta.org/index.php/s/aA3wetD6PQ9KS9X/download --content-disposition
-
-# 5.5.4 릴리즈 파일 확인
-$ ls | grep bosh-271.11.0-PaaS-TA.tgz ; ls | grep bosh-271.8.0.tgz ; ls | grep bosh-aws-cpi-release-86.tgz ; ls | grep bosh-azure-cpi-release-37.4.0.tgz ; ls | grep bosh-dns-release-1.29.0.tgz ; ls | grep bosh-google-cpi-release-40.0.4.tgz ; ls | grep bosh-openstack-cpi-release-44.tgz ; ls | grep bosh-stemcell-1.34-azure-hyperv-ubuntu-bionic-go_agent.tgz ; ls | grep bosh-stemcell-1.34-openstack-kvm-ubuntu-bionic-go_agent.tgz ; ls | grep bosh-stemcell-1.34-vsphere-esxi-ubuntu-bionic-go_agent.tgz ; ls | grep bosh-vsphere-cpi-release-58.tgz ; ls | grep bpm-release-1.1.9.tgz ; ls | grep credhub-release-2.9.0.tgz ; ls | grep light-bosh-stemcell-1.34-aws-xen-hvm-ubuntu-bionic-go_agent.tgz ; ls | grep light-bosh-stemcell-1.34-google-kvm-ubuntu-bionic-go_agent.tgz ; ls | grep os-conf-release-18.tgz ; ls | grep os-conf-release-22.1.1.tgz ; ls | grep uaa-release-75.2.0.tgz ;
-
-bosh-271.11.0-PaaS-TA.tgz
-bosh-271.8.0.tgz
-bosh-aws-cpi-release-86.tgz
-bosh-azure-cpi-release-37.4.0.tgz
-bosh-dns-release-1.29.0.tgz
-bosh-google-cpi-release-40.0.4.tgz
-bosh-openstack-cpi-release-44.tgz
-bosh-stemcell-1.34-azure-hyperv-ubuntu-bionic-go_agent.tgz
-bosh-stemcell-1.34-openstack-kvm-ubuntu-bionic-go_agent.tgz
-bosh-stemcell-1.34-vsphere-esxi-ubuntu-bionic-go_agent.tgz
-bosh-vsphere-cpi-release-58.tgz
-bpm-release-1.1.9.tgz
-credhub-release-2.9.0.tgz
-light-bosh-stemcell-1.34-aws-xen-hvm-ubuntu-bionic-go_agent.tgz
-light-bosh-stemcell-1.34-google-kvm-ubuntu-bionic-go_agent.tgz
-os-conf-release-18.tgz
-os-conf-release-22.1.1.tgz
-paasta-conf-release-1.0.2.tgz
-uaa-release-75.2.0.tgz
-```
-
-
-
-- 서버 환경에 맞추어 Deploy 스크립트 파일의 설정을 수정한다.
-
-> $ vi ~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh/deploy-aws.sh
-
-
-```                     
-bosh create-env bosh.yml \                         
-	--state=aws/state.json \
-	--vars-store=aws/creds.yml \
-	-o aws/cpi.yml \
-	-o uaa.yml \
-	-o cce.yml \
-	-o credhub.yml \
-	-o jumpbox-user.yml \
-	-o use-offline-releases.yml \
-	-o use-offline-releases-aws.yml \
-	-o use-offline-releases-uaa.yml \
-	-o use-offline-releases-cce.yml \
-	-o use-offline-releases-credhub.yml \
-	-o use-offline-releases-jumpbox-user.yml \
- 	-l aws-vars.yml
-```
-
-- BOSH 설치 Shell Script 파일 실행
-
-```
-$ cd ~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh
-$ ./deploy-{iaas}.sh
-```
-
-- BOSH 설치 중
-
-```
-ubuntu@inception:~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh$ ./deploy-aws.sh
-Deployment manifest: '/home/ubuntu/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh/bosh.yml'
-Deployment state: 'aws/state.json'
-
-Started validating
-  Validating release 'bosh'... Finished (00:00:01)
-  Validating release 'bpm'... Finished (00:00:01)
-  Validating release 'bosh-aws-cpi'... Finished (00:00:00)
-  Validating release 'uaa'... Finished (00:00:03)
-  Validating release 'credhub'...
-```
-
-- BOSH 설치 완료
-
-```
-  Compiling package 'uaa_utils/90097ea98715a560867052a2ff0916ec3460aabb'... Skipped [Package already compiled] (00:00:00)
-  Compiling package 'davcli/f8a86e0b88dd22cb03dec04e42bdca86b07f79c3'... Skipped [Package already compiled] (00:00:00)
-  Updating instance 'bosh/0'... Finished (00:01:44)
-  Waiting for instance 'bosh/0' to be running... Finished (00:02:16)
-  Running the post-start scripts 'bosh/0'... Finished (00:00:13)
-Finished deploying (00:11:54)
-
-Stopping registry... Finished (00:00:00)
-Cleaning up rendered CPI jobs... Finished (00:00:00)
-
-Succeeded
-```
-
-
 
 
 ### <div id='3.3.7'/>3.3.7. BOSH 로그인
@@ -579,7 +419,7 @@ BOSH 로그인 후, BOSH CLI 명령어를 이용하여 PaaS-TA를 설치할 수 
 BOSH 로그인 명령어는 다음과 같다.  
 
 ```
-$ cd ~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh
+$ cd ~/workspace/paasta-deployment/bosh
 $ export BOSH_CA_CERT=$(bosh int ./{iaas}/creds.yml --path /director_ssl/ca)
 $ export BOSH_CLIENT=admin
 $ export BOSH_CLIENT_SECRET=$(bosh int ./{iaas}/creds.yml --path /admin_password)
@@ -590,12 +430,10 @@ $ bosh -e {director_name} env
 
 ### <div id='3.3.8'/>3.3.8. CredHub
 CredHub은 인증정보 저장소이다.  
-BOSH 설치 시 Operation 파일로 credhub.yml을 추가하였다.  
-BOSH 설치 시 credhub.yml을 적용하면, PaaS-TA 설치 시 PaaS-TA에서 사용하는 인증정보(Certificate, Password)를 CredHub에 저장한다.  
-PaaS-TA 인증정보가 필요할 때 CredHub을 사용하며, CredHub CLI를 통해 CredHub에 로그인하여 인증정보 조회, 수정, 삭제를 할 수 있다.
+BOSH 설치 시 Operation 파일로 credhub.yml을 적용하면, 이후 BOSH를 통해 생성되는 Deployments에서 사용하는 인증정보(Certificate, Password)를 CredHub에 저장한다.  
+인증정보가 필요할 때, CredHub CLI를 통해 CredHub에 로그인하여 인증정보 조회, 수정, 삭제를 할 수 있다.
 
 #### <div id='3.3.8.1'/>3.3.8.1. CredHub CLI 설치
-
 CredHub CLI는 BOSH를 설치한 Inception(설치환경)에 설치한다.
 
 ```
@@ -605,7 +443,6 @@ $ chmod +x credhub
 $ sudo mv credhub /usr/local/bin/credhub
 $ credhub --version
 ```
-
 #### <div id='3.3.8.2'/>3.3.8.2. CredHub 로그인
 CredHub에 로그인하기 위해 BOSH를 설치한 bosh-deployment 디렉터리의 creds.yml을 활용하여 로그인한다.
 
@@ -615,24 +452,15 @@ $ export CREDHUB_CLIENT=credhub-admin
 $ export CREDHUB_SECRET=$(bosh int --path /credhub_admin_client_secret {iaas}/creds.yml)
 $ export CREDHUB_CA_CERT=$(bosh int --path /credhub_tls/ca {iaas}/creds.yml)
 $ credhub login -s https://{bosh_url}:8844 --skip-tls-validation
-$ credhub find
 ```
 
-CredHub 로그인 후 find 명령어로 조회하면 비어 있는 것을 알 수 있다.  
-PaaS-TA를 설치하면 인증 정보가 저장되어 조회할 수 있다.
-
-- uaa 인증정보 조회
-
-```
-$ credhub get -n /{director}/{deployment}/uaa_ca
-```
+Credhub 기타 활용 방법은 AP 사용 가이드의 기타 CLI 가이드를 참고한다.
 
 ### <div id='3.3.9'/>3.3.9. Jumpbox
 BOSH 설치 시 Operation 파일로 jumpbox-user.yml을 추가하였다.  
 Jumpbox는 BOSH VM에 접근하기 위한 인증을 적용하게 된다.  
 인증키는 BOSH에서 자체적으로 생성하며, 인증키를 통해 BOSH VM에 접근할 수 있다.  
 BOSH VM에 이상이 있거나 상태를 체크할 때 Jumpbox를 활용하여 BOSH VM에 접근할 수 있다.  
-
 
 **💥 BOSH 설치 시 cce.yml을 추가하면 BOSH의 Jumpbox 계정의 비밀번호 기한이 90일로 설정된다.**  
 **비밀번호 만료전에 BOSH에 재 접속하여 비밀번호를 변경하여 관리해야 한다. (미 변경시 Jumpbox 계정 잠금)**
