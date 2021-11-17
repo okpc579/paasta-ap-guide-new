@@ -41,43 +41,43 @@ BOSH Deployment: [https://github.com/cloudfoundry/bosh-deployment](https://githu
 CF Deployment: [https://github.com/cloudfoundry/cf-deployment](https://github.com/cloudfoundry/cf-deployment)
 
 
-# <div id='3'/>3. PaaS-TA 5.5.4 AP 설치
-## <div id='3.1'/>3.1. Prerequisite
+# <div id='2'/>2. PaaS-TA AP 설치
+## <div id='2.1'/>2.1. Prerequisite
 
 - BOSH2 기반의 BOSH를 설치한다.
 - PaaS-TA AP 설치는 BOSH를 설치한 Inception(설치 환경)에서 작업한다.
-- PaaS-TA AP 설치를 위해 BOSH LOGIN을 진행한다. ([BOSH 로그인](../bosh/PAAS-TA_BOSH2_INSTALL_GUIDE_V5.0.md#3.3.7))
+- PaaS-TA AP 설치를 위해 BOSH LOGIN을 진행한다.
 
-## <div id='3.2'/>3.2. 설치 파일 다운로드
+## <div id='2.2'/>3.2. 설치 파일 다운로드
 - PaaS-TA AP를 설치하기 위한 deployment가 존재하지 않는다면 다운로드 받는다
 
 ```
-$ mkdir -p ~/workspace/paasta-5.5.4/deployment
-$ cd ~/workspace/paasta-5.5.4/deployment
+$ mkdir -p ~/workspace
+$ cd ~/workspace
 $ git clone https://github.com/PaaS-TA/common.git
-$ cd ~/workspace/paasta-5.5.4/deployment
-$ git clone https://github.com/PaaS-TA/paasta-deployment.git -b v5.6.1
+$ cd ~/workspace
+$ git clone https://github.com/PaaS-TA/paasta-deployment.git -b v5.6.2
 ```
 
 ## <div id='3.3'/>3.3. Stemcell 업로드
-Stemcell은 배포 시 생성되는 PaaS-TA AP VM Base OS Image이며, PaaS-TA 5.5.4 AP는 Ubuntu bionic stemcell 1.34를 기반으로 한다.  
+Stemcell은 배포 시 생성되는 PaaS-TA AP VM Base OS Image이며, paasta-deployment v5.6.2는 Ubuntu bionic stemcell 1.34를 기반으로 한다.  
 기본적인 Stemcell 업로드 명령어는 다음과 같다.  
 ```                     
 $ bosh -e ${BOSH_ENVIRONMENT} upload-stemcell {URL}
 ```
 
-PaaS-TA 5.5.4 AP는 Stemcell 업로드 스크립트를 지원하며, BOSH 로그인 후 다음 명령어를 수행하여 Stemcell을 올린다.  
+paasta-deployment는 v5.5.0 부터 Stemcell 업로드 스크립트를 지원하며, BOSH 로그인 후 다음 명령어를 수행하여 Stemcell을 올린다.  
 BOSH_ENVIRONMENT는 BOSH 설치 시 사용한 Director 명이고, CURRENT_IAAS는 배포된 환경 IaaS(aws, azure, gcp, openstack, vsphere, 그외 입력시 bosh-lite)에 맞게 입력을 한다.
 <br>(PaaS-TA AP에서 제공되는 create-bosh-login.sh을 이용하여 BOSH LOGIN시 BOSH_ENVIRONMENT와 CURRENT_IAAS는 자동입력된다.)
 
 - Stemcell 업로드 Script의 설정 수정 (BOSH_ENVIRONMENT 수정)
 
-> $ vi ~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh/upload-stemcell.sh
+> $ vi ~/workspace/paasta-deployment/bosh/upload-stemcell.sh
 ```                     
 #!/bin/bash
 STEMCELL_VERSION=1.34
-CURRENT_IAAS="${CURRENT_IAAS}"					 # IaaS Information (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 aws/azure/gcp/openstack/vsphere 입력)
-BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"			 # bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
+CURRENT_IAAS="${CURRENT_IAAS}"				# IaaS Information (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 aws/azure/gcp/openstack/vsphere/bosh-lite 입력)
+BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"			# bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
 
 if [[ ${CURRENT_IAAS} = "aws" ]]; then
         bosh -e ${BOSH_ENVIRONMENT} upload-stemcell https://storage.googleapis.com/bosh-core-stemcells/${STEMCELL_VERSION}/bosh-stemcell-${STEMCELL_VERSION}-aws-xen-hvm-ubuntu-bionic-go_agent.tgz -n
@@ -89,76 +89,24 @@ elif [[ ${CURRENT_IAAS} = "openstack" ]]; then
         bosh -e ${BOSH_ENVIRONMENT} upload-stemcell https://storage.googleapis.com/bosh-core-stemcells/${STEMCELL_VERSION}/bosh-stemcell-${STEMCELL_VERSION}-openstack-kvm-ubuntu-bionic-go_agent.tgz -n
 elif [[ ${CURRENT_IAAS} = "vsphere" ]]; then
         bosh -e ${BOSH_ENVIRONMENT} upload-stemcell https://storage.googleapis.com/bosh-core-stemcells/${STEMCELL_VERSION}/bosh-stemcell-${STEMCELL_VERSION}-vsphere-esxi-ubuntu-bionic-go_agent.tgz -n
-else
+elif [[ ${CURRENT_IAAS} = "bosh-lite" ]]; then
         bosh -e ${BOSH_ENVIRONMENT} upload-stemcell https://storage.googleapis.com/bosh-core-stemcells/${STEMCELL_VERSION}/bosh-stemcell-${STEMCELL_VERSION}-warden-boshlite-ubuntu-bionic-go_agent.tgz -n
+else
+        echo "plz check CURRENT_IAAS"
 fi
+
 ```
 
 - Stemcell 업로드 Script 실행
 
 ```
-$ cd ~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh
+$ cd ~/workspace/paasta-deployment/bosh
 $ source upload-stemcell.sh
 ```
 
-- 만약 오프라인 환경에 저장한 스템셀을 사용 하고 싶다면, Stemcell을 저장 한 뒤 경로를 설정 후 Stemcell 업로드 Script를 실행한다.
-
-```  
-# 폴더 생성 및 이동
-$ mkdir -p ~/workspace/paasta-5.5.4/stemcell/paasta
-$ cd ~/workspace/paasta-5.5.4/stemcell/paasta/
-
-# Stemcell 다운로드
-## AWS
-$ wget https://storage.googleapis.com/bosh-core-stemcells/1.34/bosh-stemcell-1.34-aws-xen-hvm-ubuntu-bionic-go_agent.tgz
-
-## AZURE
-$ wget https://storage.googleapis.com/bosh-core-stemcells/1.34/bosh-stemcell-1.34-azure-hyperv-ubuntu-bionic-go_agent.tgz
-
-## GCP
-$ wget https://storage.googleapis.com/bosh-core-stemcells/1.34/bosh-stemcell-1.34-google-kvm-ubuntu-bionic-go_agent.tgz
-
-## OPENSTACK
-$ wget https://storage.googleapis.com/bosh-core-stemcells/1.34/bosh-stemcell-1.34-openstack-kvm-ubuntu-bionic-go_agent.tgz
-
-## VSHPERE
-$ wget https://storage.googleapis.com/bosh-core-stemcells/1.34/bosh-stemcell-1.34-vsphere-esxi-ubuntu-bionic-go_agent.tgz
-```
-
-- 오프라인 Stemcell 업로드 Script의 설정 수정 (BOSH_ENVIRONMENT, STEMCELL_DIR 수정)
-
-> $ vi ~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh/offline-upload-stemcell.sh
-```                     
-#!/bin/bash
-STEMCELL_VERSION=1.34
-STEMCELL_DIR="<STEMCELL_DIR>" # (e.g. /home/ubuntu/workspace/paasta-#.#/stemcell/paasta)
-CURRENT_IAAS="${CURRENT_IAAS}"					 # IaaS Information (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 aws/azure/gcp/openstack/vsphere 입력)
-BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"			 # bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
-
-if [[ ${CURRENT_IAAS} = "aws" ]]; then
-        bosh -e ${BOSH_ENVIRONMENT} upload-stemcell ${STEMCELL_DIR}/bosh-stemcell-${STEMCELL_VERSION}-aws-xen-hvm-ubuntu-bionic-go_agent.tgz -n
-elif [[ ${CURRENT_IAAS} = "azure" ]]; then
-        bosh -e ${BOSH_ENVIRONMENT} upload-stemcell ${STEMCELL_DIR}/bosh-stemcell-${STEMCELL_VERSION}-azure-hyperv-ubuntu-bionic-go_agent.tgz -n
-elif [[ ${CURRENT_IAAS} = "gcp" ]]; then
-        bosh -e ${BOSH_ENVIRONMENT} upload-stemcell ${STEMCELL_DIR}/bosh-stemcell-${STEMCELL_VERSION}-google-kvm-ubuntu-bionic-go_agent.tgz -n
-elif [[ ${CURRENT_IAAS} = "openstack" ]]; then
-        bosh -e ${BOSH_ENVIRONMENT} upload-stemcell ${STEMCELL_DIR}/bosh-stemcell-${STEMCELL_VERSION}-openstack-kvm-ubuntu-bionic-go_agent.tgz -n
-elif [[ ${CURRENT_IAAS} = "vsphere" ]]; then
-        bosh -e ${BOSH_ENVIRONMENT} upload-stemcell ${STEMCELL_DIR}/bosh-stemcell-${STEMCELL_VERSION}-vsphere-esxi-ubuntu-bionic-go_agent.tgz -n
-fi
-```
-
-- 오프라인 Stemcell 업로드 Script 실행
-
-```
-$ cd ~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh
-$ source offline-upload-stemcell.sh
-```
-
-
 
 ## <div id='3.4'/>3.4. Runtime Config 설정
-Runtime config는 BOSH로 배포되는 VM에 적용되는 설정이다.
+Runtime config는 BOSH로 배포되는 VM에 일괄 적용되는 설정이다.
 기본적인 Runtime Config 설정 명령어는 다음과 같다.  
 ```                     
 $ bosh -e ${BOSH_ENVIRONMENT} update-runtime-config {PATH} --name={NAME}
@@ -173,10 +121,10 @@ PaaS-TA AP에서 적용하는 Runtime Config는 다음과 같다.
 - OS Configuration Runtime Config  
   BOSH Linux OS 구성 릴리스를 이용하여 sysctl을 구성한다.  
 
-PaaS-TA 5.5.4 AP는 Runtime Config 설정 스크립트를 지원하며, BOSH 로그인 후 다음 명령어를 수행하여 Runtime Config를 설정한다.  
+paasta-deployment는 v5.5.0 부터 Runtime Config 설정 스크립트를 지원하며, BOSH 로그인 후 다음 명령어를 수행하여 Runtime Config를 설정한다.  
 
   - Runtime Config 업데이트 Script 수정 (BOSH_ENVIRONMENT 수정)
-> $ vi ~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh/update-runtime-config.sh
+> $ vi ~/workspace/paasta-deployment/bosh/update-runtime-config.sh
 ```                     
 #!/bin/bash
 
@@ -187,7 +135,7 @@ bosh -e ${BOSH_ENVIRONMENT} update-runtime-config -n --name=os-conf runtime-conf
 ```
 - Runtime Config 업데이트 Script 실행
 ```                     
-$ cd ~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh
+$ cd ~/workspace/paasta-deployment/bosh
 $ source update-runtime-config.sh
 ```
 
@@ -198,54 +146,13 @@ $ source update-runtime-config.sh
   ```
 
 
-- 만약 오프라인 환경에 저장한 릴리즈를 사용 하고 싶다면, 릴리즈를 저장 한 뒤 경로를 설정 후 update-runtime-config 업로드 Script를 실행한다.
-- [bosh-dns-release-1.27.0 다운로드](https://bosh.io/d/github.com/cloudfoundry/bosh-dns-release?v=1.29.0)
-- [os-conf-release-22.1.1 다운로드](https://bosh.io/d/github.com/cloudfoundry/os-conf-release?v=22.1.1)
-
-```  
-# 폴더 생성 및 이동
-$ mkdir -p ~/workspace/paasta-5.5.4/release/bosh
-$ cd ~/workspace/paasta-5.5.4/release/bosh
-
-# bosh-dns-release 1.29.0 다운로드
-$ wget https://bosh.io/d/github.com/cloudfoundry/bosh-dns-release?v=1.29.0 --content-disposition
-
-# os-conf 22.1.1 다운로드
-$ wget https://bosh.io/d/github.com/cloudfoundry/os-conf-release?v=22.1.1 --content-disposition
-```
-
-- 오프라인 Runtime Config 업데이트 Script 수정 (BOSH_ENVIRONMENT, RELEASE_DIR 수정)
-
-> $ vi ~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh/offline-update-runtime-config.sh
-```                     
-#!/bin/bash
-
-BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"                    # bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
-RELEASE_DIR="/home/ubuntu/workspace/paasta-5.5.4/release" # Release Directory (offline으로 릴리즈 다운받아 사용시 설정)
-
-bosh -e ${BOSH_ENVIRONMENT} update-runtime-config -n runtime-configs/dns-offline.yml \
-                -v releases_dir=${RELEASE_DIR}
-bosh -e ${BOSH_ENVIRONMENT} update-runtime-config -n --name=os-conf runtime-configs/os-conf-offline.yml \
-                -v releases_dir=${RELEASE_DIR}
-```
-
-- 오프라인 Runtime Config 업데이트 Script 실행
-
-```
-$ cd ~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh
-$ source offline-update-runtime-config.sh
-```
-
-
-
-
 ## <div id='3.5'/>3.5. Cloud Config 설정
 
-PaaS-TA AP를 설치하기 위한 IaaS 관련 Network, Storage, VM 관련 설정을 Cloud Config로 정의한다.  
-PaaS-TA AP 설치 파일을 내려받으면 ~/workspace/paasta-5.5.4/deployment/paasta-deployment/cloud-config 디렉터리 이하에 IaaS별 Cloud Config 예제를 확인할 수 있으며, 예제를 참고하여 cloud-config.yml을 IaaS에 맞게 수정한다.  
+BOSH를 통해 VM을 배포 시 IaaS 관련 Network, Storage, VM 관련 설정을 Cloud Config로 정의한다.  
+paasta-deployment 설치 파일을 내려받으면 ~/workspace/paasta-deployment/cloud-config 디렉터리 이하에 IaaS 별 Cloud Config 예제를 확인할 수 있으며, 예제를 참고하여 cloud-config.yml을 IaaS에 맞게 수정한다.  
 PaaS-TA AP 배포 전에 Cloud Config를 BOSH에 적용해야 한다.
 
-- AWS을 기준으로 한 cloud-config.yml 예제
+- AWS을 기준으로 한 [cloud-config.yml](https://github.com/PaaS-TA/paasta-deployment/blob/master/cloud-config/aws-cloud-config.yml) 예제
 
 ```
 ## azs :: 가용 영역(Availability Zone)을 정의한다.
@@ -256,21 +163,8 @@ azs:
 - cloud_properties:
     availability_zone: ap-northeast-2a
   name: z2
-- cloud_properties:
-    availability_zone: ap-northeast-2a
-  name: z3
-- cloud_properties:
-    availability_zone: ap-northeast-2a
-  name: z4
-- cloud_properties:
-    availability_zone: ap-northeast-2a
-  name: z5
-- cloud_properties:
-    availability_zone: ap-northeast-2a
-  name: z6
-- cloud_properties:
-    availability_zone: ap-northeast-2a
-  name: z7
+
+... ((생략)) ...
 
 ## compilation :: 컴파일 가상머신이 생성될 가용 영역 및 가상머신 유형 등을 정의한다.
 compilation:
@@ -280,47 +174,14 @@ compilation:
   vm_type: xlarge
   workers: 5
 
-
 ## disk_types :: 디스크 유형(Disk Type, Persistent Disk)을 정의한다.
 disk_types:
 - disk_size: 1024
   name: default
 - disk_size: 1024
   name: 1GB
-- disk_size: 2048
-  name: 2GB
-- disk_size: 5120
-  name: 5GB
-- disk_size: 8192
-  name: 8GB
-- disk_size: 10240
-  name: 10GB
-- disk_size: 20480
-  name: 20GB
-- disk_size: 30720
-  name: 30GB
-- disk_size: 51200
-  name: 50GB
-- disk_size: 102400
-  name: 100GB
-- disk_size: 512000
-  name: 500GB
-- cloud_properties:
-    type: gp2
-  disk_size: 20000
-  name: 2GB_GP2
-- cloud_properties:
-    type: gp2
-  disk_size: 50000
-  name: 5GB_GP2
-- cloud_properties:
-    type: gp2
-  disk_size: 100000
-  name: 10GB_GP2
-- cloud_properties:
-    type: gp2
-  disk_size: 500000
-  name: 50GB_GP2
+  
+... ((생략)) ...
 
 ## networks :: 네트워크(Network)를 정의한다. (AWS 경우, Subnet 및 Security Group, DNS, Gateway 등 설정)
 networks:
@@ -338,91 +199,8 @@ networks:
     - 10.0.1.2 - 10.0.1.9
     static:
     - 10.0.1.10 - 10.0.1.120
-  - az: z2
-    cloud_properties:
-      security_groups: paasta-v50-security
-      subnet: subnet-XXXXXXXXXXXXXXXXX
-    dns:
-    - 8.8.8.8
-    gateway: 10.1.41.1
-    range: 10.1.41.0/24
-    reserved:
-    - 10.1.41.1 - 10.1.41.9
-    static:
-    - 10.1.41.10 - 10.1.41.120
-  - az: z3
-    cloud_properties:
-      security_groups: paasta-v50-security
-      subnet: subnet-XXXXXXXXXXXXXXXXX
-    dns:
-    - 8.8.8.8
-    gateway: 10.2.81.1
-    range: 10.2.81.0/24
-    reserved:
-    - 10.2.81.1 - 10.2.81.9
-    static:
-    - 10.2.81.10 - 10.2.81.120
-  - az: z4
-    cloud_properties:
-      security_groups: paasta-v50-security
-      subnet: subnet-XXXXXXXXXXXXXXXXX
-    dns:
-    - 8.8.8.8
-    gateway: 10.3.121.1
-    range: 10.3.121.0/24
-    reserved:
-    - 10.3.121.1 - 10.3.121.9
-    static:
-    - 10.3.121.10 - 10.3.121.120
-  - az: z5
-    cloud_properties:
-      security_groups: paasta-v50-security
-      subnet: subnet-XXXXXXXXXXXXXXXXX
-    dns:
-    - 8.8.8.8
-    gateway: 10.4.161.1
-    range: 10.4.161.0/24
-    reserved:
-    - 10.4.161.1 - 10.4.161.9
-    static:
-    - 10.4.161.10 - 10.4.161.120
-  - az: z6
-    cloud_properties:
-      security_groups: paasta-v50-security
-      subnet: subnet-XXXXXXXXXXXXXXXXX
-    dns:
-    - 8.8.8.8
-    gateway: 10.5.201.1
-    range: 10.5.201.0/24
-    reserved:
-    - 10.5.201.1 - 10.5.201.9
-    static:
-    - 10.5.201.10 - 10.5.201.120
-  - az: z7
-    cloud_properties:
-      security_groups: paasta-v50-security
-      subnet: subnet-XXXXXXXXXXXXXXXXX
-    dns:
-    - 8.8.8.8
-    gateway: 10.6.0.1
-    range: 10.6.0.0/24
-    reserved:
-    - 10.6.0.1 - 10.6.0.9
-    static:
-    - 10.6.0.10 - 10.6.0.120
-  type: manual
 
-- name: vip
-  type: vip
-
-properties:
-  aws:
-    access_key_id: 'XXXXXXXXXXXXXXXXXXX'
-    default_key_name: aws-paasta-rnd-v50-inception.pem
-    default_security_groups:
-    - paasta-v50-security
-    region: ap-northeast-2
-    secret_access_key: 'XXXXXXXXXXXXXXXXXXXXXX'
+... ((생략)) ...
 
 ## vm_extentions :: 임의의 특정 IaaS 구성을 지정하는 가상머신 구성을 정의한다. (Security Groups 및 Load Balancers 등)
 vm_extensions:
@@ -435,17 +213,8 @@ vm_extensions:
       size: 51200
       type: gp2
   name: 50GB_ephemeral_disk
-- cloud_properties:
-    ephemeral_disk:
-      size: 102400
-      type: gp2
-  name: 100GB_ephemeral_disk
-- name: ssh-proxy-and-router-lb
-  cloud_properties:
-    ports:
-    - host: 80
-    - host: 443
-    - host: 2222
+
+... ((생략)) ...
 
 ## vm_type :: 가상머신 유형(VM Type)을 정의한다. (AWS 경우, Instance type 설정)
 vm_types:
@@ -461,108 +230,39 @@ vm_types:
       type: gp2
     instance_type: t2.small
   name: small
-- cloud_properties:
-    ephemeral_disk:
-      size: 50000
-      type: gp2
-    instance_type: t2.medium
-  name: medium
-- cloud_properties:
-    ephemeral_disk:
-      size: 50000
-      type: gp2
-    instance_type: t2.large
-  name: large
-- cloud_properties:
-    ephemeral_disk:
-      size: 50000
-      type: gp2
-    instance_type: t2.xlarge
-  name: xlarge
-- cloud_properties:
-    ephemeral_disk:
-      size: 30000
-      type: gp2
-    instance_type: t2.xlarge
-  name: small-highmem-16GB
-- cloud_properties:
-    ephemeral_disk:
-      size: 30000
-      type: gp2
-    instance_type: t2.2xlarge
-  name: large-highmem-32GB
-- cloud_properties:
-    ephemeral_disk:
-      size: 3000
-      type: gp2
-    instance_type: t2.small
-  name: service_tiny
-- cloud_properties:
-    ephemeral_disk:
-      size: 3000
-      type: gp2
-    instance_type: t2.small
-  name: service_small
-- cloud_properties:
-    ephemeral_disk:
-      size: 10000
-      type: gp2
-    instance_type: t2.small
-  name: service_medium_1CPU_2G
-- cloud_properties:
-    ephemeral_disk:
-      size: 8000
-      type: gp2
-    instance_type: t2.medium
-  name: service_medium
-- cloud_properties:
-    ephemeral_disk:
-      size: 10000
-      type: gp2
-    instance_type: t2.medium
-  name: service_medium_2G
-- cloud_properties:
-    ephemeral_disk:
-      size: 3000
-      type: gp2
-    instance_type: t2.small
-  name: portal_tiny
-- cloud_properties:
-    ephemeral_disk:
-      size: 3000
-      type: gp2
-    instance_type: t2.small
-  name: portal_small
-- cloud_properties:
-    ephemeral_disk:
-      size: 4096
-      type: gp2
-    instance_type: t2.small
-  name: portal_medium
-- cloud_properties:
-    ephemeral_disk:
-      size: 4096
-      type: gp2
-    instance_type: t2.small
-  name: portal_large
-- cloud_properties:
-    ephemeral_dist:
-      size: 4096
-      type: gp2
-    instance_type: t2.small
-  name: caas_small
-- cloud_properties:
-    ephemeral_dist:
-      size: 30000
-      type: gp2
-    instance_type: m4.xlarge
-  name: caas_small_highmem
+  
+... ((생략)) ...
 ```
+
+- AZs
+
+PaaS-TA AP에서 제공되는 Cloud Config 예제는 z1 ~ z6까지 설정되어 있다.  
+z1 ~ z3까지는 PaaS-TA AP VM이 설치되는 Zone이며, z4 ~ z6까지는 서비스가 설치되는 Zone으로 정의한다.   
+3개 단위로 설정하는 이유는 서비스 3중화를 위해서이며, 설치하는 환경에 따라 다르게 설정해도 무방하다.  
+
+- VM Types
+
+VM Type은 IaaS에서 정의된 VM Type이다.  
+
+※ 다음은 AWS에서 정의한 Instance Type이다.
+![PaaSTa_FLAVOR_Image]
+
+- Compilation
+PaaS-TA AP 및 서비스 설치 시, BOSH는 Compile 작업용 VM을 생성하여 소스를 컴파일하고, 이후 VM을 생성하여 컴파일된 파일을 대상 VM에 설치한 뒤 Compile 작업용 VM은 삭제된다. (Worker 수는 Compile VM의 수로, 많을수록 컴파일 속도가 빨라진다.)  
+
+- Disk Size
+PaaS-TA AP 및 서비스가 설치되는 VM의 Persistent Disk Size이다.
+
+- Networks
+Networks는 AZ 별 Subnet Network, DNS, Security Groups, Network ID를 정의한다.  
+보통 AZ 별로 256개의 IP를 정의할 수 있도록 Range Cider를 정의한다.
+
+<br>
 
 - Cloud Config 업데이트
 
 ```
-$ bosh -e ${BOSH_ENVIRONMENT} update-cloud-config ~/workspace/paasta-5.5.4/deployment/paasta-deployment/cloud-config/{iaas}-cloud-config.yml
+$ bosh -e ${BOSH_ENVIRONMENT} update-cloud-config ~/workspace/paasta-deployment/cloud-config/{iaas}-cloud-config.yml
 ```
 
 - Cloud Config 확인
@@ -570,33 +270,6 @@ $ bosh -e ${BOSH_ENVIRONMENT} update-cloud-config ~/workspace/paasta-5.5.4/deplo
 ```
 $ bosh -e ${BOSH_ENVIRONMENT} cloud-config  
 ```
-
-### <div id='3.5.1'/>● AZs
-
-PaaS-TA AP에서 제공되는 Cloud Config 예제는 z1 ~ z6까지 설정되어 있다.  
-z1 ~ z3까지는 PaaS-TA AP VM이 설치되는 Zone이며, z4 ~ z6까지는 서비스가 설치되는 Zone으로 정의한다.  
-3개 단위로 설정하는 이유는 서비스 3중화를 위해서이다.  
-PaaS-TA AP를 설치하는 환경에 따라 다르게 설정해도 된다.
-
-### <div id='3.5.2'/>● VM Types
-
-VM Type은 IaaS에서 정의된 VM Type이다.  
-
-※ 다음은 AWS에서 정의한 Instance Type이다.
-![PaaSTa_FLAVOR_Image]
-
-### <div id='3.5.3'/>● Compilation
-PaaS-TA AP 및 서비스 설치 시, PaaS-TA AP는 Compile VM을 생성하여 소스를 컴파일하고, PaaS-TA AP VM을 생성하여 컴파일된 파일을 대상 VM에 설치한다.  
-컴파일이 끝난 VM은 삭제된다.
-
-※ Worker 수는 Compile VM의 수로, 많을수록 컴파일 속도가 빨라진다.
-
-### <div id='3.5.4'/>● Disk Size
-PaaS-TA AP 및 서비스가 설치되는 VM의 Persistent Disk Size이다.
-
-### <div id='3.5.5'/>● Networks
-Networks는 AZ 별 Subnet Network, DNS, Security Groups, Network ID를 정의한다.  
-보통 AZ 별로 256개의 IP를 정의할 수 있도록 Range Cider를 정의한다.
 
 
 ## <div id='3.6'/>3.6.  PaaS-TA AP 설치 파일
@@ -631,73 +304,36 @@ common_vars.yml파일과 vars.yml을 수정하여 PaaS-TA AP 설치시 적용하
 ### <div id='3.6.1'/>3.6.1. PaaS-TA AP 설치 Variable File
 
 
-#### <div id='3.6.1.1'/>● common_vars.yml
-~/workspace/paasta-5.5.4/deployment/common 폴더에 있는 common_vars.yml PaaS-TA AP 및 각종 Service 설치시 적용하는 공통 변수 설정 파일이 존재한다.  
-PaaS-TA 5.5.4 AP 설치할 때는 system_domain, paasta_admin_username, paasta_admin_password, uaa_client_admin_secret, uaa_client_portal_secret, paasta_database_port의 값을 변경 하여 설치 할 수 있다.
+- common_vars.yml
+~/workspace/common 폴더에 있는 [common_vars.yml](https://github.com/PaaS-TA/common/blob/master/common_vars.yml)에는 PaaS-TA AP 및 각종 Service 설치 시 적용하는 공통 변수 설정 파일이 존재한다.  
+PaaS-TA AP를 설치 시 system_domain, paasta_admin_username, paasta_admin_password, paasta_database_port, paasta_cc_db_password, paasta_uaa_db_password, uaa_client_admin_secret, uaa_client_portal_secret의 값을 변경 하여 설치 할 수 있다.
 
-> $ vi ~/workspace/paasta-5.5.4/deployment/common/common_vars.yml
+> $ vi ~/workspace/common/common_vars.yml
 
 ```
-# BOSH INFO
-bosh_ip: "10.0.1.6"                        		# BOSH IP
-bosh_url: "http://10.0.1.6"				# BOSH URL (e.g. "https://00.000.0.0")
-bosh_client_admin_id: "admin"				# BOSH Client Admin ID
-bosh_client_admin_secret: "ert7na4jpewsczt"		# BOSH Client Admin Secret('echo $(bosh int ~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh/{iaas}/creds.yml —path /admin_password))' 명령어를 통해 확인 가능)
-bosh_director_port: 25555				# BOSH Director Port
-bosh_oauth_port: 8443					# BOSH OAuth Port
-bosh_version: 271.2					# BOSH version('bosh env' 명령어를 통해 확인 가능, on-demand service용, e.g. "271.2")
+... ((생략)) ...
 
-# PAAS-TA INFO
 system_domain: "xx.xx.xxx.xxx.nip.io"			# Domain (nip.io를 사용하는 경우 HAProxy Public IP와 동일)
 paasta_admin_username: "admin"				# PaaS-TA Admin Username
 paasta_admin_password: "admin"				# PaaS-TA Admin Password
-paasta_nats_ip: "10.0.1.121"				# PaaS-TA Nats IP(e.g. "10.0.1.121")
-paasta_nats_port: 4222					# PaaS-TA Nats Port(e.g. "4222")
-paasta_nats_user: "nats"				# PaaS-TA Nats User(e.g. "nats")
-paasta_nats_password: "7EZB5ZkMLMqT73h2JtxPqO"		# PaaS-TA Nats Password (CredHub 로그인후 'credhub get -n /micro-bosh/paasta/nats_password' 명령어를 통해 확인 가능)
-paasta_nats_private_networks_name: "default"		# PaaS-TA Nats 의 Network 이름
-paasta_database_ips: "10.0.1.123"			# PaaS-TA Database IP(e.g. "10.0.1.123")
 paasta_database_port: 5524				# PaaS-TA Database Port (e.g. 5524(postgresql)/13307(mysql)) -- Do Not Use "3306"&"13306" in mysql
-paasta_cc_db_id: "cloud_controller"			# CCDB ID(e.g. "cloud_controller")
 paasta_cc_db_password: "cc_admin"			# CCDB Password(e.g. "cc_admin")
-paasta_uaa_db_id: "uaa"					# UAADB ID(e.g. "uaa")
 paasta_uaa_db_password: "uaa_admin"			# UAADB Password(e.g. "uaa_admin")
-paasta_api_version: "v3"
-
-
-# UAAC INFO
-uaa_client_admin_id: "admin"				# UAAC Admin Client Admin ID
 uaa_client_admin_secret: "admin-secret"			# UAAC Admin Client에 접근하기 위한 Secret 변수
 uaa_client_portal_secret: "clientsecret"		# UAAC Portal Client에 접근하기 위한 Secret 변수
 
-# Monitoring INFO
-metric_url: "10.0.161.101"				# Monitoring InfluxDB IP
-elasticsearch_master_ip: "10.0.1.146"			# Logsearch의 elasticsearch master IP
-elasticsearch_master_port: 9200				# Logsearch의 elasticsearch master Port
-syslog_address: "10.0.121.100"            		# Logsearch의 ls-router IP
-syslog_port: "2514"                          		# Logsearch의 ls-router Port
-syslog_transport: "relp"                        	# Logsearch Protocol
-saas_monitoring_url: "xx.xx.xxx.xxx"	   		# Pinpoint HAProxy WEBUI의 Public IP
-monitoring_api_url: "xx.xx.xxx.xxx"        		# Monitoring-WEB의 Public IP
-
-### Portal INFO
-portal_web_user_ip: "52.78.88.252"
-portal_web_user_url: "http://portal-web-user.xx.xx.xxx.xxx.nip.io"
-
-### ETC INFO
-abacus_url: "http://abacus.xx.xx.xxx.xxx.nip.io"	# Abacus URL (e.g. "http://abacus.xxx.xxx.xxx.xxx.nip.io")
+... ((생략)) ...
 ```
 
-#### <div id='3.6.1.2'/>● vars.yml
+- vars.yml
 
 PaaS-TA AP를 설치 할 때 적용되는 각종 변수값이나 배포 될 VM의 설정을 변경할 수 있다.
 
-> $ vi ~/workspace/paasta-5.5.4/deployment/paasta-deployment/paasta/vars.yml
+> $ vi ~/workspace/paasta-deployment/paasta/vars.yml
 ```
 # SERVICE VARIABLE
 deployment_name: "paasta"			# Deployment Name
 network_name: "default"				# VM에 별도로 지정하지 않는 Default Network Name
-releases_dir: "/home/ubuntu/workspace/paasta-5.5.4/release"	# Release Directory (offline으로 릴리즈 다운받아 사용시 설정)
 haproxy_public_ip: "52.78.32.153"		# HAProxy IP (Public IP, HAproxy VM 배포시 필요)
 haproxy_public_network_name: "vip"		# PaaS-TA Public Network Name
 haproxy_private_network_name: "private" 	# PaaS-TA Private Network Name (vSphere use-haproxy-public-network-vsphere.yml 포함 배포시 설정 필요)
@@ -832,8 +468,7 @@ haproxy_vm_type: "minimal"		# HAProxy VM 종류
 haproxy_network: "default"		# HAProxy 네트워크
 ```
 
-
-#### <div id='3.6.1.3'/>● PaaS-TA AP 그외 Variable List
+이하는 UAA와 관련된 변수의 설명이다.
 
 1. uaa_login_logout_redirect_parameter_whitelist : 포탈 페이지 이동을 위한 UAA Redirect Whitelist 등록 변수
 
@@ -841,20 +476,22 @@ haproxy_network: "default"		# HAProxy 네트워크
 ex) uaa_login_logout_redirect_parameter_whitelist=["{PaaS-TA PORTAL URI}","{PaaS-TA PORTAL URI}/callback","{PaaS-TA PORTAL URI}/login"]
 ```
 
-> nip.io : 임시 도메인, 기본 DNS 서버가 8.8.8.8로 설정되어야 한다.  
-> nip.io를 사용하지 않고 DNS를 사용할 경우, Whitelist에 포탈 DNS, 포탈 DNS/callback, 포탈 DNS/login 세 개의 항목을 등록해야 한다.
-
-2. uaa_login_links_passwd : UAA 페이지에서 Reset Password 버튼 클릭 시 이동하는 링크 주소
-
-<img src="https://github.com/PaaS-TA/Guide-5.0-Ravioli/blob/master/install-guide/paasta/images/uaa-login.png" width="663px">
-
-3. uaa_login_links_signup : UAA 페이지에서 Create Account 버튼 클릭 시 이동하는 링크 주소
-
-<img src="https://github.com/PaaS-TA/Guide-5.0-Ravioli/blob/master/install-guide/paasta/images/uaa-login-2.png">
+2. uaa_login_links_signup : UAA 페이지에서 Create Account 버튼 클릭 시 이동하는 링크 주소
 
 ```
 ex) uaa_login_links_signup="{PaaS-TA PORTAL URI}/createuser"
 ```
+
+<img src="https://github.com/PaaS-TA/Guide-5.0-Ravioli/blob/master/install-guide/paasta/images/uaa-login-2.png">
+
+3. uaa_login_links_passwd : UAA 페이지에서 Reset Password 버튼 클릭 시 이동하는 링크 주소
+
+```
+ex) uaa_login_links_passwd="{PaaS-TA PORTAL URI}/resetpasswd"
+```
+
+<img src="https://github.com/PaaS-TA/Guide-5.0-Ravioli/blob/master/install-guide/paasta/images/uaa-login.png" width="663px">
+
 
 4. uaa_client_portal_redirect_uri : UAAC Portal Client의 Redirect URI 지정 변수, 포탈에서 로그인 버튼 클릭 후 UAA 페이지에서 로그인 성공 시 이동하는 URI
 
@@ -866,8 +503,6 @@ ex) uaa_client_portal_redirect_uri="{PaaS-TA PORTAL URI}, {PaaS-TA PORTAL URI}/c
 
 ```
 ex) uaa_client_portal_secret="portalclient"
-
-  paasta-portal deploy 파일 안의 portal_client_secret의 값과 일치해야 한다.
 ```
 
 ![PaaSTa_VALUE_Image]
@@ -878,32 +513,7 @@ ex) uaa_client_portal_secret="portalclient"
 ex) uaa_client_admin_secret="admin-secret"
 ```
 
-- uaa_client_admin_secret 적용 확인 방법
-
-  (1) PaaS-TA AP 설치 후 아래 명령어 실행한다.
-
-  ```
-  $ uaac target
-  $ uaac token client get
-  ```
-
-  (2) 설정한 secret 값으로 admin token을 얻을 경우 아래와 같은 결과가 출력된다.
-
-  ```
-  ubuntu@inception:~$ uaac target
-
-  Target: https://uaa.54.180.53.80.nip.io
-  Context: admin, from client admin
-
-  ubuntu@inception:~$ uaac token client get
-  Client ID:  admin
-  Client secret:  ************
-
-  Successfully fetched token via client credentials grant.
-  Target: https://uaa.54.180.53.80.nip.io
-  Context: admin, from client admin
-  ```
-
+PaaS-TA AP를 설치 후 UAAC의 활용 방법은 사용 가이드에 기타 CLI를 참고한다.
 
 
 ### <div id='3.6.2'/>3.6.2. PaaS-TA AP Operation 파일
@@ -915,28 +525,12 @@ ex) uaa_client_admin_secret="admin-secret"
 <td>요구사항</td>
 </tr>
 <tr>
-<td>operations/use-compiled-releases.yml</td>
-<td>인터넷이 연결된 환경에서 컴파일 없이 빠른 설치가 가능하다.</td>
-<td></td>
-</tr>
-<tr>
-<td>operations/use-offline-releases.yml</td>
-<td>paasta-deployment.yml에서 사용되는 릴리즈를 오프라인에 저장된 릴리즈로 설치가 가능하다.</td>
-<td>Requires value :  -v releases_dir</td>
-</tr>
-<tr>
 <td>operations/use-postgres.yml</td>
 <td>Database를 Postgres로 설치 <br>
     - use-postgres.yml 미적용 시 MySQL 설치  <br>
     - 3.5 이전 버전에서 Migration 시 필수  
 </td>
 <td></td>
-</tr>
-<tr>
-<td>operations/use-offline-releases-postgres.yml</td>
-<td>use-postgres.yml에서 사용되는 릴리즈를 오프라인에 저장된 릴리즈로 설치가 가능하다.</td>
-<td>Requires: use-postgres.yml<br>
-    Requires value :  -v releases_dir</td>
 </tr>
 <tr>
 <td>operations/use-haproxy.yml</td>
@@ -971,25 +565,13 @@ ex) uaa_client_admin_secret="admin-secret"
 </td>
 </tr>
 <tr>
-<td>operations/use-offline-releases-haproxy.yml</td>
-<td>use-haproxy.yml에서 사용되는 릴리즈를 오프라인에 저장된 릴리즈로 설치가 가능하다.</td>
-<td>Requires: use-haproxy.yml<br>
-    Requires value :  -v releases_dir</td>
-</tr>
-<tr>
 <td>operations/cce.yml</td>
 <td>CCE 조치를 적용하여 설치한다.</td>
 <td></td>
 </tr>
-<tr>
-<td>operations/use-offline-releases-cce.yml</td>
-<td>cce.yml에서 사용되는 릴리즈를 오프라인에 저장된 릴리즈로 설치가 가능하다.</td>
-<td>Requires: cce.yml<br>
-    Requires value :  -v releases_dir</td>
-</tr>
 </table>
 
-### <div id='3.6.3'/>3.6.3.   PaaS-TA AP설치 Shell Scripts
+### <div id='3.6.3'/>3.6.3.   PaaS-TA AP 설치 Shell Scripts
 paasta-deployment.yml 파일은 PaaS-TA AP를 배포하는 Manifest 파일이며, PaaS-TA AP VM에 대한 설치 정의를 하게 된다.  
 PaaS-TA AP VM 중 singleton-blobstore, database의 AZs(zone)을 변경하면 조직(ORG), 스페이스(SPACE), 앱(APP) 정보가 모두 삭제된다.
 
