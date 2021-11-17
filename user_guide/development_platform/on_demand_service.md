@@ -1384,13 +1384,12 @@ Deployment manifest 에는 sotfware를 설치 하기 위해서 어떤 Stemcell (
 3. 서비스 배포 성공후 브로커 등록 및 서비스 신청시 해당 서비스 instance 생성 확인, 생성 완료시 On-Demand-Service 설치 완료
 
 
-
-[On-Demand_Image_01]:/deployment-guide/images/on-demand/1.png
-[On-Demand_Image_02]:/deployment-guide/images/on-demand/2.png
-[On-Demand_Image_03]:/deployment-guide/images/on-demand/3.png
-[On-Demand_Image_04]:/deployment-guide/images/on-demand/4.png
-[On-Demand_Image_05]:/deployment-guide/images/on-demand/5.png
-[On-Demand_Image_06]:/deployment-guide/images/on-demand/6.png
+[On-Demand_Image_01]:./images/on-demand/1.png
+[On-Demand_Image_02]:./images/on-demand/2.png
+[On-Demand_Image_03]:./images/on-demand/3.png
+[On-Demand_Image_04]:./images/on-demand/4.png
+[On-Demand_Image_05]:./images/on-demand/5.png
+[On-Demand_Image_06]:./images/on-demand/6.png
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > On-Demand Service 개발
