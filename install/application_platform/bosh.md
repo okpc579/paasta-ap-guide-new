@@ -15,18 +15,17 @@
 　　2.3.3. [설치 파일 다운로드](#2.3.3)  
 　　2.3.4. [BOSH 설치](#2.3.4)  
 　　　2.3.4.1. [BOSH 설치 Variable 파일](#2.3.4.1)  
-　　　2.3.4.2. [BOSH 설치 Option 파일](#3.3.4.2)  
-　　　2.3.4.3. [BOSH 설치 Shell Script](#3.3.4.3)  
-　　　　● [deploy-aws.sh](#3.3.4.3.1)  
-　　　　● [deploy-openstack.sh](#3.3.4.3.2)  
-　　2.3.5. [BOSH 설치](#3.3.5)  
-　　2.3.6. [BOSH 설치 - 다운로드 된 Release 파일 이용 방식](#3.3.6)  
-　　2.3.7. [BOSH 로그인](#3.3.7)  
-　　2.3.8. [CredHub](#3.3.8)  
-　　　2.3.8.1. [CredHub CLI 설치](#3.3.8.1)  
-　　　2.3.8.2. [CredHub 로그인](#3.3.8.2)  
-　　2.3.9. [Jumpbox](#3.3.9)  
-　　2.3.10. [BOSH 로그인 생성 스크립트](#3.3.10)
+　　　2.3.4.2. [BOSH 설치 Option 파일](#2.3.4.2)  
+　　　2.3.4.3. [BOSH 설치 Shell Script](#2.3.4.3)  
+　　2.3.5. [BOSH 설치](#2.3.5)  
+　　2.3.6. [BOSH 로그인](#2.3.6)  
+3. [BOSH Option 파일 활용](#3) 
+　3.1. [CredHub](#3.1)   
+　　3.1.1. [CredHub CLI 설치](#3.1.1)  
+　　3.1.2. [CredHub 로그인](#3.1.2)  
+　3.1. [Jumpbox](#3.1)   
+4. [기타](#4) 
+　4.1. [BOSH 로그인 생성 스크립트](#4.1)   
 
 ## Executive Summary
 
@@ -34,13 +33,13 @@
 
 # <div id='1'/>1. 문서 개요
 
-## <div id='1.1'/>● 목적
+## <div id='1.1'/>1.1. 목적
 클라우드 환경에 서비스 시스템을 배포할 수 있는 BOSH는 릴리즈 엔지니어링, 개발, 소프트웨어 라이프사이클 관리를 통합한 오픈소스 프로젝트로 본 문서에서는 Inception 환경(설치환경)에서 BOSH를 설치하는 데 그 목적이 있다.
 
-## <div id='1.2'/>● 범위
+## <div id='1.2'/>1.2. 범위
 본 문서는 Linux 환경(Ubuntu 18.04)을 기준으로 BOSH 설치를 위한 패키지와 라이브러리를 설치 및 구성하고, 이를 이용하여 BOSH를 설치하는 것을 기준으로 작성하였다.
 
-## <div id='1.3'/>● 참고 자료
+## <div id='1.3'/>1.3. 참고 자료
 
 본 문서는 Cloud Foundry의 BOSH Document와 Cloud Foundry Document를 참고로 작성하였다.
 
@@ -51,15 +50,15 @@ BOSH Deployment: [https://github.com/cloudfoundry/bosh-deployment](https://githu
 Cloud Foundry Document: [https://docs.cloudfoundry.org](https://docs.cloudfoundry.org)
 
 
-# <div id='3'/>3. BOSH 설치 환경 구성 및 설치
+# <div id='2'/>2. BOSH 설치 환경 구성 및 설치
 
-## <div id='3.1'/>3.1. BOSH 설치 절차
+## <div id='2.1'/>2.1. BOSH 설치 절차
 Inception(PaaS-TA 설치 환경)은 BOSH 및 PaaS-TA를 설치하기 위한 설치 환경으로, VM 또는 서버 장비이다.  
 OS Version은 Ubuntu 18.04를 기준으로 한다. IaaS에서 수동으로 Inception VM을 생성해야 한다.
 
 Inception VM은 Ubuntu 18.04, vCPU 2 Core, Memory 4G, Disk 100G 이상을 권고한다.
 
-## <div id='3.2'/>3.2.  Inception 서버 구성
+## <div id='2.2'/>2.2.  Inception 서버 구성
 
 Inception 서버는 BOSH 및 PaaS-TA를 설치하기 위해 필요한 패키지 및 라이브러리, Manifest 파일 등의 환경을 가지고 있는 배포 작업 실행 서버이다.  
 Inception 서버는 외부 통신이 가능해야 한다.
@@ -71,9 +70,9 @@ BOSH 및 PaaS-TA 설치를 위해 Inception 서버에 구성해야 할 컴포넌
 - BOSH Deployment: BOSH 설치를 위한 manifest deployment  
 - PaaS-TA Deployment : PaaS-TA 설치를 위한 manifest deployment
 
-## <div id='3.3'/>3.3.  BOSH 설치
+## <div id='2.3'/>2.3.  BOSH 설치
 
-### <div id='3.3.1'/>3.3.1.    Prerequisite
+### <div id='2.3.1'/>2.3.1.    Prerequisite
 
 - 본 설치 가이드는 Ubuntu 18.04 버전을 기준으로 한다.  
 
@@ -97,7 +96,7 @@ BOSH 및 PaaS-TA 설치를 위해 Inception 서버에 구성해야 할 컴포넌
   ![Security_Group_ICMP_Image1](./images/security-group-icmp-01.png)  
 
 
-### <div id='3.3.2'/>3.3.2.    BOSH CLI 및 Dependency 설치
+### <div id='2.3.2'/>2.3.2.    BOSH CLI 및 Dependency 설치
 
 - BOSH Dependency 설치 (Ubuntu 18.04)
 
@@ -129,7 +128,7 @@ BOSH 인증서는 BOSH 내부 Component 간의 통신 시 필요한 certificate�
 만약 BOSH 설치 후 1년이 지나면 인증서의 갱신이 필요하다.  
 certificate 갱신 가이드 영상 - [링크](https://youtu.be/zn8VO-fHAFE?t=1994)
 
-### <div id='3.3.3'/>3.3.3.    설치 파일 다운로드
+### <div id='2.3.3'/>2.3.3.    설치 파일 다운로드
 
 - BOSH를 설치하기 위한 deployment가 존재하지 않는다면 다운로드 받는다
 ```
@@ -162,7 +161,7 @@ README.md  bosh  cloud-config  paasta
 </table>
 
 
-### <div id='3.3.4'/>3.3.4.    BOSH 설치 파일
+### <div id='2.3.4'/>2.3.4.    BOSH 설치 파일
 
 ~/workspace/paasta-deployment/bosh 폴더에는 BOSH 설치를 위한 IaaS별 Shell Script 파일이 존재한다.  
 
@@ -196,7 +195,7 @@ Shell Script 파일을 이용하여 BOSH를 설치한다.
 
 
 
-#### <div id='3.3.4.1'/>3.3.4.1. BOSH 설치 Variable File 설정
+#### <div id='2.3.4.1'/>2.3.4.1. BOSH 설치 Variable File 설정
 
 BOSH를 설치하는 IaaS환경에 맞춰서 Variable File을 설정한다.
 
@@ -259,9 +258,9 @@ syslog_transport: "relp"				# Logsearch Protocol
 
 
 
-#### <div id='3.3.4.2'/>3.3.4.2. BOSH 설치 Option 파일
+#### <div id='2.3.4.2'/>2.3.4.2. BOSH 설치 Option 파일
 
-##### <div id='3.3.4.2.1'/>● BOSH Optional 파일
+설치 Shell Script에서 사용되는 Option 파일은 다음과 같다.  
 
 <table>
 <tr>
@@ -278,7 +277,7 @@ syslog_transport: "relp"				# Logsearch Protocol
 </tr>
 <tr>
 <td>jumpbox-user.yml</td>
-<td>Jumpbox-user 적용</td>
+<td>BOSH Jumpbox user 생성</td>
 </tr>
 <tr>
 <td>cce.yml</td>
@@ -288,7 +287,7 @@ syslog_transport: "relp"				# Logsearch Protocol
 
 
 
-#### <div id='3.3.4.3'/>3.3.4.3. BOSH 설치 Shell Script
+#### <div id='2.3.4.3'/>2.3.4.3. BOSH 설치 Shell Script
 
 BOSH 설치 명령어는 create-env로 시작한다.  
 Shell이 아닌 BOSH Command로 실행 가능하며, 설치하는 IaaS 환경에 따라 Option이 달라진다.  
@@ -361,7 +360,7 @@ $ chmod +x ~/workspace/paasta-deployment/bosh/*.sh
 ```
 
 
-### <div id='3.3.5'/>3.3.5. BOSH 설치
+### <div id='2.3.5'/>2.3.5. BOSH 설치
 
 Variable File과 설치 Shell Script의 설정이 완료되었으면 다음 명령어를 이용하여 설치를 진행한다.  
 
@@ -389,7 +388,7 @@ Succeeded
 ```
 
 
-### <div id='3.3.7'/>3.3.7. BOSH 로그인
+### <div id='2.3.6'/>2.3.6. BOSH 로그인
 BOSH가 설치되면, BOSH 설치 폴더 이하 {iaas}/creds.yml 파일이 생성된다.  
 creds.yml은 BOSH 인증정보를 가지고 있으며, creds.yml을 활용하여 BOSH에 로그인한다.  
 BOSH 로그인 후, BOSH CLI 명령어를 이용하여 PaaS-TA를 설치할 수 있다.  
@@ -405,13 +404,13 @@ $ bosh alias-env {director_name} -e {bosh_url} --ca-cert <(bosh int ./{iaas}/cre
 $ bosh -e {director_name} env
 ```
 
-
-### <div id='3.3.8'/>3.3.8. CredHub
+## <div id='3'/> 3. BOSH Option 파일 활용
+### <div id='3.1'/>3.1. CredHub
 CredHub은 인증정보 저장소이다.  
 BOSH 설치 시 Operation 파일로 credhub.yml을 적용하면, 이후 BOSH를 통해 생성되는 Deployments에서 사용하는 인증정보(Certificate, Password)를 CredHub에 저장한다.  
 인증정보가 필요할 때, CredHub CLI를 통해 CredHub에 로그인하여 인증정보 조회, 수정, 삭제를 할 수 있다.
 
-#### <div id='3.3.8.1'/>3.3.8.1. CredHub CLI 설치
+#### <div id='3.1.1'/>3.1.1 CredHub CLI 설치
 CredHub CLI는 BOSH를 설치한 Inception(설치환경)에 설치한다.
 
 ```
@@ -421,7 +420,7 @@ $ chmod +x credhub
 $ sudo mv credhub /usr/local/bin/credhub
 $ credhub --version
 ```
-#### <div id='3.3.8.2'/>3.3.8.2. CredHub 로그인
+#### <div id='3.1.2'/>3.1.2. CredHub 로그인
 CredHub에 로그인하기 위해 BOSH를 설치한 bosh-deployment 디렉터리의 creds.yml을 활용하여 로그인한다.
 
 ```
@@ -434,10 +433,9 @@ $ credhub login -s https://{bosh_url}:8844 --skip-tls-validation
 
 Credhub 기타 활용 방법은 AP 사용 가이드의 기타 CLI 가이드를 참고한다.
 
-### <div id='3.3.9'/>3.3.9. Jumpbox
-BOSH 설치 시 Operation 파일로 jumpbox-user.yml을 추가하였다.  
-Jumpbox는 BOSH VM에 접근하기 위한 인증을 적용하게 된다.  
-인증키는 BOSH에서 자체적으로 생성하며, 인증키를 통해 BOSH VM에 접근할 수 있다.  
+### <div id='3.2'/>3.2. Jumpbox
+BOSH 설치 시 Operation 파일로 jumpbox-user.yml을 적용하면, BOSH VM에 Jumpbox user가 생성되어 BOSH VM에 접근할 수 있다.
+접근하기 위한 인증키는 BOSH에서 자체적으로 생성하며, 인증키를 통해 BOSH VM에 접근할 수 있다.  
 BOSH VM에 이상이 있거나 상태를 체크할 때 Jumpbox를 활용하여 BOSH VM에 접근할 수 있다.  
 
 **💥 BOSH 설치 시 cce.yml을 추가하면 BOSH의 Jumpbox 계정의 비밀번호 기한이 90일로 설정된다.**  
@@ -466,8 +464,8 @@ bosh/0:~$
 
 
 
-
-### <div id='3.3.10'/>3.3.10. BOSH 로그인 생성 스크립트
+## <div id='4'/>4. 기타
+### <div id='4.1'/>4.1. BOSH 로그인 생성 스크립트
 
 PaaS-TA 5.5부터 BOSH 로그인을 하는 스크립트의 생성을 지원한다.
 해당 스크립트의 BOSH_DEPLOYMENT_PATH, CURRENT_IAAS, BOSH_IP, BOSH_CLIENT_ADMIN_ID, BOSH_ENVIRONMENT, BOSH_LOGIN_FILE_PATH, BOSH_LOGIN_FILE_NAME를 BOSH 환경과 스크립트를 저장하고 싶은 위치로 변경 후 실행한다.
