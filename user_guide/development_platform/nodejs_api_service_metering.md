@@ -2145,7 +2145,7 @@ API 연동 샘플 애플리케이션의 url을 통해 웹 브라우저에서 접
 [다운로드](https://paas-ta.kr/data/packages/2.0/PaaSTA-Metering.zip)
 
 
-[Development_Guide_Nodejs_Image01]:images/nodejs/2-0-0.png
+[Development_Guide_Nodejs_Image01]:./images/nodejs/2-0-0.png
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Node.js API Service Metering 개발
