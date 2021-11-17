@@ -506,8 +506,6 @@ ex) uaa_client_portal_redirect_uri="{PaaS-TA PORTAL URI}, {PaaS-TA PORTAL URI}/c
 ex) uaa_client_portal_secret="portalclient"
 ```
 
-![PaaSTa_VALUE_Image]
-
 6. uaa_client_admin_secret : UAAC Admin Client에 접근하기 위한 Secret 변수
 
 ```
@@ -904,7 +902,6 @@ Select an org (or press enter to skip):
 [PaaSTa_FLAVOR_Image_2]:https://github.com/PaaS-TA/Guide/blob/monitoring-5.1/install-guide/paasta-monitoring/images/flavor_openstack.png?raw=true
 [PaaSTa_UAA_LOGIN_Image]:https://github.com/PaaS-TA/Guide-5.0-Ravioli/blob/master/install-guide/paasta/images/uaa-login.png?raw=true
 [PaaSTa_UAA_LOGIN_Image2]:https://raw.githubusercontent.com/PaaS-TA/Guide-5.0-Ravioli/master/install-guide/paasta/images/uaa-login-2.png
-[PaaSTa_VALUE_Image]:https://github.com/PaaS-TA/Guide-5.0-Ravioli/blob/master/install-guide/paasta/images/paasta-value.png?raw=true
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Install](../README.md) > PaaS-TA AP
