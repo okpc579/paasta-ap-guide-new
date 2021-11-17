@@ -12,12 +12,12 @@
 　2.3. [Stemcell 업로드](#2.3)  
 　2.4. [Runtime Config 설정](#2.4)  
 　2.5. [Cloud Config 설정](#2.5)  
-　3.6. [PaaS-TA AP 설치 파일](#3.6)  
-　　3.6.1. [PaaS-TA AP 설치 Variable 파일](#3.6.1)    
-　　3.6.2. [PaaS-TA AP Operation 파일](#3.6.2)  
-　　3.6.3. [PaaS-TA AP 설치 Shell Scripts](#3.6.3)  
-　3.7. [PaaS-TA AP 설치](#3.7)  
-　3.8. [PaaS-TA AP 로그인](#3.8)   
+　2.6. [PaaS-TA AP 설치 파일](#2.6)  
+　　2.6.1. [PaaS-TA AP 설치 Variable 파일](#2.6.1)    
+　　2.6.2. [PaaS-TA AP Operation 파일](#2.6.2)  
+　　2.6.3. [PaaS-TA AP 설치 Shell Scripts](#2.6.3)  
+　2.7. [PaaS-TA AP 설치](#2.7)  
+　2.8. [PaaS-TA AP 로그인](#2.8)   
 
 # <div id='1'/>1.  문서 개요
 
@@ -48,7 +48,7 @@ CF Deployment: [https://github.com/cloudfoundry/cf-deployment](https://github.co
 - PaaS-TA AP 설치는 BOSH를 설치한 Inception(설치 환경)에서 작업한다.
 - PaaS-TA AP 설치를 위해 BOSH LOGIN을 진행한다.
 
-## <div id='2.2'/>3.2. 설치 파일 다운로드
+## <div id='2.2'/>2.2. 설치 파일 다운로드
 - PaaS-TA AP를 설치하기 위한 deployment가 존재하지 않는다면 다운로드 받는다
 
 ```
@@ -59,7 +59,7 @@ $ cd ~/workspace
 $ git clone https://github.com/PaaS-TA/paasta-deployment.git -b v5.6.2
 ```
 
-## <div id='3.3'/>3.3. Stemcell 업로드
+## <div id='2.3'/>2.3. Stemcell 업로드
 Stemcell은 배포 시 생성되는 PaaS-TA AP VM Base OS Image이다.  
 paasta-deployment v5.6.2는 Ubuntu bionic stemcell 1.34을 기반으로 한다.  
 기본적인 Stemcell 업로드 명령어는 다음과 같다.  
@@ -106,7 +106,7 @@ $ source upload-stemcell.sh
 ```
 
 
-## <div id='3.4'/>3.4. Runtime Config 설정
+## <div id='2.4'/>2.4. Runtime Config 설정
 Runtime config는 BOSH로 배포되는 VM에 일괄 적용되는 설정이다.
 기본적인 Runtime Config 설정 명령어는 다음과 같다.  
 ```                     
@@ -147,7 +147,7 @@ $ source update-runtime-config.sh
   ```
 
 
-## <div id='3.5'/>3.5. Cloud Config 설정
+## <div id='2.5'/>2.5. Cloud Config 설정
 
 BOSH를 통해 VM을 배포 시 IaaS 관련 Network, Storage, VM 관련 설정을 Cloud Config로 정의한다.  
 paasta-deployment 설치 파일을 내려받으면 ~/workspace/paasta-deployment/cloud-config 디렉터리 이하에 IaaS 별 Cloud Config 예제를 확인할 수 있으며, 예제를 참고하여 cloud-config.yml을 IaaS에 맞게 수정한다.  
@@ -273,7 +273,7 @@ $ bosh -e ${BOSH_ENVIRONMENT} cloud-config
 ```
 
 
-## <div id='3.6'/>3.6.  PaaS-TA AP 설치 파일
+## <div id='2.6'/>2.6.  PaaS-TA AP 설치 파일
 
 common_vars.yml파일과 vars.yml을 수정하여 PaaS-TA AP 설치시 적용하는 변수를 설정할 수 있다.
 
@@ -302,7 +302,7 @@ common_vars.yml파일과 vars.yml을 수정하여 PaaS-TA AP 설치시 적용하
 
 
 
-### <div id='3.6.1'/>3.6.1. PaaS-TA AP 설치 Variable File
+### <div id='2.6.1'/>2.6.1. PaaS-TA AP 설치 Variable File
 
 
 - common_vars.yml  
@@ -516,7 +516,7 @@ ex) uaa_client_admin_secret="admin-secret"
 PaaS-TA AP를 설치 후 UAAC의 활용 방법은 사용 가이드에 기타 CLI를 참고한다.
 
 
-### <div id='3.6.2'/>3.6.2. PaaS-TA AP Operation 파일
+### <div id='2.6.2'/>2.6.2. PaaS-TA AP Operation 파일
 
 <table>
 <tr>
@@ -571,7 +571,7 @@ PaaS-TA AP를 설치 후 UAAC의 활용 방법은 사용 가이드에 기타 CLI
 </tr>
 </table>
 
-### <div id='3.6.3'/>3.6.3.   PaaS-TA AP 설치 Shell Scripts
+### <div id='2.6.3'/>2.6.3.   PaaS-TA AP 설치 Shell Scripts
 paasta-deployment.yml 파일은 PaaS-TA AP를 배포하는 Manifest 파일이며, PaaS-TA AP VM에 대한 설치 정의를 하게 된다.  
 이미 설치된 PaaS-TA AP의 재배포 시, singleton-blobstore, database의 AZs(zone)을 변경하면 조직(ORG), 공간(SPACE), 앱(APP) 정보가 모두 삭제된다.
 
@@ -652,7 +652,7 @@ $ chmod +x ~/workspace/paasta-deployment/paasta/*.sh
 
 
 
-## <div id='3.7'/>3.7.  PaaS-TA AP 설치
+## <div id='2.7'/>2.7.  PaaS-TA AP 설치
 - 서버 환경에 맞추어 common_vars.yml와 vars.yml를 수정 한 뒤, Deploy 스크립트 파일의 설정을 수정한다.
 
 ```
@@ -729,7 +729,7 @@ Succeeded
 ```
 
 
-## <div id='3.8'/>3.8.  PaaS-TA AP 로그인
+## <div id='2.8'/>2.8.  PaaS-TA AP 로그인
 
 CF CLI를 설치하고 PaaS-TA AP에 로그인한다.  
 CF CLI는 v6과 v7중 선택해서 설치를 한다.  
