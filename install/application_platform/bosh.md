@@ -499,12 +499,12 @@ PaaS-TA 5.5부터 BOSH 로그인을 하는 스크립트의 생성을 지원한�
 ```
 #!/bin/bash
 
-BOSH_DEPLOYMENT_PATH="<BOSH_DEPLOYMENT_PATH>" # (e.g. ~/workspace/paasta-deployment/bosh)
-CURRENT_IAAS="aws"						# (e.g. aws/azure/gcp/openstack/vsphere/bosh-lite)
-BOSH_IP="10.0.1.6"						# (e.g. 10.0.1.6)
+BOSH_DEPLOYMENT_PATH="<BOSH_DEPLOYMENT_PATH>" 	# (e.g. ~/workspace/paasta-deployment/bosh)
+CURRENT_IAAS="aws"				# (e.g. aws/azure/gcp/openstack/vsphere/bosh-lite)
+BOSH_IP="10.0.1.6"				# (e.g. 10.0.1.6)
 BOSH_CLIENT_ADMIN_ID="admin"			# (e.g. admin)
 BOSH_ENVIRONMENT="micro-bosh"			# (e.g. micro-bosh)
-BOSH_LOGIN_FILE_PATH="/home/ubuntu/.env"			# (e.g. /home/ubuntu/.env)
+BOSH_LOGIN_FILE_PATH="/home/ubuntu/.env"	# (e.g. /home/ubuntu/.env)
 BOSH_LOGIN_FILE_NAME="micro-bosh-login-env"	# (e.g. micro-bosh-login-env)
 
 mkdir -p ${BOSH_LOGIN_FILE_PATH}
