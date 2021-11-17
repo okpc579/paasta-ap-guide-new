@@ -16,7 +16,7 @@
   2.6. [서비스 설치 확인](#2.6)  
   2.7. [Portal SSH 설치](#2.7)  
 
-3. [PaaS-TA Portal 운영](#3)  
+3. [PaaS-TA AP Portal 운영](#3)  
   3.1. [사용자의 조직 생성 Flag 활성화](#3.1)  
   3.2. [사용자포탈 UAA 페이지 오류](#3.2)  
   3.3. [운영자포탈 유저 페이지 조회 오류](#3.3)  
@@ -298,7 +298,7 @@ $ cf push
 ```
 
 
-## <div id="3"/>3. PaaS-TA Portal 운영
+## <div id="3"/>3. PaaS-TA AP Portal 운영
 
 ### <div id="3.1"/> 3.1. 사용자의 조직 생성 Flag 활성화
 
@@ -314,7 +314,7 @@ OK
 Feature user_org_creation Enabled.
 ```
 
-### <div id="3.2"/> 3.2. 사용자포탈 UAA페이지 오류
+### <div id="3.2"/> 3.2. 사용자포탈 UAA 페이지 오류
 >![paas-ta-portal-31]
 1. uaac portalclient가 등록이 되어있지 않다면 해당 화면과 같이 redirect오류가 발생한다.
 2. uaac client add를 통해 potalclient를 추가시켜주어야 한다.
