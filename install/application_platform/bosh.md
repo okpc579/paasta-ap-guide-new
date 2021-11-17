@@ -19,12 +19,12 @@
 　　　2.3.4.3. [BOSH 설치 Shell Script](#2.3.4.3)  
 　　2.3.5. [BOSH 설치](#2.3.5)  
 　　2.3.6. [BOSH 로그인](#2.3.6)  
-3. [BOSH Option 파일 활용](#3) 
+3. [BOSH Option 파일 활용](#3)  
 　3.1. [CredHub](#3.1)   
 　　3.1.1. [CredHub CLI 설치](#3.1.1)  
 　　3.1.2. [CredHub 로그인](#3.1.2)  
 　3.1. [Jumpbox](#3.1)   
-4. [기타](#4) 
+4. [기타](#4)  
 　4.1. [BOSH 로그인 생성 스크립트](#4.1)   
 
 ## Executive Summary
