@@ -60,7 +60,8 @@ $ git clone https://github.com/PaaS-TA/paasta-deployment.git -b v5.6.2
 ```
 
 ## <div id='3.3'/>3.3. Stemcell 업로드
-Stemcell은 배포 시 생성되는 PaaS-TA AP VM Base OS Image이며, paasta-deployment v5.6.2는 Ubuntu bionic stemcell 1.34를 기반으로 한다.  
+Stemcell은 배포 시 생성되는 PaaS-TA AP VM Base OS Image이다.  
+paasta-deployment v5.6.2는 Ubuntu bionic stemcell 1.34을 기반으로 한다.  
 기본적인 Stemcell 업로드 명령어는 다음과 같다.  
 ```                     
 $ bosh -e ${BOSH_ENVIRONMENT} upload-stemcell {URL}
