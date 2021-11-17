@@ -804,12 +804,7 @@ OK
 Select an org (or press enter to skip):
 ```
 
-[PaaSTa_BOSH_Use_Guide_Image1]:https://github.com/PaaS-TA/Guide-5.0-Ravioli/blob/master/install-guide/paasta/images/bosh1.png?raw=true
-[PaaSTa_BOSH_Use_Guide_Image2]:./images/bosh2-1.png
-[PaaSTa_FLAVOR_Image]:https://github.com/PaaS-TA/Guide-5.0-Ravioli/blob/master/install-guide/paasta/images/aws-vmtype.PNG?raw=true
-[PaaSTa_FLAVOR_Image_2]:https://github.com/PaaS-TA/Guide/blob/monitoring-5.1/install-guide/paasta-monitoring/images/flavor_openstack.png?raw=true
-[PaaSTa_UAA_LOGIN_Image]:https://github.com/PaaS-TA/Guide-5.0-Ravioli/blob/master/install-guide/paasta/images/uaa-login.png?raw=true
-[PaaSTa_UAA_LOGIN_Image2]:https://raw.githubusercontent.com/PaaS-TA/Guide-5.0-Ravioli/master/install-guide/paasta/images/uaa-login-2.png
+[PaaSTa_FLAVOR_Image]:./images/ap/aws-vmtype.png
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Install](../README.md) > PaaS-TA AP
