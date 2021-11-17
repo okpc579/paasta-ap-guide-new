@@ -7,7 +7,7 @@
   1.2. [범위](#1.2)  
   1.3. [참고자료](#1.3)  
 
-2. [PaaS-TA Portal 설치](#2)  
+2. [PaaS-TA AP Portal API 설치](#2)  
   2.1. [Prerequisite](#2.1)   
   2.2. [Stemcell 확인](#2.2)    
   2.3. [Deployment 다운로드](#2.3)   
@@ -15,7 +15,7 @@
   2.5. [서비스 설치](#2.5)    
   2.6. [서비스 설치 확인](#2.6)  
 
-3. [PaaS-TA Portal 운영](#3)  
+3. [PaaS-TA AP Portal 운영](#3)  
   3.1. [사용자의 조직 생성 Flag 활성화](#3.1)  
   3.2. [사용자포탈 UAA 페이지 오류](#3.2)  
   3.3. [운영자포탈 유저 페이지 조회 오류](#3.3)  
@@ -27,33 +27,28 @@
 ## <div id="1"/> 1. 문서 개요
 ### <div id="1.1"/> 1.1. 목적
 
-본 문서(PaaS-TA Portal Release 설치 가이드)는 전자정부표준프레임워크 기반의 PaaS-TA에서 제공되는 PaaS-TA Portal Release를 Bosh2.0을 이용하여 설치 하는 방법을 기술하였다.
-PaaS-TA 3.5 버전부터는 Bosh2.0 기반으로 deploy를 진행하며 내부 네트워크는 link를 적용시켜 자동으로 Ip가 할당이 된다. 기존 Bosh1.0 기반으로 설치를 원할경우에는 PaaS-TA 3.1 이하 버전의 문서를 참고한다.
+본 문서(PaaS-TA AP Portal API 설치 가이드)는 PaaS-TA AP Portal API를 BOSH를 이용하여 설치 하는 방법을 기술하였다.
 
 ### <div id="1.2"/> 1.2. 범위
-설치 범위는 PaaS-TA Portal Release를 검증하기 위한 기본 설치를 기준으로 작성하였다.
+설치 범위는 PaaS-TA AP Portal을 검증하기 위한 Portal API 기본 설치를 기준으로 작성하였다.
 
 
 ### <div id="1.3"/> 1.3. 참고자료
 [**http://bosh.io/docs**](http://bosh.io/docs)  
 [**http://docs.cloudfoundry.org/**](http://docs.cloudfoundry.org/)
 
-## <div id="2"/> 2. PaaS-TA Portal 설치
+## <div id="2"/> 2. PaaS-TA AP Portal API 설치
 
 ### <div id="2.1"/> 2.1. Prerequisite  
 본 설치 가이드는 Linux 환경에서 설치하는 것을 기준으로 하였다.
 서비스팩 설치를 위해서는 먼저 BOSH CLI v2 가 설치 되어 있어야 하고 BOSH 에 로그인이 되어 있어야 한다.<br>
 BOSH CLI v2 가 설치 되어 있지 않을 경우 먼저 BOSH2.0 설치 가이드 문서를 참고 하여 BOSH CLI v2를 설치를 하고 사용법을 숙지 해야 한다.<br>
 
-- BOSH2.0 사용자 가이드
-
-  - [BOSH2 사용자 가이드](../../install-guide/bosh/PAAS-TA_BOSH2_INSTALL_GUIDE_V5.0.md)<br>
-  - [BOSH CLI V2 사용자 가이드](https://github.com/PaaS-TA/Guide-4.0-ROTELLE/blob/master/Use-Guide/Bosh/PaaS-TA_BOSH_CLI_V2_사용자_가이드v1.0.md)
-
 
 ### <div id="2.2"/> 2.2. Stemcell 확인
 
-Stemcell 목록을 확인하여 서비스 설치에 필요한 Stemcell이 업로드 되어 있는 것을 확인한다.  (PaaS-TA 5.5.4 과 동일 stemcell 사용)
+Stemcell 목록을 확인하여 서비스 설치에 필요한 Stemcell이 업로드 되어 있는 것을 확인한다.  
+본 가이드의 Stemcell은 ubuntu-bionic 1.34를 사용한다.  
 
 > $ bosh -e ${BOSH_ENVIRONMENT} stemcells
 
@@ -70,11 +65,18 @@ bosh-openstack-kvm-ubuntu-bionic-go_agent  1.34      ubuntu-bionic  -    ce507ae
 Succeeded
 ```
 
+만약 해당 Stemcell이 업로드 되어 있지 않다면 [bosh.io 스템셀](https://bosh.io/stemcells/) 에서 해당되는 IaaS환경과 버전에 해당되는 스템셀 링크를 복사 후 다음과 같은 명령어를 실행한다.
+
+```
+# Stemcell 업로드 명령어 예제
+bosh -e ${BOSH_ENVIRONMENT} upload-stemcell https://storage.googleapis.com/bosh-core-stemcells/${STEMCELL_VERSION}/bosh-stemcell-${STEMCELL_VERSION}-openstack-kvm-ubuntu-bionic-go_agent.tgz -n
+```
+
 ### <div id="2.3"/> 2.3. Deployment 다운로드  
 
 서비스 설치에 필요한 Deployment를 Git Repository에서 받아 서비스 설치 작업 경로로 위치시킨다.  
 
-- Portal Deployment Git Repository URL : https://github.com/PaaS-TA/portal-deployment/tree/v5.2.1
+- Portal Deployment Git Repository URL : https://github.com/PaaS-TA/portal-deployment/tree/v5.2.2
 
 ```
 # Deployment 다운로드 파일 위치 경로 생성 및 설치 경로 이동
@@ -82,13 +84,13 @@ $ mkdir -p ~/workspace
 $ cd ~/workspace
 
 # Deployment 파일 다운로드
-$ git clone https://github.com/PaaS-TA/portal-deployment.git -b v5.2.1
+$ git clone https://github.com/PaaS-TA/portal-deployment.git -b v5.2.2
 ```
 
 ### <div id="2.4"/> 2.4. Deployment 파일 수정
 
 BOSH Deployment manifest는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다.
-Deployment 파일에서 사용하는 network, vm_type, disk_type 등은 Cloud config를 활용하고, 활용 방법은 BOSH 2.0 가이드를 참고한다.   
+Deployment 파일에서 사용하는 network, vm_type, disk_type 등은 Cloud config를 활용하고, 활용 방법은 PaaS-TA AP 설치 가이드를 참고한다.   
 
 - Cloud config 설정 내용을 확인한다.   
 
@@ -153,28 +155,15 @@ Succeeded
 ```
 
 - common_vars.yml을 서버 환경에 맞게 수정한다.
-- Portal-API에서 사용하는 변수는 system_domain, paasta_admin_username, paasta_admin_password, paasta_database_ips, paasta_database_port, paasta_database_type, paasta_database_driver_class, paasta_cc_db_id, paasta_cc_db_password, paasta_uaa_db_id, paasta_uaa_db_password, uaa_client_admin_id, uaa_client_admin_secret, monitoring_api_url, portal_web_user_url이다.
+- PaaS-TA AP Portal API에서 사용하는 변수는 system_domain, paasta_admin_username, paasta_admin_password, paasta_database_ips, paasta_database_port, paasta_database_type, paasta_database_driver_class, paasta_cc_db_id, paasta_cc_db_password, paasta_uaa_db_id, paasta_uaa_db_password, uaa_client_admin_id, uaa_client_admin_secret, monitoring_api_url, portal_web_user_url이다.
 
 > $ vi ~/workspace/common/common_vars.yml
 ```
-# BOSH INFO
-bosh_ip: "10.0.1.6"				# BOSH IP
-bosh_url: "https://10.0.1.6"			# BOSH URL (e.g. "https://00.000.0.0")
-bosh_client_admin_id: "admin"			# BOSH Client Admin ID
-bosh_client_admin_secret: "ert7na4jpew"		# BOSH Client Admin Secret('echo $(bosh int ~/workspace/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
-bosh_director_port: 25555			# BOSH director port
-bosh_oauth_port: 8443				# BOSH oauth port
-bosh_version: 271.2				# BOSH version('bosh env' 명령어를 통해 확인 가능, on-demand service용, e.g. "271.2")
+... ((생략)) ...
 
-# PAAS-TA INFO
 system_domain: "61.252.53.246.nip.io"		# Domain (nip.io를 사용하는 경우 HAProxy Public IP와 동일)
 paasta_admin_username: "admin"			# PaaS-TA Admin Username
 paasta_admin_password: "admin"			# PaaS-TA Admin Password
-paasta_nats_ip: "10.0.1.121"
-paasta_nats_port: 4222
-paasta_nats_user: "nats"
-paasta_nats_password: "7EZB5ZkMLMqT7"		# PaaS-TA Nats Password (CredHub 로그인후 'credhub get -n /micro-bosh/paasta/nats_password' 명령어를 통해 확인 가능)
-paasta_nats_private_networks_name: "default"	# PaaS-TA Nats 의 Network 이름
 paasta_database_ips: "10.0.1.123"		# PaaS-TA Database IP (e.g. "10.0.1.123")
 paasta_database_port: 5524			# PaaS-TA Database Port (e.g. 5524(postgresql)/13307(mysql)) -- Do Not Use "3306"&"13306" in mysql
 paasta_database_type: "postgresql"		# PaaS-TA Database Type (e.g. "postgresql" or "mysql")
@@ -183,30 +172,12 @@ paasta_cc_db_id: "cloud_controller"		# CCDB ID (e.g. "cloud_controller")
 paasta_cc_db_password: "cc_admin"		# CCDB Password (e.g. "cc_admin")
 paasta_uaa_db_id: "uaa"				# UAADB ID (e.g. "uaa")
 paasta_uaa_db_password: "uaa_admin"		# UAADB Password (e.g. "uaa_admin")
-paasta_api_version: "v3"
-
-# UAAC INFO
 uaa_client_admin_id: "admin"			# UAAC Admin Client Admin ID
 uaa_client_admin_secret: "admin-secret"		# UAAC Admin Client에 접근하기 위한 Secret 변수
-uaa_client_portal_secret: "clientsecret"	# UAAC Portal Client에 접근하기 위한 Secret 변수
-
-# Monitoring INFO
-metric_url: "10.0.161.101"			# Monitoring InfluxDB IP
-elasticsearch_master_ip: "10.0.1.146"           # Logsearch의 elasticsearch master IP
-elasticsearch_master_port: 9200                 # Logsearch의 elasticsearch master Port
-syslog_address: "10.0.121.100"			# Logsearch의 ls-router IP
-syslog_port: "2514"				# Logsearch의 ls-router Port
-syslog_transport: "relp"			# Logsearch Protocol
-saas_monitoring_url: "61.252.53.248"		# Pinpoint HAProxy WEBUI의 Public IP
 monitoring_api_url: "61.252.53.241"		# Monitoring-WEB의 Public IP
-
-### Portal INFO
-portal_web_user_ip: "52.78.88.252"
 portal_web_user_url: "http://portal-web-user.52.78.88.252.nip.io"
 
-### ETC INFO
-abacus_url: "http://abacus.61.252.53.248.nip.io"	# abacus url (e.g. "http://abacus.xxx.xxx.xxx.xxx.nip.io")
-
+... ((생략)) ...
 ```
 
 
@@ -356,7 +327,7 @@ paas-ta-portal-storage-api/2940366a-8294-4509-a9c0-811c8140663a   running       
 Succeeded
 ```
 
-## <div id="3"/>3. PaaS-TA Portal 운영
+## <div id="3"/>3. PaaS-TA AP Portal 운영
 
 ### <div id="3.1"/> 3.1. 사용자의 조직 생성 Flag 활성화
 
