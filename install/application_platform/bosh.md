@@ -210,7 +210,6 @@ bosh_client_admin_id: "admin"				# Bosh Client Admin ID
 private_cidr: "10.0.1.0/24"				# Private IP Range
 private_gw: "10.0.1.1"					# Private IP Gateway
 bosh_url: "10.0.1.6"					# Private IP
-releases_dir: "/home/ubuntu/workspace/paasta-5.5.4/release"	# Release Directory (offline으로 릴리즈 다운받아 사용시 설정)
 director_name: "micro-bosh"				# BOSH Director Name
 access_key_id: "XXXXXXXXXXXXXXX"			# AWS Access Key
 secret_access_key: "XXXXXXXXXXXXX"			# AWS Secret Key
@@ -233,7 +232,6 @@ syslog_transport: "relp"				# Logsearch Protocol
 ```
 # BOSH VARIABLE
 bosh_client_admin_id: "admin"				# Bosh Client Admin ID
-releases_dir: "/home/ubuntu/workspace/paasta-5.5.4/release"	# Release Directory (offline으로 릴리즈 다운받아 사용시 설정)
 director_name: "micro-bosh"				# BOSH Director Name
 private_cidr: "10.0.1.0/24"				# Private IP Range
 private_gw: "10.0.1.1"					# Private IP Gateway
@@ -447,7 +445,7 @@ $ credhub --version
 CredHub에 로그인하기 위해 BOSH를 설치한 bosh-deployment 디렉터리의 creds.yml을 활용하여 로그인한다.
 
 ```
-$ cd ~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh
+$ cd ~/workspace/paasta-deployment/bosh
 $ export CREDHUB_CLIENT=credhub-admin
 $ export CREDHUB_SECRET=$(bosh int --path /credhub_admin_client_secret {iaas}/creds.yml)
 $ export CREDHUB_CA_CERT=$(bosh int --path /credhub_tls/ca {iaas}/creds.yml)
@@ -466,17 +464,17 @@ BOSH VM에 이상이 있거나 상태를 체크할 때 Jumpbox를 활용하여 B
 **비밀번호 만료전에 BOSH에 재 접속하여 비밀번호를 변경하여 관리해야 한다. (미 변경시 Jumpbox 계정 잠금)**
 
 ```
-$ cd ~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh
+$ cd ~/workspace/paasta-deployment/bosh
 $ bosh int {iaas}/creds.yml --path /jumpbox_ssh/private_key > jumpbox.key
 $ chmod 600 jumpbox.key
 $ ssh jumpbox@{bosh_url} -i jumpbox.key
 ```
 
 ```
-ubuntu@inception:~/workspace/paasta-5.5/deployment/paasta-deployment/bosh$ ssh jumpbox@10.0.1.6 -i jumpbox.key
+ubuntu@inception:~/workspace/paasta-deployment/bosh$ ssh jumpbox@10.0.1.6 -i jumpbox.key
 Unauthorized use is strictly prohibited. All access and activity
 is subject to logging and monitoring.
-Welcome to Ubuntu 16.04.6 LTS (GNU/Linux 4.15.0-54-generic x86_64)
+Welcome to Ubuntu 18.04.6 LTS (GNU/Linux 4.15.0-54-generic x86_64)
 
  * Documentation:  https://help.ubuntu.com
  * Management:     https://landscape.canonical.com
@@ -496,12 +494,12 @@ PaaS-TA 5.5부터 BOSH 로그인을 하는 스크립트의 생성을 지원한�
 
 - BOSH Login 생성 Script의 설정 수정
 
-> vi ~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh/create-bosh-login.sh
+> vi ~/workspace/paasta-deployment/bosh/create-bosh-login.sh
 
 ```
 #!/bin/bash
 
-BOSH_DEPLOYMENT_PATH="~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh" # (e.g. ~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh)
+BOSH_DEPLOYMENT_PATH="~/workspace/paasta-deployment/bosh" # (e.g. ~/workspace/paasta-deployment/bosh)
 CURRENT_IAAS="aws"				# (e.g. aws/azure/gcp/openstack/vsphere/bosh-lite)
 BOSH_IP="10.0.1.6"				# (e.g. 10.0.1.6)
 BOSH_CLIENT_ADMIN_ID="admin"			# (e.g. admin)
@@ -527,7 +525,7 @@ credhub login -s https://'${BOSH_IP}':8844 --skip-tls-validation
 - BOSH Login 생성 Script 실행
 
 ```
-$ cd ~/workspace/paasta-5.5.4/deployment/paasta-deployment/bosh
+$ cd ~/workspace/paasta-deployment/bosh
 $ source create-bosh-login.sh
 ```
 
