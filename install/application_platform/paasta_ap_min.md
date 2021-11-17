@@ -644,7 +644,7 @@ PaaS-TA AP min 배포 시, 설치 Option을 추가해야 한다. 설치 Option�
 - AWS 환경 4vm 설치 시
 
 ```
-$ vi ~/workspace/paasta-deployment/paasta/deploy-aws-4vms.sh
+$ vi ~/workspace/paasta-deployment-min/paasta/deploy-aws-4vms.sh
 
 BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"                   # bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
 
@@ -662,7 +662,7 @@ bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy min-paasta-deployment.yml \	# Pa
 - AWS 환경 7vm 설치 시
 
 ```
-$ vi ~/workspace/paasta-deployment/paasta/deploy-aws-7vms.sh
+$ vi ~/workspace/paasta-deployment-min/paasta/deploy-aws-7vms.sh
 
 BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"                   # bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
 
@@ -683,7 +683,7 @@ bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy min-paasta-deployment.yml \	# Pa
 - Openstack 환경 4vm 설치 시
 
 ```
-$ vi ~/workspace/paasta-deployment/paasta/deploy-openstack-4vms.sh
+$ vi ~/workspace/paasta-deployment-min/paasta/deploy-openstack-4vms.sh
 
 BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"                   # bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
 
@@ -700,7 +700,7 @@ bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy min-paasta-deployment.yml \	# Pa
 - Openstack 환경 7vm 설치 시
 
 ```
-$ vi ~/workspace/paasta-deployment/paasta/deploy-openstack-7vms.sh
+$ vi ~/workspace/paasta-deployment-min/paasta/deploy-openstack-7vms.sh
 
 BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"                   # bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
 
@@ -731,7 +731,7 @@ $ chmod +x ~/workspace/paasta-deployment-min/paasta/*.sh
 
 - 4VM 배포 시
 ```
-$ vi ~/workspace/paasta-deployment/paasta/deploy-aws-4vms.sh
+$ vi ~/workspace/paasta-deployment-min/paasta/deploy-aws-4vms.sh
 
 BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"                   # bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
 
@@ -749,7 +749,7 @@ bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy min-paasta-deployment.yml \	# Pa
 
 - 7VM 배포 시
 ```
-$ vi ~/workspace/paasta-deployment/paasta/deploy-aws-7vms.sh
+$ vi ~/workspace/paasta-deployment-min/paasta/deploy-aws-7vms.sh
 
 BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"                   # bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
 
