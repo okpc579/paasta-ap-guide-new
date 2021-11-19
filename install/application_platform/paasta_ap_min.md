@@ -162,7 +162,7 @@ $ source update-runtime-config.sh
 ## <div id='2.5'/>2.5. Cloud Config 설정
 
 BOSH를 통해 VM을 배포 시 IaaS 관련 Network, Storage, VM 관련 설정을 Cloud Config로 정의한다.  
-paasta-deployment 설치 파일을 내려받으면 ~/workspace/paasta-deployment/cloud-config 디렉터리 이하에 IaaS 별 Cloud Config 예제를 확인할 수 있으며, 예제를 참고하여 cloud-config.yml을 IaaS에 맞게 수정한다.  
+paasta-deployment 설치 파일을 내려받으면 ~/workspace/paasta-deployment-min/cloud-config 디렉터리 이하에 IaaS 별 Cloud Config 예제를 확인할 수 있으며, 예제를 참고하여 cloud-config.yml을 IaaS에 맞게 수정한다.  
 PaaS-TA AP 배포 전에 Cloud Config를 BOSH에 적용해야 한다.
 
 - AWS을 기준으로 한 [cloud-config.yml](https://github.com/PaaS-TA/paasta-deployment/blob/master/cloud-config/aws-cloud-config.yml) 예제
@@ -278,7 +278,7 @@ Networks는 AZ 별 Subnet Network, DNS, Security Groups, Network ID를 정의한
 - Cloud Config 업데이트
 
 ```
-$ bosh -e ${BOSH_ENVIRONMENT} update-cloud-config ~/workspace/paasta-deployment/cloud-config/{iaas}-cloud-config.yml
+$ bosh -e ${BOSH_ENVIRONMENT} update-cloud-config ~/workspace/paasta-deployment-min/cloud-config/{iaas}-cloud-config.yml
 ```
 
 - Cloud Config 확인
