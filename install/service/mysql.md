@@ -17,7 +17,7 @@
   
 3. [MySQL 연동 Sample Web App 설명](#3)  
   3.1. [서비스 브로커 등록](#3.1)  
-  3.2. [Sample Web App 구조](#3.2)  
+  3.2. [Sample Web App 다운로드](#3.2)  
   3.3. [PaaS-TA에서 서비스 신청](#3.3)  
   3.4. [Sample Web App 배포 및 MySQL바인드 확인](#3.4)  
   
