@@ -25,8 +25,7 @@
 ## <div id="1"/> 1. 문서 개요
 
 ### <div id="1.1"/>1.1. 목적
-본 문서(GlusterFS 서비스팩 설치 가이드)는 전자정부 표준 프레임워크 기반의 PaaS-TA에서 제공되는 서비스팩인 GlusterFS 서비스팩을 Bosh를 이용하여 설치 하는 방법과 PaaS-TA의 SaaS 형태로 제공하는 Application 에서GlusterFS 서비스를 사용하는 방법을 기술하였다.
-PaaS-TA 3.5 버전부터는 Bosh2.0 기반으로 deploy를 진행하며 기존 Bosh1.0 기반으로 설치를 원할경우에는 PaaS-TA 3.1 이하 버전의 문서를 참고한다.
+본 문서(GlusterFS 서비스팩 설치 가이드)는 PaaS-TA에서 제공되는 서비스팩인 GlusterFS 서비스팩을 Bosh를 이용하여 설치 하는 방법을 기술하였다.  
 
 ### <div id="1.2"/> 1.2. 범위
 설치 범위는 GlusterFS 서비스팩을 검증하기 위한 기본 설치를 기준으로 작성하였다.
@@ -40,19 +39,22 @@ Cloud Foundry Document: [https://docs.cloudfoundry.org](https://docs.cloudfoundr
 
 ### <div id="2.1"/> 2.1. Prerequisite  
 
-본 설치 가이드는 Linux 환경에서 설치하는 것을 기준으로 하였다. 서비스 설치를 위해서는 BOSH 2.0과 PaaS-TA 5.0 이상, PaaS-TA 포털이 설치되어 있어야 한다. 
+본 설치 가이드는 Linux 환경에서 설치하는 것을 기준으로 하였다.  
+서비스팩 설치를 위해서는 먼저 BOSH CLI v2 가 설치 되어 있어야 하고 BOSH 에 로그인이 되어 있어야 한다.  
+BOSH CLI v2 가 설치 되어 있지 않을 경우 먼저 BOSH2.0 설치 가이드 문서를 참고 하여 BOSH CLI v2를 설치를 하고 사용법을 숙지 해야 한다.  
 
 ### <div id="2.2"/> 2.2. Stemcell 확인
 
-Stemcell 목록을 확인하여 서비스 설치에 필요한 Stemcell이 업로드 되어 있는 것을 확인한다.  (PaaS-TA 5.5.2 과 동일 stemcell 사용)
+Stemcell 목록을 확인하여 서비스 설치에 필요한 Stemcell이 업로드 되어 있는 것을 확인한다.  
+본 가이드의 Stemcell은 ubuntu-bionic 1.34를 사용한다.  
 
-> $ bosh -e micro-bosh stemcells
+> $ bosh -e ${BOSH_ENVIRONMENT} stemcells
 
 ```
 Using environment '10.0.1.6' as client 'admin'
 
-Name                                     Version  OS             CPI  CID  
-bosh-aws-xen-hvm-ubuntu-xenial-go_agent  621.94*  ubuntu-xenial  -    ami-0297ff649e8eea21b  
+Name                                       Version   OS             CPI  CID  
+bosh-openstack-kvm-ubuntu-bionic-go_agent  1.34      ubuntu-bionic  -    ce507ae4-aca6-4a6d-b7c7-220e3f4aaa7d
 
 (*) Currently deployed
 
@@ -61,11 +63,19 @@ bosh-aws-xen-hvm-ubuntu-xenial-go_agent  621.94*  ubuntu-xenial  -    ami-0297ff
 Succeeded
 ```
 
+만약 해당 Stemcell이 업로드 되어 있지 않다면 [bosh.io 스템셀](https://bosh.io/stemcells/) 에서 해당되는 IaaS환경과 버전에 해당되는 스템셀 링크를 복사 후 다음과 같은 명령어를 실행한다.
+
+```
+# Stemcell 업로드 명령어 예제
+bosh -e ${BOSH_ENVIRONMENT} upload-stemcell https://storage.googleapis.com/bosh-core-stemcells/${STEMCELL_VERSION}/bosh-stemcell-${STEMCELL_VERSION}-openstack-kvm-ubuntu-bionic-go_agent.tgz -n
+```
+
+
 ### <div id="2.3"/> 2.3. Deployment 다운로드  
 
 서비스 설치에 필요한 Deployment를 Git Repository에서 받아 서비스 설치 작업 경로로 위치시킨다.  
 
-- Service Deployment Git Repository URL : https://github.com/PaaS-TA/service-deployment/tree/v5.1.0
+- Service Deployment Git Repository URL : https://github.com/PaaS-TA/service-deployment/tree/v5.1.2
 
 ```
 # Deployment 다운로드 파일 위치 경로 생성 및 설치 경로 이동
@@ -73,7 +83,7 @@ $ mkdir -p ~/workspace
 $ cd ~/workspace
 
 # Deployment 파일 다운로드
-$ git clone https://github.com/PaaS-TA/service-deployment.git -b v5.1.0
+$ git clone https://github.com/PaaS-TA/service-deployment.git -b v5.1.2
 
 # common_vars.yml 파일 다운로드(common_vars.yml가 존재하지 않는다면 다운로드)
 $ git clone https://github.com/PaaS-TA/common.git
@@ -81,8 +91,8 @@ $ git clone https://github.com/PaaS-TA/common.git
 
 ### <div id="2.4"/> 2.4. Deployment 파일 수정
 
-BOSH Deployment manifest는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다.
-Deployment 파일에서 사용하는 network, vm_type, disk_type 등은 Cloud config를 활용하고, 활용 방법은 BOSH 2.0 가이드를 참고한다.   
+BOSH Deployment manifest는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다.  
+Deployment 파일에서 사용하는 network, vm_type, disk_type 등은 Cloud config를 활용하고, 활용 방법은 PaaS-TA AP 설치 가이드를 참고한다.  
 
 - Cloud config 설정 내용을 확인한다.   
 
@@ -151,55 +161,13 @@ Succeeded
 
 > $ vi ~/workspace/common/common_vars.yml
 ```
-# BOSH INFO
-bosh_ip: "10.0.1.6"				# BOSH IP
-bosh_url: "https://10.0.1.6"			# BOSH URL (e.g. "https://00.000.0.0")
-bosh_client_admin_id: "admin"			# BOSH Client Admin ID
-bosh_client_admin_secret: "ert7na4jpew48"	# BOSH Client Admin Secret('echo $(bosh int ~/workspace/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
-bosh_director_port: 25555			# BOSH director port
-bosh_oauth_port: 8443				# BOSH oauth port
-bosh_version: 271.2				# BOSH version('bosh env' 명령어를 통해 확인 가능, on-demand service용, e.g. "271.2")
+... ((생략)) ...
 
-# PAAS-TA INFO
 system_domain: "61.252.53.246.nip.io"		# Domain (nip.io를 사용하는 경우 HAProxy Public IP와 동일)
 paasta_admin_username: "admin"			# PaaS-TA Admin Username
 paasta_admin_password: "admin"			# PaaS-TA Admin Password
-paasta_nats_ip: "10.0.1.121"
-paasta_nats_port: 4222
-paasta_nats_user: "nats"
-paasta_nats_password: "7EZB5ZkMLMqT73h2Jh3UsqO"	# PaaS-TA Nats Password (CredHub 로그인후 'credhub get -n /micro-bosh/paasta/nats_password' 명령어를 통해 확인 가능)
-paasta_nats_private_networks_name: "default"	# PaaS-TA Nats 의 Network 이름
-paasta_database_ips: "10.0.1.123"		# PaaS-TA Database IP (e.g. "10.0.1.123")
-paasta_database_port: 5524			# PaaS-TA Database Port (e.g. 5524(postgresql)/13307(mysql)) -- Do Not Use "3306"&"13306" in mysql
-paasta_database_type: "postgresql"                      # PaaS-TA Database Type (e.g. "postgresql" or "mysql")
-paasta_database_driver_class: "org.postgresql.Driver"   # PaaS-TA Database driver-class (e.g. "org.postgresql.Driver" or "com.mysql.jdbc.Driver")
-paasta_cc_db_id: "cloud_controller"		# CCDB ID (e.g. "cloud_controller")
-paasta_cc_db_password: "cc_admin"		# CCDB Password (e.g. "cc_admin")
-paasta_uaa_db_id: "uaa"				# UAADB ID (e.g. "uaa")
-paasta_uaa_db_password: "uaa_admin"		# UAADB Password (e.g. "uaa_admin")
-paasta_api_version: "v3"
 
-# UAAC INFO
-uaa_client_admin_id: "admin"			# UAAC Admin Client Admin ID
-uaa_client_admin_secret: "admin-secret"		# UAAC Admin Client에 접근하기 위한 Secret 변수
-uaa_client_portal_secret: "clientsecret"	# UAAC Portal Client에 접근하기 위한 Secret 변수
-
-# Monitoring INFO
-metric_url: "10.0.161.101"			# Monitoring InfluxDB IP
-elasticsearch_master_ip: "10.0.1.146"           # Logsearch의 elasticsearch master IP
-elasticsearch_master_port: 9200                 # Logsearch의 elasticsearch master Port
-syslog_address: "10.0.121.100"            	# Logsearch의 ls-router IP
-syslog_port: "2514"                          	# Logsearch의 ls-router Port
-syslog_transport: "relp"                        # Logsearch Protocol
-saas_monitoring_url: "61.252.53.248"	   	# Pinpoint HAProxy WEBUI의 Public IP
-monitoring_api_url: "61.252.53.241"        	# Monitoring-WEB의 Public IP
-
-### Portal INFO
-portal_web_user_ip: "52.78.88.252"
-portal_web_user_url: "http://portal-web-user.52.78.88.252.nip.io" 
-
-### ETC INFO
-abacus_url: "http://abacus.61.252.53.248.nip.io"	# abacus url (e.g. "http://abacus.xxx.xxx.xxx.xxx.nip.io")
+... ((생략)) ...
 
 ```
 
@@ -211,8 +179,8 @@ abacus_url: "http://abacus.61.252.53.248.nip.io"	# abacus url (e.g. "http://abac
 
 ```
 # STEMCELL
-stemcell_os: "ubuntu-xenial"                                     # stemcell os
-stemcell_version: "621.94"                                       # stemcell version
+stemcell_os: "ubuntu-bionic"                                     # stemcell os
+stemcell_version: "1.34"                                       # stemcell version
 
 
 # NETWORK
@@ -224,10 +192,10 @@ public_networks_name: "vip"                                      # public networ
 mysql_azs: [z4]                                                  # mysql azs
 mysql_instances: 1                                               # mysql instances 
 mysql_vm_type: "medium"                                          # mysql vm type
-mysql_persistent_disk_type: "1GB"                                # mysql persistent disk type
+mysql_persistent_disk_type: "2GB"                                # mysql persistent disk type
 mysql_port: 13306                                                # mysql port (e.g. 13306) -- Do Not Use "3306"
 mysql_admin_username: "<MYSQL_ADMIN_USERNAME>"                   # mysql admin username (e.g. "root")
-mysql_admin_password: "<MYSQL_ADMIN_PASSWORD>"                   # mysql admin password (e.g. "admin1234")
+mysql_admin_password: "<MYSQL_ADMIN_PASSWORD>"                   # mysql admin password (e.g. "admin#1234" 영어/숫자/특수문자 혼용 8자리 이상 또는 2종류 혼용 10자리 이상)
 
 
 # GLUSTERFS SERVER
@@ -235,7 +203,9 @@ glusterfs_url: "<GLUSTERFS_PUBLIC_IP>"                           # Glusterfs 서
 glusterfs_tenantname: "<GLUSTERFS_TENANT_NAME>"                  # Glusterfs 서비스 테넌트 이름(e.g. "service")
 glusterfs_username: "<GLUSTERFS_USERNAME>"                       # Glusterfs 서비스 계정 아이디(e.g. "swift")
 glusterfs_password: "<GLUSTERFS_PASSWORD>"                       # Glusterfs 서비스 암호(e.g. "password")
-
+glusterfs_domainname: "<GLUSTERFS_DOMAIN_NAME>"                  # Glusterfs 서비스 도메인 이름 (e.g. "default")
+swiftproxy_port: "<SWIFT_PROXY_PORT>"                            # Glusterfs 서비스 swift proxy port (e.g. "10008")
+auth_port: "<AUTH_PORT>"                                         # Glusterfs 서비스 auth port (e.g. "15001")
 
 # GLUSTERFS_BROKER
 broker_azs: [z4]                                                 # glusterfs broker azs
@@ -315,7 +285,7 @@ GlusterFS 서비스팩 배포가 완료 되었으면 Application에서 서비스
 
 ##### 서비스 브로커 목록을 확인한다.
 
->`$ cf service-brokers`
+> $ cf service-brokers
 ```  
 $ cf service-brokers
 Getting service brokers as admin...
@@ -325,27 +295,28 @@ No service brokers found
 ```  
 
 ##### GlusterFS 서비스 브로커를 등록한다.  
-> $ cf create-service-broker [SERVICE_BROKER] [USERNAME] [PASSWORD] [SERVICE_BROKER_URL]
-> 
-> [SERVICE_BROKER] : 서비스 브로커 명
-> [USERNAME] / [PASSWORD] : 서비스 브로커에 접근할 수 있는 사용자 ID / PASSWORD
-> [SERVICE_BROKER_URL] : 서비스 브로커 접근 URL
->`$ cf create-service-broker glusterfs-service admin cloudfoundry http://10.30.107.197:8080`
+> $ cf create-service-broker {서비스팩 이름} {서비스팩 사용자ID} {서비스팩 사용자비밀번호} http://{서비스팩 URL(IP)}   
+
+  **서비스팩 이름** : 서비스 팩 관리를 위해 PaaS-TA에서 보여지는 명칭이다. 서비스 Marketplace에서는 각각의 API 서비스 명이 보여지니 여기서 명칭은 서비스팩 리스트의 명칭이다.<br>
+  **서비스팩 사용자ID** / 비밀번호 : 서비스팩에 접근할 수 있는 사용자 ID입니다. 서비스팩도 하나의 API 서버이기 때문에 아무나 접근을 허용할 수 없어 접근이 가능한 ID/비밀번호를 입력한다.<br>
+  **서비스팩 URL** : 서비스팩이 제공하는 API를 사용할 수 있는 URL을 입력한다.  
+  
+> $ cf create-service-broker glusterfs-service admin cloudfoundry http://<paasta-glusterfs-broker_ip>:8080
 ```  
-$ cf create-service-broker glusterfs-service admin cloudfoundry http://10.30.107.197:8080
+$ cf create-service-broker glusterfs-service admin cloudfoundry http://10.30.52.11:8080
 Creating service broker glusterfs-service as admin...
 OK
 ```  
 
 ##### 등록된 GlusterFS 서비스 브로커를 확인한다.
 
->`$ cf service-brokers`  
+> $ cf service-brokers   
 ```  
 $ cf service-brokers
 Getting service brokers as admin...
 
 name                           url
-glusterfs-service              http://10.30.107.197:8080
+glusterfs-service              http://10.30.52.11:8080
 ```  
 
 ##### 접근 가능한 서비스 목록을 확인한다.
@@ -364,8 +335,8 @@ broker: glusterfs-service
 
 ##### 특정 조직에 해당 서비스 접근 허용을 할당하고 접근 서비스 목록을 다시 확인한다. (전체 조직)
 
->`$ cf enable-service-access glusterfs`  
->`$ cf service-access`  
+> $ cf enable-service-access glusterfs   
+> $ cf service-access   
 ```  
 $ cf enable-service-access glusterfs
 Enabling access to all plans of service glusterfs for all orgs as admin...
@@ -382,41 +353,15 @@ broker: glusterfs-service
 
 
 
-### <div id="3.2"/> 3.2. Sample App 구조
+### <div id='3.2'> 3.2. Sample App 다운로드
 
-Sample Web App은 PaaS-TA에 App으로 배포가 된다. 배포 완료 후 정상적으로 App 이 구동되면 브라우저나 curl로 해당 App에 접속 하여 GlusterFS 환경정보(서비스 연결 정보)와파일 업로드하고 확인하는 기능을 제공한다.
+Sample Web App은 PaaS-TA에 App으로 배포가 된다. App을 배포하여 구동시 Bind 된 Mongodb 서비스 연결정보로 접속하여 초기 데이터를 생성하게 된다.  
+배포 완료 후 정상적으로 App 이 구동되면 브라우저나 curl로 해당 App에 접속 하여 Mongodb 환경정보(서비스 연결 정보)와 초기 적재된 데이터를 보여준다.  
 
-Sample App 구조는 다음과 같다.
-<table>
-  <tr>
-    <td>이름</td>
-    <td>설명</td>
-  </tr>
-  <tr>
-    <td>src</td>
-    <td>Sample 소스디렉토리</td>
-  </tr>
-  <tr>
-    <td>manifest</td>
-    <td>PaaS-TA에 app 배포시 필요한 설정을 저장하는 파일</td>
-  </tr>
-  <tr>
-    <td>pom.xml</td>
-    <td>maven project 설정 파일</td>
-  </tr>
-  <tr>
-    <td>target</td>
-    <td>maven build시 생성되는 디렉토리(war 파일, classes 폴더 등)</td>
-  </tr>
-</table>
-
-<br>
-
-##### PaaSTA-Sample-Apps.zip 파일 압축을 풀고 Service폴더안에 있는 GlusterFSSample Web App인 hello-spring-glusterfs를 복사한다.
-
->`$ ls -all`
-
->![glusterfs_image_07]
+- Sample App 묶음 다운로드
+> $ wget https://nextcloud.paas-ta.org/index.php/s/8sCHaWcw4n36MiB/download --content-disposition  
+> $ unzip paasta-service-samples.zip  
+> $ cd paasta-service-samples/mongodb  
 
 <br>
 
@@ -426,22 +371,29 @@ Sample App에서 GlusterFS 서비스를 사용하기 위해서는 서비스 신�
 
 ##### 먼저 PaaS-TA Marketplace에서 서비스가 있는지 확인을 한다.
 
->`$ cf marketplace`
+> $ cf marketplace
 
->![glusterfs_image_08]
+```  
+$ cf marketplace
+Getting services from marketplace in org system / space dev as admin...
+OK
+
+service      plans                                              description
+glusterfs    glusterfs-5Mb, glusterfs-100Mb, glusterfs-1000Mb   A simple glusterfs implementation 
+
+TIP:  Use 'cf marketplace -s SERVICE' to view descriptions of individual plans of a given service.
+```  
 
 <br>
 
 ##### Marketplace에서 원하는 서비스가 있으면 서비스 신청(Provision)을 한다.
 
->`$ cf create-service {서비스명} {서비스 플랜} {내 서비스명}`
-- **서비스명** : p-rabbitmq로 Marketplace에서 보여지는 서비스 명칭이다.
-- **서비스플랜** : 서비스에 대한 정책으로 plans에 있는 정보 중 하나를 선택한다. RabbitMQ 서비스는 standard plan만 지원한다.
-- **내 서비스명** : 내 서비스에서 보여지는 명칭이다. 이 명칭을 기준으로 환경 설정 정보를 가져온다.
-
->`$ cf create-service glusterfs glusterfs-1000Mb glusterfs-service-instance`
-
->![glusterfs_image_09]
+> $ cf create-service glusterfs glusterfs-1000Mb glusterfs-service-instance 
+```  
+$ cf create-service glusterfs glusterfs-1000Mb glusterfs-service-instance
+Creating service instance glusterfs-service-instance in org system / space dev as admin...
+OK
+```  
 
 <br>
 
@@ -449,15 +401,167 @@ Sample App에서 GlusterFS 서비스를 사용하기 위해서는 서비스 신�
 ##### 생성된 GlusterFS 서비스 인스턴스를 확인한다.
 
 >`$ cf services`
+```  
+$ cf services
+Getting services in org system / space dev as admin...
+OK
 
->![glusterfs_image_10]
+name                        service     plan                 bound apps            last operation
+glusterfs-service-instance  glusterfs   glusterfs-1000Mb                           create succeeded
+```  
 
 <br>
 
 
-##### 브라우에서 이미지 확인
+### <div id='3.4'> 3.4. Sample App에 서비스 바인드 신청 및 App 확인  
 
-> ![glusterfs_image_17]
+서비스 신청이 완료되었으면 Sample Web App 에서는 생성된 서비스 인스턴스를 Bind 하여 App에서 GlusterFS 서비스를 이용한다.
+*참고: 서비스 Bind 신청시 개방형 클라우드 플랫폼에서 서비스 Bind신청 할 수 있는 사용자로 로그인이 되어 있어야 한다.
+  
+##### Sample App 디렉토리로 이동하여 manifest 파일을 확인한다.(swift_region을 GlusterFS 서버의 사용하려는 region으로 설정한다.)  
+
+> $ vi manifest.yml   
+
+```
+---
+applications:
+- name: hello-spring-glusterfs
+  memory: 1G
+  instances: 1
+  path: hello-spring-glusterfs.war
+  buildpacks:
+  - java_buildpack
+  env:
+    swift_region: paasta
+```
+
+##### --no-start 옵션으로 App을 배포한다.
+- -no-start: App 배포시 구동은 하지 않는다.
+
+> $ cf push --no-start 
+```  
+$ cf push --no-start
+Applying manifest file /home/ubuntu/workspace/samples/paasta-service-samples/gluserfs/manifest.yml...
+Manifest applied
+Packaging files to upload...
+Uploading files...
+ 17.06 MiB / 17.06 MiB [=================================================================================================
+
+Waiting for API to complete processing files...
+
+name:              hello-spring-glusterfs
+requested state:   stopped
+routes:            hello-spring-glusterfs.paasta.kr
+last uploaded:     
+stack:             
+buildpacks:        
+
+type:           web
+sidecars:       
+instances:      0/1
+memory usage:   1024M
+     state   since                  cpu    memory   disk     details
+#0   down    2021-11-22T05:13:12Z   0.0%   0 of 0   0 of 0   
+```  
+  
+##### Sample Web App에서 생성한 서비스 인스턴스 바인드 신청을 한다.
+
+> $ cf bind-service hello-spring-glusterfs glusterfs-service-instance
+
+```
+$ cf bind-service hello-spring-glusterfs glusterfs-service-instance
+	
+Binding service glusterfs-service-instance to app hello-spring-glusterfs in org system / space dev as admin...
+OK
+```
+
+App 구동 시 Service와의 통신을 위하여 보안 그룹을 추가한다.
+
+##### rule.json 파일을 만들고 아래와 같이 내용을 넣는다.  
+> $ vi rule.json   
+```
+## glusterfs의 IP와 PORT(swiftproxy_port, auth_port)를 destination에 설정
+[
+  {
+    "protocol": "tcp",
+    "ports": "<auth_port>, <swiftproxy_port>",
+    "destination": "<glusterfs_ip>",
+    "log": true,
+    "description": "Allow tcp traffic to gluster"
+  }
+]
+```
+  
+##### 보안 그룹을 생성한다.  
+
+> $ cf create-security-group glusterfs rule.json  
+
+```
+$ cf create-security-group glusterfs rule.json  
+Creating security group glusterfs as admin...
+
+OK		
+```
+  
+##### Mongodb 서비스를 사용할수 있도록 생성한 보안 그룹을 적용한다.
+> $ cf bind-running-security-group glusterfs  
+```
+$ cf bind-running-security-group glusterfs  
+Binding security group glusterfs to running as admin...
+OK		
+```
+  
+##### 바인드가 적용되기 위해서 App을 재기동한다.
+
+> $ cf restart hello-spring-mongodb 
+
+```	
+$ cf restart hello-spring-glusterfs
+Restarting app hello-spring-glusterfs in org system / space dev as admin...
+
+Staging app and tracing logs...
+   Downloading java_buildpack...
+   Downloaded java_buildpack
+   Cell 4a88ce8b-1e72-485a-8f62-1fe0c6b9a7cd creating container for instance 678aa272-945b-41a9-8924-0782891d0cc4
+   Cell 4a88ce8b-1e72-485a-8f62-1fe0c6b9a7cd successfully created container for instance 678aa272-945b-41a9-8924-0782891d0cc4
+   Downloading app package...
+   Downloaded app package (30.5M)
+
+........
+........
+Instances starting...
+Instances starting...
+
+name:              hello-spring-glusterfs
+requested state:   started
+routes:            hello-spring-glusterfs.paasta.kr
+last uploaded:     Mon 22 Nov 05:19:59 UTC 2021
+stack:             cflinuxfs3
+buildpacks:        
+	name             version                                                             detect output   buildpack na
+	java_buildpack   v4.37-https://github.com/cloudfoundry/java-buildpack.git#ab2b4512   java            java
+
+type:           web
+sidecars:       
+instances:      1/1
+memory usage:   1024M
+     state     since                  cpu    memory    disk       details
+#0   running   2021-11-22T05:20:19Z   0.0%   0 of 1G   8K of 1G   
+
+```  
+
+
+##### App이 정상적으로 GlusterFS 서비스를 사용하는지 확인한다.
+
+> curl 로 확인
+
+>`$  curl hello-spring-glusterfs.<System_Domain>` 
+
+> ![mongodb_image_22]
+
+
+##### 브라우저에서 확인
+> ![mongodb_image_23]
 
 [glusterfs_image_01]:./images/glusterfs/glusterfs_image_01.png
 
