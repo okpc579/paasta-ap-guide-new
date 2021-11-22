@@ -366,7 +366,7 @@ Attention: The plan `Mysql-Plan2-100con` of service `Mysql-DB` is not free.  The
 
 ##### 생성된 MySQL 서비스 인스턴스를 확인한다.  
 
->`$ cf services`
+> $ cf services 
 ```  
 $ cf services
 Getting services in org demo / space dev as demo...
@@ -382,7 +382,7 @@ mysql-service-instance    Mysql-DB   Mysql-Plan2-100con                         
 
 ##### Sample App 디렉토리로 이동하여 manifest 파일을 확인한다.  
 
->`$ vi manifest.yml`  
+> $ vi manifest.yml   
 
 ```
 ---
@@ -400,7 +400,7 @@ applications:
 
 ```
 
-##### App을 배포한다.  
+##### --no-start 옵션으로 App을 배포한다.  
 > $ cf push --no-start  
 ```  
 $ cf push --no-start
@@ -426,6 +426,17 @@ memory usage:   1024M
      state   since                  cpu    memory   disk     details
 #0   down    2021-11-22T05:21:57Z   0.0%   0 of 0   0 of 0   
 ```  
+	
+##### Sample Web App에서 생성한 서비스 인스턴스 바인드 신청을 한다.
+
+>$ cf bind-service mysql-sample-app mysql-service-instance  
+
+```
+$ cf bind-service mysql-sample-app mysql-service-instance
+	
+Binding service mysql-service-instance to app mysql-sample-app in org demo / space dev as demo...
+OK
+```
 
 App 구동 시 Service와의 통신을 위하여 보안 그룹을 추가한다.
 
