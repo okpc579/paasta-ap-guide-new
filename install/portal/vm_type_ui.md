@@ -34,8 +34,8 @@
 설치 범위는 PaaS-TA AP Portal을 검증하기 위한 Portal UI 기본 설치를 기준으로 작성하였다.
 
 ### <div id="1.3"/> 1.3. 참고자료
-[**http://bosh.io/docs**](http://bosh.io/docs)  
-[**http://docs.cloudfoundry.org/**](http://docs.cloudfoundry.org/)
+BOSH Document: [http://bosh.io](http://bosh.io)  
+Cloud Foundry Document: [https://docs.cloudfoundry.org](https://docs.cloudfoundry.org)  
 
 ## <div id="2"/> 2. PaaS-TA AP Portal UI 설치
 
