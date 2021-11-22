@@ -17,7 +17,7 @@
   
 3. [Mongodb 연동 Sample Web App 설명](#3)  
   3.1. [Mongodb 서비스 브로커 등록](#3.1)  
-  3.2. [Sample App 구조](#3.2)  
+  3.2. [Sample App ](#3.2)  
   3.3. [PaaS-TA에서 서비스 신청](#3.3)  
   3.4. [Sample App에 서비스 바인드 신청 및 App 확인](#3.4)   
 
@@ -28,12 +28,10 @@
 ## <div id='1'> 1. 문서 개요
 ### <div id='1.1'> 1.1. 목적
 
-본 문서(Mongodb 서비스팩 설치 가이드)는 전자정부표준프레임워크 기반의 PaaS-TA에서 제공되는 서비스팩인 Mongodb 서비스팩을 Bosh를 이용하여 설치 하는 방법과 PaaS-TA의 SaaS 형태로 제공하는 Application 에서 Mongodb 서비스를 사용하는 방법을 기술하였다.
-PaaS-TA 3.5 버전부터는 Bosh2.0 기반으로 deploy를 진행하며 기존 Bosh1.0 기반으로 설치를 원할경우에는 PaaS-TA 3.1 이하 버전의 문서를 참고한다.
+본 문서(Mongodb 서비스팩 설치 가이드)는 PaaS-TA에서 제공되는 서비스팩인 Mongodb 서비스팩을 Bosh를 이용하여 설치 하는 방법을 기술하였다.  
 
 ### <div id='1.2'> 1.2. 범위
-설치 범위는 Mongodb 서비스팩을 검증하기 위한 기본 설치를 기준으로 작성하였다.
-
+설치 범위는 Mongodb 서비스팩을 검증하기 위한 기본 설치를 기준으로 작성하였다.  
 
 ### <div id='1.3'> 1.3. 참고자료
 BOSH Document: [http://bosh.io](http://bosh.io)  
@@ -44,19 +42,22 @@ Cloud Foundry Document: [https://docs.cloudfoundry.org](https://docs.cloudfoundr
 
 ### <div id="2.1"/> 2.1. Prerequisite  
 
-본 설치 가이드는 Linux 환경에서 설치하는 것을 기준으로 하였다. 서비스 설치를 위해서는 BOSH 2.0과 PaaS-TA 5.0 이상, PaaS-TA 포털이 설치되어 있어야 한다. 
+본 설치 가이드는 Linux 환경에서 설치하는 것을 기준으로 하였다.  
+서비스팩 설치를 위해서는 먼저 BOSH CLI v2 가 설치 되어 있어야 하고 BOSH 에 로그인이 되어 있어야 한다.  
+BOSH CLI v2 가 설치 되어 있지 않을 경우 먼저 BOSH2.0 설치 가이드 문서를 참고 하여 BOSH CLI v2를 설치를 하고 사용법을 숙지 해야 한다.  
 
 ### <div id="2.2"/> 2.2. Stemcell 확인
 
-Stemcell 목록을 확인하여 서비스 설치에 필요한 Stemcell이 업로드 되어 있는 것을 확인한다.  (PaaS-TA 5.5.2 과 동일 stemcell 사용)
+Stemcell 목록을 확인하여 서비스 설치에 필요한 Stemcell이 업로드 되어 있는 것을 확인한다.  
+본 가이드의 Stemcell은 ubuntu-bionic 1.34를 사용한다.  
 
-> $ bosh -e micro-bosh stemcells
+> $ bosh -e ${BOSH_ENVIRONMENT} stemcells
 
 ```
 Using environment '10.0.1.6' as client 'admin'
 
-Name                                     Version  OS             CPI  CID  
-bosh-aws-xen-hvm-ubuntu-xenial-go_agent  621.94*  ubuntu-xenial  -    ami-0297ff649e8eea21b  
+Name                                       Version   OS             CPI  CID  
+bosh-openstack-kvm-ubuntu-bionic-go_agent  1.34      ubuntu-bionic  -    ce507ae4-aca6-4a6d-b7c7-220e3f4aaa7d
 
 (*) Currently deployed
 
@@ -65,11 +66,18 @@ bosh-aws-xen-hvm-ubuntu-xenial-go_agent  621.94*  ubuntu-xenial  -    ami-0297ff
 Succeeded
 ```
 
+만약 해당 Stemcell이 업로드 되어 있지 않다면 [bosh.io 스템셀](https://bosh.io/stemcells/) 에서 해당되는 IaaS환경과 버전에 해당되는 스템셀 링크를 복사 후 다음과 같은 명령어를 실행한다.
+
+```
+# Stemcell 업로드 명령어 예제
+bosh -e ${BOSH_ENVIRONMENT} upload-stemcell https://storage.googleapis.com/bosh-core-stemcells/${STEMCELL_VERSION}/bosh-stemcell-${STEMCELL_VERSION}-openstack-kvm-ubuntu-bionic-go_agent.tgz -n
+```
+
 ### <div id="2.3"/> 2.3. Deployment 다운로드  
 
 서비스 설치에 필요한 Deployment를 Git Repository에서 받아 서비스 설치 작업 경로로 위치시킨다.  
 
-- Service Deployment Git Repository URL : https://github.com/PaaS-TA/service-deployment/tree/v5.1.0
+- Service Deployment Git Repository URL : https://github.com/PaaS-TA/service-deployment/tree/v5.1.2
 
 ```
 # Deployment 다운로드 파일 위치 경로 생성 및 설치 경로 이동
@@ -77,7 +85,7 @@ $ mkdir -p ~/workspace
 $ cd ~/workspace
 
 # Deployment 파일 다운로드
-$ git clone https://github.com/PaaS-TA/service-deployment.git -b v5.1.0
+$ git clone https://github.com/PaaS-TA/service-deployment.git -b v5.1.2
 
 # common_vars.yml 파일 다운로드(common_vars.yml가 존재하지 않는다면 다운로드)
 $ git clone https://github.com/PaaS-TA/common.git
@@ -85,8 +93,8 @@ $ git clone https://github.com/PaaS-TA/common.git
 
 ### <div id="2.4"/> 2.4. Deployment 파일 수정
 
-BOSH Deployment manifest는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다.
-Deployment 파일에서 사용하는 network, vm_type, disk_type 등은 Cloud config를 활용하고, 활용 방법은 BOSH 2.0 가이드를 참고한다.   
+BOSH Deployment manifest는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다.  
+Deployment 파일에서 사용하는 network, vm_type, disk_type 등은 Cloud config를 활용하고, 활용 방법은 PaaS-TA AP 설치 가이드를 참고한다.  
 
 - Cloud config 설정 내용을 확인한다.   
 
@@ -155,16 +163,8 @@ Succeeded
 
 > $ vi ~/workspace/common/common_vars.yml
 ```
-# BOSH INFO
-bosh_ip: "10.0.1.6"				# BOSH IP
-bosh_url: "https://10.0.1.6"			# BOSH URL (e.g. "https://00.000.0.0")
-bosh_client_admin_id: "admin"			# BOSH Client Admin ID
-bosh_client_admin_secret: "ert7na4jpew48"	# BOSH Client Admin Secret('echo $(bosh int ~/workspace/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
-bosh_director_port: 25555			# BOSH director port
-bosh_oauth_port: 8443				# BOSH oauth port
-bosh_version: 271.2				# BOSH version('bosh env' 명령어를 통해 확인 가능, on-demand service용, e.g. "271.2")
+... ((생략)) ...
 
-# PAAS-TA INFO
 system_domain: "61.252.53.246.nip.io"		# Domain (nip.io를 사용하는 경우 HAProxy Public IP와 동일)
 paasta_admin_username: "admin"			# PaaS-TA Admin Username
 paasta_admin_password: "admin"			# PaaS-TA Admin Password
@@ -172,38 +172,8 @@ paasta_nats_ip: "10.0.1.121"
 paasta_nats_port: 4222
 paasta_nats_user: "nats"
 paasta_nats_password: "7EZB5ZkMLMqT73h2Jh3UsqO"	# PaaS-TA Nats Password (CredHub 로그인후 'credhub get -n /micro-bosh/paasta/nats_password' 명령어를 통해 확인 가능)
-paasta_nats_private_networks_name: "default"	# PaaS-TA Nats 의 Network 이름
-paasta_database_ips: "10.0.1.123"		# PaaS-TA Database IP (e.g. "10.0.1.123")
-paasta_database_port: 5524			# PaaS-TA Database Port (e.g. 5524(postgresql)/13307(mysql)) -- Do Not Use "3306"&"13306" in mysql
-paasta_database_type: "postgresql"                      # PaaS-TA Database Type (e.g. "postgresql" or "mysql")
-paasta_database_driver_class: "org.postgresql.Driver"   # PaaS-TA Database driver-class (e.g. "org.postgresql.Driver" or "com.mysql.jdbc.Driver")
-paasta_cc_db_id: "cloud_controller"		# CCDB ID (e.g. "cloud_controller")
-paasta_cc_db_password: "cc_admin"		# CCDB Password (e.g. "cc_admin")
-paasta_uaa_db_id: "uaa"				# UAADB ID (e.g. "uaa")
-paasta_uaa_db_password: "uaa_admin"		# UAADB Password (e.g. "uaa_admin")
-paasta_api_version: "v3"
 
-# UAAC INFO
-uaa_client_admin_id: "admin"			# UAAC Admin Client Admin ID
-uaa_client_admin_secret: "admin-secret"		# UAAC Admin Client에 접근하기 위한 Secret 변수
-uaa_client_portal_secret: "clientsecret"	# UAAC Portal Client에 접근하기 위한 Secret 변수
-
-# Monitoring INFO
-metric_url: "10.0.161.101"			# Monitoring InfluxDB IP
-elasticsearch_master_ip: "10.0.1.146"           # Logsearch의 elasticsearch master IP
-elasticsearch_master_port: 9200                 # Logsearch의 elasticsearch master Port
-syslog_address: "10.0.121.100"            	# Logsearch의 ls-router IP
-syslog_port: "2514"                          	# Logsearch의 ls-router Port
-syslog_transport: "relp"                        # Logsearch Protocol
-saas_monitoring_url: "61.252.53.248"	   	# Pinpoint HAProxy WEBUI의 Public IP
-monitoring_api_url: "61.252.53.241"        	# Monitoring-WEB의 Public IP
-
-### Portal INFO
-portal_web_user_ip: "52.78.88.252"
-portal_web_user_url: "http://portal-web-user.52.78.88.252.nip.io" 
-
-### ETC INFO
-abacus_url: "http://abacus.61.252.53.248.nip.io"	# abacus url (e.g. "http://abacus.xxx.xxx.xxx.xxx.nip.io")
+... ((생략)) ...
 
 ```
 
@@ -212,8 +182,8 @@ abacus_url: "http://abacus.61.252.53.248.nip.io"	# abacus url (e.g. "http://abac
 > $ vi ~/workspace/service-deployment/mongodb/vars.yml
 ```
 # STEMCELL
-stemcell_os: "ubuntu-xenial"                                     # stemcell os
-stemcell_version: "621.94"                                       # stemcell version
+stemcell_os: "ubuntu-bionic"                                     # stemcell os
+stemcell_version: "1.34"                                         # stemcell version
 
 # NETWORK
 private_networks_name: "default"                                 # private network name
@@ -221,7 +191,7 @@ private_networks_name: "default"                                 # private netwo
 # MONGODB_REPL_SET_NAME
 replSetName1: "op1"                                              # replica set1 name
 replSetName2: "op2"                                              # replica set2 name
-replSetName3: "op3"                                              # replica set3 name
+replSetName3: "op3"                                              # replica set3 name : use to operations/add-replica-set.yml
 
 # MONGODB_SLAVE1
 mongodb_slave1_azs: [z3]                                         # mongodb slave1 azs
@@ -237,7 +207,7 @@ mongodb_slave2_vm_type: "medium"                                 # mongodb slave
 mongodb_slave2_persistent_disk_type: "10GB"                      # mongodb slave2 persistent disk type
 mongodb_slave2_static_ips: "<MONGODB_SLAVE2_PRIVATE_IPS>"        # mongodb slave2's private IPs (e.g. ["10.0.81.14","10.0.81.15"])
 
-# MONGODB_SLAVE3
+# MONGODB_SLAVE3 : use to operations/add-replica-set.yml
 mongodb_slave3_azs: [z3]                                         # mongodb slave3 azs
 mongodb_slave3_instances: 2                                      # mongodb slave3 instances
 mongodb_slave3_vm_type: "medium"                                 # mongodb slave3 vm type
@@ -260,7 +230,7 @@ mongodb_master2_persistent_disk_type: "10GB"                             # mongo
 mongodb_master2_static_ips: "<MONGODB_MASTER2_PRIVATE_IP>"               # mongodb master2's private IP (e.g. "10.0.81.13")
 mongodb_master2_replSet_hosts: "<MONGODB_MASTER2_REPLSET_HOSTS>"         # 첫번째 Host는 replicaSet2 의master2 ip, 차례대로 slave2 의 ips. (e.g. ["10.0.81.13", "10.0.81.14","10.0.81.15"])
 
-# MONGODB_MASTER3
+# MONGODB_MASTER3 : use to operations/add-replica-set.yml
 mongodb_master3_azs: [z3]                                                # mongodb master3 azs
 mongodb_master3_instances: 1                                             # mongodb master3 instances
 mongodb_master3_vm_type: "medium"                                        # mongodb master3 vm type
@@ -270,22 +240,22 @@ mongodb_master3_replSet_hosts: "<MONGODB_MASTER3_REPLSET_HOSTS>"         # 첫�
 
 # MONGODB_CONFIG
 mongodb_config_azs: [z3]                                                 # mongodb config azs
-mongodb_config_instances: 3                                              # mongodb config instances
+mongodb_config_instances: 2                                              # mongodb config instances : less than 3 instances
 mongodb_config_vm_type: "medium"                                         # mongodb config vm type
 mongodb_config_persistent_disk_type: "10GB"                              # mongodb config persistent disk type
-mongodb_config_static_ips: "<MONGODB_CONFIG_PRIVATE_IPS>"                # mongodb config's private IPs (e.g. ["10.0.81.19", "10.0.81.20","10.0.81.21"])
+mongodb_config_static_ips: "<MONGODB_CONFIG_PRIVATE_IPS>"                # mongodb config's private IPs (e.g. ["10.0.81.19", "10.0.81.20"])
 
 # MONGODB_SHARD
 mongodb_shard_azs: [z3]                                                  # mongodb shard azs
 mongodb_shard_instances: 1                                               # mongodb shard instances
 mongodb_shard_vm_type: "medium"                                          # mongodb shard vm type
-mongodb_shard_static_ips: "<MONGODB_SHARD_PRIVATE_IP>"                   # mongodb shard's private IP (e.g. "10.0.81.22")
+mongodb_shard_static_ips: "<MONGODB_SHARD_PRIVATE_IP>"                   # mongodb shard's private IP (e.g. "10.0.81.21")
 
 # MONGODB_BROKER
 mongodb_broker_azs: [z3]                                                 # mongodb broker azs
 mongodb_broker_instances: 1                                              # mongodb broker instances
 mongodb_broker_vm_type: "medium"                                         # mongodb broker vm type
-mongodb_broker_static_ips: "<MONGODB_BROKER_PRIVATE_IP>"                 # mongodb broker's private IP (e.g. "10.0.81.23")
+mongodb_broker_static_ips: "<MONGODB_BROKER_PRIVATE_IP>"                 # mongodb broker's private IP (e.g. "10.0.81.22")
 
 # BROKER_REGISTRAR
 broker_registrar_broker_azs: [z3]                                        # broker registrar azs
@@ -346,19 +316,15 @@ Instance                                              Process State  AZ  IPs    
 mongodb_broker/0e8933f1-1b67-4486-b37a-2b104da1351a   running        z5  10.30.107.114  vm-e0bb79c6-6482-497a-b071-f7df4bf2a059  minimal  true  
 mongodb_config/35ee66e6-9c25-44c2-85a4-e7c1d520641b   running        z5  10.30.107.111  vm-672ce5b9-4d8f-4b22-9745-43f7d9e39402  minimal  true  
 mongodb_config/935aed3c-e7a4-4179-b397-68d0535bc1d9   running        z5  10.30.107.112  vm-8069a84b-5a91-44ca-a5d8-cca37b5d8952  minimal  true  
-mongodb_config/cc798fba-7840-46ea-9211-6b5646fc766f   running        z5  10.30.107.110  vm-5a7a9d16-8de4-4adf-b504-1364716decce  minimal  true  
 mongodb_master1/1e8b971e-c503-4ba6-bcba-ab28dd7dd797  running        z5  10.30.107.101  vm-54b33ec2-582d-44ef-a4bf-6281acfbf81b  minimal  true  
 mongodb_master2/7a4460e4-a9b5-4d15-9508-adba3405f387  running        z5  10.30.107.104  vm-a388a44e-4ab9-4340-9227-b12b7bd2c410  minimal  true  
-mongodb_master3/88e1aa1c-fb1f-467d-a550-b6334fdfce8d  running        z5  10.30.107.107  vm-9c6aed35-69aa-4a7d-9b08-c5671e728e2a  minimal  true  
 mongodb_shard/1fd85812-c8d4-4ebd-98f5-c8cf637db9e5    running        z5  10.30.107.113  vm-c2628ba8-feed-4401-b1c9-be1445722d34  minimal  true  
 mongodb_slave1/2710c368-dbc2-4d72-a100-1fa37d73e2ec   running        z5  10.30.107.102  vm-048757cf-1c19-4c30-a3cd-2b0dd05c1554  minimal  true  
 mongodb_slave1/bb6275f1-4ab5-4998-ba89-ef30c36c3f67   running        z5  10.30.107.103  vm-6d0f52ef-a0b3-4c26-8e04-cb5cef30337d  minimal  true  
 mongodb_slave2/9671e09b-7ca1-4da2-af8a-88d20caeebfe   running        z5  10.30.107.106  vm-8a57713b-68df-4639-8ab3-3d12c01fd880  minimal  true  
 mongodb_slave2/fed23144-9c18-42f6-9f99-213f7dc294ee   running        z5  10.30.107.105  vm-c58e860a-8b5e-43e1-abe9-c3043cbfb16d  minimal  true  
-mongodb_slave3/7cebf99b-5a79-4033-a4e8-86f8d476a709   running        z5  10.30.107.108  vm-d34d8a3f-37fb-41a8-b995-6e8c7e8ff041  minimal  true  
-mongodb_slave3/ab6d22fb-d436-4c1c-a423-9e9d82c4266a   running        z5  10.30.107.109  vm-ca14b629-4d00-4c96-8782-1cf7a174ce1e  minimal  true  
 
-14 vms
+10 vms
 
 Succeeded
 ```
@@ -369,15 +335,19 @@ Succeeded
 
 ### <div id='3.1'> 3.1. Mongodb 서비스 브로커 등록
 
-Mongodb 서비스팩 배포가 완료 되었으면 Application에서 서비스 팩을 사용하기 위해서 먼저 Mongodb 서비스 브로커를 등록해 주어야 한다.
-
-서비스 브로커 등록시 개방형 클라우드 플랫폼에서 서비스브로커를 등록할 수 있는 사용자로 로그인이 되어있어야 한다.
+Mongodb 서비스팩 배포가 완료 되었으면 Application에서 서비스 팩을 사용하기 위해서 먼저 Mongodb 서비스 브로커를 등록해 주어야 한다.  
+서비스 브로커 등록시 개방형 클라우드 플랫폼에서 서비스브로커를 등록할 수 있는 사용자로 로그인이 되어있어야 한다.  
 
 ##### 서비스 브로커 목록을 확인한다.
 
->`$ cf service-brokers`  
+> $ cf service-brokers  
 
->![mongodb_image_06]
+```
+Getting service brokers as admin...
+
+name   url
+No service brokers found
+```
 
 <br>
 
@@ -389,69 +359,70 @@ Mongodb 서비스팩 배포가 완료 되었으면 Application에서 서비스 �
   **서비스팩 사용자ID** / 비밀번호 : 서비스팩에 접근할 수 있는 사용자 ID입니다. 서비스팩도 하나의 API 서버이기 때문에 아무나 접근을 허용할 수 없어 접근이 가능한 ID/비밀번호를 입력한다.<br>
   **서비스팩 URL** : 서비스팩이 제공하는 API를 사용할 수 있는 URL을 입력한다.
 
->`$ cf create-service-broker mongodb-shard-service-broker admin cloudfoundry http://10.30.107.114:8080`  
+> $ cf create-service-broker mongodb-shard-service-broker admin cloudfoundry http://<mongodb_broker_ip>:8080  
 
-> ![mongodb_image_07]
+```
+$ cf create-service-broker mongodb-shard-service-broker admin cloudfoundry http://10.30.107.114:8080
+Creating service broker mongodb-shard-service-broker as admin...
+OK
+
+```
 
 
 ##### 등록된 mongodb 서비스 브로커를 확인한다.
 
->`$ cf service-brokers`
+> $ cf service-brokers
 
-> ![mongodb_image_08]
+```
+$ cf service-brokers
+Getting service brokers as admin...
+name                           url
+mongodb-shard-service-broker   http://10.30.107.114:8080
+```
 
 
 ##### 접근 가능한 서비스 목록을 확인한다.
 
->`$ cf service-access`  
+> $ cf service-access  
+```
+$ cf service-access 
+Getting service access as admin...
 
-> ![mongodb_image_09]
+broker: mongodb-shard-service-broker
+   offering   plan           access   orgs
+   Mongo-DB   default-plan   none      
+```
 
 >서비스 브로커 생성시 디폴트로 접근을 허용하지 않는다.
 
 
 ##### 특정 조직에 해당 서비스 접근 허용을 할당하고 접근 서비스 목록을 다시 확인한다. (전체 조직)
 
->`$ cf enable-service-access Mongo-DB` <br>
->`$ cf service-access`
+> $ cf enable-service-access Mongo-DB <br>
+> $ cf service-access
 
-> ![mongodb_image_10]
+```
+$ cf enable-service-access Mongo-DB
+Enabling access to all plans of service offering Mongo-DB for all orgs as admin...
+OK
+  
+$ cf service-access 
+Getting service access as admin...
 
-### <div id='3.2'> 3.2. Sample App 구조
+broker: mongodb-shard-service-broker
+   offering   plan           access   orgs
+   Mongo-DB   default-plan   all      
+```
 
-Sample Web App은 PaaS-TA에 App으로 배포가 된다. App을 배포하여 구동시 Bind 된 Mongodb 서비스 연결정보로 접속하여 초기 데이터를 생성하게 된다. 배포 완료 후 정상적으로 App 이 구동되면 브라우저나 curl로 해당 App에 접속 하여 Mongodb 환경정보(서비스 연결 정보)와 초기 적재된 데이터를 보여준다.
+### <div id='3.2'> 3.2. Sample App 다운로드
 
-Sample Web App 구조는 다음과 같다.
+Sample Web App은 PaaS-TA에 App으로 배포가 된다. App을 배포하여 구동시 Bind 된 Mongodb 서비스 연결정보로 접속하여 초기 데이터를 생성하게 된다.  
+배포 완료 후 정상적으로 App 이 구동되면 브라우저나 curl로 해당 App에 접속 하여 Mongodb 환경정보(서비스 연결 정보)와 초기 적재된 데이터를 보여준다.  
 
-<table>
-  <tr>
-    <td>이름</td>
-    <td>설명</td>
-  </tr>
-  <tr>
-    <td>src</td>
-    <td>Sample 소스디렉토리</td>
-  </tr>
-  <tr>
-    <td>manifest</td>
-    <td>PaaS-TA에 app 배포시 필요한 설정을 저장하는 파일</td>
-  </tr>
-  <tr>
-    <td>build.gradle</td>
-    <td>gradle project 설정 파일</td>
-  </tr>
-  <tr>
-    <td>build</td>
-    <td>gradle 빌드시 생성되는 디렉토리(war 파일, classes 폴더 등)</td>
-  </tr>
-</table>
-
-
-##### PaaS-TA-Sample-Apps.zip 파일 압축을 풀고 Service 폴더안에 있는 Mongodb Sample Web App인 hello-spring-mongodb를 복사한다.
-
->`$ ls -all`
-
-> ![mongodb_image_11]
+- Sample App 묶음 다운로드
+> $ wget https://nextcloud.paas-ta.org/index.php/s/8sCHaWcw4n36MiB/download --content-disposition  
+> $ unzip paasta-service-samples.zip  
+> $ cd paasta-service-samples/mongodb  
 
 <br>
 
@@ -463,9 +434,18 @@ Sample Web App에서 Mongodb 서비스를 사용하기 위해서는 서비스 �
 
 ##### 먼저 PaaS-TA Marketplace에서 서비스가 있는지 확인을 한다.
 
->`$ cf marketplace`
+> $ cf marketplace
 
-> ![mongodb_image_12]
+```  
+$ cf marketplace
+Getting services from marketplace in org system / space dev as admin...
+OK
+
+service      plans          description
+Mongo-DB     default-plan   A simple mongo implementation
+
+TIP:  Use 'cf marketplace -s SERVICE' to view descriptions of individual plans of a given service.
+```  
 
 <br>
 
@@ -478,16 +458,25 @@ Sample Web App에서 Mongodb 서비스를 사용하기 위해서는 서비스 �
   **서비스팩 URL** : 서비스팩이 제공하는 API를 사용할 수 있는 URL을 입력한다.
   
 >`$ cf create-service Mongo-DB default-plan mongodb-service-instance`
-
->![mongodb_image_13]
+```  
+$ cf create-service Mysql-DB Mysql-Plan2-100con mysql-service-instance
+Creating service instance mongodb-service-instance in org system / space dev as admin...
+OK
+```  
 
 <br>
 
 ##### 생성된 Mongodb 서비스 인스턴스를 확인한다.
 
->`$ cf services`
+> $ cf services 
+```  
+$ cf services
+Getting services in org system / space dev as admin...
+OK
 
->![mongodb_image_14]
+name                      service    plan                 bound apps            last operation
+mongodb-service-instance  Mongo-DB   default-plan                               create succeeded
+```  
 
 <br>
 
@@ -495,104 +484,132 @@ Sample Web App에서 Mongodb 서비스를 사용하기 위해서는 서비스 �
 
 서비스 신청이 완료되었으면 Sample Web App 에서는 생성된 서비스 인스턴스를 Bind 하여 App에서 Mongodb 서비스를 이용한다.
 *참고: 서비스 Bind 신청시 개방형 클라우드 플랫폼에서 서비스 Bind신청 할 수 있는 사용자로 로그인이 되어 있어야 한다.
+  
+##### Sample App 디렉토리로 이동하여 manifest 파일을 확인한다.  
 
-
-##### Sample Web App 디렉토리로 이동하여 manifest 파일을 확인한다.
-다운로드 :: http://nextcloud.paas-ta.org/index.php/s/x8Tg37WDFiL5ZDi/download
-```
-$ wget -O sample.zip http://nextcloud.paas-ta.org/index.php/s/x8Tg37WDFiL5ZDi/download
-$ unzip sample.zip -d sample
-$ cd sample/Service/hello-spring-mongodb
-
-```
-
->`$ vi manifest.yml` <br>
+> $ vi manifest.yml   
 
 ```
 ---
 applications:
-- name: hello-spring-mongodb       #배포할 App 이름
-  memory: 1G                # 배포시 메모리 사이즈
-  instances: 1                    # 배포 인스턴스 수
-path: ./build/libs/hello-spring-mongodb.war      #배포하는 App 파일 PATH
+- name: hello-spring-mongodb
+  memory: 1G
+  instances: 1
+  path: hello-spring-mongodb.war
 ```
 
 ##### --no-start 옵션으로 App을 배포한다.
 - -no-start: App 배포시 구동은 하지 않는다.
 
->`$ cf push --no-start`
+> $ cf push --no-start 
+```  
+$ cf push --no-start
+Applying manifest file /home/ubuntu/workspace/samples/paasta-service-samples/mongodb/manifest.yml...
+Manifest applied
+Packaging files to upload...
+Uploading files...
+ 17.06 MiB / 17.06 MiB [=================================================================================================
 
->![mongodb_image_15]
+Waiting for API to complete processing files...
 
-<br>
+name:              hello-spring-mongodb
+requested state:   stopped
+routes:            hello-spring-mongodb.paasta.kr
+last uploaded:     
+stack:             
+buildpacks:        
 
-##### 배포된 Sample App을 확인하고 로그를 수행한다.
-
->`$ cf apps`
-
->![mongodb_image_16]
-
-<br>
-
->`$ cf logs hello-spring-mongodb`  **// cf logs {배포된 App명}**
-
-![mongodb_image_17]
-
-<br>
-
+type:           web
+sidecars:       
+instances:      0/1
+memory usage:   1024M
+     state   since                  cpu    memory   disk     details
+#0   down    2021-11-22T05:13:12Z   0.0%   0 of 0   0 of 0   
+```  
+  
 ##### Sample Web App에서 생성한 서비스 인스턴스 바인드 신청을 한다.
 
->`$  cf bind-service hello-spring-Mongodb mongodb-service-instance` 
-
-> ![mongodb_image_42]
-
-<br>
-
-##### 바인드가 적용되기 위해서 App을 재기동한다.
-
->`$  cf restart hello-spring-mongodb` 
-
-> ![mongodb_image_18]
-
-(참고) 바인드 후 App구동시 Mongodb 서비스 접속 에러로 App 구동이 안될 경우 보안 그룹을 추가한다.
-
-##### rule.json 파일을 만들고 아래와 같이 내용을 넣는다.
-
->`$ vi rule.json` 
+> $ cf bind-service hello-spring-Mongodb mongodb-service-instance 
 
 ```
+$ cf bind-service hello-spring-Mongodb mongodb-service-instance 
+	
+Binding service mongodb-service-instance to app hello-spring-Mongodb in org system / space dev as admin...
+OK
+```
+
+App 구동 시 Service와의 통신을 위하여 보안 그룹을 추가한다.
+
+##### rule.json 파일을 만들고 아래와 같이 내용을 넣는다.  
+> $ vi rule.json   
+```
+## mongodb의 mongodb_shard IP를 destination에 설정
 [
   {
     "protocol": "tcp",
-    "destination": "10.20.0.153",
+    "destination": "<mongodb_shard_ip>",
     "ports": "27017"
   }
 ]
 ```
+  
+##### 보안 그룹을 생성한다.  
 
-##### 보안 그룹을 생성한다.
+> $ cf create-security-group mongodb rule.json  
 
->`$  cf create-security-group Mongo-DB rule.json` 
-
-> ![mongodb_image_19]
-
-<br>
-
-
-##### 모든 App에 Mongodb 서비스를 사용할 수 있도록 생성한 보안 그룹을 적용한다.
-
-
->`$ cf bind-running-security-group Mongo-DB` 
-
-> ![mongodb_image_20]
-
-<br>
-
--	App을 리부팅 한다.
 ```
-$ cf restart hello-spring-Mongodb
+$ cf create-security-group mongodb rule.json  
+Creating security group mongodb as admin...
+
+OK		
 ```
-![mongodb_image_21]
+  
+##### Mongodb 서비스를 사용할수 있도록 생성한 보안 그룹을 적용한다.
+> $ cf bind-running-security-group mongodb  
+```
+$ cf bind-running-security-group mongodb  
+Binding security group mongodb to running as admin...
+OK		
+```
+  
+##### 바인드가 적용되기 위해서 App을 재기동한다.
+
+> $ cf restart hello-spring-mongodb 
+
+```	
+$ cf restage hello-spring-mongodb
+This action will cause app downtime.
+
+Restaging app hello-spring-mongodb in org system / space dev as admin...
+
+Staging app and tracing logs...
+   Downloading binary_buildpack...
+   Downloading nodejs_buildpack...
+   Downloading php_buildpack...
+   Downloading nginx_buildpack...
+
+........
+........
+Instances starting...
+Instances starting...
+
+name:              hello-spring-mongodb
+requested state:   started
+routes:            hello-spring-mongodb.paasta.kr
+last uploaded:     Mon 22 Nov 05:19:59 UTC 2021
+stack:             cflinuxfs3
+buildpacks:        
+	name             version                                                             detect output   buildpack na
+	java_buildpack   v4.37-https://github.com/cloudfoundry/java-buildpack.git#ab2b4512   java            java
+
+type:           web
+sidecars:       
+instances:      1/1
+memory usage:   1024M
+     state     since                  cpu    memory    disk       details
+#0   running   2021-11-22T05:20:19Z   0.0%   0 of 1G   8K of 1G   
+
+```  
 
 
 ##### App이 정상적으로 Mongodb 서비스를 사용하는지 확인한다.
