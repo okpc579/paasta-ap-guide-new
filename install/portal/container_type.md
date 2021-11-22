@@ -86,7 +86,8 @@ $ git clone https://github.com/PaaS-TA/portal-deployment.git -b v5.2.2
 ```
 
 ### <div id="2.4"/> 2.4. Deployment 파일 수정  
-BOSH Deployment manifest는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다. Deployment 파일에서 사용하는 network, vm_type, disk_type 등은 Cloud config를 활용하고, 활용 방법은 PaaS-TA AP 설치 가이드를 참고한다.
+BOSH Deployment manifest는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다.  
+Deployment 파일에서 사용하는 network, vm_type, disk_type 등은 Cloud config를 활용하고, 활용 방법은 PaaS-TA AP 설치 가이드를 참고한다.  
 
 - Cloud config 설정 내용을 확인한다.   
 
