@@ -34,7 +34,8 @@
 설치 범위는 Mongodb 서비스팩을 검증하기 위한 기본 설치를 기준으로 작성하였다.  
 
 ### <div id='1.3'> 1.3. 참고자료
-BOSH Document: [http://bosh.io](http://bosh.io)  
+BOSH Document: [http://bosh.io](http://bosh.io)  ![mongodb_image_22](https://user-images.githubusercontent.com/55691511/142844084-c6354537-548a-43a4-a377-f3565da0b7dc.png)
+
 Cloud Foundry Document: [https://docs.cloudfoundry.org](https://docs.cloudfoundry.org)  
 
 
@@ -479,7 +480,7 @@ mongodb-service-instance  Mongo-DB   default-plan                               
 서비스 신청이 완료되었으면 Sample Web App 에서는 생성된 서비스 인스턴스를 Bind 하여 App에서 Mongodb 서비스를 이용한다.
 *참고: 서비스 Bind 신청시 개방형 클라우드 플랫폼에서 서비스 Bind신청 할 수 있는 사용자로 로그인이 되어 있어야 한다.
   
-##### Sample App 디렉토리로 이동하여 manifest 파일을 확인한다.  
+##### manifest 파일을 확인한다.  
 
 > $ vi manifest.yml   
 
