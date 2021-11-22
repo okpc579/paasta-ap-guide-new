@@ -269,9 +269,9 @@ No service brokers found
   서비스팩 사용자ID / 비밀번호 : 서비스팩에 접근할 수 있는 사용자 ID로, 서비스팩도 하나의 API 서버이기 때문에 아무나 접근을 허용할 수 없어 접근이 가능한 ID/비밀번호를 입력한다.  
   서비스팩 URL : 서비스팩이 제공하는 API를 사용할 수 있는 URL을 입력한다.  
 
->`$ cf create-service-broker mysql-service-broker admin cloudfoundry http://10.30.107.167:8080`
+>`$ cf create-service-broker mysql-service-broker admin cloudfoundry http://<mysql-broker-ip>:8080`
 ```  
-cf create-service-broker mysql-service-broker admin cloudfoundry http://10.30.107.167:8080
+$ cf create-service-broker mysql-service-broker admin cloudfoundry http://10.30.107.167:8080
 Creating service broker mysql-service-broker as admin...
 OK
 ```  
@@ -317,31 +317,16 @@ broker: mysql-service-broker
    Mysql-DB   Mysql-Plan2-100con   all
 ```  
 
-### <div id='3.2'> 3.2. Sample Web App 구조  
+### <div id='3.2'> 3.2. Sample Web App 다운로드  
 
 Sample App은 PaaS-TA에 App으로 배포되며 App구동시 Bind 된 MySQL 서비스 연결 정보로 접속하여 초기 데이터를 생성하게 된다.    
 브라우져를 통해 App에 접속 후 "MYSQL 데이터 가져오기"를 통해 초기 생성된 데이터를 조회 할 수 있다.  
 
-Sample App 구조는 다음과 같다.  
+- Sample App 묶음 다운로드
+> $ wget https://nextcloud.paas-ta.org/index.php/s/8sCHaWcw4n36MiB/download --content-disposition  
+> $ unzip paasta-service-samples.zip  
+> $ cd paasta-service-samples/mysql  
 
-| 이름 | 설명  
-| ---- | ------------  
-| manifest.yml | PaaS-TA에 app 배포시 필요한 설정을 저장하는 파일  
-| mysql-sample-app.war | mysql sample app war 파일  
-
-- Sample App 다운로드
-> $ wget -O mysql-sample-app.zip https://nextcloud.paas-ta.org/index.php/s/nKQAM3SiRdEdZTf/download  
-> $ unzip mysql-sample-app.zip  
-> $ cd mysql-sample-app  
-
->`$ ls -all`  
-```   
-$ ls -all  
-drwxr-xr-x 1 demo 197121        0 Nov 20 20:14 ./
-drwxr-xr-x 1 demo 197121        0 Nov 20 19:40 ../
--rw-r--r-- 1 demo 197121      523 Nov 20 20:05 manifest.yml
--rw-r--r-- 1 demo 197121 35238277 Nov 20 19:46 mysql-sample-app.war
-```  
 
 ### <div id='3.3'> 3.3. PaaS-TA에서 서비스 신청  
 Sample App에서 MySQL 서비스를 사용하기 위해서는 서비스 신청(Provision)을 해야 한다.  
@@ -397,108 +382,61 @@ mysql-service-instance    Mysql-DB   Mysql-Plan2-100con                         
 
 ##### Sample App 디렉토리로 이동하여 manifest 파일을 확인한다.  
 
->`$ cd mysql-sample-app`  
 >`$ vi manifest.yml`  
 
-```yml
+```
 ---
 applications:
-- name: mysql-sample-app                     # 배포할 App 이름
-  memory: 1024M                              # 배포시 메모리 사이즈
-  instances: 1                               # 배포 인스턴스 수
+- name: mysql-sample-app
+  memory: 1024M
+  instances: 1
   buildpack: java_buildpack
-  path: ./mysql-sample-app.war               # 배포하는 App 파일 PATH
-  services:
-  - mysql-service-instance
+  path: mysql-sample-app.war
   env:
     mysql_datasource_driver-class-name: org.mariadb.jdbc.Driver
     mysql_datasource_jdbc-url: jdbc:\${vcap.services.mysql-service-instance.credentials.uri}
     mysql_datasource_username: \${vcap.services.mysql-service-instance.credentials.username}
     mysql_datasource_password: \${vcap.services.mysql-service-instance.credentials.password}
+
 ```
 
 ##### App을 배포한다.  
+> $ cf push --no-start  
 ```  
-$ cf push
-Using manifest file D:\mysql-sample-app\manifest.yml
+$ cf push --no-start
+Applying manifest file /home/ubuntu/workspace/samples/paasta-service-samples/mysql/manifest.yml...
+Manifest applied
+Packaging files to upload...
+Uploading files...
+ 26.48 MiB / 26.48 MiB [================================================================================================================] 100.00% 1s
 
-Updating app mysql-sample-app in org demo / space dev as demo...
-OK
+Waiting for API to complete processing files...
 
-Uploading mysql-sample-app...
-Uploading app files from: C:\Users\demo\AppData\Local\Temp\unzipped-app577458739
-Uploading 32M, 177 files
-Done uploading
-OK
-Binding service mysql-service-instance to app mysql-sample-app in org demo / space dev as demo...
-OK
+name:              mysql-sample-app
+requested state:   stopped
+routes:            mysql-sample-app.paasta.kr
+last uploaded:     
+stack:             
+buildpacks:        
 
-Starting app mysql-sample-app in org demo / space dev as demo...
-Downloading java_buildpack...
-Downloaded java_buildpack
-Cell 26b27641-f601-4ec5-9b3c-28a0d3517573 creating container for instance 36836a8a-94d7-4096-a916-f547bd472058
-Cell 26b27641-f601-4ec5-9b3c-28a0d3517573 successfully created container for instance 36836a8a-94d7-4096-a916-f547bd472058
-Downloading app package...
-Downloaded app package (33M)
------> Java Buildpack v4.19.1 | https://github.com/cloudfoundry/java-buildpack.git#3f4eee2
------> Downloading Jvmkill Agent 1.16.0_RELEASE from https://java-buildpack.cloudfoundry.org/jvmkill/bionic/x86_64/jvmkill-1.16.0-RELEASE.so (5.1s)
------> Downloading Open Jdk JRE 1.8.0_212 from https://java-buildpack.cloudfoundry.org/openjdk/bionic/x86_64/openjdk-jre-1.8.0_212-bionic.tar.gz (0.9s)
-       Expanding Open Jdk JRE to .java-buildpack/open_jdk_jre (1.3s)
-       JVM DNS caching disabled in lieu of BOSH DNS caching
------> Downloading Open JDK Like Memory Calculator 3.13.0_RELEASE from https://java-buildpack.cloudfoundry.org/memory-calculator/bionic/x86_64/memory-calculator-3.13.0-RELEASE.tar.gz (0.1s)
-       Loaded Classes: 15660, Threads: 250
------> Downloading Client Certificate Mapper 1.8.0_RELEASE from https://java-buildpack.cloudfoundry.org/client-certificate-mapper/client-certificate-mapper-1.8.0-RELEASE.jar (0.1s)
------> Downloading Container Customizer 2.6.0_RELEASE from https://java-buildpack.cloudfoundry.org/container-customizer/container-customizer-2.6.0-RELEASE.jar (0.1s)
------> Downloading Container Security Provider 1.16.0_RELEASE from https://java-buildpack.cloudfoundry.org/container-security-provider/container-security-provider-1.16.0-RELEASE.jar (5.1s)
------> Downloading Spring Auto Reconfiguration 2.7.0_RELEASE from https://java-buildpack.cloudfoundry.org/auto-reconfiguration/auto-reconfiguration-2.7.0-RELEASE.jar (0.1s)
-Exit status 0
-Uploading droplet, build artifacts cache...
-Uploading droplet...
-Uploading build artifacts cache...
-Uploaded build artifacts cache (43.3M)
-Uploaded droplet (76.4M)
-Uploading complete
-Cell 26b27641-f601-4ec5-9b3c-28a0d3517573 stopping instance 36836a8a-94d7-4096-a916-f547bd472058
-Cell 26b27641-f601-4ec5-9b3c-28a0d3517573 destroying container for instance 36836a8a-94d7-4096-a916-f547bd472058
-Cell 26b27641-f601-4ec5-9b3c-28a0d3517573 successfully destroyed container for instance 36836a8a-94d7-4096-a916-f547bd472058
-
-0 of 1 instances running, 1 starting
-0 of 1 instances running, 1 starting
-0 of 1 instances running, 1 starting
-1 of 1 instances running
-
-App started
-
-
-OK
-
-App mysql-sample-app was started using this command `JAVA_OPTS="-agentpath:$PWD/.java-buildpack/open_jdk_jre/bin/jvmkill-1.16.0_RELEASE=printHeapHistogram=1 -Djava.io.tmpdir=$TMPDIR -XX:ActiveProcessorCount=$(nproc) -Djava.ext.dirs=$PWD/.java-buildpack/container_security_provider:$PWD/.java-buildpack/open_jdk_jre/lib/ext -Djava.security.properties=$PWD/.java-buildpack/java_security/java.security $JAVA_OPTS" && CALCULATED_MEMORY=$($PWD/.java-buildpack/open_jdk_jre/bin/java-buildpack-memory-calculator-3.13.0_RELEASE -totMemory=$MEMORY_LIMIT -loadedClasses=16963 -poolType=metaspace -stackThreads=250 -vmOptions="$JAVA_OPTS") && echo JVM Memory Configuration: $CALCULATED_MEMORY && JAVA_OPTS="$JAVA_OPTS $CALCULATED_MEMORY" && MALLOC_ARENA_MAX=2 SERVER_PORT=$PORT eval exec $PWD/.java-buildpack/open_jdk_jre/bin/java $JAVA_OPTS -cp $PWD/. org.springframework.boot.loader.WarLauncher`
-
-Showing health and status for app mysql-sample-app in org demo / space dev as demo...
-OK
-
-requested state: started
-instances: 1/1
-usage: 1G x 1 instances
-urls: mysql-sample-app.115.68.47.178.nip.io
-last uploaded: Wed Nov 20 11:05:39 UTC 2019
-stack: cflinuxfs3
-buildpack: java_buildpack
-
-     state     since                    cpu      memory         disk           details
-#0   running   2019-11-20 08:07:15 PM   200.1%   165.4M of 1G   147.3M of 1G
+type:           web
+sidecars:       
+instances:      0/1
+memory usage:   1024M
+     state   since                  cpu    memory   disk     details
+#0   down    2021-11-22T05:21:57Z   0.0%   0 of 0   0 of 0   
 ```  
 
->(참고) App구동시 Mysql 서비스 접속 에러로 App 구동이 안될 경우 보안 그룹을 추가한다.  
+App 구동 시 Service와의 통신을 위하여 보안 그룹을 추가한다.
 
-##### rule.json 화일을 만들고 아래와 같이 내용을 넣는다.  
->`$ vi rule.json`   
-destination : mysql의 proxy 인스턴스 ip.
-```json
+##### rule.json 파일을 만들고 아래와 같이 내용을 넣는다.  
+> $ vi rule.json   
+```
+## mysql의 proxy IP를 destination에 설정
 [
   {
     "protocol": "tcp",
-    "destination": "10.30.107.168",
+    "destination": "<proxy_ip>",
     "ports": "13307"
   }
 ]
@@ -507,52 +445,42 @@ destination : mysql의 proxy 인스턴스 ip.
 
 ##### 보안 그룹을 생성한다.  
 
->`$ cf create-security-group p-mysql rule.json`  
+> $ cf create-security-group mysql rule.json  
 
 >![update_mysql_vsphere_30]  
 
 <br>
 
-##### 모든 App에 Mysql 서비스를 사용할수 있도록 생성한 보안 그룹을 적용한 후, App을 리부팅 한다.  
+##### Mysql 서비스를 사용할수 있도록 생성한 보안 그룹을 적용한 후, App을 리부팅 한다.  
 
->`$ cf bind-staging-security-group p-mysql`
->`$ cf bind-running-security-group p-mysql`  
->`$ cf restart mysql-sample-app`  
+> $ cf bind-running-security-group mysql  
+> $ cf restart mysql-sample-app  
 >![update_mysql_vsphere_31] 
 ```  
 $ cf restart mysql-sample-app  
-Stopping app mysql-sample-app in org demo / space dev as demo...
-OK
+Restarting app mysql-sample-app in org system / space dev as admin...
 
-Starting app mysql-sample-app in org demo / space dev as demo...
+Staging app and tracing logs...
+   Downloading java_buildpack...
+   Downloaded java_buildpack
+   Cell 4a88ce8b-1e72-485a-8f62-1fe0c6b9a7cd creating container for instance 678aa272-945b-41a9-8924-0782891d0cc4
+   Cell 4a88ce8b-1e72-485a-8f62-1fe0c6b9a7cd successfully created container for instance 678aa272-945b-41a9-8924-0782891d0cc4
+   Downloading app package...
+   Downloaded app package (30.5M)
 
-0 of 1 instances running, 1 starting
-0 of 1 instances running, 1 starting
-0 of 1 instances running, 1 starting
-0 of 1 instances running, 1 starting
-0 of 1 instances running, 1 starting
-1 of 1 instances running
+........
+........
+Instances starting...
+Instances starting...
 
-App started
-
-
-OK
-
-App mysql-sample-app was started using this command `JAVA_OPTS="-agentpath:$PWD/.java-buildpack/open_jdk_jre/bin/jvmkill-1.16.0_RELEASE=printHeapHistogram=1 -Djava.io.tmpdir=$TMPDIR -XX:ActiveProcessorCount=$(nproc) -Djava.ext.dirs=$PWD/.java-buildpack/container_security_provider:$PWD/.java-buildpack/open_jdk_jre/lib/ext -Djava.security.properties=$PWD/.java-buildpack/java_security/java.security $JAVA_OPTS" && CALCULATED_MEMORY=$($PWD/.java-buildpack/open_jdk_jre/bin/java-buildpack-memory-calculator-3.13.0_RELEASE -totMemory=$MEMORY_LIMIT -loadedClasses=16963 -poolType=metaspace -stackThreads=250 -vmOptions="$JAVA_OPTS") && echo JVM Memory Configuration: $CALCULATED_MEMORY && JAVA_OPTS="$JAVA_OPTS $CALCULATED_MEMORY" && MALLOC_ARENA_MAX=2 SERVER_PORT=$PORT eval exec $PWD/.java-buildpack/open_jdk_jre/bin/java $JAVA_OPTS -cp $PWD/. org.springframework.boot.loader.WarLauncher`
-
-Showing health and status for app mysql-sample-app in org demo / space dev as demo...
-OK
-
-requested state: started
-instances: 1/1
-usage: 1G x 1 instances
-urls: mysql-sample-app.115.68.47.178.nip.io
-last uploaded: Wed Nov 20 11:05:39 UTC 2019
-stack: cflinuxfs3
-buildpack: java_buildpack
-
-     state     since                    cpu      memory         disk           details
-#0   running   2019-11-20 08:33:16 PM   297.9%   229.4M of 1G   147.3M of 1G
+name:              mysql-sample-app
+requested state:   started
+routes:            mysql-sample-app.paasta.kr
+last uploaded:     Mon 22 Nov 05:23:48 UTC 2021
+stack:             cflinuxfs3
+buildpacks:        
+	name             version                                                             detect output   buildpack name
+	java_buildpack   v4.37-https://github.com/cloudfoundry/java-buildpack.git#ab2b4512   java            java
 ```  
 
 ##### App이 정상적으로 MySQL 서비스를 사용하는지 확인한다.  
