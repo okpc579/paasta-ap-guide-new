@@ -32,8 +32,8 @@ PaaS-TA 3.5 버전부터는 Bosh2.0 기반으로 deploy를 진행하며 기존 B
 
 
 ### <div id='1.3'> 1.3. 참고자료
-[**http://bosh.io/docs**](http://bosh.io/docs)<br>
-[**http://docs.cloudfoundry.org/**](http://docs.cloudfoundry.org/)
+BOSH Document: [http://bosh.io](http://bosh.io)  
+Cloud Foundry Document: [https://docs.cloudfoundry.org](https://docs.cloudfoundry.org)  
 
 ## <div id='2'> 2. Pinpoint 서비스 설치
 
