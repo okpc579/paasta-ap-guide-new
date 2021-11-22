@@ -41,10 +41,9 @@ PaaS-TA 3.5 버전부터는 Bosh2.0 기반으로 deploy를 진행하며 기존 B
 
 
 ### <div id='1.3'/>1.3. 참고자료
-
-> [**http://bosh.io/docs**](http://bosh.io/docs) <br>
-> [**http://docs.cloudfoundry.org/**](http://docs.cloudfoundry.org/) <br>
-> [**https://www.eclipse.org/che/technology/**](https://www.eclipse.org/che/technology/) <br>
+BOSH Document: [http://bosh.io](http://bosh.io)  
+Cloud Foundry Document: [https://docs.cloudfoundry.org](https://docs.cloudfoundry.org)  
+Eclipse Che Technology: [https://www.eclipse.org/che/technology/](https://www.eclipse.org/che/technology/)  
 
 
 ## <div id='2'/> 2. WEB IDE 설치  
