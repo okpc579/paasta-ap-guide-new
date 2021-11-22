@@ -477,7 +477,7 @@ OK
 
 App 구동 시 Service와의 통신을 위하여 보안 그룹을 추가한다.
 
-##### rule.json 파일을 만들고 아래와 같이 내용을 넣는다.  
+##### rule.json을 편집한다.  
 > $ vi rule.json   
 ```
 ## glusterfs의 IP와 PORT(swiftproxy_port, auth_port)를 destination에 설정
