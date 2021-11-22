@@ -30,7 +30,7 @@
 ## <div id='1'> 1. 문서 개요
 
 ### <div id='1.1'> 1.1. 목적
-본 문서(Redis 서비스팩 설치 가이드)는 전자정부표준프레임워크 기반의 PaaS-TA에서 제공되는 서비스팩인 Redis 서비스팩을 Bosh를 이용하여 설치하는 방법과 PaaS-TA의 SaaS 형태로 제공하는 Application에서 Redis 서비스를 사용하는 방법을 기술하였다.
+본 문서(Redis 서비스팩 설치 가이드)는 PaaS-TA에서 제공되는 서비스팩인 Redis 서비스팩을 Bosh를 이용하여 설치하는 방법을 기술하였다.
 
 ### <div id='1.2'> 1.2. 범위
 설치 범위는 Redis서비스팩을 검증하기 위한 기본 설치를 기준으로 작성하였다.
@@ -44,19 +44,16 @@ Cloud Foundry Document: [https://docs.cloudfoundry.org](https://docs.cloudfoundr
 	
 ### <div id="2.1"/> 2.1. Prerequisite  
 
-본 설치 가이드는 Linux 환경에서 설치하는 것을 기준으로 하였다. 서비스 설치를 위해서는 BOSH 2.0과 PaaS-TA 5.0 이상, PaaS-TA 포털이 설치되어 있어야 한다. 
+Stemcell 목록을 확인하여 서비스 설치에 필요한 Stemcell이 업로드 되어 있는 것을 확인한다.  
+본 가이드의 Stemcell은 ubuntu-bionic 1.34를 사용한다.  
 
-### <div id="2.2"/> 2.2. Stemcell 확인
-
-Stemcell 목록을 확인하여 서비스 설치에 필요한 Stemcell이 업로드 되어 있는 것을 확인한다.  (PaaS-TA 5.5.2 과 동일 stemcell 사용)
-
-> $ bosh -e micro-bosh stemcells
+> $ bosh -e ${BOSH_ENVIRONMENT} stemcells
 
 ```
 Using environment '10.0.1.6' as client 'admin'
 
-Name                                     Version  OS             CPI  CID  
-bosh-aws-xen-hvm-ubuntu-xenial-go_agent  621.94*  ubuntu-xenial  -    ami-0297ff649e8eea21b  
+Name                                       Version   OS             CPI  CID  
+bosh-openstack-kvm-ubuntu-bionic-go_agent  1.34      ubuntu-bionic  -    ce507ae4-aca6-4a6d-b7c7-220e3f4aaa7d
 
 (*) Currently deployed
 
@@ -65,11 +62,18 @@ bosh-aws-xen-hvm-ubuntu-xenial-go_agent  621.94*  ubuntu-xenial  -    ami-0297ff
 Succeeded
 ```
 
+만약 해당 Stemcell이 업로드 되어 있지 않다면 [bosh.io 스템셀](https://bosh.io/stemcells/) 에서 해당되는 IaaS환경과 버전에 해당되는 스템셀 링크를 복사 후 다음과 같은 명령어를 실행한다.
+
+```
+# Stemcell 업로드 명령어 예제
+bosh -e ${BOSH_ENVIRONMENT} upload-stemcell https://storage.googleapis.com/bosh-core-stemcells/${STEMCELL_VERSION}/bosh-stemcell-${STEMCELL_VERSION}-openstack-kvm-ubuntu-bionic-go_agent.tgz -n
+```
+
 ### <div id="2.3"/> 2.3. Deployment 다운로드  
 
 서비스 설치에 필요한 Deployment를 Git Repository에서 받아 서비스 설치 작업 경로로 위치시킨다.  
 
-- Service Deployment Git Repository URL : https://github.com/PaaS-TA/service-deployment/tree/v5.1.0
+- Service Deployment Git Repository URL : https://github.com/PaaS-TA/service-deployment/tree/v5.1.2
 
 ```
 # Deployment 다운로드 파일 위치 경로 생성 및 설치 경로 이동
@@ -77,7 +81,7 @@ $ mkdir -p ~/workspace
 $ cd ~/workspace
 
 # Deployment 파일 다운로드
-$ git clone https://github.com/PaaS-TA/service-deployment.git -b v5.1.0
+$ git clone https://github.com/PaaS-TA/service-deployment.git -b v5.1.2
 
 # common_vars.yml 파일 다운로드(common_vars.yml가 존재하지 않는다면 다운로드)
 $ git clone https://github.com/PaaS-TA/common.git
@@ -85,8 +89,8 @@ $ git clone https://github.com/PaaS-TA/common.git
 
 ### <div id="2.4"/> 2.4. Deployment 파일 수정
 
-BOSH Deployment manifest는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다.
-Deployment 파일에서 사용하는 network, vm_type, disk_type 등은 Cloud config를 활용하고, 활용 방법은 BOSH 2.0 가이드를 참고한다.   
+BOSH Deployment manifest는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다.  
+Deployment 파일에서 사용하는 network, vm_type, disk_type 등은 Cloud config를 활용하고, 활용 방법은 PaaS-TA AP 설치 가이드를 참고한다.  
 
 - Cloud config 설정 내용을 확인한다.   
 
@@ -155,56 +159,17 @@ Succeeded
 
 > $ vi ~/workspace/common/common_vars.yml
 ```
-# BOSH INFO
-bosh_ip: "10.0.1.6"				# BOSH IP
+... ((생략)) ...
 bosh_url: "https://10.0.1.6"			# BOSH URL (e.g. "https://00.000.0.0")
 bosh_client_admin_id: "admin"			# BOSH Client Admin ID
 bosh_client_admin_secret: "ert7na4jpew48"	# BOSH Client Admin Secret('echo $(bosh int ~/workspace/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
 bosh_director_port: 25555			# BOSH director port
 bosh_oauth_port: 8443				# BOSH oauth port
 bosh_version: 271.2				# BOSH version('bosh env' 명령어를 통해 확인 가능, on-demand service용, e.g. "271.2")
-
-# PAAS-TA INFO
 system_domain: "61.252.53.246.nip.io"		# Domain (nip.io를 사용하는 경우 HAProxy Public IP와 동일)
 paasta_admin_username: "admin"			# PaaS-TA Admin Username
 paasta_admin_password: "admin"			# PaaS-TA Admin Password
-paasta_nats_ip: "10.0.1.121"
-paasta_nats_port: 4222
-paasta_nats_user: "nats"
-paasta_nats_password: "7EZB5ZkMLMqT73h2Jh3UsqO"	# PaaS-TA Nats Password (CredHub 로그인후 'credhub get -n /micro-bosh/paasta/nats_password' 명령어를 통해 확인 가능)
-paasta_nats_private_networks_name: "default"	# PaaS-TA Nats 의 Network 이름
-paasta_database_ips: "10.0.1.123"		# PaaS-TA Database IP (e.g. "10.0.1.123")
-paasta_database_port: 5524			# PaaS-TA Database Port (e.g. 5524(postgresql)/13307(mysql)) -- Do Not Use "3306"&"13306" in mysql
-paasta_database_type: "postgresql"                      # PaaS-TA Database Type (e.g. "postgresql" or "mysql")
-paasta_database_driver_class: "org.postgresql.Driver"   # PaaS-TA Database driver-class (e.g. "org.postgresql.Driver" or "com.mysql.jdbc.Driver")
-paasta_cc_db_id: "cloud_controller"		# CCDB ID (e.g. "cloud_controller")
-paasta_cc_db_password: "cc_admin"		# CCDB Password (e.g. "cc_admin")
-paasta_uaa_db_id: "uaa"				# UAADB ID (e.g. "uaa")
-paasta_uaa_db_password: "uaa_admin"		# UAADB Password (e.g. "uaa_admin")
-paasta_api_version: "v3"
-
-# UAAC INFO
-uaa_client_admin_id: "admin"			# UAAC Admin Client Admin ID
-uaa_client_admin_secret: "admin-secret"		# UAAC Admin Client에 접근하기 위한 Secret 변수
-uaa_client_portal_secret: "clientsecret"	# UAAC Portal Client에 접근하기 위한 Secret 변수
-
-# Monitoring INFO
-metric_url: "10.0.161.101"			# Monitoring InfluxDB IP
-elasticsearch_master_ip: "10.0.1.146"           # Logsearch의 elasticsearch master IP
-elasticsearch_master_port: 9200                 # Logsearch의 elasticsearch master Port
-syslog_address: "10.0.121.100"            	# Logsearch의 ls-router IP
-syslog_port: "2514"                          	# Logsearch의 ls-router Port
-syslog_transport: "relp"                        # Logsearch Protocol
-saas_monitoring_url: "61.252.53.248"	   	# Pinpoint HAProxy WEBUI의 Public IP
-monitoring_api_url: "61.252.53.241"        	# Monitoring-WEB의 Public IP
-
-### Portal INFO
-portal_web_user_ip: "52.78.88.252"
-portal_web_user_url: "http://portal-web-user.52.78.88.252.nip.io" 
-
-### ETC INFO
-abacus_url: "http://abacus.61.252.53.248.nip.io"	# abacus url (e.g. "http://abacus.xxx.xxx.xxx.xxx.nip.io")
-
+... ((생략)) ...
 ```
 
 
@@ -213,8 +178,8 @@ abacus_url: "http://abacus.61.252.53.248.nip.io"	# abacus url (e.g. "http://abac
 > $ vi ~/workspace/deployment/service-deployment/redis/vars.yml
 ```
 # STEMCELL
-stemcell_os: "ubuntu-xenial"                                      # Deployment Main Stemcell OS
-stemcell_version: "621.94"                                        # Main Stemcell Version
+stemcell_os: "ubuntu-bionic"                                      # Deployment Main Stemcell OS
+stemcell_version: "1.34"                                        # Main Stemcell Version
 
 # NETWORK
 private_networks_name: "default"                                  # private network name
@@ -225,19 +190,24 @@ mariadb_instances: 1                                              # mariadb inst
 mariadb_vm_type: "medium"                                         # mariadb vm type
 mariadb_persistent_disk_type: "2GB"                               # mariadb persistent disk type
 mariadb_user_password: "admin"                                    # mariadb admin password
-mariadb_port: 3306                                                # mariadb port (default : 3306)
+mariadb_port: 13306                                               # mariadb port (e.g. 13306) -- Do Not Use "3306"
 
 # ON DEMAND BROKER
 broker_azs: [z5]                                                  # broker azs
 broker_instances: 1                                               # broker instances 
 broker_vm_type: "service_medium"                                  # broker vm type
 
+# REDIS
+redis_azs: [z5]                                                   # redis azs
+redis_vm_type: "medium"                                           # redis vm type
+redis_persistent_disk_type: "1GB"                                 # redis persistent disk type
+
 # PROPERTIES
 broker_server_port: 8080                                          # broker server port
 
 ### On-Demand Dedicated Service Instance Properties ###
 on_demand_service_instance_name: "redis"                          # On-Demand Service Instance Name
-service_password: "admin"                                         # On-Demand Redis Service password
+service_password: "PaaS-TA#2021!"                                 # On-Demand Redis Service password
 service_port: 6379                                                # On-Demand Redis Service port
 
 # SERVICE PLAN INFO
@@ -294,28 +264,28 @@ Task 936167. Done
 Deployment 'redis'
 
 Instance                                                       Process State  AZ  IPs           VM CID                                   VM Type         Active  
-mariadb/e35f3ece-9c34-41f4-a88e-d8365e9b8c70                   running        z3  10.30.255.25  vm-5168ec8d-f42f-40fa-9c3a-8635bf138b0a  service_tiny    true  
-paas-ta-on-demand-broker/13c11522-10dd-485c-bb86-3ac5337223d0  running        z3  10.30.255.26  vm-eab6e832-8b7c-49bc-ac04-80258896880d  service_medium  true  
+mariadb/e35f3ece-9c34-41f4-a88e-d8365e9b8c70                   running        z5  10.30.255.25  vm-5168ec8d-f42f-40fa-9c3a-8635bf138b0a  medium          true  
+paas-ta-on-demand-broker/13c11522-10dd-485c-bb86-3ac5337223d0  running        z5  10.30.255.26  vm-eab6e832-8b7c-49bc-ac04-80258896880d  service_medium  true  
 
 2 vms
 
 Succeeded
 ```
 
-## <div id='3'> 3. CF CLI를 이용한 On-Demand-Redis 서비스 브로커 등록
-
+## <div id='3'> 3. CF CLI를 이용한 On-Demand-Redis 서비스 
+### <div id='3.1'> 3.1. On-Demand-Redis 서비스 브로커 등록
 Redis 서비스팩 배포가 완료 되었으면 Application에서 서비스 팩을 사용하기 위해서 먼저 On-Demand-Redis 서비스 브로커를 등록해 주어야 한다.
 서비스 브로커 등록시에는 PaaS-TA에서 서비스 브로커를 등록할 수 있는 사용자로 로그인하여야 한다
 
 
 ##### 서비스 브로커 목록을 확인한다.
 
->`$ cf service-brokers`
+> $ cf service-brokers
 ```
 Getting service brokers as admin...
 
-name                     url
-paasta-pinpoint-broker  http://10.30.70.82:8080
+name   url
+No service brokers found
 ```
 
 
@@ -326,11 +296,12 @@ paasta-pinpoint-broker  http://10.30.70.82:8080
   **서비스팩 사용자ID** / 비밀번호 : 서비스팩에 접근할 수 있는 사용자 ID입니다. 서비스팩도 하나의 API 서버이기 때문에 아무나 접근을 허용할 수 없어 접근이 가능한 ID/비밀번호를 입력한다.<br>
   **서비스팩 URL** : 서비스팩이 제공하는 API를 사용할 수 있는 URL을 입력한다.
 
->`$ cf create-service-broker on-demand-redis-service admin cloudfoundry http://10.30.255.26:8080`
+>`$ cf create-service-broker on-demand-redis-service admin cloudfoundry http://<paas-ta-on-demand-broker_ip>:8080`
 
 ```
-    Creating service broker on-demand-redis-service as admin...
-    OK
+$ cf create-service-broker on-demand-redis-service admin cloudfoundry http://10.30.255.26:8080
+Creating service broker on-demand-redis-service as admin...
+OK
 ```
 
 ##### 등록된 On-Demand-Redis 서비스 브로커를 확인한다.
@@ -340,8 +311,7 @@ paasta-pinpoint-broker  http://10.30.70.82:8080
 Getting service brokers as admin...
 
 name                     url
-paasta-pinpoint-broker  http://10.30.70.82:8080
-on-demand-redis-service   http://10.30.255.26:8080
+on-demand-redis-service  http://10.30.255.26:8080
 ```
 
 
@@ -351,8 +321,8 @@ on-demand-redis-service   http://10.30.255.26:8080
 ```
 Getting service access as admin...
 broker: on-demand-redis-service
-  service   plan           access   orgs
-  redis     dedicated-vm   none
+   offering   plan           access   orgs
+   redis      dedicated-vm   none   
 
 ```
 서비스 브로커 등록시 최초에는 접근을 허용하지 않는다. 따라서 access는 none으로 설정된다.
@@ -363,19 +333,34 @@ broker: on-demand-redis-service
 >`$ cf enable-service-access redis` <br>
 >`$ cf service-access`
 ```
+$ cf enable-service-access redis
+Enabling access to all plans of service offering redis for all orgs as admin...
+OK
+
+$ cf service-access
 Getting service access as admin...
-broker: paasta-redis-broker
-  service   plan           access   orgs
-  redis     dedicated-vm   all
+	
+broker: on-demand-redis-service
+   offering   plan           access   orgs
+   redis      dedicated-vm   all   
 ```
 
-### <div id='3.1'> 3.1. PaaS-TA에서 서비스 신청
+### <div id='3.2'> 3.2. Sample App 다운로드
+
+- Sample App 묶음 다운로드
+> $ wget https://nextcloud.paas-ta.org/index.php/s/8sCHaWcw4n36MiB/download --content-disposition  
+> $ unzip paasta-service-samples.zip  
+> $ cd paasta-service-samples/redis  
+
+<br>
+
+### <div id='3.3'> 3.3. PaaS-TA에서 서비스 신청
 Sample App에서 Redis 서비스를 사용하기 위해서는 서비스 신청(Provision)을 해야 한다.
 *참고: 서비스 신청시 PaaS-TA에서 서비스를 신청 할 수 있는 사용자로 로그인이 되어 있어야 한다.
 
 ##### 먼저 PaaS-TA Marketplace에서 서비스가 있는지 확인을 한다.
 
->`$  cf marketplace`
+> $ cf marketplace
 
 ```
 OK
@@ -393,14 +378,14 @@ redis     dedicated-vm   A paasta source control service for application develop
 - **내 서비스명** : 내 서비스에서 보여지는 명칭이다. 이 명칭을 기준으로 환경 설정 정보를 가져온다.
 
 
->`$  cf create-service redis dedicated-vm redis`
+> $ cf create-service redis dedicated-vm redis
 
 ```
+$ cf create-service redis dedicated-vm redis
+Creating service instance redis in org system / space dev as admin...
 OK
 
 Create in progress. Use 'cf services' or 'cf service redis' to check operation status.
-
-Attention: The plan `dedicated-vm` of service `redis` is not free.  The instance `redis` will incur a cost.  Contact your administrator if you think this is in error.
 ```
 
 
@@ -484,84 +469,99 @@ OK
 서비스 신청이 완료되었으면 Sample App 에서는 생성된 서비스 인스턴스를 Bind 하여 App에서 Redis 서비스를 이용한다.
 *참고: 서비스 Bind 신청시 PaaS-TA에서 서비스 Bind신청 할 수 있는 사용자로 로그인이 되어 있어야 한다.
 
+##### Sample App 디렉토리로 이동하여 manifest 파일을 확인한다.  
 
-##### Sample App 다운 및 manifest.yml을 생성한다.
-
->`$ git clone https://github.com/pivotal-cf/cf-redis-example-app.git`
-
->`$ cd cf-redis-example-app`
-
->`$ cf push redis-example-app --no-start`
+> $ vi manifest.yml   
 
 ```
-Creating app with these attributes...
-+ name:         redis-example-app
-  path:         /home/inception/workspace/user/cheolhan/cf-redis-example-app
-  buildpacks:
-+   ruby_buildpack
-+ instances:    1
-+ memory:       256M
-  routes:
-+   redis-example-app.115.68.47.178.nip.io
+---
+applications:
+- name: redis-example-app
+  memory: 256M
+  instances: 1
+  path: .
+  buildpacks: [ruby_buildpack]
+```
 
-Creating app redis-example-app...
-Mapping routes...
-Comparing local files to remote cache...
+##### --no-start 옵션으로 App을 배포한다.
+- -no-start: App 배포시 구동은 하지 않는다.
+
+> $ cf push --no-start 
+```  
+$ cf push --no-start
+Pushing app redis-example-app to org system / space dev as admin...
+Applying manifest file /home/ubuntu/workspace/samples/paasta-service-samples/redis/manifest.yml...
+Manifest applied
 Packaging files to upload...
 Uploading files...
- 5.39 MiB / 5.39 MiB [============================================================================================================================================================================================================================================] 100.00% 2s
+ 1.23 MiB / 1.23 MiB [===================================================================================================
 
 Waiting for API to complete processing files...
 
 name:              redis-example-app
 requested state:   stopped
-routes:            redis-example-app.115.68.47.178.nip.io
+routes:            redis-example-app.paastacloud.shop
 last uploaded:     
 stack:             
 buildpacks:        
 
 type:           web
+sidecars:       
 instances:      0/1
 memory usage:   256M
      state   since                  cpu    memory   disk     details
-#0   down    2019-11-20T01:02:06Z   0.0%   0 of 0   0 of 0   
+#0   down    2021-11-22T05:39:06Z   0.0%   0 of 0   0 of 0   
+```  
+  
+##### Sample Web App에서 생성한 서비스 인스턴스 바인드 신청을 한다.
 
-
-```
-
-<br>
-
-##### Sample App에서 생성한 서비스 인스턴스 바인드 신청을 한다.
-
->`$ cf bind-service redis-example-app redis`
+> $ cf bind-service redis-example-app redis 
 
 ```
-Binding service redis to app redis-sample in org system / space dev as admin...
+$ cf bind-service redis-example-app redis 
+	
+Binding service redis to app redis-example-app in org system / space dev as admin...
 OK
-TIP: Use 'cf restage redis-sample' to ensure your env variable changes take effect
 ```
+	
+##### 바인드가 적용되기 위해서 App을 재기동한다.
 
-##### 바인드를 적용하기 위해서 App을 재기동한다.
+> $ cf restart redis-example-app 
 
->`$ cf restart redis-example-app`
-```
-Waiting for app to start...
+```	
+$ cf restart redis-example-app
+Restarting app redis-example-app in org system / space dev as admin...
+
+Staging app and tracing logs...
+   Downloading ruby_buildpack...
+   Downloaded ruby_buildpack
+   Cell 4a88ce8b-1e72-485a-8f62-1fe0c6b9a7cd creating container for instance 4a47d02a-24d6-4046-b2b8-866b915eaf6a
+   Cell 4a88ce8b-1e72-485a-8f62-1fe0c6b9a7cd successfully created container for instance 4a47d02a-24d6-4046-b2b8-866b915e
+   Downloading app package...
+   Downloaded app package (1.4M)
+   -----> Ruby Buildpack version 1.8.37
+
+........
+........
+Instances starting...
+Instances starting...
 
 name:              redis-example-app
 requested state:   started
-routes:            redis-example-app.115.68.47.178.nip.io
-last uploaded:     Wed 20 Nov 10:12:51 KST 2019
+routes:            redis-example-app.paastacloud.shop
+last uploaded:     Mon 22 Nov 05:40:50 UTC 2021
 stack:             cflinuxfs3
-buildpacks:        ruby
+buildpacks:        
+	name             version   detect output   buildpack name
+	ruby_buildpack   1.8.37    ruby            ruby
 
-type:            web
-instances:       1/1
-memory usage:    256M
-start command:   bundle exec rackup config.ru -p $PORT
-     state     since                  cpu    memory         disk           details
-#0   running   2019-11-20T01:13:03Z   0.0%   9.5M of 256M   100.3M of 1G   
- 
-```
+type:           web
+sidecars:       
+instances:      1/1
+memory usage:   256M
+     state     since                  cpu    memory   disk     details
+#0   running   2021-11-22T05:41:01Z   0.0%   0 of 0   0 of 0  
+```  
 
 
 <br>
