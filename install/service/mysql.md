@@ -159,8 +159,8 @@ Succeeded
 > $ vi ~/workspace/service-deployment/mysql/vars.yml	
 ```
 # STEMCELL
-stemcell_os: "ubuntu-xenial"                                     # stemcell os
-stemcell_version: "621.94"                                       # stemcell version
+stemcell_os: "ubuntu-bionic"                                     # stemcell os
+stemcell_version: "1.34"                                       # stemcell version
 
 # NETWORK
 private_networks_name: "default"                                 # private network name
