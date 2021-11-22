@@ -451,7 +451,7 @@ TIP:  Use 'cf marketplace -s SERVICE' to view descriptions of individual plans o
 
 ##### Marketplace에서 원하는 서비스가 있으면 서비스 신청(Provision)을 한다.
 
->`$ cf create-service Mongo-DB default-plan mongodb-service-instance`
+> $ cf create-service Mongo-DB default-plan mongodb-service-instance 
 ```  
 $ cf create-service Mysql-DB Mysql-Plan2-100con mysql-service-instance
 Creating service instance mongodb-service-instance in org system / space dev as admin...
@@ -534,7 +534,7 @@ OK
 
 App 구동 시 Service와의 통신을 위하여 보안 그룹을 추가한다.
 
-##### rule.json 파일을 만들고 아래와 같이 내용을 넣는다.  
+##### rule.json을 편집한다.  
 > $ vi rule.json   
 ```
 ## mongodb의 mongodb_shard IP를 destination에 설정
