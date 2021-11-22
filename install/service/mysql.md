@@ -269,7 +269,7 @@ No service brokers found
   서비스팩 사용자ID / 비밀번호 : 서비스팩에 접근할 수 있는 사용자 ID로, 서비스팩도 하나의 API 서버이기 때문에 아무나 접근을 허용할 수 없어 접근이 가능한 ID/비밀번호를 입력한다.  
   서비스팩 URL : 서비스팩이 제공하는 API를 사용할 수 있는 URL을 입력한다.  
 
->`$ cf create-service-broker mysql-service-broker admin cloudfoundry http://<mysql-broker-ip>:8080`
+>`$ cf create-service-broker mysql-service-broker admin cloudfoundry http://<mysql-broker_ip>:8080`
 ```  
 $ cf create-service-broker mysql-service-broker admin cloudfoundry http://10.30.107.167:8080
 Creating service broker mysql-service-broker as admin...
