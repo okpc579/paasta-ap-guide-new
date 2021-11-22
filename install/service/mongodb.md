@@ -17,7 +17,7 @@
   
 3. [Mongodb 연동 Sample Web App 설명](#3)  
   3.1. [Mongodb 서비스 브로커 등록](#3.1)  
-  3.2. [Sample App ](#3.2)  
+  3.2. [Sample App 다운로드](#3.2)  
   3.3. [PaaS-TA에서 서비스 신청](#3.3)  
   3.4. [Sample App에 서비스 바인드 신청 및 App 확인](#3.4)   
 
