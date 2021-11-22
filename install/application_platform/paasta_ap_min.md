@@ -36,13 +36,10 @@ PaaS-TA AP는 VMware vSphere, Google Cloud Platform, Amazon Web Services EC2, Op
 
 본 문서는 Cloud Foundry의 BOSH Document와 Cloud Foundry Document를 참고로 작성하였다.
 
-BOSH Document: [http://bosh.io](http://bosh.io)
-
-Cloud Foundry Document: [https://docs.cloudfoundry.org](https://docs.cloudfoundry.org)
-
-BOSH Deployment: [https://github.com/cloudfoundry/bosh-deployment](https://github.com/cloudfoundry/bosh-deployment)
-
-CF Deployment: [https://github.com/cloudfoundry/cf-deployment](https://github.com/cloudfoundry/cf-deployment)
+BOSH Document: [http://bosh.io](http://bosh.io)  
+Cloud Foundry Document: [https://docs.cloudfoundry.org](https://docs.cloudfoundry.org)  
+BOSH Deployment: [https://github.com/cloudfoundry/bosh-deployment](https://github.com/cloudfoundry/bosh-deployment)  
+CF Deployment: [https://github.com/cloudfoundry/cf-deployment](https://github.com/cloudfoundry/cf-deployment)  
 
 <br><br>
 
