@@ -380,7 +380,7 @@ mysql-service-instance    Mysql-DB   Mysql-Plan2-100con                         
 서비스 신청이 완료되었으면 Sample Web App 에서는 생성된 서비스 인스턴스를 Bind 하여 App에서 MySQL 서비스를 이용한다.  
 *참고: 서비스 Bind 신청시 PaaS-TA에서 서비스 Bind신청 할 수 있는 사용자로 로그인이 되어 있어야 한다.  
 
-##### Sample App 디렉토리로 이동하여 manifest 파일을 확인한다.  
+##### manifest 파일을 확인한다.  
 
 > $ vi manifest.yml   
 
