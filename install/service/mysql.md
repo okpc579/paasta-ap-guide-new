@@ -76,7 +76,7 @@ bosh -e ${BOSH_ENVIRONMENT} upload-stemcell https://storage.googleapis.com/bosh-
 
 서비스 설치에 필요한 Deployment를 Git Repository에서 받아 서비스 설치 작업 경로로 위치시킨다.  
 
-- Service Deployment Git Repository URL : https://github.com/PaaS-TA/service-deployment/tree/v5.1.0
+- Service Deployment Git Repository URL : https://github.com/PaaS-TA/service-deployment/tree/v5.1.2
 
 ```
 # Deployment 다운로드 파일 위치 경로 생성 및 설치 경로 이동
@@ -84,13 +84,13 @@ $ mkdir -p ~/workspace
 $ cd ~/workspace
 
 # Deployment 파일 다운로드
-$ git clone https://github.com/PaaS-TA/service-deployment.git -b v5.1.0
+$ git clone https://github.com/PaaS-TA/service-deployment.git -b v5.1.2
 ```
 
 ### <div id="2.4"/> 2.4. Deployment 파일 수정
 
-BOSH Deployment manifest는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다.
-Deployment 파일에서 사용하는 network, vm_type, disk_type 등은 Cloud config를 활용하고, 활용 방법은 BOSH 2.0 가이드를 참고한다.   
+BOSH Deployment manifest는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다.  
+Deployment 파일에서 사용하는 network, vm_type, disk_type 등은 Cloud config를 활용하고, 활용 방법은 PaaS-TA AP 설치 가이드를 참고한다.  
 
 - Cloud config 설정 내용을 확인한다.   
 
