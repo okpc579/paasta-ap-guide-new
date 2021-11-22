@@ -338,7 +338,7 @@ Sample App에서 MySQL 서비스를 사용하기 위해서는 서비스 신청(P
 >`$ cf marketplace`  
 ```  
 $ cf marketplace
-Getting services from marketplace in org demo / space dev as demo...
+Getting services from marketplace in org org system / space dev as admin...
 OK
 
 service      plans                                    description
@@ -358,7 +358,7 @@ TIP:  Use 'cf marketplace -s SERVICE' to view descriptions of individual plans o
 >`$ cf create-service Mysql-DB Mysql-Plan2-100con mysql-service-instance`  
 ```  
 $ cf create-service Mysql-DB Mysql-Plan2-100con mysql-service-instance
-Creating service instance mysql-service-instance in org demo / space dev as demo...
+Creating service instance mysql-service-instance in org org system / space dev as admin...
 OK
 
 Attention: The plan `Mysql-Plan2-100con` of service `Mysql-DB` is not free.  The instance `mysql-service-instance` will incur a cost.  Contact your administrator if you think this is in error.
@@ -369,7 +369,7 @@ Attention: The plan `Mysql-Plan2-100con` of service `Mysql-DB` is not free.  The
 > $ cf services 
 ```  
 $ cf services
-Getting services in org demo / space dev as demo...
+Getting services in org system / space dev as admin...
 OK
 
 name                      service    plan                 bound apps            last operation
@@ -434,7 +434,7 @@ memory usage:   1024M
 ```
 $ cf bind-service mysql-sample-app mysql-service-instance
 	
-Binding service mysql-service-instance to app mysql-sample-app in org demo / space dev as demo...
+Binding service mysql-service-instance to app mysql-sample-app in org system / space dev as admin...
 OK
 ```
 
@@ -458,16 +458,28 @@ App 구동 시 Service와의 통신을 위하여 보안 그룹을 추가한다.
 
 > $ cf create-security-group mysql rule.json  
 
->![update_mysql_vsphere_30]  
+```
+$ cf create-security-group mysql rule.json  
+Creating security group mysql as admin...
+
+OK		
+```
 
 <br>
 
-##### Mysql 서비스를 사용할수 있도록 생성한 보안 그룹을 적용한 후, App을 리부팅 한다.  
-
+##### Mysql 서비스를 사용할수 있도록 생성한 보안 그룹을 적용한다.
 > $ cf bind-running-security-group mysql  
+```
+$ cf bind-running-security-group mysql  
+Binding security group mysql to running as admin...
+OK		
+```
+	
+##### App을 재기동 한다.  
+
+
 > $ cf restart mysql-sample-app  
->![update_mysql_vsphere_31] 
-```  
+```	
 $ cf restart mysql-sample-app  
 Restarting app mysql-sample-app in org system / space dev as admin...
 
