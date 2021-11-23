@@ -558,7 +558,7 @@ memory usage:   256M
 
 <br>
 
-- App이 정상적으로 Redis 서비스를 사용하는지 확인한다.
+App이 정상적으로 Redis 서비스를 사용하는지 확인한다.
 
 - curl 로 확인
 
