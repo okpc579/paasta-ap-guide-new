@@ -101,7 +101,6 @@ elif [[ ${CURRENT_IAAS} = "bosh-lite" ]]; then
 else
         echo "plz check CURRENT_IAAS"
 fi
-
 ```
 
 - Stemcell 업로드 Script 실행
@@ -626,9 +625,8 @@ PaaS-TA AP 배포 시, 설치 Option을 추가해야 한다. 설치 Option에 �
 
 - AWS 환경 설치 시
 
+> $ vi ~/workspace/paasta-deployment/paasta/deploy-aws.sh
 ```
-$ vi ~/workspace/paasta-deployment/paasta/deploy-aws.sh
-
 BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"					 # bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
 
 bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy paasta-deployment.yml \	# PaaS-TA Manifest File
@@ -643,9 +641,8 @@ bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy paasta-deployment.yml \	# PaaS-T
 ```
 
 - OpenStack 환경 설치 시
+> $ vi ~/workspace/paasta-deployment/paasta/deploy-openstack.sh
 ```
-$ vi ~/workspace/paasta-deployment/paasta/deploy-openstack.sh
-
 BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"					 # bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
 
 bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy paasta-deployment.yml \	# PaaS-TA Manifest File
@@ -669,10 +666,8 @@ $ chmod +x ~/workspace/paasta-deployment/paasta/*.sh
 
 ## <div id='2.7'/>2.7.  PaaS-TA AP 설치
 - 서버 환경에 맞추어 common_vars.yml와 vars.yml를 수정 한 뒤, Deploy 스크립트 파일의 설정을 수정한다.
-
+> $ vi ~/workspace/paasta-deployment/paasta/deploy-aws.sh
 ```
-$ vi ~/workspace/paasta-deployment/paasta/deploy-aws.sh
-
 BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"			 		# bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
 
 bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy paasta-deployment.yml \	# PaaS-TA Manifest File
@@ -771,24 +766,28 @@ $ sudo apt install cf7-cli -y
 $ cf --version
 ```
 
-- CF API URL 설정
-
-> $ cf api api.{system_domain} --skip-ssl-validation
-
-```
-ubuntu@inception:~$ cf api api.54.180.53.80.nip.io --skip-ssl-validation
-Setting api endpoint to api.54.180.53.80.nip.io...
-OK
-
-api endpoint:   https://api.54.180.53.80.nip.io
-api version:    3.87.0
-```
-
 - PaaS-TA AP 로그인
 
-> $ cf login
+> $ cf login -a https://api.{system_domain} --skip-ssl-validation 
 
 ```
+$ cf login -a https://api.54.180.53.80.nip.io --skip-ssl-validation 
+API endpoint: https://api.54.180.53.80.nip.io
+
+Email: admin
+Password: 
+
+Authenticating...
+OK
+
+Targeted org system.
+
+API endpoint:   https://api.54.180.53.80.nip.io
+API version:    3.99.0
+user:           admin
+org:            system
+space:          No space targeted, use 'cf target -s SPACE'
+
 ubuntu@inception:~$ cf login
 API endpoint: https://api.54.180.53.80.nip.io
 
