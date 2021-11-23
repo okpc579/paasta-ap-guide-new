@@ -564,18 +564,13 @@ App이 정상적으로 Redis 서비스를 사용하는지 확인한다.
 
 - curl 로 확인
 
->`$  export APP=redis-example-app.[CF Domain]`
-
->`$ curl -X PUT $APP/foo -d 'data=bar' `
 ```
+$ export APP=redis-example-app.[CF Domain]
+$ curl -X PUT $APP/foo -d 'data=bar
 success
-```
->`$ curl -X GET $APP/foo `
-```
+$ curl -X GET $APP/foo
 bar
-```
->`$ curl -X DELETE $APP/foo `
-```
+$ curl -X DELETE $APP/foo
 success
 ```
 
