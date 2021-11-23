@@ -531,24 +531,24 @@ memory usage:   1024M
 -  App이 정상적으로 RabbitMQ 서비스를 사용하는지 확인한다.
 
 
--  브라우저에서 확인
->`https://rabbit-example-app.<YOUR_DOMAIN>/write`
+- 브라우저에서 확인
+> https://rabbit-example-app.<YOUR_DOMAIN>/write 
 
->`https://rabbit-example-app.<YOUR_DOMAIN>/read`
+> https://rabbit-example-app.<YOUR_DOMAIN>/read 
 
 >![rabbitmq_image_12]
 
--  스토어 엔드포인트 테스트
->`curl -XPOST -d 'test' https://rabbit-example-app.<YOUR-DOMAIN>/store`
+- 스토어 엔드포인트 테스트
+> curl -XPOST -d 'test' https://rabbit-example-app.<YOUR-DOMAIN>/store -k
 
->`curl -XGET https://rabbit-example-app.<YOUR-DOMAIN>/store`
+> curl -XGET https://rabbit-example-app.<YOUR-DOMAIN>/store -k
 
 >![rabbitmq_image_13]
 
--  큐 엔드포인트 테스트
->`curl -XPOST -d 'test' https://rabbit-example-app.<YOUR-DOMAIN>/queues/<YOUR-QUEUE-NAME>`
+- 큐 엔드포인트 테스트
+> curl -XPOST -d 'test' https://rabbit-example-app.<YOUR-DOMAIN>/queues/<YOUR-QUEUE-NAME> -k
 
->`curl -XGET https://rabbit-example-app.<YOUR-DOMAIN>/queues/<YOUR-QUEUE-NAME>`
+> curl -XGET https://rabbit-example-app.<YOUR-DOMAIN>/queues/<YOUR-QUEUE-NAME> -k
 
 >![rabbitmq_image_14]
 
