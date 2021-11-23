@@ -491,8 +491,8 @@ OK
 [3-1-3]:./images/source-control/adminPortal_serviceControl.png
 [3-2-1]:./images/source-control/adminPortal_catalog.png
 [3-2-2]:./images/source-control/adminPortal_catalogDetail.PNG
-[003]:./images/source-control/userportal_catalog.PNG
-[004]:./images/source-control/userportal_dashboard.PNG
+[003]:./images/source-control/userportal_catalog.png
+[004]:./images/source-control/userportal_dashboard.png
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Install](../README.md) > Source Control Service
