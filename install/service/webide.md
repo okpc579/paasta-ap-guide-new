@@ -402,12 +402,12 @@ Succeeded
 
 - 생성된 WEB-IDE 서비스 인스턴스를 확인한다.
 
-> $ cf services
+> $ cf service webide-service
 ```
-Getting services in org system / space dev as admin...
-
-name     service   plan           bound apps   last operation     broker                  upgrade available
-webide   webide    dedicated-vm                create succeeded   webide-service-broker   
+ ... (생략) ...
+ Dashboard:        http://115.68.46.178:8080
+ Service broker:   webide-service-broker
+ ... (생략) ...
 ```
 <br>
 
