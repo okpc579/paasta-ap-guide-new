@@ -338,7 +338,7 @@ Succeeded
 Mongodb 서비스팩 배포가 완료 되었으면 Application에서 서비스 팩을 사용하기 위해서 먼저 Mongodb 서비스 브로커를 등록해 주어야 한다.  
 서비스 브로커 등록시 개방형 클라우드 플랫폼에서 서비스브로커를 등록할 수 있는 사용자로 로그인이 되어있어야 한다.  
 
-##### 서비스 브로커 목록을 확인한다.
+- 서비스 브로커 목록을 확인한다.
 
 > $ cf service-brokers  
 
@@ -351,7 +351,7 @@ No service brokers found
 
 <br>
 
-##### Mongodb 서비스 브로커를 등록한다.  
+- Mongodb 서비스 브로커를 등록한다.  
 
 > $ cf create-service-broker {서비스팩 이름} {서비스팩 사용자ID} {서비스팩 사용자비밀번호} http://{서비스팩 URL(IP)}   
   
@@ -365,7 +365,6 @@ No service brokers found
 $ cf create-service-broker mongodb-shard-service-broker admin cloudfoundry http://10.30.107.114:8080
 Creating service broker mongodb-shard-service-broker as admin...
 OK
-
 ```
 
 
@@ -374,7 +373,6 @@ OK
 > $ cf service-brokers
 
 ```
-$ cf service-brokers
 Getting service brokers as admin...
 name                           url
 mongodb-shard-service-broker   http://10.30.107.114:8080
@@ -385,7 +383,6 @@ mongodb-shard-service-broker   http://10.30.107.114:8080
 
 > $ cf service-access  
 ```
-$ cf service-access 
 Getting service access as admin...
 
 broker: mongodb-shard-service-broker
@@ -399,14 +396,13 @@ broker: mongodb-shard-service-broker
 ##### 특정 조직에 해당 서비스 접근 허용을 할당하고 접근 서비스 목록을 다시 확인한다. (전체 조직)
 
 > $ cf enable-service-access Mongo-DB <br>
+```
+Enabling access to all plans of service offering Mongo-DB for all orgs as admin...
+OK
+```
 > $ cf service-access
 
 ```
-$ cf enable-service-access Mongo-DB
-Enabling access to all plans of service offering Mongo-DB for all orgs as admin...
-OK
-  
-$ cf service-access 
 Getting service access as admin...
 
 broker: mongodb-shard-service-broker
@@ -420,9 +416,11 @@ Sample Web App은 PaaS-TA에 App으로 배포가 된다. App을 배포하여 구
 배포 완료 후 정상적으로 App 이 구동되면 브라우저나 curl로 해당 App에 접속 하여 Mongodb 환경정보(서비스 연결 정보)와 초기 적재된 데이터를 보여준다.  
 
 - Sample App 묶음 다운로드
-> $ wget https://nextcloud.paas-ta.org/index.php/s/8sCHaWcw4n36MiB/download --content-disposition  
-> $ unzip paasta-service-samples.zip  
-> $ cd paasta-service-samples/mongodb  
+```
+$ wget https://nextcloud.paas-ta.org/index.php/s/8sCHaWcw4n36MiB/download --content-disposition  
+$ unzip paasta-service-samples.zip  
+$ cd paasta-service-samples/mongodb  
+```
 
 <br>
 
@@ -432,12 +430,11 @@ Sample Web App에서 Mongodb 서비스를 사용하기 위해서는 서비스 �
 *참고: 서비스 신청시 개방형 클라우드 플랫폼에서 서비스를 신청 할 수 있는 사용자로 로그인이 되어 있어야 한다.
 
 
-##### 먼저 PaaS-TA Marketplace에서 서비스가 있는지 확인을 한다.
+- 먼저 PaaS-TA Marketplace에서 서비스가 있는지 확인을 한다.
 
 > $ cf marketplace
 
 ```  
-$ cf marketplace
 Getting services from marketplace in org system / space dev as admin...
 OK
 
@@ -449,22 +446,20 @@ TIP:  Use 'cf marketplace -s SERVICE' to view descriptions of individual plans o
 
 <br>
 
-##### Marketplace에서 원하는 서비스가 있으면 서비스 신청(Provision)을 한다.
+- Marketplace에서 원하는 서비스가 있으면 서비스 신청(Provision)을 한다.
 
 > $ cf create-service Mongo-DB default-plan mongodb-service-instance 
 ```  
-$ cf create-service Mysql-DB Mysql-Plan2-100con mysql-service-instance
 Creating service instance mongodb-service-instance in org system / space dev as admin...
 OK
 ```  
 
 <br>
 
-##### 생성된 Mongodb 서비스 인스턴스를 확인한다.
+- 생성된 Mongodb 서비스 인스턴스를 확인한다.
 
 > $ cf services 
 ```  
-$ cf services
 Getting services in org system / space dev as admin...
 OK
 
@@ -479,7 +474,7 @@ mongodb-service-instance  Mongo-DB   default-plan                               
 서비스 신청이 완료되었으면 Sample Web App 에서는 생성된 서비스 인스턴스를 Bind 하여 App에서 Mongodb 서비스를 이용한다.
 *참고: 서비스 Bind 신청시 개방형 클라우드 플랫폼에서 서비스 Bind신청 할 수 있는 사용자로 로그인이 되어 있어야 한다.
   
-##### manifest 파일을 확인한다.  
+- manifest 파일을 확인한다.  
 
 > $ vi manifest.yml   
 
@@ -492,12 +487,9 @@ applications:
   path: hello-spring-mongodb.war
 ```
 
-##### --no-start 옵션으로 App을 배포한다.
-- -no-start: App 배포시 구동은 하지 않는다.
-
+- --no-start 옵션으로 App을 배포한다.  
 > $ cf push --no-start 
 ```  
-$ cf push --no-start
 Applying manifest file /home/ubuntu/workspace/samples/paasta-service-samples/mongodb/manifest.yml...
 Manifest applied
 Packaging files to upload...
@@ -521,20 +513,18 @@ memory usage:   1024M
 #0   down    2021-11-22T05:13:12Z   0.0%   0 of 0   0 of 0   
 ```  
   
-##### Sample Web App에서 생성한 서비스 인스턴스 바인드 신청을 한다.
+- Sample Web App에서 생성한 서비스 인스턴스 바인드 신청을 한다.
 
 > $ cf bind-service hello-spring-Mongodb mongodb-service-instance 
 
 ```
-$ cf bind-service hello-spring-Mongodb mongodb-service-instance 
-	
 Binding service mongodb-service-instance to app hello-spring-Mongodb in org system / space dev as admin...
 OK
 ```
 
 App 구동 시 Service와의 통신을 위하여 보안 그룹을 추가한다.
 
-##### rule.json을 편집한다.  
+- rule.json을 편집한다.  
 > $ vi rule.json   
 ```
 ## mongodb의 mongodb_shard IP를 destination에 설정
@@ -547,31 +537,28 @@ App 구동 시 Service와의 통신을 위하여 보안 그룹을 추가한다.
 ]
 ```
   
-##### 보안 그룹을 생성한다.  
+- 보안 그룹을 생성한다.  
 
 > $ cf create-security-group mongodb rule.json  
 
 ```
-$ cf create-security-group mongodb rule.json  
 Creating security group mongodb as admin...
 
 OK		
 ```
   
-##### Mongodb 서비스를 사용할수 있도록 생성한 보안 그룹을 적용한다.
+- Mongodb 서비스를 사용할수 있도록 생성한 보안 그룹을 적용한다.
 > $ cf bind-running-security-group mongodb  
 ```
-$ cf bind-running-security-group mongodb  
 Binding security group mongodb to running as admin...
 OK		
 ```
   
-##### 바인드가 적용되기 위해서 App을 재기동한다.
+- 바인드가 적용되기 위해서 App을 재기동한다.
 
 > $ cf restart hello-spring-mongodb 
 
 ```	
-$ cf restart hello-spring-mongodb
 Restarting app hello-spring-mongodb in org system / space dev as admin...
 
 Staging app and tracing logs...
@@ -604,7 +591,7 @@ memory usage:   1024M
 ```  
 
 
-##### App이 정상적으로 Mongodb 서비스를 사용하는지 확인한다.
+- App이 정상적으로 Mongodb 서비스를 사용하는지 확인한다.
 
 > curl 로 확인
 
@@ -613,7 +600,7 @@ memory usage:   1024M
 > ![mongodb_image_22]
 
 
-##### 브라우저에서 확인
+- 브라우저에서 확인
 > ![mongodb_image_23]
 
 
@@ -626,57 +613,57 @@ Application에 바인딩된 Mongodb 서비스 연결정보는 Private IP로 구�
 MongoChef 프로그램은 무료로 사용할 수 있는 소프트웨어이다.
 
 
-##### MongoChef을 다운로드 하기 위해 아래 URL로 이동하여 설치파일을 다운로드 한다.
+- MongoChef을 다운로드 하기 위해 아래 URL로 이동하여 설치파일을 다운로드 한다.
 [**http://3t.io/mongochef/download/platform/**](http://3t.io/mongochef/download/platform/)
 > ![mongodb_image_24]
 
 
-##### 다운로드한 설치파일을 실행한다.
+- 다운로드한 설치파일을 실행한다.
 > ![mongodb_image_25]
 
 <br>
 
-##### MongoChef 설치를 위한 안내사항이다. Next 버튼을 클릭한다.
+- MongoChef 설치를 위한 안내사항이다. Next 버튼을 클릭한다.
 > ![mongodb_image_26]
 
 <br>
 
-##### 프로그램 라이선스에 관련된 내용이다. 동의(I accept the terms in the License Agreement)에 체크 후 Next 버튼을 클릭한다.
+- 프로그램 라이선스에 관련된 내용이다. 동의(I accept the terms in the License Agreement)에 체크 후 Next 버튼을 클릭한다.
 > ![mongodb_image_27]
 
 <br>
 
-##### MongoChef 을 설치할 경로를 설정 후 Next 버튼을 클릭한다. 별도의 경로 설정이 필요 없을 경우 default로 C드라이브 Program Files 폴더에 설치가 된다.
+- MongoChef 을 설치할 경로를 설정 후 Next 버튼을 클릭한다. 별도의 경로 설정이 필요 없을 경우 default로 C드라이브 Program Files 폴더에 설치가 된다.
 > ![mongodb_image_28]
 
 <br>
 
-##### Install 버튼을 클릭하여 설치를 진행한다.
+- Install 버튼을 클릭하여 설치를 진행한다.
 > ![mongodb_image_29]
 
 <br>
 
-##### Finish 버튼 클릭으로 설치를 완료한다.
+- Finish 버튼 클릭으로 설치를 완료한다.
 > ![mongodb_image_30]
 
 <br>
 
-##### MongoChef를 실행했을 때 처음 뜨는 화면이다. 이 화면에서 Server에 접속하기 위한 profile을 설정/저장하여 접속할 수 있다. Connect버튼을 클릭한다.
+- MongoChef를 실행했을 때 처음 뜨는 화면이다. 이 화면에서 Server에 접속하기 위한 profile을 설정/저장하여 접속할 수 있다. Connect버튼을 클릭한다.
 > ![mongodb_image_31]
 
 <br>
 
-##### 새로운 접속 정보를 작성하기 위해New Connection 버튼을 클릭한다.
+- 새로운 접속 정보를 작성하기 위해New Connection 버튼을 클릭한다.
 > ![mongodb_image_32]
 
 <br>
 
-##### Server에 접속하기 위한 Connection 정보를 입력한다.
+- Server에 접속하기 위한 Connection 정보를 입력한다.
 > ![mongodb_image_33]
 
 <br>
 
-##### 서버 정보는 Application에 바인드되어 있는 서버 정보를 입력한다. cf env <app_name> 명령어로 이용하여 확인한다.
+- 서버 정보는 Application에 바인드되어 있는 서버 정보를 입력한다. cf env <app_name> 명령어로 이용하여 확인한다.
 >`$ cf env hello-spring-mongodb` 
 
 <br>
@@ -685,40 +672,40 @@ MongoChef 프로그램은 무료로 사용할 수 있는 소프트웨어이다.
 
 <br>
 
-##### Authentication탭으로 이동하여 mongodb 의 인증정보를 입력한다.
+- Authentication탭으로 이동하여 mongodb 의 인증정보를 입력한다.
 > ![mongodb_image_35]
 
 <br>
 
-##### SSH 터널 탭을 클릭하고 PaaS-TA 운영 관리자에게 제공받은 SSH 터널링 가능한 서버 정보를 입력한다.
+- SSH 터널 탭을 클릭하고 PaaS-TA 운영 관리자에게 제공받은 SSH 터널링 가능한 서버 정보를 입력한다.
 > ![mongodb_image_36]
 
 <br>
 
-##### 모든 정보를 입력했으면 Test Connection 버튼을 눌러 접속 테스트를 한다.
+- 모든 정보를 입력했으면 Test Connection 버튼을 눌러 접속 테스트를 한다.
 > ![mongodb_image_37]
 
 <br>
 
-##### 모두 OK 결과가 나오면 정상적으로 접속이 된다는 것이다. OK 버튼을 누른다.
+- 모두 OK 결과가 나오면 정상적으로 접속이 된다는 것이다. OK 버튼을 누른다.
 
 
-##### Save 버튼을 눌러 작성한 접속정보를 저장한다.
+- Save 버튼을 눌러 작성한 접속정보를 저장한다.
 > ![mongodb_image_38]
 
 <br>
 
-##### 방금 저장한 접속정보를 선택하고 Connect 버튼을 클릭하여 접속한다.
+- 방금 저장한 접속정보를 선택하고 Connect 버튼을 클릭하여 접속한다.
 > ![mongodb_image_39]
 
 <br>
 
-##### 접속이 완료되면 좌측에 스키마 정보가 나타난다. 컬럼을 더블클릭 해보면 우측에 적재되어있는 데이터가 출력된다.
+- 접속이 완료되면 좌측에 스키마 정보가 나타난다. 컬럼을 더블클릭 해보면 우측에 적재되어있는 데이터가 출력된다.
 > ![mongodb_image_40]
 
 <br>
 
-##### 우측 화면에 쿼리 항목에 Query문을 작성한 후 실행 버튼(삼각형)을 클릭한다. Query문에 이상이 없다면 정상적으로 결과를 얻을 수 있을 것이다.
+- 우측 화면에 쿼리 항목에 Query문을 작성한 후 실행 버튼(삼각형)을 클릭한다. Query문에 이상이 없다면 정상적으로 결과를 얻을 수 있을 것이다.
 > ![mongodb_image_41]
 
 
