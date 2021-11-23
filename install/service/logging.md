@@ -25,11 +25,11 @@
 
 ### <div id="1.1"/> 1.1. 목적
 
-본 문서는 Logging 서비스 Release를 Bosh2.0을 이용하여 설치 하는 방법을 기술하였다.
+본 문서(Logging 서비스팩 설치 가이드)는 PaaS-TA에서 제공되는 서비스팩인 Logging 서비스팩을 Bosh를 이용하여 설치 하는 방법을 기술하였다.  
 
 ### <div id="1.2"/> 1.2. 범위
 
-설치 범위는 Logging 서비스 Release를 검증하기 위한 기본 설치를 기준으로 작성하였다.
+설치 범위는 Logging 서비스팩을 검증하기 위한 기본 설치를 기준으로 작성하였다.
 
 ### <div id="1.3"/> 1.3. 참고자료
 BOSH Document: [http://bosh.io](http://bosh.io)  
@@ -39,7 +39,9 @@ Cloud Foundry Document: [https://docs.cloudfoundry.org](https://docs.cloudfoundr
 
 ### <div id="2.1"/> 2.1. Prerequisite 
 
-본 설치 가이드는 Linux 환경에서 설치하는 것을 기준으로 하였다. 서비스 설치를 위해서는 BOSH 2.0과 PaaS-TA 5.0 이상, PaaS-TA 포털이 설치되어 있어야 한다. 
+본 설치 가이드는 Linux 환경에서 설치하는 것을 기준으로 하였다.  
+서비스팩 설치를 위해서는 먼저 BOSH CLI v2 가 설치 되어 있어야 하고 BOSH 에 로그인이 되어 있어야 한다.  
+BOSH CLI v2 가 설치 되어 있지 않을 경우 먼저 BOSH2.0 설치 가이드 문서를 참고 하여 BOSH CLI v2를 설치를 하고 사용법을 숙지 해야 한다.  
 
 ※ "firehose-to-syslog" uaac client 확인  
 
@@ -85,7 +87,8 @@ lastmodified: 1552530293656
 
 ### <div id="2.2"/> 2.2. Stemcell 확인  
 
-Stemcell 목록을 확인하여 서비스 설치에 필요한 Stemcell이 업로드 되어 있는 것을 확인한다.  (PaaS-TA 5.5.1 과 동일 stemcell 사용)
+Stemcell 목록을 확인하여 서비스 설치에 필요한 Stemcell이 업로드 되어 있는 것을 확인한다.  
+본 가이드의 Stemcell은 ubuntu-xenial 621.94를 사용한다.  
 
 > $ bosh -e micro-bosh stemcells  
 
@@ -101,6 +104,13 @@ bosh-aws-xen-hvm-ubuntu-xenial-go_agent  621.94*  ubuntu-xenial  -    ami-0297ff
 
 Succeeded
 ```  
+
+만약 해당 Stemcell이 업로드 되어 있지 않다면 [bosh.io 스템셀](https://bosh.io/stemcells/) 에서 해당되는 IaaS환경과 버전에 해당되는 스템셀 링크를 복사 후 다음과 같은 명령어를 실행한다.
+
+```
+# Stemcell 업로드 명령어 예제
+bosh -e ${BOSH_ENVIRONMENT} upload-stemcell -n {STEMCELL_URL}
+```
 
 ### <div id="2.3"/> 2.3. Deployment 다운로드
 
@@ -122,8 +132,8 @@ $ git clone https://github.com/PaaS-TA/common.git
 
 ### <div id="2.4"/> 2.4. Deployment 파일 수정
 
-BOSH Deployment manifest는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다.
-Deployment 파일에서 사용하는 network, vm_type, disk_type 등은 Cloud config를 활용하고, 활용 방법은 BOSH 2.0 가이드를 참고한다.   
+BOSH Deployment manifest는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다.  
+Deployment 파일에서 사용하는 network, vm_type, disk_type 등은 Cloud config를 활용하고, 활용 방법은 PaaS-TA AP 설치 가이드를 참고한다.  
 
 - Cloud config 설정 내용을 확인한다.   
 
@@ -192,56 +202,16 @@ Succeeded
 
 > $ vi ~/workspace/common/common_vars.yml
 ```
-# BOSH INFO
-bosh_ip: "10.0.1.6"				# BOSH IP
-bosh_url: "https://10.0.1.6"			# BOSH URL (e.g. "https://00.000.0.0")
-bosh_client_admin_id: "admin"			# BOSH Client Admin ID
-bosh_client_admin_secret: "ert7na4jpew48"	# BOSH Client Admin Secret('echo $(bosh int ~/workspace/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
-bosh_director_port: 25555			# BOSH director port
-bosh_oauth_port: 8443				# BOSH oauth port
-bosh_version: 271.2				# BOSH version('bosh env' 명령어를 통해 확인 가능, on-demand service용, e.g. "271.2")
+... ((생략)) ...
 
 # PAAS-TA INFO
 system_domain: "61.252.53.246.nip.io"		# Domain (nip.io를 사용하는 경우 HAProxy Public IP와 동일)
-paasta_admin_username: "admin"			# PaaS-TA Admin Username
-paasta_admin_password: "admin"			# PaaS-TA Admin Password
-paasta_nats_ip: "10.0.1.121"
-paasta_nats_port: 4222
-paasta_nats_user: "nats"
-paasta_nats_password: "7EZB5ZkMLMqT73h2Jh3UsqO"	# PaaS-TA Nats Password (CredHub 로그인후 'credhub get -n /micro-bosh/paasta/nats_password' 명령어를 통해 확인 가능)
-paasta_nats_private_networks_name: "default"	# PaaS-TA Nats 의 Network 이름
-paasta_database_ips: "10.0.1.123"		# PaaS-TA Database IP (e.g. "10.0.1.123")
-paasta_database_port: 5524			# PaaS-TA Database Port (e.g. 5524(postgresql)/13307(mysql)) -- Do Not Use "3306"&"13306" in mysql
-paasta_database_type: "postgresql"                      # PaaS-TA Database Type (e.g. "postgresql" or "mysql")
-paasta_database_driver_class: "org.postgresql.Driver"   # PaaS-TA Database driver-class (e.g. "org.postgresql.Driver" or "com.mysql.jdbc.Driver")
-paasta_cc_db_id: "cloud_controller"		# CCDB ID (e.g. "cloud_controller")
-paasta_cc_db_password: "cc_admin"		# CCDB Password (e.g. "cc_admin")
-paasta_uaa_db_id: "uaa"				# UAADB ID (e.g. "uaa")
-paasta_uaa_db_password: "uaa_admin"		# UAADB Password (e.g. "uaa_admin")
-paasta_api_version: "v3"
-
-# UAAC INFO
 uaa_client_admin_id: "admin"			# UAAC Admin Client Admin ID
 uaa_client_admin_secret: "admin-secret"		# UAAC Admin Client에 접근하기 위한 Secret 변수
-uaa_client_portal_secret: "clientsecret"	# UAAC Portal Client에 접근하기 위한 Secret 변수
 
-# Monitoring INFO
-metric_url: "10.0.161.101"			# Monitoring InfluxDB IP
-syslog_address: "10.0.121.100"            	# Logsearch의 ls-router IP
-syslog_port: "2514"                          	# Logsearch의 ls-router Port
-syslog_transport: "relp"                        # Logsearch Protocol
-saas_monitoring_url: "61.252.53.248"	   	# Pinpoint HAProxy WEBUI의 Public IP
-monitoring_api_url: "61.252.53.241"        	# Monitoring-WEB의 Public IP
-
-### Portal INFO
-portal_web_user_ip: "52.78.88.252"
-portal_web_user_url: "http://portal-web-user.52.78.88.252.nip.io" 
-
-### ETC INFO
-abacus_url: "http://abacus.61.252.53.248.nip.io"	# abacus url (e.g. "http://abacus.xxx.xxx.xxx.xxx.nip.io")
+... ((생략)) ...
 
 ```
-
 
 
 - Deployment YAML에서 사용하는 변수 파일을 서버 환경에 맞게 수정한다.
@@ -408,17 +378,24 @@ Context: admin, from client admin
 
 ```
 
--	Logging 서비스 계정을 생성 한다.  
-$ uaac client add <CF_UAA_CLIENT_ID> -s <CF_UAA_CLIENT_SECRET> --redirect_uri <Logging 서비스 URI> --scope <퍼미션 범위> --authorized_grant_types <권한 타입> --authorities=<권한 퍼미션> --autoapprove=<자동승인권한>  
+-	Logging 서비스 계정을 생성 한다. 
+```
+### uaac client add 설명
+uaac client add <CF_UAA_CLIENT_ID> -s <CF_UAA_CLIENT_SECRET> --redirect_uri <Logging 서비스 URI> --scope <퍼미션 범위> --authorized_grant_types <권한 타입> --authorities=<권한 퍼미션> --autoapprove=<자동승인권한>  
 
-  -	<CF_UAA_CLIENT_ID> : uaac 클라이언트 id  
-  -	<CF_UAA_CLIENT_SECRET> : uaac 클라이언트 secret  
-  -	<Logging 서비스 URI> : 성공적으로 리다이렉션 할 Logging 서비스 접근 URI (http://<logging-service의 router public IP>)  
-  -	<퍼미션 범위> : 클라이언트가 사용자를 대신하여 얻을 수있는 허용 범위 목록  
-  -	<권한 타입> : 서비스가 제공하는 API를 사용할 수 있는 권한 목록  
-  -	<권한 퍼미션> : 클라이언트에 부여 된 권한 목록  
-  -	<자동승인권한> : 사용자 승인이 필요하지 않은 권한 목록  
-
+<CF_UAA_CLIENT_ID> : uaac 클라이언트 id  
+<CF_UAA_CLIENT_SECRET> : uaac 클라이언트 secret  
+<Logging 서비스 URI> : 성공적으로 리다이렉션 할 Logging 서비스 접근 URI (http://<logging-service의 router public IP>)  
+<퍼미션 범위> : 클라이언트가 사용자를 대신하여 얻을 수있는 허용 범위 목록  
+<권한 타입> : 서비스가 제공하는 API를 사용할 수 있는 권한 목록  
+<권한 퍼미션> : 클라이언트에 부여 된 권한 목록  
+<자동승인권한> : 사용자 승인이 필요하지 않은 권한 목록  
+``` 
+> uaac client add laasclient -s clientsecret --redirect_uri " http://[DASHBOARD_URL]" \
+>  --scope "cloud_controller_service_permissions.read , openid , cloud_controller.read , cloud_controller.write , cloud_controller.admin" \
+>  --authorized_grant_types "authorization_code , client_credentials , refresh_token" \
+>  --authorities="uaa.resource" \
+>--autoapprove="openid , cloud_controller_service_permissions.read"
 ```  
 # e.g. Logging 서비스 계정 생성
 $ uaac client add laasclient -s clientsecret --redirect_uri " http://115.68.47.181" \
