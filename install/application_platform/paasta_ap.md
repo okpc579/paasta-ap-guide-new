@@ -787,17 +787,6 @@ API version:    3.99.0
 user:           admin
 org:            system
 space:          No space targeted, use 'cf target -s SPACE'
-
-ubuntu@inception:~$ cf login
-API endpoint: https://api.54.180.53.80.nip.io
-
-Email> admin
-
-Password>
-Authenticating...
-OK
-
-Select an org (or press enter to skip):
 ```
 
 [PaaSTa_FLAVOR_Image]:./images/ap/aws-vmtype.png
