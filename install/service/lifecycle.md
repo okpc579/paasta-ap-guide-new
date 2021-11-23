@@ -16,9 +16,11 @@
   2.6. [서비스 설치 확인](#2.6)  
   
 3. [라이프사이클 관리 서비스 관리 및 신청](#3)  
-  3.1. [서비스 브로커 등록](#3.1)  
-  3.2. [PaaS-TA 운영자 포탈 - 서비스 등록](#3.2)  
-  3.3. [PaaS-TA 사용자 포탈 - 서비스 신청](#3.3)
+ 3.1. [서비스 브로커 등록](#3.1)   
+ 3.2. [서비스 신청](#3.2)  
+　3.2.1. [서비스 신청 - 포탈](#3.2.1)   
+　3.2.2. [서비스 신청 - CLI](#3.2.2)   
+
 
 
 
@@ -345,7 +347,8 @@ broker: app-lifecycle-service-broker
    app-lifecycle   dedicated-vm   all
 ```
 
-### <div id="3.2"/>  3.2.	PaaS-TA 운영자 포탈 - 서비스 등록
+### <div id='3.2'/> 3.2. 서비스 신청
+#### <div id='3.2.1'/> 3.2.1. 서비스 신청 - 포탈
 
 -	PaaS-TA 운영자 포탈에 접속하여 서비스를 등록한다.  
 
@@ -368,7 +371,6 @@ broker: app-lifecycle-service-broker
 >  
 > ![002]
 
-## <div id="3.3"/>  3.3. PaaS-TA 사용자 포탈 - 서비스 신청
 -	PaaS-TA 사용자  포탈에 접속하여, 카탈로그를 통해 서비스를 신청한다.   
 
 ![003]
@@ -377,11 +379,25 @@ broker: app-lifecycle-service-broker
 
 ![004]  
 
- > 라이프사이클 관리 서비스 대시보드
- >
- > ![005]  
- >  
- > ![006]
+#### <div id='3.2.2'/> 3.2.2. 서비스 신청 - CLI
+CLI 를 통한 Lifecycle 서비스 신청 방법을 설명한다.
+
+- Lifecycle 서비스를 신청한다. (password 변수 설정)
+> $ cf create-service app-lifecycle dedicated-vm lifecycle -c '{"password":"password"}'
+```
+Creating service instance app-lifecycle in org system / space dev as admin...
+OK
+```
+
+- 서비스 상세의 대시보드 URL 정보를 확인하여 서비스에 접근한다.
+> $ cf service app-lifecycle
+ ```
+ ... (생략) ...
+dashboard:        http://13.124.4.62/admin/|http://13.124.4.62/discover
+service broker:   app-lifecycle-service-broker
+ ... (생략) ...
+ ```
+
 
 
 - 라이프사이클 관리 서비스(TAIGA) 참고 자료  
