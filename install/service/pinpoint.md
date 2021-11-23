@@ -567,7 +567,7 @@ memory usage:   1024M
 There are no running instances of this process.
 ```
 
-- APP 및 Service  정상 구동 확인
+- Service 정상 구동 확인
 > $ cf service PS1
 ```
 name:             PS1
@@ -578,16 +578,23 @@ description:      A simple pinpoint implementation
 documentation:    http://www.openpaas.org
 dashboard:        http://3.53.24.53/#/main
 service broker:   pinpoint-service-broker
-
-http://3.12.24.53/#/main/spring-music-pinpoint@SPRING_BOOT/realtime 접속
 ```
 
+- PINPOINT UI 접근 
+```
+# PINPOINT APP UI
+http://[DASHBOARD]/[application_name]@SPRING_BOOT/realtime
+
+e.g. http://3.12.24.53/#/main/spring-music-pinpoint@SPRING_BOOT/realtime
+```	
 	
+![pinpoint_image_04]
 
 [pinpoint_image_01]:./images/pinpoint/pinpoint-image1.png
 [pinpoint_image_01-1]:./images/pinpoint/pinpoint-image1-1.png
 [pinpoint_image_02]:./images/pinpoint/pinpoint-image2.png
 [pinpoint_image_03]:./images/pinpoint/pinpoint-image3.png
+[pinpoint_image_04]:./images/pinpoint/pinpoint-image4.png
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Install](../README.md) > Pinpoint APM Service
