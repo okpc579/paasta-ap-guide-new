@@ -457,6 +457,14 @@ scclient
 >  
 > ![3-2-2]
 
+- PaaS-TA 사용자  포탈에 접속하여, 카탈로그를 통해 서비스를 신청한다.   
+
+![003]
+
+- 대시보드 URL을 통해 서비스에 접근한다.    
+
+![004]  
+
 
 #### <div id="3.3.2"/>  3.3.2. 서비스 신청 - CLI
 CLI 를 통한 형상관리 서비스 신청 방법을 설명한다.
@@ -483,6 +491,8 @@ OK
 [3-1-3]:./images/source-control/adminPortal_serviceControl.png
 [3-2-1]:./images/source-control/adminPortal_catalog.png
 [3-2-2]:./images/source-control/adminPortal_catalogDetail.PNG
+[003]:./images/source-control/userportal_catalog.PNG
+[004]:./images/source-control/userportal_dashboard.PNG
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Install](../README.md) > Source Control Service
