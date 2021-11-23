@@ -535,9 +535,8 @@ memory usage:   1024M
 
 
 - App이 정상적으로 GlusterFS 서비스를 사용하는지 확인한다.
-```
-수정필요 결과창 캡쳐 후 반영 필요
-```
+![glusterfs_image_18]
+![glusterfs_image_19]
 
 [glusterfs_image_01]:./images/glusterfs/glusterfs_image_01.png
 
@@ -552,7 +551,8 @@ memory usage:   1024M
 [glusterfs_image_15]:./images/glusterfs/glusterfs_image_15.png
 [glusterfs_image_16]:./images/glusterfs/glusterfs_image_16.png
 [glusterfs_image_17]:./images/glusterfs/glusterfs_image_17.jpeg
-
+[glusterfs_image_18]:./images/glusterfs/glusterfs_image_18.png
+[glusterfs_image_19]:./images/glusterfs/glusterfs_image_19.png
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Install](../README.md) > GlusterFS Service
