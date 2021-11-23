@@ -535,16 +535,9 @@ memory usage:   1024M
 
 
 - App이 정상적으로 GlusterFS 서비스를 사용하는지 확인한다.
-
-> curl 로 확인
-
->`$  curl hello-spring-glusterfs.<System_Domain>` 
-
-> ![mongodb_image_22]
-
-
-- 브라우저에서 확인
-> ![mongodb_image_23]
+```
+수정필요 결과창 캡쳐 후 반영 필요
+```
 
 [glusterfs_image_01]:./images/glusterfs/glusterfs_image_01.png
 
