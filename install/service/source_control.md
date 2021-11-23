@@ -437,15 +437,6 @@ Creating service instance paasta-sourcecontrol in org system / space dev as admi
 OK
 ```
 
-- 생성된 형상관리 서비스 인스턴스를 확인한다.
-> $ cf services
-```
-Getting services in org system / space dev as admin...
-
-name                    service                  plan            bound apps   last operation     broker                        upgrade available
-paasta-sourcecontrol    p-paasta-sourcecontrol   Default                      create succeeded   paasta-sourcecontrol-broker
-```
-
 - 서비스 상세의 대시보드 URL 정보를 확인하여 서비스에 접근한다.
 > $ cf service paasta-sourcecontrol
  ```
