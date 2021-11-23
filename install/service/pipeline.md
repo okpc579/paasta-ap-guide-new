@@ -26,8 +26,7 @@
 ## <div id='1'/> 1. 문서 개요
 
 ### <div id='1.1'/> 1.1. 목적
-본 문서(배포 파이프라인 서비스팩 설치 가이드)는 개방형 PaaS 플랫폼 고도화 및 개발자 지원 환경 기반의 Open PaaS에서 제공되는 서비스팩인 배포 파이프라인 서비스팩을 Bosh를 이용하여 설치 및 서비스 등록하는 방법을 기술하였다.
-PaaS-TA 3.5 버전부터는 Bosh2.0 기반으로 deploy를 진행하며 기존 Bosh1.0 기반으로 설치를 원할경우에는 PaaS-TA 3.1 이하 버전의 문서를 참고한다.
+본 문서(배포 파이프라인 서비스팩 설치 가이드)는 PaaS-TA에서 제공되는 서비스팩인 배포 파이프라인 서비스팩을 Bosh를 이용하여 설치 하는 방법을 기술하였다.  
 
 ### <div id='1.2'/> 1.2. 범위
 설치 범위는 배포 파이프라인 서비스팩을 검증하기 위한 기본 설치를 기준으로 작성하였다.
@@ -41,13 +40,16 @@ Cloud Foundry Document: [https://docs.cloudfoundry.org](https://docs.cloudfoundr
 
 ### <div id='2.1'/> 2.1. Prerequisite
 
-본 설치 가이드는 Linux 환경에서 설치하는 것을 기준으로 하였다. 서비스팩 설치를 위해서는 BOSH 2.0과 PaaS-TA 5.0 이상, PaaS-TA 포털이 설치되어 있어야 한다.
+본 설치 가이드는 Linux 환경에서 설치하는 것을 기준으로 하였다.  
+서비스팩 설치를 위해서는 먼저 BOSH CLI v2 가 설치 되어 있어야 하고 BOSH 에 로그인이 되어 있어야 한다.  
+BOSH CLI v2 가 설치 되어 있지 않을 경우 먼저 BOSH2.0 설치 가이드 문서를 참고 하여 BOSH CLI v2를 설치를 하고 사용법을 숙지 해야 한다.  
 
 ### <div id='2.2'/> 2.2. Stemcell 확인
 
-Stemcell 목록을 확인하여 서비스 설치에 필요한 Stemcell이 업로드 되어 있는 것을 확인한다.  (PaaS-TA 5.5.1 과 동일 stemcell 사용)
+Stemcell 목록을 확인하여 서비스 설치에 필요한 Stemcell이 업로드 되어 있는 것을 확인한다.  
+본 가이드의 Stemcell은 ubuntu-xenial 621.94를 사용한다.  
 
-> $ bosh -e micro-bosh stemcells
+> $ bosh -e ${BOSH_ENVIRONMENT} stemcells
 
 ```
 Using environment '10.0.1.6' as client 'admin'
@@ -60,6 +62,13 @@ bosh-aws-xen-hvm-ubuntu-xenial-go_agent  621.94*  ubuntu-xenial  -    ami-0297ff
 1 stemcells
 
 Succeeded
+```
+
+만약 해당 Stemcell이 업로드 되어 있지 않다면 [bosh.io 스템셀](https://bosh.io/stemcells/) 에서 해당되는 IaaS환경과 버전에 해당되는 스템셀 링크를 복사 후 다음과 같은 명령어를 실행한다.
+
+```
+# Stemcell 업로드 명령어 예제
+bosh -e ${BOSH_ENVIRONMENT} upload-stemcell -n {STEMCELL_URL}
 ```
 
 ### <div id='2.3'/> 2.3. Deployment 다운로드  
@@ -82,8 +91,8 @@ $ git clone https://github.com/PaaS-TA/common.git
 
 ### <div id='2.4'/> 2.4. Deployment 파일 수정
 
-BOSH Deployment manifest는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다.
-Deployment 파일에서 사용하는 network, vm_type, disk_type 등은 Cloud config를 활용하고, 활용 방법은 BOSH 2.0 가이드를 참고한다.   
+BOSH Deployment manifest는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다.  
+Deployment 파일에서 사용하는 network, vm_type, disk_type 등은 Cloud config를 활용하고, 활용 방법은 PaaS-TA AP 설치 가이드를 참고한다.  
 
 - Cloud config 설정 내용을 확인한다.   
 
@@ -152,56 +161,13 @@ Succeeded
 
 > $ vi ~/workspace/common/common_vars.yml
 ```
-# BOSH INFO
-bosh_ip: "10.0.1.6"				# BOSH IP
-bosh_url: "https://10.0.1.6"			# BOSH URL (e.g. "https://00.000.0.0")
-bosh_client_admin_id: "admin"			# BOSH Client Admin ID
-bosh_client_admin_secret: "ert7na4jpew48"	# BOSH Client Admin Secret('echo $(bosh int ~/workspace/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
-bosh_director_port: 25555			# BOSH director port
-bosh_oauth_port: 8443				# BOSH oauth port
-bosh_version: 271.2				# BOSH version('bosh env' 명령어를 통해 확인 가능, on-demand service용, e.g. "271.2")
+... ((생략)) ...
 
-# PAAS-TA INFO
 system_domain: "61.252.53.246.nip.io"		# Domain (nip.io를 사용하는 경우 HAProxy Public IP와 동일)
-paasta_admin_username: "admin"			# PaaS-TA Admin Username
-paasta_admin_password: "admin"			# PaaS-TA Admin Password
-paasta_nats_ip: "10.0.1.121"
-paasta_nats_port: 4222
-paasta_nats_user: "nats"
-paasta_nats_password: "7EZB5ZkMLMqT73h2Jh3UsqO"	# PaaS-TA Nats Password (CredHub 로그인후 'credhub get -n /micro-bosh/paasta/nats_password' 명령어를 통해 확인 가능)
-paasta_nats_private_networks_name: "default"	# PaaS-TA Nats 의 Network 이름
-paasta_database_ips: "10.0.1.123"		# PaaS-TA Database IP (e.g. "10.0.1.123")
-paasta_database_port: 5524			# PaaS-TA Database Port (e.g. 5524(postgresql)/13307(mysql)) -- Do Not Use "3306"&"13306" in mysql
-paasta_database_type: "postgresql"                      # PaaS-TA Database Type (e.g. "postgresql" or "mysql")
-paasta_database_driver_class: "org.postgresql.Driver"   # PaaS-TA Database driver-class (e.g. "org.postgresql.Driver" or "com.mysql.jdbc.Driver")
-paasta_cc_db_id: "cloud_controller"		# CCDB ID (e.g. "cloud_controller")
-paasta_cc_db_password: "cc_admin"		# CCDB Password (e.g. "cc_admin")
-paasta_uaa_db_id: "uaa"				# UAADB ID (e.g. "uaa")
-paasta_uaa_db_password: "uaa_admin"		# UAADB Password (e.g. "uaa_admin")
-paasta_api_version: "v3"
 
-# UAAC INFO
-uaa_client_admin_id: "admin"			# UAAC Admin Client Admin ID
-uaa_client_admin_secret: "admin-secret"		# UAAC Admin Client에 접근하기 위한 Secret 변수
-uaa_client_portal_secret: "clientsecret"	# UAAC Portal Client에 접근하기 위한 Secret 변수
-
-# Monitoring INFO
-metric_url: "10.0.161.101"			# Monitoring InfluxDB IP
-syslog_address: "10.0.121.100"            	# Logsearch의 ls-router IP
-syslog_port: "2514"                          	# Logsearch의 ls-router Port
-syslog_transport: "relp"                        # Logsearch Protocol
-saas_monitoring_url: "61.252.53.248"	   	# Pinpoint HAProxy WEBUI의 Public IP
-monitoring_api_url: "61.252.53.241"        	# Monitoring-WEB의 Public IP
-
-### Portal INFO
-portal_web_user_ip: "52.78.88.252"
-portal_web_user_url: "http://portal-web-user.52.78.88.252.nip.io" 
-
-### ETC INFO
-abacus_url: "http://abacus.61.252.53.248.nip.io"	# abacus url (e.g. "http://abacus.xxx.xxx.xxx.xxx.nip.io")
+... ((생략)) ...
 
 ```
-
 
 - Deployment YAML에서 사용하는 변수 파일을 서버 환경에 맞게 수정한다.
 
@@ -403,85 +369,82 @@ PaaS-TA 운영자 포탈을 통해 배포파이프라인 서비스를 등록 및
 배포 파이프라인 서비스팩 배포가 완료되었으면 파스-타 포탈에서 서비스 팩을 사용하기 위해서 먼저 배포 파이프라인 서비스 브로커를 등록해 주어야 한다.
 서비스 브로커 등록 시 개방형 클라우드 플랫폼에서 서비스 브로커를 등록할 수 있는 사용자로 로그인이 되어있어야 한다.
 
-##### 서비스 브로커 목록을 확인한다.
+- 서비스 브로커 목록을 확인한다.
 
->`$ cf service-brokers`  
+> $ cf service-brokers   
 ```  
-$ cf service-brokers
 Getting service brokers as admin...
 
 name   url
 No service brokers found
 ```  
 
-##### 배포 파이프라인 서비스 브로커를 등록한다.
->`$ cf create-service-broker {서비스팩 이름} {서비스팩 사용자ID} {서비스팩 사용자비밀번호} http://{서비스팩 URL}`  
+- 배포 파이프라인 서비스 브로커를 등록한다.
+> $ cf create-service-broker {서비스팩 이름} {서비스팩 사용자ID} {서비스팩 사용자비밀번호} http://{서비스팩 URL}   
 
   **서비스팩 이름** : 서비스 팩 관리를 위해 PaaS-TA에서 보여지는 명칭이다. 서비스 Marketplace에서는 각각의 API 서비스 명이 보여지니 여기서 명칭은 서비스팩 리스트의 명칭이다.<br>
   **서비스팩 사용자ID** / 비밀번호 : 서비스팩에 접근할 수 있는 사용자 ID입니다. 서비스팩도 하나의 API 서버이기 때문에 아무나 접근을 허용할 수 없어 접근이 가능한 ID/비밀번호를 입력한다.<br>
   **서비스팩 URL** : 서비스팩이 제공하는 API를 사용할 수 있는 URL을 입력한다.
 
->`$ cf create-service-broker delivery-pipeline admin cloudfoundry http://10.30.107.64:8080`  
+> $ cf create-service-broker delivery-pipeline admin cloudfoundry http://<delivery-pipeline-service-broker_ip>:8080   
 ```  
-$ cf create-service-broker delivery-pipeline-broker admin cloudfoundry http://10.30.107.64:8080
+$ cf create-service-broker delivery-pipeline-broker admin cloudfoundry http://10.0.161.22:8080
 Creating service broker delivery-pipeline-broker as admin...
 OK
 ```  
 
-##### 등록된 배포 파이프라인 서비스 브로커를 확인한다.
+- 등록된 배포 파이프라인 서비스 브로커를 확인한다.
 
->`$ cf service-brokers`  
+> $ cf service-brokers  
 ```  
-$ cf service-brokers
 Getting service brokers as admin...
 
 name                           url
-delivery-pipeline-broker       http://10.30.107.64:8080
+delivery-pipeline-broker       http://10.0.161.22:8080
 ```  
 
-##### 접근 가능한 서비스 목록을 확인한다.
->`$ cf service-access`
+- 접근 가능한 서비스 목록을 확인한다.
+>$ cf service-access  
 
 ```
-# 서비스 브로커 생성시 디폴트로 접근을 허용하지 않는다.
-$ cf service-access
 Getting service access as admin...
 broker: delivery-pipeline-broker
    service             plan                          access   orgs
    delivery-pipeline   delivery-pipeline-shared      none
    delivery-pipeline   delivery-pipeline-dedicated   none
-
 ```
+서비스 브로커 생성시 디폴트로 접근을 허용하지 않는다.
 
-##### 특정 조직에 해당 서비스 접근 허용을 할당하고 접근 서비스 목록을 다시 확인한다. (전체 조직)  
->`$ cf enable-service-access delivery-pipeline`  
->`$ cf service-access`  
-```  
-$ cf enable-service-access delivery-pipeline                                         
+- 특정 조직에 해당 서비스 접근 허용을 할당하고 접근 서비스 목록을 다시 확인한다. (전체 조직)  
+> $ cf enable-service-access delivery-pipeline   
+```
 Enabling access to all plans of service delivery-pipeline for all orgs as admin...   
 OK
-
-$ cf service-access
+```
+> $ cf service-access   
+```                          
 Getting service access as admin...
 broker: delivery-pipeline-broker
    service             plan                          access   orgs
    delivery-pipeline   delivery-pipeline-shared      all
    delivery-pipeline   delivery-pipeline-dedicated   all
-
 ```
 
 ### <div id='3.2'/> 3.2. UAAC Client 등록
 UAAC Client 계정 등록 절차에 대한 순서를 확인한다.
 
 - 배포 파이프라인 UAAC Client를 등록한다.
-> $ uaac client add {클라이언트 명} -s {클라이언트 비밀번호} --redirect_URL{대시보드 URL} --scope {퍼미션 범위} --authorized_grant_types {권한 타입} --authorities={권한 퍼미션} --autoapprove={자동승인권한}  
-> 클라이언트 명 : uaac 클라이언트 명 (pipeclient)  
-> 클라이언트 비밀번호 : uaac 클라이언트 비밀번호  
-> 대시보드 URL: 성공적으로 리다이렉션 할 대시보드 URL   
-> 퍼미션 범위: 클라이언트가 사용자를 대신하여 얻을 수있는 허용 범위 목록  
-> 권한 타입 : 서비스팩이 제공하는 API를 사용할 수 있는 권한 목록  
-> 권한 퍼미션 : 클라이언트에 부여 된 권한 목록  
-> 자동승인권한: 사용자 승인이 필요하지 않은 권한 목록  
+```
+### uaac client add 
+uaac client add {클라이언트 명} -s {클라이언트 비밀번호} --redirect_URL{대시보드 URL} --scope {퍼미션 범위} --authorized_grant_types {권한 타입} --authorities={권한 퍼미션} --autoapprove={자동승인권한}  
+클라이언트 명 : uaac 클라이언트 명 (pipeclient)  
+클라이언트 비밀번호 : uaac 클라이언트 비밀번호  
+대시보드 URL: 성공적으로 리다이렉션 할 대시보드 URL   
+퍼미션 범위: 클라이언트가 사용자를 대신하여 얻을 수있는 허용 범위 목록  
+권한 타입 : 서비스팩이 제공하는 API를 사용할 수 있는 권한 목록  
+권한 퍼미션 : 클라이언트에 부여 된 권한 목록  
+자동승인권한: 사용자 승인이 필요하지 않은 권한 목록  
+```
 
 >$ uaac client add pipeclient -s clientsecret --redirect_uri "[DASHBOARD_URL]" /  
 >--scope "cloud_controller_service_permissions.read , openid , cloud_controller.read , cloud_controller.write , cloud_controller.admin" /  
@@ -502,7 +465,7 @@ Context: uaa_admin, from client uaa_admin
 $ uaac token client get <UAA_ADMIN_CLIENT_ID> -s <UAA_ADMIN_CLIENT_SECRET>
 
 ### 배포파이프라인 uaac client 등록
-$ uaac client add pipeclient -s clientsecret --redirect_uri "http://115.68.47.175:8084 http://115.68.47.175:8084/dashboard" \
+$ uaac client add pipeclient -s clientsecret --redirect_uri "http://101.55.50.208:8084 http://101.55.50.208:8084/dashboard" \
    --scope "cloud_controller_service_permissions.read , openid , cloud_controller.read , cloud_controller.write , cloud_controller.admin" \
    --authorized_grant_types "authorization_code , client_credentials , refresh_token" \
    --authorities="uaa.resource" \
@@ -511,24 +474,19 @@ $ uaac client add pipeclient -s clientsecret --redirect_uri "http://115.68.47.17
 
 
 ### <div id='3.3'/> 3.3. Java Offline Buildpack 등록
-- 배포 파이프라인 서비스 사용을 위해 Java Offline Buildpack을 등록한다.
-> `$ cf create-buildpack [BUILDPACK] [PATH] [POSITION] `  
-> **[BUILDPACK]** : java_buildpack_offline (buildpack 명)  
-> **[PATH]** : buildpack zip 파일의 경로     
-> **[POSITION]** : 우선순위  
+배포 파이프라인 서비스 사용을 위해 Java Offline Buildpack을 등록한다.
 
 - Java Offline Buildpack 다운로드 
 > wget -O java-buildpack-offline-v4.37.zip https://nextcloud.paas-ta.org/index.php/s/8rGJXEFa8odFDLk/download 
 
 **buildpack 등록**  
 
->`$ cf create-buildpack java_buildpack_offline ..\buildpack\java-buildpack-offline-v4.25.zip 3`  
+> $ cf create-buildpack java_buildpack_offline ..\buildpack\java-buildpack-offline-v4.25.zip 3   
 
 **buildpack 등록 확인**  
 
->`$ cf buildpacks`
+> $ cf buildpacks 
 ```
-$ cf buildpacks
 Getting buildpacks...
 
 buildpack                position   enabled   locked   filename
@@ -584,12 +542,7 @@ binary_buildpack         12         true      false    binary_buildpack-cflinuxf
 
 
 ### <div id='3.5'/> 3.5. 서비스 신청 - CF CLI
-- CF CLI 를 통한 파이프라인 서비스 신청 방법을 설명한다.
-
-> $ cf create-service [SERVICE] [PLAN] [SERVICE_INSTANCE] [-c PARAMETERS_AS_JSON]
-> - [SERVICE] / [PLAN] : 서비스 명과 서비스 플랜
-> - [SERVICE_INSTANCE] : 서비스 인스턴스 명 (내 서비스 목록에서 보여지는 명칭)
-> - [-c PARAMETERS_AS_JSON] : JSON 형식의 파라미터 (파이프라인 서비스 신청 시, owner 파라미터는 필수)
+CF CLI 를 통한 파이프라인 서비스 신청 방법을 설명한다.
 
 ```
 ### e.g. 파이프라인 서비스 신청
