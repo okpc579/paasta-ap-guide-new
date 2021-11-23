@@ -330,8 +330,8 @@ broker: on-demand-redis-service
 
 ##### 특정 조직에 해당 서비스 접근 허용을 할당하고 접근 서비스 목록을 다시 확인한다. (전체 조직)
 
->`$ cf enable-service-access redis` <br>
->`$ cf service-access`
+> $ cf enable-service-access redis  <br>
+> $ cf service-access 
 ```
 $ cf enable-service-access redis
 Enabling access to all plans of service offering redis for all orgs as admin...
