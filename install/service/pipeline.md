@@ -556,7 +556,6 @@ OK
 - 서비스 상세의 대시보드 URL 정보를 확인하여 서비스에 접근한다.
 > $ cf service pipeline-service
  ```
- 
  ... (생략) ...
  Dashboard:        http://101.55.50.208:8084/dashboard/2bcbe484-e235-441e-bdb6-ef88f73cb516/
  Service broker:   delivery-pipeline-broker
