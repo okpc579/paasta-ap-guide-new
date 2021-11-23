@@ -36,6 +36,7 @@
 ### <div id="1.3"/> 1.3. 참고자료
 BOSH Document: [http://bosh.io](http://bosh.io)  
 Cloud Foundry Document: [https://docs.cloudfoundry.org](https://docs.cloudfoundry.org)  
+애플리케이션 Gateway 서비스(WSO2) Document : [https://apim.docs.wso2.com/en/3.2.0/](https://apim.docs.wso2.com/en/3.2.0/)
 
 ## <div id="2"/> 2. 애플리케이션 Gateway 서비스 설치  
 
@@ -396,8 +397,7 @@ service broker:   api-gateway-service-broker
  ```
 
 
-- 애플리케이션 Gateway 서비스(WSO2) 참고 자료  
-  https://docs.wso2.com/display/AM260/Introduction
+
 
 [001]:./images/apigateway-service/image001.png
 [002]:./images/apigateway-service/image002.png
