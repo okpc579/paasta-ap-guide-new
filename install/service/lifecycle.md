@@ -36,7 +36,8 @@
 
 ### <div id="1.3"/> 1.3. 참고자료
 BOSH Document: [http://bosh.io](http://bosh.io)  
-Cloud Foundry Document: [https://docs.cloudfoundry.org](https://docs.cloudfoundry.org)  
+Cloud Foundry Document: [https://docs.cloudfoundry.org](https://docs.cloudfoundry.org)   
+라이프사이클 관리 서비스(TAIGA) 참고 자료  : [https://resources.taiga.io/](https://resources.taiga.io/)
 
 ## <div id="2"/> 2. 라이프사이클 관리 서비스 설치  
 
@@ -398,10 +399,6 @@ service broker:   app-lifecycle-service-broker
  ... (생략) ...
  ```
 
-
-
-- 라이프사이클 관리 서비스(TAIGA) 참고 자료  
-  https://tree.taiga.io/support/
 
 [001]:./images/applifecycle-service/image001.png
 [002]:./images/applifecycle-service/image002.png
