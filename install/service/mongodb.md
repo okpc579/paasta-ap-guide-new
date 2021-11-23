@@ -34,8 +34,7 @@
 설치 범위는 Mongodb 서비스팩을 검증하기 위한 기본 설치를 기준으로 작성하였다.  
 
 ### <div id='1.3'> 1.3. 참고자료
-BOSH Document: [http://bosh.io](http://bosh.io)  ![mongodb_image_22](https://user-images.githubusercontent.com/55691511/142844084-c6354537-548a-43a4-a377-f3565da0b7dc.png)
-
+BOSH Document: [http://bosh.io](http://bosh.io) 
 Cloud Foundry Document: [https://docs.cloudfoundry.org](https://docs.cloudfoundry.org)  
 
 
