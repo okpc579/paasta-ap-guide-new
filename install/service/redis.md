@@ -700,8 +700,8 @@ Redis Desktop Manager 프로그램은 무료로 사용할 수 있는 오픈소�
 [7]:./images/redis/redis_test7.PNG
 [8]:./images/redis/redis_test8.PNG
 [9]:./images/redis/redis_test9.PNG
-[10]./images/redis/redis_test10.PNG
-[11]./images/redis/redis_test11.PNG
+[10]:./images/redis/redis_test10.PNG
+[11]:./images/redis/redis_test11.PNG
 
 
 
