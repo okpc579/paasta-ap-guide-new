@@ -593,14 +593,6 @@ memory usage:   1024M
 
 - App이 정상적으로 Mongodb 서비스를 사용하는지 확인한다.
 
-> curl 로 확인
-
-> $ curl hello-spring-Mongodb.<System_Domain>  
-
-> ![mongodb_image_22]
-
-
-- 브라우저에서 확인
 > ![mongodb_image_23]
 
 
