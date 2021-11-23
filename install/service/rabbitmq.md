@@ -532,23 +532,15 @@ memory usage:   1024M
 
 
 - 브라우저에서 확인
-> https://rabbit-example-app.<YOUR_DOMAIN>/write  
-> https://rabbit-example-app.<YOUR_DOMAIN>/read   
 
 >![rabbitmq_image_12]
 
 - 스토어 엔드포인트 테스트
-> $ curl -XPOST -d 'test' https://rabbit-example-app.<YOUR-DOMAIN>/store -k  
-> $ curl -XGET https://rabbit-example-app.<YOUR-DOMAIN>/store -k  
-
->![rabbitmq_image_13]
-
-- 큐 엔드포인트 테스트
-> $ curl -XPOST -d 'test' https://rabbit-example-app.<YOUR-DOMAIN>/queues/<YOUR-QUEUE-NAME> -k  
-> $ curl -XGET https://rabbit-example-app.<YOUR-DOMAIN>/queues/<YOUR-QUEUE-NAME> -k  
-
->![rabbitmq_image_14]
-
+```	
+$ curl -XPOST -d 'test' https://rabbit-example-app.<YOUR-DOMAIN>/store -k  
+$ curl -XGET https://rabbit-example-app.<YOUR-DOMAIN>/store -k  
+test
+```
 
 
 
