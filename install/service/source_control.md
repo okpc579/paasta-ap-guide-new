@@ -421,8 +421,45 @@ scclient
     lastmodified: 1542894096080
 ```  
 
-### <div id="3.3"/>  3.3. 서비스 신청 - CLI
-CLI 를 통한 Lifecycle 서비스 신청 방법을 설명한다.
+### <div id='3.3'/> 3.3. 서비스 신청
+#### <div id='3.3.1'/> 3.3.1. 서비스 신청 - 포탈
+1. PaaS-Ta 운영자 포탈에 접속하여 로그인한다.
+![3-1-1]
+
+2. 로그인 후 서비스 관리 > 서비스 브로커 페이지에서 형상관리 서비스 브로커를 확인한다.
+![3-1-2]
+
+3. 서비스 관리 > 서비스 제어 페이지에서 배포 형상관리 서비스 플랜 접근 가능 권한을 확인한다.
+![3-1-3]
+
+4. 운영관리 > 카탈로그 > 앱서비스 페이지를 확인하여 "형상관리" 서비스 이름을 클릭한다.  
+![3-2-1]
+
+- 아래의 내용을 상세 페이지에 입력한다.
+
+> ※ 카탈로그 관리 > 앱 서비스
+> - 이름 : 형상관리
+> - 분류 :  개발 지원 도구
+> - 서비스 : p-paasta-sourcecontrol
+> - 썸네일 : [형상관리 서비스 썸네일]
+> - 문서 URL : https://github.com/PaaS-TA/SOURCE-CONTROL-SERVICE-BROKER
+> - 서비스 생성 파라미터 : owner
+> - 서비스 생성 파라미터 : org_name
+> - 앱 바인드 사용 : N
+> - 공개 : Y
+> - 대시보드 사용 : Y
+> - 온디멘드 : N
+> - 태그 : paasta / tag6, free / tag2
+> - 요약 : 형상관리
+> - 설명 :
+> 형상관리 서비스로써 GIT 과 SVN 레파지토리를 제공합니다.
+> 형상관리 Server, 형상관리 서비스 브로커로 최소 사항을 구성하였다.
+>  
+> ![3-2-2]
+
+
+#### <div id="3.3.2"/>  3.3.2. 서비스 신청 - CLI
+CLI 를 통한 형상관리 서비스 신청 방법을 설명한다.
 
 - 형상관리 서비스 사용을 위해 서비스를 신청 한다.
 > $ cf create-service p-paasta-sourcecontrol Default paasta-sourcecontrol -c '{"owner":"demo", "org_name":"demo"}'  
@@ -441,6 +478,11 @@ OK
  ```
  
 [source_controller_service_guide01]:.images/source-control/source_controller_service_guide01.PNG
+[3-1-1]:./images/source-control/adminPortal_login.png
+[3-1-2]:./images/source-control/adminPortal_serviceBroker.png
+[3-1-3]:./images/source-control/adminPortal_serviceControl.png
+[3-2-1]:./images/source-control/adminPortal_catalog.png
+[3-2-2]:./images/source-control/adminPortal_catalogDetail.PNG
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Install](../README.md) > Source Control Service
