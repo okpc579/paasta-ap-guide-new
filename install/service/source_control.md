@@ -421,14 +421,8 @@ scclient
     lastmodified: 1542894096080
 ```  
 
-### <div id="3.3"/>  3.3. 서비스 신청  
-
-- 먼저 PaaS-TA Marketplace에서 서비스가 있는지 확인을 한다.
-
-> $ cf marketplace
-```
-```
-
+### <div id="3.3"/>  3.3. 서비스 신청 - CLI
+CLI 를 통한 Lifecycle 서비스 신청 방법을 설명한다.
 
 - 형상관리 서비스 사용을 위해 서비스를 신청 한다.
 > $ cf create-service p-paasta-sourcecontrol Default paasta-sourcecontrol -c '{"owner":"demo", "org_name":"demo"}'  
