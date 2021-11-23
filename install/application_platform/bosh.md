@@ -318,9 +318,8 @@ BOSH 설치 Option은 아래와 같다.
 
 - AWS 환경 설치 시 
 
+> $ vi ~/workspace/paasta-deployment/bosh/deploy-aws.sh
 ```
-$ vi ~/workspace/paasta-deployment/bosh/deploy-aws.sh
-
 bosh create-env bosh.yml \                         
 	--state=aws/state.json \			# BOSH Latest Running State, 설치 시 생성, Backup 필요
 	--vars-store=aws/creds.yml \			# BOSH Credentials and Certs, 설치 시 생성, Backup 필요
@@ -334,8 +333,8 @@ bosh create-env bosh.yml \
 
 - OpenStack 환경 설치 시 
 
+> $ vi ~/workspace/paasta-deployment/bosh/deploy-openstack.sh
 ```
-$ vi ~/workspace/paasta-deployment/bosh/deploy-openstack.sh
 bosh create-env bosh.yml \                       
 	--state=openstack/state.json \			# BOSH Latest Running State, 설치 시 생성, Backup 필요
 	--vars-store=openstack/creds.yml \		# BOSH Credentials and Certs, 설치 시 생성, Backup 필요
@@ -468,9 +467,8 @@ PaaS-TA 5.5부터 BOSH 로그인을 하는 스크립트의 생성을 지원한�
 
 - BOSH Login 생성 Script의 설정 수정
 
+> $ vi ~/workspace/paasta-deployment/bosh/create-bosh-login.sh
 ```
-$ vi ~/workspace/paasta-deployment/bosh/create-bosh-login.sh
-
 #!/bin/bash
 
 BOSH_DEPLOYMENT_PATH="<BOSH_DEPLOYMENT_PATH>" 	# (e.g. ~/workspace/paasta-deployment/bosh)
