@@ -499,8 +499,7 @@ buildpacks:
 
 - App이 정상적으로 MySQL 서비스를 사용하는지 확인한다.  
 
-> 브라우져에서 확인  
->![update_mysql_vsphere_34]  
+![update_mysql_vsphere_34]  
 
 ## <div id='4'> 4. MySQL Client 툴 접속  
 
