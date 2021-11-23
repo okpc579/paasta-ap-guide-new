@@ -534,8 +534,11 @@ memory usage:   1024M
 ```  
 
 
-- App이 정상적으로 GlusterFS 서비스를 사용하는지 확인한다.
+- App이 정상적으로 GlusterFS 서비스를 사용하는지 확인한다.  
+	
 ![glusterfs_image_18]
+<br>
+
 ![glusterfs_image_19]
 
 [glusterfs_image_01]:./images/glusterfs/glusterfs_image_01.png
