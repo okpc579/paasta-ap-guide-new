@@ -20,7 +20,8 @@
   3.2. [UAA Client 등록](#3.2)  
   3.3. [Java Offline Buildpack 등록](#3.3)  
   3.4. [서비스 신청](#3.4)  
-  3.5. [서비스 신청 - CF CLI](#3.5)  
+    3.4.1. [서비스 신청 - 포탈](#3.4.1)  
+    3.4.2. [서비스 신청 - CF CLI](#3.4.2)  
 
 
 ## <div id='1'/> 1. 문서 개요
@@ -507,6 +508,7 @@ binary_buildpack         12         true      false    binary_buildpack-cflinuxf
 
   
 ### <div id='3.4'/> 3.4. 서비스 신청
+#### <div id='3.4.1'/> 3.4.1. 서비스 신청 - 포탈
 1. PaaS-Ta 운영자 포탈에 접속하여 로그인한다.
 ![3-1-1]
 
@@ -541,7 +543,7 @@ binary_buildpack         12         true      false    binary_buildpack-cflinuxf
 > ![3-2-2]
 
 
-### <div id='3.5'/> 3.5. 서비스 신청 - CF CLI
+### <div id='3.4.2'/> 3.4.2. 서비스 신청 - CF CLI
 CF CLI 를 통한 파이프라인 서비스 신청 방법을 설명한다.
 
 ```
