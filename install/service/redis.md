@@ -66,7 +66,7 @@ Succeeded
 
 ```
 # Stemcell 업로드 명령어 예제
-bosh -e ${BOSH_ENVIRONMENT} upload-stemcell https://storage.googleapis.com/bosh-core-stemcells/${STEMCELL_VERSION}/bosh-stemcell-${STEMCELL_VERSION}-openstack-kvm-ubuntu-bionic-go_agent.tgz -n
+bosh -e ${BOSH_ENVIRONMENT} upload-stemcell -n {STEMCELL_URL}
 ```
 
 ### <div id="2.3"/> 2.3. Deployment 다운로드  
