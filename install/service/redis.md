@@ -17,7 +17,9 @@
 
 3. [CF CLI를 이용한 On-Demand-Redis 서비스 브로커 등록](#3)  
   3.1. [PaaS-TA에서 서비스 신청](#3.1)  
-  3.2. [Sample App에 서비스 바인드 신청 및 App 확인](#3.2)  
+  3.2. [Sample App 다운로드](#3.2)  
+  3.3. [PaaS-TA에서 서비스 신청](#3.3)  
+  3.4. [Sample App에 서비스 바인드 신청 및 App 확인](#3.4)  
 
 4. [Portal을 이용한 Redis Service Test](#4)  
   4.1. [서비스 신청](#4.1)  
@@ -462,7 +464,7 @@ OK
 ```
 
 
-### <div id='3.2'> 3.2. Sample App에 서비스 바인드 신청 및 App 확인
+### <div id='3.4'> 3.4. Sample App에 서비스 바인드 신청 및 App 확인
 서비스 신청이 완료되었으면 Sample App 에서는 생성된 서비스 인스턴스를 Bind 하여 App에서 Redis 서비스를 이용한다.
 *참고: 서비스 Bind 신청시 PaaS-TA에서 서비스 Bind신청 할 수 있는 사용자로 로그인이 되어 있어야 한다.
 
