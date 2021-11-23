@@ -278,7 +278,7 @@ Redis 서비스팩 배포가 완료 되었으면 Application에서 서비스 팩
 서비스 브로커 등록시에는 PaaS-TA에서 서비스 브로커를 등록할 수 있는 사용자로 로그인하여야 한다
 
 
-##### 서비스 브로커 목록을 확인한다.
+- 서비스 브로커 목록을 확인한다.
 
 > $ cf service-brokers
 ```
@@ -304,9 +304,9 @@ Creating service broker on-demand-redis-service as admin...
 OK
 ```
 
-##### 등록된 On-Demand-Redis 서비스 브로커를 확인한다.
+- 등록된 On-Demand-Redis 서비스 브로커를 확인한다.
 
->$ cf service-brokers 
+> $ cf service-brokers 
 ```
 Getting service brokers as admin...
 
@@ -315,9 +315,9 @@ on-demand-redis-service  http://10.30.255.26:8080
 ```
 
 
-##### 접근 가능한 서비스 목록을 확인한다.
+- 접근 가능한 서비스 목록을 확인한다.
 
->`$ cf service-access`
+> $ cf service-access 
 ```
 Getting service access as admin...
 broker: on-demand-redis-service
@@ -328,16 +328,15 @@ broker: on-demand-redis-service
 서비스 브로커 등록시 최초에는 접근을 허용하지 않는다. 따라서 access는 none으로 설정된다.
 
 
-##### 특정 조직에 해당 서비스 접근 허용을 할당하고 접근 서비스 목록을 다시 확인한다. (전체 조직)
+- 특정 조직에 해당 서비스 접근 허용을 할당하고 접근 서비스 목록을 다시 확인한다. (전체 조직)
 
 > $ cf enable-service-access redis  <br>
-> $ cf service-access 
 ```
-$ cf enable-service-access redis
 Enabling access to all plans of service offering redis for all orgs as admin...
 OK
-
-$ cf service-access
+```
+> $ cf service-access 
+```
 Getting service access as admin...
 	
 broker: on-demand-redis-service
@@ -348,9 +347,11 @@ broker: on-demand-redis-service
 ### <div id='3.2'> 3.2. Sample App 다운로드
 
 - Sample App 묶음 다운로드
-> $ wget https://nextcloud.paas-ta.org/index.php/s/8sCHaWcw4n36MiB/download --content-disposition  
-> $ unzip paasta-service-samples.zip  
-> $ cd paasta-service-samples/redis  
+```
+$ wget https://nextcloud.paas-ta.org/index.php/s/8sCHaWcw4n36MiB/download --content-disposition  
+$ unzip paasta-service-samples.zip  
+$ cd paasta-service-samples/redis  
+```
 
 <br>
 
@@ -358,7 +359,7 @@ broker: on-demand-redis-service
 Sample App에서 Redis 서비스를 사용하기 위해서는 서비스 신청(Provision)을 해야 한다.
 *참고: 서비스 신청시 PaaS-TA에서 서비스를 신청 할 수 있는 사용자로 로그인이 되어 있어야 한다.
 
-##### 먼저 PaaS-TA Marketplace에서 서비스가 있는지 확인을 한다.
+- 먼저 PaaS-TA Marketplace에서 서비스가 있는지 확인을 한다.
 
 > $ cf marketplace
 
@@ -370,9 +371,9 @@ redis     dedicated-vm   A paasta source control service for application develop
 
 <br>
 
-##### Marketplace에서 원하는 서비스가 있으면 서비스 신청(Provision)을 한다.
+- Marketplace에서 원하는 서비스가 있으면 서비스 신청(Provision)을 한다.
 
->`$ cf create-service {서비스명} {서비스 플랜} {내 서비스명}`
+> $ cf create-service {서비스명} {서비스 플랜} {내 서비스명}  
 - **서비스명** : redis로 Marketplace에서 보여지는 서비스 명칭이다.
 - **서비스플랜** : 서비스에 대한 정책으로 plans에 있는 정보 중 하나를 선택한다. On-Demand-Redis 서비스는 dedicated-vm만 지원한다.
 - **내 서비스명** : 내 서비스에서 보여지는 명칭이다. 이 명칭을 기준으로 환경 설정 정보를 가져온다.
@@ -381,7 +382,6 @@ redis     dedicated-vm   A paasta source control service for application develop
 > $ cf create-service redis dedicated-vm redis
 
 ```
-$ cf create-service redis dedicated-vm redis
 Creating service instance redis in org system / space dev as admin...
 OK
 
@@ -391,9 +391,9 @@ Create in progress. Use 'cf services' or 'cf service redis' to check operation s
 
 <br>
 
-##### 생성된 Redis 서비스 인스턴스의 status를 확인한다.
+- 생성된 Redis 서비스 인스턴스의 status를 확인한다.
  * create in progress인 상태일경우 서비스 준비중이므로 서비스 이용 및 바인드, 삭제가 제한이되므로 create succeeded가 될때까지 기다려야 한다.
->`$ cf service redis`
+> $ cf service redis  
 
 ```
 Showing info of service redis in org system / space dev as admin...
@@ -415,7 +415,7 @@ updated:   2019-07-05T05:58:16Z
 
 There are no bound apps for this service.
 ```
-##### 생성된 Redis 서비스 인스턴스의 status가 create succeeded가 된것을 확인한다.
+- 생성된 Redis 서비스 인스턴스의 status가 create succeeded가 된것을 확인한다.
 ```
 Showing info of service redis in org system / space dev as admin...
 
@@ -438,19 +438,17 @@ There are no bound apps for this service.
 ```
 
 <br>
-### on-demand-service를 통해 서비스를 생성할 경우 해당 공간에 security-group 생성 및 자동적으로 할당이 된다.
-
-
-### Secuirty-group에 redis_[서비스 할당된 space guid] 가 생성된것을 확인한다.
->`$ cf space [space] --guid`
+	
+- on-demand-service를 통해 서비스를 생성할 경우 해당 공간에 security-group 생성 및 자동적으로 할당이 된다.  
+- Secuirty-group에 redis_[서비스 할당된 space guid] 가 생성된것을 확인한다.  
+	
+> $ cf space [space] --guid  
 ```
-$ cf space dev --guid
 20bc9b52-c3d5-4cd2-94d9-7f444f9ab464
 ```
 
->`$ cf security-groups`
+> $ cf security-groups  
 ```
-
 Getting security groups as admin...
 OK
 
@@ -461,7 +459,6 @@ OK
 #2   public_networks                              <all>          <all>   running
      public_networks                              <all>          <all>   staging
 #3   redis_20bc9b52-c3d5-4cd2-94d9-7f444f9ab464   system         dev     running
-
 ```
 
 
@@ -469,7 +466,7 @@ OK
 서비스 신청이 완료되었으면 Sample App 에서는 생성된 서비스 인스턴스를 Bind 하여 App에서 Redis 서비스를 이용한다.
 *참고: 서비스 Bind 신청시 PaaS-TA에서 서비스 Bind신청 할 수 있는 사용자로 로그인이 되어 있어야 한다.
 
-##### manifest 파일을 확인한다.  
+- manifest 파일을 확인한다.  
 
 > $ vi manifest.yml   
 
@@ -483,12 +480,10 @@ applications:
   buildpacks: [ruby_buildpack]
 ```
 
-##### --no-start 옵션으로 App을 배포한다.
-- -no-start: App 배포시 구동은 하지 않는다.
+- --no-start 옵션으로 App을 배포한다.
 
 > $ cf push --no-start 
 ```  
-$ cf push --no-start
 Pushing app redis-example-app to org system / space dev as admin...
 Applying manifest file /home/ubuntu/workspace/samples/paasta-service-samples/redis/manifest.yml...
 Manifest applied
@@ -513,23 +508,20 @@ memory usage:   256M
 #0   down    2021-11-22T05:39:06Z   0.0%   0 of 0   0 of 0   
 ```  
   
-##### Sample Web App에서 생성한 서비스 인스턴스 바인드 신청을 한다.
+- Sample Web App에서 생성한 서비스 인스턴스 바인드 신청을 한다.
 
 > $ cf bind-service redis-example-app redis 
 
-```
-$ cf bind-service redis-example-app redis 
-	
+```	
 Binding service redis to app redis-example-app in org system / space dev as admin...
 OK
 ```
 	
-##### 바인드가 적용되기 위해서 App을 재기동한다.
+- 바인드가 적용되기 위해서 App을 재기동한다.
 
 > $ cf restart redis-example-app 
 
 ```	
-$ cf restart redis-example-app
 Restarting app redis-example-app in org system / space dev as admin...
 
 Staging app and tracing logs...
@@ -566,9 +558,9 @@ memory usage:   256M
 
 <br>
 
-##### App이 정상적으로 Redis 서비스를 사용하는지 확인한다.
+- App이 정상적으로 Redis 서비스를 사용하는지 확인한다.
 
-##### curl 로 확인
+- curl 로 확인
 
 >`$  export APP=redis-example-app.[CF Domain]`
 
@@ -592,38 +584,38 @@ success
 사용자 및 관리자 포탈이 설치가 되어있으면 포탈을 통해서 레디스 서비스 신청 및 바인드, 테스트가 가능하다.
 
 
-##### 관리자 포탈에 접속해 서비스 관리의 서비스 브로커 페이지에서 브로커 리스트를 확인한다..
+- 관리자 포탈에 접속해 서비스 관리의 서비스 브로커 페이지에서 브로커 리스트를 확인한다..
 ![1]
-##### On-Demand-Redis 서비스 브로커를 등록한다.
+- On-Demand-Redis 서비스 브로커를 등록한다.
 ![2]
 ![3]
-##### 등록된 On-Demand-Redis 서비스 브로커를 확인한다.
+- 등록된 On-Demand-Redis 서비스 브로커를 확인한다.
 ![4]
-##### 서비스관리의 서비스 제어 페이지에서 접근 가능한 서비스 목록을 확인한다.
+- 서비스관리의 서비스 제어 페이지에서 접근 가능한 서비스 목록을 확인한다.
 ![5]
 
 서비스 브로커 등록시 최초에는 접근을 허용하지 않는다. 따라서 access는 none으로 설정된다.
-##### 특정 조직에 해당 서비스 접근 허용을 할당하고 접근 서비스 목록을 다시 확인한다. (전체 조직)
+- 특정 조직에 해당 서비스 접근 허용을 할당하고 접근 서비스 목록을 다시 확인한다. (전체 조직)
 ![6]
 
 ### <div id='4.1'> 4.1. 서비스 신청
 사용자 포탈에서 서비스 신청하기 위해서는 관리자 포탈의 카탈로그페이지에서 서비스 등록을 먼저 해주어야 사용이 가능하다.
 
-##### 관리자 포탈의 운영관리의 카탈로그 페이지로 이동해 서비스 등록을 한다.
+- 관리자 포탈의 운영관리의 카탈로그 페이지로 이동해 서비스 등록을 한다.
 ![7]
 앱 바인드 파라미터는 app_guid 자동입력을 추가, 온디멘드 Y 로 설정후 서비스 등록을 진행한다.
-##### 사용자 포탈 로그인 후 카탈로그 페이지에서 서비스를 생성한다.
+- 사용자 포탈 로그인 후 카탈로그 페이지에서 서비스를 생성한다.
 ![8]
 
 
-##### 생성된 Redis 서비스 인스턴스의 status를 확인한다.
+- 생성된 Redis 서비스 인스턴스의 status를 확인한다.
 Service status : in progress
 ![9]
  
 Service status : created succeed
 ![10]
 
-##### 관리자포탈 보안의 시큐리티그룹 페이지로 이동해 redis_[서비스 할당된 space guid] 가 생성된것을 확인한다.
+- 관리자포탈 보안의 시큐리티그룹 페이지로 이동해 redis_[서비스 할당된 space guid] 가 생성된것을 확인한다.
 ![11]
 
 ## <div id='5'> 5. Redis Client 툴 접속
@@ -633,47 +625,47 @@ Application에 바인딩 된 Redis 서비스 연결정보는 Private IP로 구�
 ### <div id='5.1'> 5.1. Redis Desktop Manager 설치 및 연결
 Redis Desktop Manager 프로그램은 무료로 사용할 수 있는 오픈소스 소프트웨어이다.
 
-##### Redis Desktop Manager를 다운로드 하기 위해 아래 URL로 이동하여 설치파일을 다운로드 한다.
+- Redis Desktop Manager를 다운로드 하기 위해 아래 URL로 이동하여 설치파일을 다운로드 한다.
 [**http://redisdesktop.com/download**](http://redisdesktop.com/download)
 ![redis_image_14]
 
-##### 다운로드한 설치파일을 실행한다.
+- 다운로드한 설치파일을 실행한다.
 > ![redis_image_15]
 
-##### Redis Desktop Manager 설치를 위한 안내사항이다. Next 버튼을 클릭한다.
+- Redis Desktop Manager 설치를 위한 안내사항이다. Next 버튼을 클릭한다.
 > ![redis_image_16]
 
-##### 프로그램 라이선스에 관련된 내용이다. I Agree 버튼을 클릭한다.
+- 프로그램 라이선스에 관련된 내용이다. I Agree 버튼을 클릭한다.
 > ![redis_image_17]
 
-##### Redis Desktop Manager를 설치할 경로를 설정 후 Install 버튼을 클릭한다.
+- Redis Desktop Manager를 설치할 경로를 설정 후 Install 버튼을 클릭한다.
 별도의 경로 설정이 필요 없을 경우 default로 C드라이브 Program Files 폴더에 설치가 된다.
 > ![redis_image_18]
 
-##### 설치 완료 후 Next 버튼을 클릭하여 다음 과정을 진행한다.
+- 설치 완료 후 Next 버튼을 클릭하여 다음 과정을 진행한다.
 > ![redis_image_19]
 
-##### Finish 버튼 클릭으로 설치를 완료한다.
+- Finish 버튼 클릭으로 설치를 완료한다.
 > ![redis_image_20]
 
-##### Redis Desktop Manager를 실행했을 때 처음 뜨는 화면이다. 이 화면에서 Server에 접속하기 위한 profile을 설정/저장하여 접속할 수 있다. Connect to Redis Server 버튼을 클릭한다.
+- Redis Desktop Manager를 실행했을 때 처음 뜨는 화면이다. 이 화면에서 Server에 접속하기 위한 profile을 설정/저장하여 접속할 수 있다. Connect to Redis Server 버튼을 클릭한다.
 > ![redis_image_21]
 
-##### Connection 탭에서 아래 붉은색 영역에 접속하려는 서버 정보를 모두 입력한다.
+- Connection 탭에서 아래 붉은색 영역에 접속하려는 서버 정보를 모두 입력한다.
 > ![redis_image_22]
 
-##### 서버 정보는 Application에 바인드 되어 있는 서버 정보를 입력한다. cfenv<app_name> 명령어로 이용하여 확인한다.
+- 서버 정보는 Application에 바인드 되어 있는 서버 정보를 입력한다. cfenv<app_name> 명령어로 이용하여 확인한다.
 예) $ cfenvredis-example-app
 > ![redis_image_23]
 
-##### SSH Tunnel탭을 클릭하고 PaaS-TA 운영 관리자에게 제공받은 SSH 터널링 가능한 서버 정보를 입력하고 공개키(.pem) 파일을 불러온다. Test Connection 버튼을 클릭하면 Redis 서버에 접속이 되는지 테스트 하고 OK 버튼을 눌러 Redis 서버에 접속한다.
+- SSH Tunnel탭을 클릭하고 PaaS-TA 운영 관리자에게 제공받은 SSH 터널링 가능한 서버 정보를 입력하고 공개키(.pem) 파일을 불러온다. Test Connection 버튼을 클릭하면 Redis 서버에 접속이 되는지 테스트 하고 OK 버튼을 눌러 Redis 서버에 접속한다.
 (참고) 만일 공개키 없이 ID/Password로 접속이 가능한 경우에는 공개키 대신 사용자 이름과 암호를 입력한다.
 > ![redis_image_24]
 
-##### 접속이 완료되고 좌측 서버 정보를 더블 클릭하면 좌측에 스키마 정보가 나타난다.
+- 접속이 완료되고 좌측 서버 정보를 더블 클릭하면 좌측에 스키마 정보가 나타난다.
 > ![redis_image_25]
 
-##### 신규 키 등록후 확인
+- 신규 키 등록후 확인
 > ![redis_image_26]
 
 [redis_image_01]:./images/redis/redis_image_01.png
