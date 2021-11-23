@@ -435,7 +435,7 @@ UAAC Client 계정 등록 절차에 대한 순서를 확인한다.
 
 - 배포 파이프라인 UAAC Client를 등록한다.
 ```
-### uaac client add 
+### uaac client add 설명
 uaac client add {클라이언트 명} -s {클라이언트 비밀번호} --redirect_URL{대시보드 URL} --scope {퍼미션 범위} --authorized_grant_types {권한 타입} --authorities={권한 퍼미션} --autoapprove={자동승인권한}  
 클라이언트 명 : uaac 클라이언트 명 (pipeclient)  
 클라이언트 비밀번호 : uaac 클라이언트 비밀번호  
