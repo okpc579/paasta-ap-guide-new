@@ -488,7 +488,7 @@ Creating security group rabbitmq as admin...
 OK		
 ```
   
-##### Mongodb 서비스를 사용할수 있도록 생성한 보안 그룹을 적용한다.
+##### rabbitmq 서비스를 사용할수 있도록 생성한 보안 그룹을 적용한다.
 > $ cf bind-running-security-group rabbitmq 
 ```
 $ cf bind-running-security-group rabbitmq  
