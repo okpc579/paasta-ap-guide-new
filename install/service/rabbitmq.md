@@ -277,10 +277,9 @@ Succeeded
 RabbitMQ 서비스팩 배포가 완료 되었으면 Application에서 서비스 팩을 사용하기 위해서 먼저 RabbitMQ 서비스 브로커를 등록해 주어야 한다.
 서비스 브로커 등록시에는 PaaS-TA에서 서비스 브로커를 등록할 수 있는 사용자로 로그인 하여야 한다
 
-##### 서비스 브로커 목록을 확인한다.
-
+- 서비스 브로커 목록을 확인한다.
+> $ cf service-brokers
 ```
-$ cf service-brokers
 Getting service brokers as admin...
   
 name   url
@@ -289,9 +288,9 @@ No service brokers found
 
 <br>
 
-##### rabbitmq 서비스 브로커를 등록한다.
+- rabbitmq 서비스 브로커를 등록한다.
 
->`$ cf create-service-broker {서비스팩 이름} {서비스팩 사용자ID} {서비스팩 사용자비밀번호} http://{서비스팩 URL(IP)}`
+> $ cf create-service-broker {서비스팩 이름} {서비스팩 사용자ID} {서비스팩 사용자비밀번호} http://{서비스팩 URL(IP)}  
   
   **서비스팩 이름** : 서비스 팩 관리를 위해 PaaS-TA에서 보여지는 명칭이다. 서비스 Marketplace에서는 각각의 API 서비스 명이 보여지니 여기서 명칭은 서비스팩 리스트의 명칭이다.<br>
   **서비스팩 사용자ID** / 비밀번호 : 서비스팩에 접근할 수 있는 사용자 ID입니다. 서비스팩도 하나의 API 서버이기 때문에 아무나 접근을 허용할 수 없어 접근이 가능한 ID/비밀번호를 입력한다.<br>
@@ -306,12 +305,11 @@ OK
 ```
 <br>
 
-##### 등록된 RabbitMQ 서비스 브로커를 확인한다.
+- 등록된 RabbitMQ 서비스 브로커를 확인한다.
 
 > $ cf service-brokers  
 
 ```
-$ cf service-brokers
 Getting service brokers as admin...
 
 name                    url
@@ -319,12 +317,11 @@ rabbitmq-service-broker http://10.30.107.191:4567
 ```
 <br>
 
-#### 접근 가능한 서비스 목록을 확인한다.
+- 접근 가능한 서비스 목록을 확인한다.
 
 > $ cf service-access
 
 ```
-$ cf service-access
 Getting service access as admin...
 broker: rabbitmq-service-broker
    service      plan       access   orgs
@@ -333,15 +330,17 @@ broker: rabbitmq-service-broker
 
 - 서비스 브로커 등록시 최초에는 접근을 허용하지 않는다. 따라서 access는 none으로 설정된다.
 
-#### 특정 조직에 해당 서비스 접근 허용을 할당하고 접근 서비스 목록을 다시 확인한다. (전체 조직)
+- 특정 조직에 해당 서비스 접근 허용을 할당하고 접근 서비스 목록을 다시 확인한다. (전체 조직)
 
 > $ cf enable-service-access rabbitmq 
 
 ```
 Enabling access to all plans of service rabbitmq for all orgs as admin...
 OK
+```
 
-$ cf service-access
+> $ cf service-access
+```
 Getting service access as admin...
 broker: rabbitmq-service-broker
    service      plan       access   orgs
@@ -351,9 +350,11 @@ broker: rabbitmq-service-broker
 ### <div id='3.2'> 3.2. Sample App 다운로드
 
 - Sample App 묶음 다운로드
-> $ wget https://nextcloud.paas-ta.org/index.php/s/8sCHaWcw4n36MiB/download --content-disposition  
-> $ unzip paasta-service-samples.zip  
-> $ cd paasta-service-samples/rabbitmq  
+```
+$ wget https://nextcloud.paas-ta.org/index.php/s/8sCHaWcw4n36MiB/download --content-disposition  
+$ unzip paasta-service-samples.zip  
+$ cd paasta-service-samples/rabbitmq  
+```
 
 <br>
 
@@ -362,12 +363,11 @@ broker: rabbitmq-service-broker
 Sample App에서 RabbitMQ 서비스를 사용하기 위해서는 서비스 신청(Provision)을 해야 한다.
 *참고: 서비스 신청시 PaaS-TA에서 서비스를 신청 할 수 있는 사용자로 로그인이 되어 있어야 한다.
 
-#### 먼저 PaaS-TA Marketplace에서 서비스가 있는지 확인을 한다.
+- 먼저 PaaS-TA Marketplace에서 서비스가 있는지 확인을 한다.
 
 > $ cf marketplace
 
 ```
-$ cf marketplace
 getting services from marketplace in org system / space dev as admin...
 OK
 
@@ -378,11 +378,10 @@ TIP: Use 'cf marketplace -s SERVICE' to view descriptions of individual plans of
 ```
 <br>
 
-#### Marketplace에서 원하는 서비스가 있으면 서비스 신청(Provision)을 한다.
+- Marketplace에서 원하는 서비스가 있으면 서비스 신청(Provision)을 한다.
 
 > $ cf create-service rabbitmq standard my_rabbitmq_service
 ```
-$ cf create-service rabbitmq standard my_rabbitmq_service
 Creating service instance my_rabbitmq_service in org system / space dev as admin...
 OK
 ```
@@ -394,7 +393,6 @@ OK
 > $ cf services
 
 ```
-$ cf services
 Getting services in org system / space dev as admin...
 
 name                  service      plan       bound apps   last operation     broker                    upgrade available
@@ -407,7 +405,7 @@ my_rabbitmq_service   rabbitmq     standard                create succeeded   ra
 서비스 신청이 완료되었으면 cf 에서 제공하는 rabbit-example-app을 다운로드해서 테스트를 진행한다.
 * 참고: 서비스 Bind 신청시 PaaS-TA에서 서비스 Bind 신청 할 수 있는 사용자로 로그인이 되어 있어야 한다.
 
-##### manifest 파일을 확인한다.  
+- manifest 파일을 확인한다.  
 
 > $ vi manifest.yml   
 
@@ -421,12 +419,10 @@ applications:
   - ruby_buildpack
 ```
 
-##### --no-start 옵션으로 App을 배포한다.
-- -no-start: App 배포시 구동은 하지 않는다.
+- --no-start 옵션으로 App을 배포한다.
 
 > $ cf push --no-start 
 ```  
-$ cf push --no-start
 Applying manifest file /home/ubuntu/workspace/samples/paasta-service-samples/rabbitmq/manifest.yml...
 Manifest applied
 Packaging files to upload...
@@ -452,20 +448,18 @@ start command:   thin -R config.ru start
 
 ```  
   
-##### Sample Web App에서 생성한 서비스 인스턴스 바인드 신청을 한다.
+- Sample Web App에서 생성한 서비스 인스턴스 바인드 신청을 한다.
 
 > $ cf bind-service rabbit-example-app my_rabbitmq_service 
 
-```
-$ cf bind-service rabbit-example-app my_rabbitmq_service 
-	
+```	
 Binding service my_rabbitmq_service to app rabbit-example-app in org system / space dev as admin...
 OK
 ```
 
 App 구동 시 Service와의 통신을 위하여 보안 그룹을 추가한다.
 
-##### rule.json을 편집한다.  
+- rule.json을 편집한다.  
 > $ vi rule.json   
 ```
 ## rabbitmq의 haproxy IP를 destination에 설정
@@ -477,31 +471,28 @@ App 구동 시 Service와의 통신을 위하여 보안 그룹을 추가한다.
 ]
 ```
   
-##### 보안 그룹을 생성한다.  
+- 보안 그룹을 생성한다.  
 
 > $ cf create-security-group rabbitmq rule.json
 
 ```
-$ cf create-security-group rabbitmq rule.json 
 Creating security group rabbitmq as admin...
 
 OK		
 ```
   
-##### rabbitmq 서비스를 사용할수 있도록 생성한 보안 그룹을 적용한다.
+- rabbitmq 서비스를 사용할수 있도록 생성한 보안 그룹을 적용한다.
 > $ cf bind-running-security-group rabbitmq 
 ```
-$ cf bind-running-security-group rabbitmq  
 Binding security group rabbitmq to running as admin...
 OK		
 ```
   
-##### 바인드가 적용되기 위해서 App을 재기동한다.
+- 바인드가 적용되기 위해서 App을 재기동한다.
 
 > $ cf restart rabbit-example-app 
 
 ```	
-$ cf restart rabbit-example-app
 Restarting app rabbit-example-app in org system / space dev as admin...
 
 Staging app and tracing logs...
@@ -537,24 +528,24 @@ memory usage:   1024M
 ```  
 
 
-####  App이 정상적으로 RabbitMQ 서비스를 사용하는지 확인한다.
+-  App이 정상적으로 RabbitMQ 서비스를 사용하는지 확인한다.
 
 
-####  브라우저에서 확인
+-  브라우저에서 확인
 >`https://rabbit-example-app.<YOUR_DOMAIN>/write`
 
 >`https://rabbit-example-app.<YOUR_DOMAIN>/read`
 
 >![rabbitmq_image_12]
 
-####  스토어 엔드포인트 테스트
+-  스토어 엔드포인트 테스트
 >`curl -XPOST -d 'test' https://rabbit-example-app.<YOUR-DOMAIN>/store`
 
 >`curl -XGET https://rabbit-example-app.<YOUR-DOMAIN>/store`
 
 >![rabbitmq_image_13]
 
-####  큐 엔드포인트 테스트
+-  큐 엔드포인트 테스트
 >`curl -XPOST -d 'test' https://rabbit-example-app.<YOUR-DOMAIN>/queues/<YOUR-QUEUE-NAME>`
 
 >`curl -XGET https://rabbit-example-app.<YOUR-DOMAIN>/queues/<YOUR-QUEUE-NAME>`
