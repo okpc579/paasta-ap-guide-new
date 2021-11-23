@@ -307,9 +307,7 @@ Pinpoint 서비스팩 배포가 완료 되었으면 Application에서 서비스 
 
 - 서비스 브로커 목록을 확인한다.
 
-```
-$ cf service-brokers
-```
+> $ cf service-brokers
 ```
 Getting service brokers as admin...
 
@@ -338,7 +336,6 @@ OK
 
 > $ cf service-brokers
 ```
-$ cf service-brokers
 Getting service brokers as admin...
 name url
 pinpoint-service-broker http://10.30.107.182:8080
@@ -348,7 +345,6 @@ pinpoint-service-broker http://10.30.107.182:8080
 
 > $ cf service-access
 ```
-$ cf service-access
 Getting service access as admin...
 broker: pinpoint-service-broker
    offering   plan                access   orgs
@@ -360,7 +356,6 @@ broker: pinpoint-service-broker
 
 > $ cf enable-service-access Pinpoint
 ```
-$ cf enable-service-access Pinpoint
 Enabling access to all plans of service Pinpoint for all orgs as admin...
 OK
 ```
@@ -368,7 +363,6 @@ OK
 - 서비스 접근 허용을 확인한다.
 > $ cf service-access
 ```
-$ cf service-access
 broker: pinpoint-service-broker
    offering   plan                access   orgs
    Pinpoint   Pinpoint_standard   all  
@@ -380,9 +374,11 @@ Sample Web App은 PaaS-TA에 App으로 배포가 된다. 배포된 App에 Pinpoi
 바인드 완료 후 연결 url을 통하여 브라우저로 해당 App에 대한 Pinpoint 서비스 모니터링을 할 수 있다.
 
 - Sample App 묶음 다운로드
-> $ wget https://nextcloud.paas-ta.org/index.php/s/8sCHaWcw4n36MiB/download --content-disposition  
-> $ unzip paasta-service-samples.zip  
-> $ cd paasta-service-samples/pinpoint  
+```
+$ wget https://nextcloud.paas-ta.org/index.php/s/8sCHaWcw4n36MiB/download --content-disposition  
+$ unzip paasta-service-samples.zip  
+$ cd paasta-service-samples/pinpoint  
+```
 
 <br>
 
@@ -403,12 +399,11 @@ service    plans               description
 Pinpoint   Pinpoint_standard   A simple pinpoint implementation
 ```
 
--   Marketplace에서 원하는 서비스가 있으면 서비스 신청(Provision)을 하여 서비스 인스턴스를 생성한다.
+- Marketplace에서 원하는 서비스가 있으면 서비스 신청(Provision)을 하여 서비스 인스턴스를 생성한다.
 
 > $ cf create-service Pinpoint Pinpoint_standard PS1
 
 ```
-$ cf create-service Pinpoint Pinpoint_standard PS1
 Creating service instance PS1 in org org / space space as admin...
 OK
 ```
@@ -417,7 +412,6 @@ OK
 
 > $ cf services
 ```
-$ cf services
 Getting services in org system / space space as admin...
 OK
 
@@ -451,9 +445,7 @@ applications:
 - Pinpoint buildpack 등록  
 	
 > $ cf create-buildpack pinpoint_buildpack java-buildpack-pinpoint-monitoring-2402a2c.zip 14
-```
-$ cf create-buildpack pinpoint_buildpack java-buildpack-pinpoint-monitoring-2402a2c.zip 14
-	
+```	
 Creating buildpack pinpoint_buildpack as admin...
 OK
 
@@ -469,7 +461,6 @@ OK
 
 > $ cf push --no-start 
 ```  
-$ cf push --no-start
 Applying manifest file /home/ubuntu/workspace/samples/paasta-service-samples/pinpoint/manifest.yml...
 Manifest applied
 Packaging files to upload...
@@ -497,9 +488,7 @@ memory usage:   1024M
 
 > $ cf bind-service spring-music-pinpoint PS1 -c '{"application_name":"spring-music-pinpoint"}'
 	
-```
-$ cf bind-service spring-music-pinpoint PS1 -c '{"application_name":"spring-music-pinpoint"}'
-	
+```	
 Binding service PS1 to app spring-music-pinpoint in org org / space space as admin...
 OK
 TIP: Use 'cf restage spring-music-pinpoint' to ensure your env variable changes take effect
@@ -524,7 +513,6 @@ App 구동 시 Service와의 통신을 위하여 보안 그룹을 추가한다.
 > $ cf create-security-group pinpoint rule.json  
 
 ```
-$ cf create-security-group pinpoint rule.json  
 Creating security group pinpoint as admin...
 
 OK		
@@ -533,7 +521,6 @@ OK
 - Pinpoint 서비스를 사용할수 있도록 생성한 보안 그룹을 적용한다.
 > $ cf bind-running-security-group pinpoint  
 ```
-$ cf bind-running-security-group pinpoint  
 Binding security group pinpoint to running as admin...
 OK		
 ```
@@ -542,9 +529,7 @@ OK
 
 > $ cf restage spring-music-pinpoint
 
-```
-$ cf restage spring-music-pinpoint
-	
+```	
 Staging app and tracing logs...
    Downloading pinpoint_buildpack...
    Downloaded pinpoint_buildpack (14M)
@@ -583,10 +568,8 @@ There are no running instances of this process.
 ```
 
 - APP 및 Service  정상 구동 확인
+> $ cf service PS1
 ```
-
-$ cf service PS1
-	
 name:             PS1
 service:          Pinpoint
 tags:             
@@ -598,26 +581,6 @@ service broker:   pinpoint-service-broker
 
 http://3.12.24.53/#/main/spring-music-pinpoint@SPRING_BOOT/realtime 접속
 ```
-	
-- (참고) 바인드 후 Pinpoint 서비스 대시보드 접속 시 정상접속이 안될 경우 보안 그룹을 추가한다.
-
-```  
-##### rule.json 화일을 만들고 아래와 같이 내용을 넣는다.
-$ vi rule.json
-[
-  {
-    "protocol": "all",
-    "destination": "<collector_IP>",
-  }
-]
-
-##### 보안 그룹을 생성한 후, 모든 App에 Pinpoint 서비스를 사용할수 있도록 생성한 보안 그룹을 적용한다.
-$ cf create-security-group pinpoint rule.json
-$ cf bind-running-security-group pinpoint
-
-##### App을 리부팅 한다.
-$ cf restage spring-music-pinpoint
-```  
 
 	
 
