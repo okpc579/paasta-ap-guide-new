@@ -431,6 +431,7 @@ OK
 ```
 
 - 생성된 형상관리 서비스 인스턴스를 확인한다.
+> $ cf services
 ```
 Getting services in org system / space dev as admin...
 
@@ -439,9 +440,8 @@ paasta-sourcecontrol    p-paasta-sourcecontrol   Default                      cr
 ```
 
 - 서비스 상세의 대시보드 URL 정보를 확인하여 서비스에 접근한다.
+> $ cf service paasta-sourcecontrol
  ```
- ### 서비스 상세 정보의 Dashboard URL을 확인한다.
- $ cf service paasta-sourcecontrol
  ... (생략) ...
  Dashboard:        http://115.68.47.179:8080/repositories/user/b840ecb4-15fb-4b35-a9fc-185f42f0de37
  Service broker:   paasta-sourcecontrol-broker
