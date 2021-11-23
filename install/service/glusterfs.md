@@ -283,18 +283,17 @@ Succeeded
 GlusterFS 서비스팩 배포가 완료 되었으면 Application에서 서비스 팩을 사용하기 위해서 먼저 GlusterFS 서비스 브로커를 등록해 주어야 한다.
 서비스 브로커 등록시에는 PaaS-TA에서 서비스 브로커를 등록할 수 있는 사용자로 로그인 하여야 한다
 
-##### 서비스 브로커 목록을 확인한다.
+- 서비스 브로커 목록을 확인한다.
 
 > $ cf service-brokers
 ```  
-$ cf service-brokers
 Getting service brokers as admin...
 
 name   url
 No service brokers found
 ```  
 
-##### GlusterFS 서비스 브로커를 등록한다.  
+- GlusterFS 서비스 브로커를 등록한다.  
 > $ cf create-service-broker {서비스팩 이름} {서비스팩 사용자ID} {서비스팩 사용자비밀번호} http://{서비스팩 URL(IP)}   
 
   **서비스팩 이름** : 서비스 팩 관리를 위해 PaaS-TA에서 보여지는 명칭이다. 서비스 Marketplace에서는 각각의 API 서비스 명이 보여지니 여기서 명칭은 서비스팩 리스트의 명칭이다.<br>
@@ -308,22 +307,20 @@ Creating service broker glusterfs-service as admin...
 OK
 ```  
 
-##### 등록된 GlusterFS 서비스 브로커를 확인한다.
+- 등록된 GlusterFS 서비스 브로커를 확인한다.
 
 > $ cf service-brokers   
 ```  
-$ cf service-brokers
 Getting service brokers as admin...
 
 name                           url
 glusterfs-service              http://10.30.52.11:8080
 ```  
 
-##### 접근 가능한 서비스 목록을 확인한다.
+- 접근 가능한 서비스 목록을 확인한다.
 
 >`$ cf service-access`  
 ```  
-$ cf service-access
 Getting service access as admin...
 broker: glusterfs-service
    service     plan               access   orgs
@@ -333,16 +330,15 @@ broker: glusterfs-service
 ```  
 >서비스 브로커 등록시 최초에는 접근을 허용하지 않는다. 따라서 access는 none으로 설정된다.
 
-##### 특정 조직에 해당 서비스 접근 허용을 할당하고 접근 서비스 목록을 다시 확인한다. (전체 조직)
+- 특정 조직에 해당 서비스 접근 허용을 할당하고 접근 서비스 목록을 다시 확인한다. (전체 조직)
 
 > $ cf enable-service-access glusterfs   
-> $ cf service-access   
-```  
-$ cf enable-service-access glusterfs
+```
 Enabling access to all plans of service glusterfs for all orgs as admin...
 OK
-
-$ cf service-access
+```
+> $ cf service-access   
+```  
 Getting service access as admin...
 broker: glusterfs-service
    service     plan               access   orgs
@@ -352,16 +348,14 @@ broker: glusterfs-service
 ```  
 
 
-
 ### <div id='3.2'> 3.2. Sample App 다운로드
 
-Sample Web App은 PaaS-TA에 App으로 배포가 된다. App을 배포하여 구동시 Bind 된 Mongodb 서비스 연결정보로 접속하여 초기 데이터를 생성하게 된다.  
-배포 완료 후 정상적으로 App 이 구동되면 브라우저나 curl로 해당 App에 접속 하여 Mongodb 환경정보(서비스 연결 정보)와 초기 적재된 데이터를 보여준다.  
-
 - Sample App 묶음 다운로드
-> $ wget https://nextcloud.paas-ta.org/index.php/s/8sCHaWcw4n36MiB/download --content-disposition  
-> $ unzip paasta-service-samples.zip  
-> $ cd paasta-service-samples/mongodb  
+```
+$ wget https://nextcloud.paas-ta.org/index.php/s/8sCHaWcw4n36MiB/download --content-disposition  
+$ unzip paasta-service-samples.zip  
+$ cd paasta-service-samples/glusterfs  
+```
 
 <br>
 
@@ -369,12 +363,11 @@ Sample Web App은 PaaS-TA에 App으로 배포가 된다. App을 배포하여 구
 Sample App에서 GlusterFS 서비스를 사용하기 위해서는 서비스 신청(Provision)을 해야 한다.
 *참고: 서비스 신청시 PaaS-TA에서 서비스를 신청 할 수 있는 사용자로 로그인이 되어 있어야 한다.
 
-##### 먼저 PaaS-TA Marketplace에서 서비스가 있는지 확인을 한다.
+- 먼저 PaaS-TA Marketplace에서 서비스가 있는지 확인을 한다.
 
 > $ cf marketplace
 
 ```  
-$ cf marketplace
 Getting services from marketplace in org system / space dev as admin...
 OK
 
@@ -386,11 +379,10 @@ TIP:  Use 'cf marketplace -s SERVICE' to view descriptions of individual plans o
 
 <br>
 
-##### Marketplace에서 원하는 서비스가 있으면 서비스 신청(Provision)을 한다.
+- Marketplace에서 원하는 서비스가 있으면 서비스 신청(Provision)을 한다.
 
 > $ cf create-service glusterfs glusterfs-1000Mb glusterfs-service-instance 
 ```  
-$ cf create-service glusterfs glusterfs-1000Mb glusterfs-service-instance
 Creating service instance glusterfs-service-instance in org system / space dev as admin...
 OK
 ```  
@@ -398,11 +390,10 @@ OK
 <br>
 
 
-##### 생성된 GlusterFS 서비스 인스턴스를 확인한다.
+- 생성된 GlusterFS 서비스 인스턴스를 확인한다.
 
->`$ cf services`
+> $ cf services
 ```  
-$ cf services
 Getting services in org system / space dev as admin...
 OK
 
@@ -418,10 +409,9 @@ glusterfs-service-instance  glusterfs   glusterfs-1000Mb                        
 서비스 신청이 완료되었으면 Sample Web App 에서는 생성된 서비스 인스턴스를 Bind 하여 App에서 GlusterFS 서비스를 이용한다.
 *참고: 서비스 Bind 신청시 개방형 클라우드 플랫폼에서 서비스 Bind신청 할 수 있는 사용자로 로그인이 되어 있어야 한다.
   
-##### manifest 파일을 확인한다. (swift_region을 GlusterFS 서버의 사용하려는 region으로 설정한다.)  
+- manifest 파일을 확인한다. (swift_region을 GlusterFS 서버의 사용하려는 region으로 설정한다.)  
 
 > $ vi manifest.yml   
-
 ```
 ---
 applications:
@@ -435,12 +425,10 @@ applications:
     swift_region: paasta
 ```
 
-##### --no-start 옵션으로 App을 배포한다.
-- -no-start: App 배포시 구동은 하지 않는다.
+- --no-start 옵션으로 App을 배포한다.
 
 > $ cf push --no-start 
 ```  
-$ cf push --no-start
 Applying manifest file /home/ubuntu/workspace/samples/paasta-service-samples/gluserfs/manifest.yml...
 Manifest applied
 Packaging files to upload...
@@ -464,20 +452,18 @@ memory usage:   1024M
 #0   down    2021-11-22T05:13:12Z   0.0%   0 of 0   0 of 0   
 ```  
   
-##### Sample Web App에서 생성한 서비스 인스턴스 바인드 신청을 한다.
+- Sample Web App에서 생성한 서비스 인스턴스 바인드 신청을 한다.
 
 > $ cf bind-service hello-spring-glusterfs glusterfs-service-instance
 
 ```
-$ cf bind-service hello-spring-glusterfs glusterfs-service-instance
-	
 Binding service glusterfs-service-instance to app hello-spring-glusterfs in org system / space dev as admin...
 OK
 ```
 
 App 구동 시 Service와의 통신을 위하여 보안 그룹을 추가한다.
 
-##### rule.json을 편집한다.  
+- rule.json을 편집한다.  
 > $ vi rule.json   
 ```
 ## glusterfs의 IP와 PORT(swiftproxy_port, auth_port)를 destination에 설정
@@ -492,31 +478,28 @@ App 구동 시 Service와의 통신을 위하여 보안 그룹을 추가한다.
 ]
 ```
   
-##### 보안 그룹을 생성한다.  
+- 보안 그룹을 생성한다.  
 
 > $ cf create-security-group glusterfs rule.json  
 
 ```
-$ cf create-security-group glusterfs rule.json  
 Creating security group glusterfs as admin...
 
 OK		
 ```
   
-##### Mongodb 서비스를 사용할수 있도록 생성한 보안 그룹을 적용한다.
+- GlusterFS 서비스를 사용할수 있도록 생성한 보안 그룹을 적용한다.
 > $ cf bind-running-security-group glusterfs  
 ```
-$ cf bind-running-security-group glusterfs  
 Binding security group glusterfs to running as admin...
 OK		
 ```
   
-##### 바인드가 적용되기 위해서 App을 재기동한다.
+- 바인드가 적용되기 위해서 App을 재기동한다.
 
-> $ cf restart hello-spring-mongodb 
+> $ cf restart hello-spring-glusterfs 
 
 ```	
-$ cf restart hello-spring-glusterfs
 Restarting app hello-spring-glusterfs in org system / space dev as admin...
 
 Staging app and tracing logs...
@@ -551,7 +534,7 @@ memory usage:   1024M
 ```  
 
 
-##### App이 정상적으로 GlusterFS 서비스를 사용하는지 확인한다.
+- App이 정상적으로 GlusterFS 서비스를 사용하는지 확인한다.
 
 > curl 로 확인
 
@@ -560,7 +543,7 @@ memory usage:   1024M
 > ![mongodb_image_22]
 
 
-##### 브라우저에서 확인
+- 브라우저에서 확인
 > ![mongodb_image_23]
 
 [glusterfs_image_01]:./images/glusterfs/glusterfs_image_01.png
