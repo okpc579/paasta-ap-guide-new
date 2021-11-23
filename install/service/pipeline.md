@@ -21,7 +21,7 @@
  3.3. [Java Offline Buildpack 등록](#3.3)  
  3.4. [서비스 신청](#3.4)  
 　3.4.1. [서비스 신청 - 포탈](#3.4.1)   
-　3.4.2. [서비스 신청 - CF CLI](#3.4.2)   
+　3.4.2. [서비스 신청 - CLI](#3.4.2)   
 
 
 ## <div id='1'/> 1. 문서 개요
@@ -543,28 +543,23 @@ binary_buildpack         12         true      false    binary_buildpack-cflinuxf
 > ![3-2-2]
 
 
-#### <div id='3.4.2'/> 3.4.2. 서비스 신청 - CF CLI
-CF CLI 를 통한 파이프라인 서비스 신청 방법을 설명한다.
+#### <div id='3.4.2'/> 3.4.2. 서비스 신청 - CLI
+CLI 를 통한 파이프라인 서비스 신청 방법을 설명한다.
 
+- 파이프라인 서비스를 신청한다. (PaaS-TA user_id 설정)
+> cf create-service delivery-pipeline delivery-pipeline-shared pipeline-service -c '{"owner":"{user_id}"}'  
 ```
-### e.g. 파이프라인 서비스 신청
-$ cf create-service delivery-pipeline delivery-pipeline-shared pipeline-service -c '{"owner":"demo"}'  
-
-### e.g. 파이프라인 서비스 확인
-$ cf services
-Getting services in org system / space dev as admin...
-
-name            service                  plan                        bound apps      last operation     broker               upgrade available
-pipeline        delivery-pipeline        delivery-pipeline-shared                    create succeeded   delivery-pipeline
+Creating service instance pipeline-service in org system / space dev as admin...
+OK
 ```
 
 - 서비스 상세의 대시보드 URL 정보를 확인하여 서비스에 접근한다.
+> $ cf service pipeline-service
  ```
- ### 서비스 상세 정보의 Dashboard URL을 확인한다.
- $ cf service pipeline
+ 
  ... (생략) ...
- Dashboard:        http://115.68.47.201:8084/dashboard/2bcbe484-e235-441e-bdb6-ef88f73cb516/
- Service broker:   delivery-pipeline
+ Dashboard:        http://101.55.50.208:8084/dashboard/2bcbe484-e235-441e-bdb6-ef88f73cb516/
+ Service broker:   delivery-pipeline-broker
  ... (생략) ...
  ```
 
