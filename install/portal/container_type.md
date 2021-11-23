@@ -271,10 +271,8 @@ $ cd ~/workspace/portal-deployment/portal-container-infra/scripts
 ```
 
 Script 변수를 설정한다. (FILE PATH 부분 변경 필수, 나머지 옵션)
+> $ vi portal-app-variable.yml
 ```
-### 변수파일 설정
-$ vi portal-app-variable.yml
-
 #!/bin/bash
 
 ##FILE PATH
@@ -339,10 +337,9 @@ PORTAL_EXTERNAL_STORAGE_PASSWORD=			# Portal External Storage Password
 
 ### <div id="3.3"/> 3.3. Portal App 배포 Script 실행
 변수 설정이 완료되었으면 배포 Script를 실행한다.
-
+> $ source deploy-portal-app.sh
 ```
-$ source deploy-portal-app.sh
-
+.....
 .....
 
 name                  requested state   processes           routes
