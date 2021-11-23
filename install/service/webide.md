@@ -33,8 +33,7 @@
 
 ### <div id='1.1'/>1.1. 목적
 
-본 문서는 PaaS-TA에서 사용할 수 있는 WEB-IDE의 설치를 Bosh를 이용하여 설치 하는 방법과 PaaS-TA 포털에서 WEB-IDE 서비스를 사용하는 방법을 기술하였다.
-PaaS-TA 3.5 버전부터는 Bosh2.0 기반으로 deploy를 진행하며 기존 Bosh1.0 기반으로 설치를 원할경우에는 PaaS-TA 3.1 이하 버전의 문서를 참고한다.
+본 문서(WEB-IDE 서비스팩 설치 가이드)는 PaaS-TA에서 제공되는 서비스팩인 WEB-IDE 서비스팩을 Bosh를 이용하여 설치 하는 방법을 기술하였다.
 
 ### <div id='1.2'/> 1.2. 범위
 설치 범위는 WEB-IDE 사용을 검증하기 위한 기본 설치를 기준으로 작성하였다.
@@ -50,32 +49,42 @@ Eclipse Che Technology: [https://www.eclipse.org/che/technology/](https://www.ec
 
 ### <div id="2.1"/> 2.1. Prerequisite 
 
-본 설치 가이드는 Linux 환경에서 설치하는 것을 기준으로 하였다. 서비스 설치를 위해서는 BOSH 2.0과 PaaS-TA 5.0 이상이 설치되있어야 한다.
+본 설치 가이드는 Linux 환경에서 설치하는 것을 기준으로 하였다.  
+서비스팩 설치를 위해서는 먼저 BOSH CLI v2 가 설치 되어 있어야 하고 BOSH 에 로그인이 되어 있어야 한다.  
+BOSH CLI v2 가 설치 되어 있지 않을 경우 먼저 BOSH2.0 설치 가이드 문서를 참고 하여 BOSH CLI v2를 설치를 하고 사용법을 숙지 해야 한다.  
 
 ### <div id="2.2"/> 2.2. Stemcell 확인  
 
-Stemcell 목록을 확인하여 서비스 설치에 필요한 Stemcell이 업로드 되어 있는 것을 확인한다.  (PaaS-TA 5.5.2 과 동일 stemcell 사용)
+Stemcell 목록을 확인하여 서비스 설치에 필요한 Stemcell이 업로드 되어 있는 것을 확인한다.  
+본 가이드의 Stemcell은 ubuntu-bionic 1.34를 사용한다.  
 
-> $ bosh -e micro-bosh stemcells  
+> $ bosh -e ${BOSH_ENVIRONMENT} stemcells
 
 ```
 Using environment '10.0.1.6' as client 'admin'
 
-Name                                     Version  OS             CPI  CID  
-bosh-aws-xen-hvm-ubuntu-xenial-go_agent  621.94*  ubuntu-xenial  -    ami-0297ff649e8eea21b  
+Name                                       Version   OS             CPI  CID  
+bosh-openstack-kvm-ubuntu-bionic-go_agent  1.34      ubuntu-bionic  -    ce507ae4-aca6-4a6d-b7c7-220e3f4aaa7d
 
 (*) Currently deployed
 
 1 stemcells
 
 Succeeded
-```  
+```
+
+만약 해당 Stemcell이 업로드 되어 있지 않다면 [bosh.io 스템셀](https://bosh.io/stemcells/) 에서 해당되는 IaaS환경과 버전에 해당되는 스템셀 링크를 복사 후 다음과 같은 명령어를 실행한다.
+
+```
+# Stemcell 업로드 명령어 예제
+bosh -e ${BOSH_ENVIRONMENT} upload-stemcell https://storage.googleapis.com/bosh-core-stemcells/${STEMCELL_VERSION}/bosh-stemcell-${STEMCELL_VERSION}-openstack-kvm-ubuntu-bionic-go_agent.tgz -n
+```
 
 ### <div id="2.3"/> 2.3. Deployment 다운로드
 
 서비스 설치에 필요한 Deployment를 Git Repository에서 받아 서비스 설치 작업 경로로 위치시킨다.  
 
-- Service Deployment Git Repository URL : https://github.com/PaaS-TA/service-deployment/tree/v5.1.0
+- Service Deployment Git Repository URL : https://github.com/PaaS-TA/service-deployment/tree/v5.1.2
 
 ```
 # Deployment 다운로드 파일 위치 경로 생성 및 설치 경로 이동
@@ -83,13 +92,16 @@ $ mkdir -p ~/workspace
 $ cd ~/workspace
 
 # Deployment 파일 다운로드
-$ git clone https://github.com/PaaS-TA/service-deployment.git -b v5.1.0
+$ git clone https://github.com/PaaS-TA/service-deployment.git -b v5.1.2
+
+# common_vars.yml 파일 다운로드(common_vars.yml가 존재하지 않는다면 다운로드)
+$ git clone https://github.com/PaaS-TA/common.git
 ```
 
 ### <div id="2.4"/> 2.4. Deployment 파일 수정
 
-BOSH Deployment manifest는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다.
-Deployment 파일에서 사용하는 network, vm_type, disk_type 등은 Cloud config를 활용하고, 활용 방법은 BOSH 2.0 가이드를 참고한다.   
+BOSH Deployment manifest는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다.  
+Deployment 파일에서 사용하는 network, vm_type, disk_type 등은 Cloud config를 활용하고, 활용 방법은 PaaS-TA AP 설치 가이드를 참고한다.  
 
 - Cloud config 설정 내용을 확인한다.   
 
@@ -158,55 +170,19 @@ Succeeded
 
 > $ vi ~/workspace/common/common_vars.yml
 ```
-# BOSH INFO
-bosh_ip: "10.0.1.6"				# BOSH IP
+... ((생략)) ...
+
 bosh_url: "https://10.0.1.6"			# BOSH URL (e.g. "https://00.000.0.0")
 bosh_client_admin_id: "admin"			# BOSH Client Admin ID
 bosh_client_admin_secret: "ert7na4jpew"		# BOSH Client Admin Secret('echo $(bosh int ~/workspace/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
 bosh_director_port: 25555			# BOSH director port
 bosh_oauth_port: 8443				# BOSH oauth port
 bosh_version: 271.2				# BOSH version('bosh env' 명령어를 통해 확인 가능, on-demand service용, e.g. "271.2")
-
-# PAAS-TA INFO
 system_domain: "61.252.53.246.nip.io"		# Domain (nip.io를 사용하는 경우 HAProxy Public IP와 동일)
 paasta_admin_username: "admin"			# PaaS-TA Admin Username
 paasta_admin_password: "admin"			# PaaS-TA Admin Password
-paasta_nats_ip: "10.0.1.121"
-paasta_nats_port: 4222
-paasta_nats_user: "nats"
-paasta_nats_password: "7EZB5ZkMLMqT7"		# PaaS-TA Nats Password (CredHub 로그인후 'credhub get -n /micro-bosh/paasta/nats_password' 명령어를 통해 확인 가능)
-paasta_nats_private_networks_name: "default"	# PaaS-TA Nats 의 Network 이름
-paasta_database_ips: "10.0.1.123"		# PaaS-TA Database IP (e.g. "10.0.1.123")
-paasta_database_port: 5524			# PaaS-TA Database Port (e.g. 5524(postgresql)/13307(mysql)) -- Do Not Use "3306"&"13306" in mysql
-paasta_database_type: "postgresql"		# PaaS-TA Database Type (e.g. "postgresql" or "mysql")
-paasta_database_driver_class: "org.postgresql.Driver"	# PaaS-TA Database driver-class (e.g. "org.postgresql.Driver" or "com.mysql.jdbc.Driver")
-paasta_cc_db_id: "cloud_controller"		# CCDB ID (e.g. "cloud_controller")
-paasta_cc_db_password: "cc_admin"		# CCDB Password (e.g. "cc_admin")
-paasta_uaa_db_id: "uaa"				# UAADB ID (e.g. "uaa")
-paasta_uaa_db_password: "uaa_admin"		# UAADB Password (e.g. "uaa_admin")
-paasta_api_version: "v3"
 
-# UAAC INFO
-uaa_client_admin_id: "admin"			# UAAC Admin Client Admin ID
-uaa_client_admin_secret: "admin-secret"		# UAAC Admin Client에 접근하기 위한 Secret 변수
-uaa_client_portal_secret: "clientsecret"	# UAAC Portal Client에 접근하기 위한 Secret 변수
-
-# Monitoring INFO
-metric_url: "10.0.161.101"			# Monitoring InfluxDB IP
-elasticsearch_master_ip: "10.0.1.146"           # Logsearch의 elasticsearch master IP
-elasticsearch_master_port: 9200                 # Logsearch의 elasticsearch master Port
-syslog_address: "10.0.121.100"			# Logsearch의 ls-router IP
-syslog_port: "2514"				# Logsearch의 ls-router Port
-syslog_transport: "relp"			# Logsearch Protocol
-saas_monitoring_url: "61.252.53.248"		# Pinpoint HAProxy WEBUI의 Public IP
-monitoring_api_url: "61.252.53.241"		# Monitoring-WEB의 Public IP
-
-### Portal INFO
-portal_web_user_ip: "52.78.88.252"
-portal_web_user_url: "http://portal-web-user.52.78.88.252.nip.io" 
-
-### ETC INFO
-abacus_url: "http://abacus.61.252.53.248.nip.io"	# abacus url (e.g. "http://abacus.xxx.xxx.xxx.xxx.nip.io")
+... ((생략)) ...
 
 ```
 
@@ -321,13 +297,14 @@ Succeeded
 
 ### <div id='3.1'/> 3.1. WEB-IDE 서비스 브로커 등록
 
->`$ cf create-service-broker {서비스팩 이름} {서비스팩 사용자ID} {서비스팩 사용자비밀번호} http://{서비스팩 URL(IP)}`
+- web-ide 서비스 브로커를 등록한다.
+> $ cf create-service-broker {서비스팩 이름} {서비스팩 사용자ID} {서비스팩 사용자비밀번호} http://{서비스팩 URL(IP)} 
 
   **서비스팩 이름** : 서비스 팩 관리를 위해 PaaS-TA에서 보여지는 명칭이다. 서비스 Marketplace에서는 각각의 API 서비스 명이 보여지니 여기서 명칭은 서비스팩 리스트의 명칭이다.<br>
   **서비스팩 사용자ID** / 비밀번호 : 서비스팩에 접근할 수 있는 사용자 ID입니다. 서비스팩도 하나의 API 서버이기 때문에 아무나 접근을 허용할 수 없어 접근이 가능한 ID/비밀번호를 입력한다.<br>
   **서비스팩 URL** : 서비스팩이 제공하는 API를 사용할 수 있는 URL을 입력한다.
 
->`$ cf create-service-broker webide-service-broker admin cloudfoundry http://10.30.56.56:8080`
+> $ cf create-service-broker webide-service-broker admin cloudfoundry http://<webide-broker_ip>:8080
 ```
 $ cf create-service-broker webide-service-broker admin cloudfoundry http://10.30.56.56:8080
 Creating service broker webide-service-broker as admin...
@@ -335,10 +312,9 @@ OK
 ```
 <br>
 
-##### 등록된 WEB-IDE 서비스 브로커를 확인한다.
->`$ cf service-brokers`
+- 등록된 WEB-IDE 서비스 브로커를 확인한다.
+> $ cf service-brokers  
 ```
-$ cf service-brokers
 Getting service brokers as admin...
 
 name                          url
@@ -346,29 +322,25 @@ webide-service-broker         http://10.30.56.56:8080
 ```
 <br>
 
-#### 접근 가능한 서비스 목록을 확인한다.
->`$ cf service-access`
+- 접근 가능한 서비스 목록을 확인한다.
+> $ cf service-access
 ```
-$ cf service-access
 Getting service access as admin...
 broker: webide-service-broker
    offering   plan           access   orgs
    webide     dedicated-vm   none      
 ```
 <br>
+서비스 브로커 등록시 최초에는 접근을 허용하지 않는다. 따라서 access는 none으로 설정된다.
 
-- 서비스 브로커 등록시 최초에는 접근을 허용하지 않는다. 따라서 access는 none으로 설정된다.
-
-#### 특정 조직에 해당 서비스 접근 허용을 할당하고 접근 서비스 목록을 다시 확인한다. (전체 조직)
->`$ cf enable-service-access webide`<br>
->`$ cf service-access`
+- 특정 조직에 해당 서비스 접근 허용을 할당하고 접근 서비스 목록을 다시 확인한다. (전체 조직)
+> $ cf enable-service-access webide <br>
 ```
-$ cf enable-service-access webide
 Enabling access to all plans of service webide for all orgs as admin...
 OK
 ```
+> $ cf service-access 
 ```
-$ cf service-access
 Getting service access as admin...
 
 broker: webide-service-broker
@@ -377,11 +349,10 @@ broker: webide-service-broker
 ```
 <br>
 
-#### PaaS-TA Marketplace에서 서비스가 있는지 확인을 한다.
+- PaaS-TA Marketplace에서 서비스가 있는지 확인을 한다.
 
->`$ cf marketplace`
+> $ cf marketplace
 ```
-$ cf marketplace
 Getting services from marketplace in org system / space dev as admin...
 OK
 
@@ -390,17 +361,16 @@ webide     dedicated-vm   A paasta web ide service for application development.p
 ```
 <br>
 
-#### Marketplace에서 원하는 서비스가 있으면 서비스 신청(Provision)을 한다.
+- Marketplace에서 원하는 서비스가 있으면 서비스 신청(Provision)을 한다.
 
->`$ cf create-service {서비스명} {서비스 플랜} {내 서비스명}`
+> $ cf create-service {서비스명} {서비스 플랜} {내 서비스명}  
 - **서비스명** : webide로 Marketplace에서 보여지는 서비스 명칭이다.
 - **서비스플랜** : 서비스에 대한 정책으로 plans에 있는 정보 중 하나를 선택한다. webide 서비스는 standard plan만 지원한다.
 - **내 서비스명** : 내 서비스에서 보여지는 명칭이다. 이 명칭을 기준으로 환경 설정 정보를 가져온다.
 
 
->`$ cf create-service webide dedicated-vm webide-service`
+> $ cf create-service webide dedicated-vm webide-service  
 ```
-$ cf create-service webide dedicated-vm paasta-webide-service
 Creating service instance paasta-webide-service in org system / space dev as admin...
 OK
 
@@ -408,11 +378,10 @@ Create in progress. Use 'cf services' or 'cf service webide' to check operation 
 ```
 <br>
 
-#### 생성된 WEB-IDE VM 인스턴스를 확인한다.
+- 생성된 WEB-IDE VM 인스턴스를 확인한다.
 
->`bosh -e micro-bosh -d web-ide vms`
+> bosh -e micro-bosh -d web-ide vms  
 ```
-$ bosh -e micro-bosh -d web-ide vms
 Using environment '10.30.40.111' as user 'admin' (openid, bosh.admin)
 
 Task 7872. Done
@@ -431,11 +400,10 @@ Succeeded
 ```
 <br>
 
-#### 생성된 WEB-IDE 서비스 인스턴스를 확인한다.
+- 생성된 WEB-IDE 서비스 인스턴스를 확인한다.
 
->`$ cf services`
+> $ cf services
 ```
-$ cf services
 Getting services in org system / space dev as admin...
 
 name     service   plan           bound apps   last operation     broker                  upgrade available
@@ -469,15 +437,15 @@ webide   webide    dedicated-vm                create succeeded   webide-service
 
 ### <div id='4.3'/> 4.3. WEB-IDE Teminal에서의 CF CLI 실행
 
-##### -cf api 명령을 이용해 endpoint를 지정한다.
+- -cf api 명령을 이용해 endpoint를 지정한다.
 
 > ![](./images/webide/web-ide-12.png)
 
-##### cf login 명령어로 로그인하고 조직과 공간을 선택한다.
+- cf login 명령어로 로그인하고 조직과 공간을 선택한다.
 
 > ![](./images/webide/web-ide-13.png)
 
-##### cf push 를 이용해 cf에 앱을 업로드한다.
+- cf push 를 이용해 cf에 앱을 업로드한다.
 
 > ![](./images/webide/web-ide-14.png)
 
@@ -489,9 +457,8 @@ webide   webide    dedicated-vm                create succeeded   webide-service
 
 현재 생성된 WEB-IDE VM 인스턴스를 확인한다.
 
->`bosh -e micro-bosh -d web-ide vms`
+> bosh -e micro-bosh -d web-ide vms  
 ```
-$ bosh -e micro-bosh -d web-ide vms
 Using environment '10.30.40.111' as user 'admin' (openid, bosh.admin)
 
 Task 7872. Done
