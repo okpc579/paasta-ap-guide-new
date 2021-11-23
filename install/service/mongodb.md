@@ -593,7 +593,7 @@ memory usage:   1024M
 
 - App이 정상적으로 Mongodb 서비스를 사용하는지 확인한다.
 
-> ![mongodb_image_23]
+![mongodb_image_23]
 
 
 ## <div id='4'> 4.  Mongodb Client 툴 접속
