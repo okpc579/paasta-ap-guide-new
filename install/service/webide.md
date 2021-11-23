@@ -603,6 +603,9 @@ webide-broker/a641df99-d36a-49ee-8329-018fe10fa23d  running        z3  10.30.56.
 
 Succeeded
 ```
+[3-2-2]:./images/webide/adminPortal_catalogDetail.png
+[003]:./images/webide/userportal_catalog.png
+[004]:./images/webide/userportal_dashboard.png
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Install](../README.md) > WEB IDE Service
