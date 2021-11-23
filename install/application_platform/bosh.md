@@ -470,9 +470,9 @@ PaaS-TA 5.5부터 BOSH 로그인을 하는 스크립트의 생성을 지원한�
 
 - BOSH Login 생성 Script의 설정 수정
 
-> vi ~/workspace/paasta-deployment/bosh/create-bosh-login.sh
-
 ```
+$ vi ~/workspace/paasta-deployment/bosh/create-bosh-login.sh
+
 #!/bin/bash
 
 BOSH_DEPLOYMENT_PATH="<BOSH_DEPLOYMENT_PATH>" 	# (e.g. ~/workspace/paasta-deployment/bosh)
