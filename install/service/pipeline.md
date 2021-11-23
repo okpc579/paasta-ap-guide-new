@@ -549,6 +549,14 @@ binary_buildpack         12         true      false    binary_buildpack-cflinuxf
 >  
 > ![3-2-2]
 
+- PaaS-TA 사용자  포탈에 접속하여, 카탈로그를 통해 서비스를 신청한다.   
+
+![003]
+
+- 대시보드 URL을 통해 서비스에 접근한다.    
+
+![004]  
+
 
 #### <div id='3.4.2'/> 3.4.2. 서비스 신청 - CLI
 CLI 를 통한 파이프라인 서비스 신청 방법을 설명한다.
@@ -576,6 +584,9 @@ OK
 [3-1-3]:./images/pipeline/adminPortal_serviceControl.png
 [3-2-1]:./images/pipeline/adminPortal_catalog.png
 [3-2-2]:./images/pipeline/adminPortal_catalogDetail.png
+[003]:./images/pipeline/userportal_catalog.PNG
+[004]:./images/pipeline/userportal_dashboard.PNG
+
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Install](../README.md) > Pipeline Service
