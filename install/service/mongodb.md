@@ -595,7 +595,7 @@ memory usage:   1024M
 
 > curl 로 확인
 
->`$  curl hello-spring-Mongodb.<System_Domain>` 
+> $ curl hello-spring-Mongodb.<System_Domain>  
 
 > ![mongodb_image_22]
 
@@ -664,7 +664,7 @@ MongoChef 프로그램은 무료로 사용할 수 있는 소프트웨어이다.
 <br>
 
 - 서버 정보는 Application에 바인드되어 있는 서버 정보를 입력한다. cf env <app_name> 명령어로 이용하여 확인한다.
->`$ cf env hello-spring-mongodb` 
+> $ cf env hello-spring-mongodb  
 
 <br>
 
