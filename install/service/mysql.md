@@ -253,7 +253,7 @@ Mysql 서비스팩 배포가 완료 되었으면 Application에서 서비스 팩
 
 - 서비스 브로커 목록을 확인한다.
 
->`$ cf service-brokers`  
+> $ cf service-brokers  
 ```  
 Getting service brokers as admin...
 
@@ -302,12 +302,12 @@ broker: mysql-service-broker
 
 - 특정 조직에 해당 서비스 접근 허용을 할당하고 접근 서비스 목록을 다시 확인한다. (전체 조직)
 
->`$ cf enable-service-access Mysql-DB`  
+> $ cf enable-service-access Mysql-DB  
 ```
 Enabling access to all plans of service Mysql-DB for all orgs as admin...
 OK
 ```
->`$ cf service-access`  
+> $ cf service-access   
 ```
 Getting service access as admin...
 broker: mysql-service-broker
@@ -335,7 +335,7 @@ Sample App에서 MySQL 서비스를 사용하기 위해서는 서비스 신청(P
 
 - 먼저 PaaS-TA Marketplace에서 서비스가 있는지 확인을 한다.  
 
->`$ cf marketplace`  
+> $ cf marketplace   
 ```  
 Getting services from marketplace in org org system / space dev as admin...
 OK
