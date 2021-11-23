@@ -199,9 +199,8 @@ BOSH를 설치하는 IaaS환경에 맞춰서 Variable File을 설정한다.
 
 - AWS 환경 설치 시 
 
+> $ vi ~/workspace/paasta-deployment/bosh/aws-vars.yml
 ```
-$ vi ~/workspace/paasta-deployment/bosh/aws-vars.yml
-
 # BOSH VARIABLE
 bosh_client_admin_id: "admin"				# Bosh Client Admin ID
 private_cidr: "10.0.1.0/24"				# Private IP Range
@@ -226,9 +225,8 @@ syslog_transport: "relp"				# Logsearch Protocol
 
 - OpenStack 환경 설치 시
 
+> $ vi ~/workspace/paasta-deployment/bosh/openstack-vars.yml
 ```
-$ vi ~/workspace/paasta-deployment/bosh/openstack-vars.yml
-
 # BOSH VARIABLE
 bosh_client_admin_id: "admin"				# Bosh Client Admin ID
 director_name: "micro-bosh"				# BOSH Director Name
