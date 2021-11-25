@@ -290,13 +290,17 @@ name   url
 No service brokers found
 ```
 
+- 서비스 브로커 등록 명령어
+```
+cf create-service-broker [SERVICE_BROKER] [USERNAME] [PASSWORD] [SERVICE_BROKER_URL]
 
+[SERVICE_BROKER] : 서비스 브로커 명
+[USERNAME] / [PASSWORD] : 서비스 브로커에 접근할 수 있는 사용자 ID / PASSWORD
+[SERVICE_BROKER_URL] : 서비스 브로커 접근 URL
+```
+
+	
 - On-Demand-Redis 서비스 브로커를 등록한다.
-> $ cf create-service-broker {서비스팩 이름} {서비스팩 사용자ID} {서비스팩 사용자비밀번호} http://{서비스팩 URL(IP)} 
-  
-  **서비스팩 이름** : 서비스 팩 관리를 위해 PaaS-TA에서 보여지는 명칭이다. 서비스 Marketplace에서는 각각의 API 서비스 명이 보여지니 여기서 명칭은 서비스팩 리스트의 명칭이다.<br>
-  **서비스팩 사용자ID** / 비밀번호 : 서비스팩에 접근할 수 있는 사용자 ID입니다. 서비스팩도 하나의 API 서버이기 때문에 아무나 접근을 허용할 수 없어 접근이 가능한 ID/비밀번호를 입력한다.<br>
-  **서비스팩 URL** : 서비스팩이 제공하는 API를 사용할 수 있는 URL을 입력한다.
 
 > $ cf create-service-broker on-demand-redis-service admin cloudfoundry http://<paas-ta-on-demand-broker_ip>:8080 
 
@@ -373,13 +377,16 @@ redis     dedicated-vm   A paasta source control service for application develop
 
 <br>
 
+- 서비스 인스턴스 신청 명령어
+```
+cf create-service [SERVICE] [PLAN] [SERVICE_INSTANCE]
+
+[SERVICE] : Marketplace에서 보여지는 서비스 명
+[PLAN] : 서비스에 대한 정책
+[SERVICE_INSTANCE] : 생성할 서비스 인스턴스 이름
+```
+	
 - Marketplace에서 원하는 서비스가 있으면 서비스 신청(Provision)을 한다.
-
-> $ cf create-service {서비스명} {서비스 플랜} {내 서비스명}  
-- **서비스명** : redis로 Marketplace에서 보여지는 서비스 명칭이다.
-- **서비스플랜** : 서비스에 대한 정책으로 plans에 있는 정보 중 하나를 선택한다. On-Demand-Redis 서비스는 dedicated-vm만 지원한다.
-- **내 서비스명** : 내 서비스에서 보여지는 명칭이다. 이 명칭을 기준으로 환경 설정 정보를 가져온다.
-
 
 > $ cf create-service redis dedicated-vm redis
 
