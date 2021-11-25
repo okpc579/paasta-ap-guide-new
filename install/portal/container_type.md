@@ -75,7 +75,7 @@ Succeeded
 
 ```
 # Stemcell 업로드 명령어 예제
-bosh -e ${BOSH_ENVIRONMENT} upload-stemcell -n {STEMCELL_URL}
+$ bosh -e ${BOSH_ENVIRONMENT} upload-stemcell -n {STEMCELL_URL}
 ```
 
 
