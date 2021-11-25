@@ -199,8 +199,8 @@ paasta_admin_password: "admin"			# PaaS-TA Admin Password
 deployment_name: "web-ide"                                                # 서비스 배포 명
 
 # STEMCELL
-stemcell_os: "ubuntu-xenial"                                              # stemcell os
-stemcell_version: "621.94"                                                # stemcell version
+stemcell_os: "ubuntu-bionic"                                              # stemcell os
+stemcell_version: "1.34"                                                  # stemcell version
 stemcell_alias: "default"                                                 # stemcell alias
 
 # NETWORK
@@ -209,11 +209,11 @@ public_networks_name: "vip"                                               # publ
 
 # ECLIPSE-CHE
 eclipse_che_azs: [z7]                                                     # eclipse-che : azs
-eclipse_che_instances: 0                                                  # eclipse-che : instances (1), ondemand service default 0
+eclipse_che_instances: 0                                                  # eclipse-che : instances (default : 0)
 eclipse_che_vm_type: "large"                                              # eclipse-che : vm type
-eclipse_che_public_ips: "<ECLIPSE_CHE_INIT_PUBLIC_IPS>"                   # eclipse-che : public ips (e.g. ["00.00.00.00" , "11.11.11.11"])
-eclipse_che_buffer_ips: "<ECLIPSE_CHE_BUFFER_PUBLIC_IPS>"                 # eclipse-che : OnDemand 에서 사용할 여분의 public ips
-eclipse_che_instance_name: "eclipse-che"                                  # eclipse-che : 작업 이름
+eclipse_che_public_ips: "<ECLIPSE_CHE_PUBLIC_IPS>"                        # eclipse-che : public ips (e.g. ["00.00.00.00" , "11.11.11.11"], 초기 배포시 [])
+eclipse_che_buffer_ips: "<ECLIPSE_CHE_BUFFER_IPS>"                        # eclipse-che : OnDemand 에서 사용할 여분의 public ips
+
 
 # MARIA_DB
 mariadb_azs: [z4]                                                         # mariadb : azs
@@ -221,7 +221,7 @@ mariadb_instances: 1                                                      # mari
 mariadb_vm_type: "small"                                                  # mariadb : vm type
 mariadb_persistent_disk_type: "10GB"                                      # mariadb : persistent disk type
 mariadb_port: "<MARIADB_PORT>"                                            # mariadb : database port (e.g. 31306) -- Do Not Use "3306"
-mariadb_admin_password: "<MARIADB_ADMIN_PASSWORD>"                        # mariadb : database admin password (e.g. "Paasta@2018")
+mariadb_admin_password: "<MARIADB_ADMIN_PASSWORD>"                        # mariadb : database admin password (e.g. "Paasta@2021")
 
 # SERVICE-BROKER
 broker_azs: [z4]                                                          # service-broker : azs
@@ -289,7 +289,7 @@ Instance                                            Process State  AZ  IPs      
 mariadb/ec34aa5b-c7cc-4297-9e2d-babf05d83832        running        z3  10.30.56.55    vm-9e1631af-b6c8-481e-aad3-3fd713f106a9  small    true
 webide-broker/a641df99-d36a-49ee-8329-018fe10fa23d  running        z3  10.30.56.56    vm-eb784964-48cd-4e4c-b080-53675d3738c2  medium   true
 
-3 vms
+2 vms
 
 Succeeded
 ```
