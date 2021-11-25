@@ -21,9 +21,6 @@
   3.3. [PaaS-TA에서 서비스 신청](#3.3)  
   3.4. [Sample App에 서비스 바인드 신청 및 App 확인](#3.4)   
 
-4. [Mongodb Client 툴 접속](#4)  
-  4.1. [MongoChef 설치 및 연결](#4.1)  
-
 
 ## <div id='1'> 1. 문서 개요
 ### <div id='1.1'> 1.1. 목적
@@ -607,110 +604,6 @@ memory usage:   1024M
 
 ![mongodb_image_23]
 
-
-## <div id='4'> 4.  Mongodb Client 툴 접속
-
-Application에 바인딩된 Mongodb 서비스 연결정보는 Private IP로 구성되어 있기 때문에 Mongodb Client 툴에서 직접 연결할수 없다. 따라서 SSH 터널, Proxy 터널 등을 제공하는 Mongodb Client 툴을 사용해서 연결하여야 한다. 본 가이드는 SSH 터널을 이용하여 연결 하는 방법을 제공하며 Mongodb Client 툴로써는 MongoChef 로 가이드한다. MongoChef 에서 접속하기 위해서 먼저 SSH 터널링 할수 있는 VM 인스턴스를 생성해야한다. 이 인스턴스는 SSH로 접속이 가능해야 하고 접속 후 PaaS-TA에 설치한 서비스팩에 Private IP 와 해당 포트로 접근이 가능하도록 시큐리티 그룹을 구성해야 한다. 이 부분은 OpenStack관리자 및 PaaS-TA 운영자에게 문의하여 구성한다.
-
-
-### <div id='4.1'> 4.1.  MongoChef 설치 & 연결
-MongoChef 프로그램은 무료로 사용할 수 있는 소프트웨어이다.
-
-
-- MongoChef을 다운로드 하기 위해 아래 URL로 이동하여 설치파일을 다운로드 한다.
-[**http://3t.io/mongochef/download/platform/**](http://3t.io/mongochef/download/platform/)
-> ![mongodb_image_24]
-
-
-- 다운로드한 설치파일을 실행한다.
-> ![mongodb_image_25]
-
-<br>
-
-- MongoChef 설치를 위한 안내사항이다. Next 버튼을 클릭한다.
-> ![mongodb_image_26]
-
-<br>
-
-- 프로그램 라이선스에 관련된 내용이다. 동의(I accept the terms in the License Agreement)에 체크 후 Next 버튼을 클릭한다.
-> ![mongodb_image_27]
-
-<br>
-
-- MongoChef 을 설치할 경로를 설정 후 Next 버튼을 클릭한다. 별도의 경로 설정이 필요 없을 경우 default로 C드라이브 Program Files 폴더에 설치가 된다.
-> ![mongodb_image_28]
-
-<br>
-
-- Install 버튼을 클릭하여 설치를 진행한다.
-> ![mongodb_image_29]
-
-<br>
-
-- Finish 버튼 클릭으로 설치를 완료한다.
-> ![mongodb_image_30]
-
-<br>
-
-- MongoChef를 실행했을 때 처음 뜨는 화면이다. 이 화면에서 Server에 접속하기 위한 profile을 설정/저장하여 접속할 수 있다. Connect버튼을 클릭한다.
-> ![mongodb_image_31]
-
-<br>
-
-- 새로운 접속 정보를 작성하기 위해New Connection 버튼을 클릭한다.
-> ![mongodb_image_32]
-
-<br>
-
-- Server에 접속하기 위한 Connection 정보를 입력한다.
-> ![mongodb_image_33]
-
-<br>
-
-- 서버 정보는 Application에 바인드되어 있는 서버 정보를 입력한다. cf env <app_name> 명령어로 이용하여 확인한다.
-> $ cf env hello-spring-mongodb  
-
-<br>
-
-> ![mongodb_image_34]
-
-<br>
-
-- Authentication탭으로 이동하여 mongodb 의 인증정보를 입력한다.
-> ![mongodb_image_35]
-
-<br>
-
-- SSH 터널 탭을 클릭하고 PaaS-TA 운영 관리자에게 제공받은 SSH 터널링 가능한 서버 정보를 입력한다.
-> ![mongodb_image_36]
-
-<br>
-
-- 모든 정보를 입력했으면 Test Connection 버튼을 눌러 접속 테스트를 한다.
-> ![mongodb_image_37]
-
-<br>
-
-- 모두 OK 결과가 나오면 정상적으로 접속이 된다는 것이다. OK 버튼을 누른다.
-
-
-- Save 버튼을 눌러 작성한 접속정보를 저장한다.
-> ![mongodb_image_38]
-
-<br>
-
-- 방금 저장한 접속정보를 선택하고 Connect 버튼을 클릭하여 접속한다.
-> ![mongodb_image_39]
-
-<br>
-
-- 접속이 완료되면 좌측에 스키마 정보가 나타난다. 컬럼을 더블클릭 해보면 우측에 적재되어있는 데이터가 출력된다.
-> ![mongodb_image_40]
-
-<br>
-
-- 우측 화면에 쿼리 항목에 Query문을 작성한 후 실행 버튼(삼각형)을 클릭한다. Query문에 이상이 없다면 정상적으로 결과를 얻을 수 있을 것이다.
-> ![mongodb_image_41]
 
 
 [mongodb_image_01]:./images/mongodb/mongodb_image_01.png
