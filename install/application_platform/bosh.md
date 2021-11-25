@@ -126,7 +126,7 @@ BOSH2 CLI는 BOSH 설치 시, BOSH certificate 정보를 생성해 주는 기능
 Cloud Foundry의 기본 BOSH CLI는 인증서가 1년으로 제한되어 있다.  
 BOSH 인증서는 BOSH 내부 Component 간의 통신 시 필요한 certificate이다.  
 만약 BOSH 설치 후 1년이 지나면 인증서의 갱신이 필요하다.  
-certificate 갱신 가이드 영상 - [링크](https://youtu.be/zn8VO-fHAFE?t=1994)
+- certificate 갱신 가이드 영상 - [링크](https://youtu.be/zn8VO-fHAFE?t=1994)
 
 ### <div id='2.3.3'/>2.3.3.    설치 파일 다운로드
 
