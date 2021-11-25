@@ -381,7 +381,7 @@ Context: uaa_admin, from client uaa_admin
 - uaac 로그인을 한다.
 
 ```
-$ uaac token client get <UAA_ADMIN_CLIENT_ID> -s <UAA_ADMIN_CLIENT_SECRET>
+$ uaac token client get <UAA_CLIENT_ADMIN_ID> -s <UAA_CLIENT_ADMIN_SECRET>
 Successfully fetched token via client credentials grant.
 Target: https://uaa.<DOMAIN>
 Context: admin, from client admin
