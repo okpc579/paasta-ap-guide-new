@@ -24,9 +24,6 @@
 4. [Portal을 이용한 Redis Service Test](#4)  
   4.1. [서비스 신청](#4.1)  
 
-5. [Redis Client 툴 접속](#5)  
-  5.1. [Redis Desktop Manager 설치 및 연결](#5.1)  
-  
 
 
 ## <div id='1'> 1. 문서 개요
@@ -622,55 +619,6 @@ Service status : created succeed
 - 관리자포탈 보안의 시큐리티그룹 페이지로 이동해 redis_[서비스 할당된 space guid] 가 생성된것을 확인한다.
 ![11]
 
-## <div id='5'> 5. Redis Client 툴 접속
-Application에 바인딩 된 Redis 서비스 연결정보는 Private IP로 구성되어 있기 때문에 Redis Client 툴에서 직접 연결할 수 없다. 따라서 Redis Client 툴에서 SSH 터널, Proxy 터널 등을 제공하는 툴을 사용해서 연결하여야 한다. 본 가이드는 SSH 터널을 이용하여 연결 하는 방법을 제공하며 Redis Client 툴로써는 오픈 소스인 Redis Desktop Manager로 가이드한다. Redis Desktop Manager 에서 접속하기 위해서 먼저 SSH 터널링할수 있는 VM 인스턴스를 생성해야한다. 이 인스턴스는 SSH로 접속이 가능해야 하고 접속 후 PaaS-TA에 설치한 서비스팩에 Private IP 와 해당 포트로 접근이 가능하도록 시큐리티 그룹을 구성해야 한다. 이 부분은 OpenStack 관리자 및 PaaS-TA 운영자에게 문의하여 구성한다. vsphere 에서 구성한 인스턴스는 공개키(.pem) 로 접속을 해야 하므로 공개키는 운영 담당자에게 문의하여 제공받는다. 참고) 개인키(.ppk)로는 접속이 되지 않는다.
-
-
-### <div id='5.1'> 5.1. Redis Desktop Manager 설치 및 연결
-Redis Desktop Manager 프로그램은 무료로 사용할 수 있는 오픈소스 소프트웨어이다.
-
-- Redis Desktop Manager를 다운로드 하기 위해 아래 URL로 이동하여 설치파일을 다운로드 한다.
-[**http://redisdesktop.com/download**](http://redisdesktop.com/download)
-![redis_image_14]
-
-- 다운로드한 설치파일을 실행한다.
-> ![redis_image_15]
-
-- Redis Desktop Manager 설치를 위한 안내사항이다. Next 버튼을 클릭한다.
-> ![redis_image_16]
-
-- 프로그램 라이선스에 관련된 내용이다. I Agree 버튼을 클릭한다.
-> ![redis_image_17]
-
-- Redis Desktop Manager를 설치할 경로를 설정 후 Install 버튼을 클릭한다.
-별도의 경로 설정이 필요 없을 경우 default로 C드라이브 Program Files 폴더에 설치가 된다.
-> ![redis_image_18]
-
-- 설치 완료 후 Next 버튼을 클릭하여 다음 과정을 진행한다.
-> ![redis_image_19]
-
-- Finish 버튼 클릭으로 설치를 완료한다.
-> ![redis_image_20]
-
-- Redis Desktop Manager를 실행했을 때 처음 뜨는 화면이다. 이 화면에서 Server에 접속하기 위한 profile을 설정/저장하여 접속할 수 있다. Connect to Redis Server 버튼을 클릭한다.
-> ![redis_image_21]
-
-- Connection 탭에서 아래 붉은색 영역에 접속하려는 서버 정보를 모두 입력한다.
-> ![redis_image_22]
-
-- 서버 정보는 Application에 바인드 되어 있는 서버 정보를 입력한다. cfenv<app_name> 명령어로 이용하여 확인한다.
-예) $ cfenvredis-example-app
-> ![redis_image_23]
-
-- SSH Tunnel탭을 클릭하고 PaaS-TA 운영 관리자에게 제공받은 SSH 터널링 가능한 서버 정보를 입력하고 공개키(.pem) 파일을 불러온다. Test Connection 버튼을 클릭하면 Redis 서버에 접속이 되는지 테스트 하고 OK 버튼을 눌러 Redis 서버에 접속한다.
-(참고) 만일 공개키 없이 ID/Password로 접속이 가능한 경우에는 공개키 대신 사용자 이름과 암호를 입력한다.
-> ![redis_image_24]
-
-- 접속이 완료되고 좌측 서버 정보를 더블 클릭하면 좌측에 스키마 정보가 나타난다.
-> ![redis_image_25]
-
-- 신규 키 등록후 확인
-> ![redis_image_26]
 
 [redis_image_01]:./images/redis/redis_image_01.png
 [redis_image_02]:./images/redis/redis_image_02.png
