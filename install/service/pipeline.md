@@ -474,7 +474,7 @@ Target: https://uaa.<DOMAIN>
 Context: uaa_admin, from client uaa_admin
 
 ### uaac 로그인
-$ uaac token client get <UAA_ADMIN_CLIENT_ID> -s <UAA_ADMIN_CLIENT_SECRET>
+$ uaac token client get <UAA_CLIENT_ADMIN_ID> -s <UAA_CLIENT_ADMIN_SECRET>
 
 ### 배포파이프라인 uaac client 등록
 $ uaac client add pipeclient -s clientsecret --redirect_uri "http://101.55.50.208:8084 http://101.55.50.208:8084/dashboard" \
