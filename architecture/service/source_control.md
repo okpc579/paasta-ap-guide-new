@@ -5,7 +5,7 @@
 <br><br>
 
 ## 시스템 구성도
-![Source Control Service Architecture](image/source_control_architecture.png)
+![Source Control Service Architecture](image/source_control_architecture.PNG)
 
 <br>
 
