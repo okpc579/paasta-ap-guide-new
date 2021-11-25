@@ -266,6 +266,15 @@ name   url
 No service brokers found
 ```   
 
+- 서비스 브로커 등록 명령어
+```
+cf create-service-broker [SERVICE_BROKER] [USERNAME] [PASSWORD] [SERVICE_BROKER_URL]
+
+[SERVICE_BROKER] : 서비스 브로커 명
+[USERNAME] / [PASSWORD] : 서비스 브로커에 접근할 수 있는 사용자 ID / PASSWORD
+[SERVICE_BROKER_URL] : 서비스 브로커 접근 URL
+```
+	
 - MySQL 서비스 브로커를 등록한다.
 
 >`$ cf create-service-broker mysql-service-broker admin cloudfoundry http://<mysql-broker_ip>:8080`
@@ -345,6 +354,15 @@ Mysql-DB     Mysql-Plan1-10con, Mysql-Plan2-100con*   A simple mysql implementat
 TIP:  Use 'cf marketplace -s SERVICE' to view descriptions of individual plans of a given service.
 ```  
 
+- 서비스 인스턴스 신청 명령어
+```
+cf create-service [SERVICE] [PLAN] [SERVICE_INSTANCE]
+
+[SERVICE] : Marketplace에서 보여지는 서비스 명
+[PLAN] : 서비스에 대한 정책
+[SERVICE_INSTANCE] : 생성할 서비스 인스턴스 이름
+```
+	
 - Marketplace에서 원하는 서비스가 있으면 서비스 신청(Provision)을 한다.  
 
 > $ cf create-service Mysql-DB Mysql-Plan2-100con mysql-service-instance   
