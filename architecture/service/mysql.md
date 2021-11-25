@@ -10,13 +10,13 @@
 ![MySQL Service Architecture](image/mysql_architecture.png)
 
 <br>
-
+1vCPU / 2GB RAM
 | 구분  | 스펙 |
 |-------|----|
-| arbitrator | 1vCPU / 512MB RAM / 64GB 추가 디스크 |
-| arbitrator | 1vCPU / 512MB RAM / 64GB 추가 디스크 |
-| arbitrator | 1vCPU / 512MB RAM / 64GB 추가 디스크 |
-| arbitrator | 1vCPU / 512MB RAM / 64GB 추가 디스크 |
+| arbitrator | 1vCPU / 2GB RAM |
+| mysql | 1vCPU / 2GB RAM / 8GB 추가 디스크 |
+| mysql_broker | 1vCPU / 2GB RAM |
+| proxy | 1vCPU / 2GB RAM |
 
 
 
