@@ -315,14 +315,16 @@ name   url
 No service brokers found
 ```
 
+- 서비스 브로커 등록 명령어
+```
+cf create-service-broker [SERVICE_BROKER] [USERNAME] [PASSWORD] [SERVICE_BROKER_URL]
+
+[SERVICE_BROKER] : 서비스 브로커 명
+[USERNAME] / [PASSWORD] : 서비스 브로커에 접근할 수 있는 사용자 ID / PASSWORD
+[SERVICE_BROKER_URL] : 서비스 브로커 접근 URL
+```
+
 - Pinpoint 서비스 브로커를 등록한다.
-
-> $ cf create-service-broker {서비스브로커 이름} {서비스브로커 사용자ID} {서비스브로커 사용자비밀번호} http://{서비스브로커 URL(IP)}  
-	
-  **서비스팩 이름** : 서비스 팩 관리를 위해 PaaS-TA에서 보여지는 명칭이다. 서비스 Marketplace에서는 각각의 API 서비스 명이 보여지니 여기서 명칭은 서비스팩 리스트의 명칭이다.<br>
-  **서비스팩 사용자ID** / 비밀번호 : 서비스팩에 접근할 수 있는 사용자 ID입니다. 서비스팩도 하나의 API 서버이기 때문에 아무나 접근을 허용할 수 없어 접근이 가능한 ID/비밀번호를 입력한다.<br>
-  **서비스팩 URL** : 서비스팩이 제공하는 API를 사용할 수 있는 URL을 입력한다.
-
 
 > $ cf create-service-broker pinpoint-service-broker admin cloudfoundry http://<broker_ip>:8080
 
@@ -397,6 +399,15 @@ OK
 
 service    plans               description
 Pinpoint   Pinpoint_standard   A simple pinpoint implementation
+```
+
+- 서비스 인스턴스 신청 명령어
+```
+cf create-service [SERVICE] [PLAN] [SERVICE_INSTANCE]
+
+[SERVICE] : Marketplace에서 보여지는 서비스 명
+[PLAN] : 서비스에 대한 정책
+[SERVICE_INSTANCE] : 생성할 서비스 인스턴스 이름
 ```
 
 - Marketplace에서 원하는 서비스가 있으면 서비스 신청(Provision)을 하여 서비스 인스턴스를 생성한다.
