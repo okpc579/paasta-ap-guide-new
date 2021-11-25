@@ -351,13 +351,16 @@ No service brokers found
 
 <br>
 
-- Mongodb 서비스 브로커를 등록한다.  
+- 서비스 브로커 등록 명령어
+```
+cf create-service-broker [SERVICE_BROKER] [USERNAME] [PASSWORD] [SERVICE_BROKER_URL]
 
-> $ cf create-service-broker {서비스팩 이름} {서비스팩 사용자ID} {서비스팩 사용자비밀번호} http://{서비스팩 URL(IP)}   
-  
-  **서비스팩 이름** : 서비스 팩 관리를 위해 PaaS-TA에서 보여지는 명칭이다. 서비스 Marketplace에서는 각각의 API 서비스 명이 보여지니 여기서 명칭은 서비스팩 리스트의 명칭이다.<br>
-  **서비스팩 사용자ID** / 비밀번호 : 서비스팩에 접근할 수 있는 사용자 ID입니다. 서비스팩도 하나의 API 서버이기 때문에 아무나 접근을 허용할 수 없어 접근이 가능한 ID/비밀번호를 입력한다.<br>
-  **서비스팩 URL** : 서비스팩이 제공하는 API를 사용할 수 있는 URL을 입력한다.
+[SERVICE_BROKER] : 서비스 브로커 명
+[USERNAME] / [PASSWORD] : 서비스 브로커에 접근할 수 있는 사용자 ID / PASSWORD
+[SERVICE_BROKER_URL] : 서비스 브로커 접근 URL
+```
+	
+- Mongodb 서비스 브로커를 등록한다.  
 
 > $ cf create-service-broker mongodb-shard-service-broker admin cloudfoundry http://<mongodb_broker_ip>:8080  
 
@@ -368,7 +371,7 @@ OK
 ```
 
 
-##### 등록된 mongodb 서비스 브로커를 확인한다.
+- 등록된 mongodb 서비스 브로커를 확인한다.
 
 > $ cf service-brokers
 
@@ -379,7 +382,7 @@ mongodb-shard-service-broker   http://10.30.107.114:8080
 ```
 
 
-##### 접근 가능한 서비스 목록을 확인한다.
+- 접근 가능한 서비스 목록을 확인한다.
 
 > $ cf service-access  
 ```
@@ -393,7 +396,7 @@ broker: mongodb-shard-service-broker
 >서비스 브로커 생성시 디폴트로 접근을 허용하지 않는다.
 
 
-##### 특정 조직에 해당 서비스 접근 허용을 할당하고 접근 서비스 목록을 다시 확인한다. (전체 조직)
+- 특정 조직에 해당 서비스 접근 허용을 할당하고 접근 서비스 목록을 다시 확인한다. (전체 조직)
 
 > $ cf enable-service-access Mongo-DB <br>
 ```
@@ -445,6 +448,15 @@ TIP:  Use 'cf marketplace -s SERVICE' to view descriptions of individual plans o
 ```  
 
 <br>
+
+- 서비스 인스턴스 신청 명령어
+```
+cf create-service [SERVICE] [PLAN] [SERVICE_INSTANCE]
+
+[SERVICE] : Marketplace에서 보여지는 서비스 명
+[PLAN] : 서비스에 대한 정책
+[SERVICE_INSTANCE] : 생성할 서비스 인스턴스 이름
+```
 
 - Marketplace에서 원하는 서비스가 있으면 서비스 신청(Provision)을 한다.
 
