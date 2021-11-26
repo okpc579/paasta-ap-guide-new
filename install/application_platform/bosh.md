@@ -428,8 +428,6 @@ $ export CREDHUB_CA_CERT=$(bosh int --path /credhub_tls/ca {iaas}/creds.yml)
 $ credhub login -s https://{bosh_url}:8844 --skip-tls-validation
 ```
 
-Credhub 기타 활용 방법은 AP 사용 가이드의 기타 CLI 가이드를 참고한다.
-
 ### <div id='3.2'/>3.2. Jumpbox
 BOSH 설치 시 Operation 파일로 jumpbox-user.yml을 적용하면, BOSH VM에 Jumpbox user가 생성되어 BOSH VM에 접근할 수 있다.
 접근하기 위한 인증키는 BOSH에서 자체적으로 생성하며, 인증키를 통해 BOSH VM에 접근할 수 있다.  
