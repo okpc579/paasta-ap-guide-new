@@ -350,7 +350,7 @@ public class CloudDataConfig extends AbstractCloudConfig {
      			<artifactId>spring-boot-configuration-processor</artifactId>
      			<optional>true</optional>
      		</dependency>
- ==>Spring Boot 의존성
+     ==>Spring Boot 의존성
 
 
     <!-- Spring Cloud Connector Start -->
@@ -370,7 +370,7 @@ public class CloudDataConfig extends AbstractCloudConfig {
  		</dependency>
  		<!-- Spring Cloud Connector End -->
 
- ==> Spring Cloud Connector 의존성
+         ==> Spring Cloud Connector 의존성
 
 
  		<!-- MongoDB Dependency Start -->
@@ -571,6 +571,6 @@ admin/admin 입력후 로그인 합니다.
 2) 로그인이 완료되면 다음 조직 화면이 나타납니다. 화면 하단에 집 아이콘을 클릭하면 해당 조직의 상세 조직 화면이 나타납니다. 조직명을 클릭하면 조직의 에하 조직 목록을 조회 할 수 있습니다.
 
 <img src="./images/java/image19.png" width="350" height="150" />
-```
+
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Java 개발
