@@ -11,8 +11,8 @@
 본 문서의 범위는 Open PaaS 프로젝트의 Java 애플리케이션 개발과 서비스팩 연동에 대한 내용으로 한정되어 있다.
 
 ##### 1.1.3. 참고 자료
--   [***http://java.sun.com](http://java.sun.com)
--   [***http://spring.io](http://spring.io)
+-   [http://java.sun.com](http://java.sun.com)
+-   [http://spring.io](http://spring.io)
 
 
 ### 2. JAVA 애플리케이션 개발가이드
