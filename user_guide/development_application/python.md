@@ -625,8 +625,8 @@ def make_connection():
  개발 완료된 애플리케이션을 개방형 클라우드 플랫폼에 배포하는 방법을 기술한다. 배포과정은 개방형 클라우드 플랫폼 로그인, 서비스 생성, 애플리케이션 배포, 서비스 바인드, 애플리케이션 실행의 과정으로 이루어져 있다.
 
 ##### <div id='2-4-1'></div> 2.4.1. 완성된 샘플 애플리케이션 다운로드
-[2.3. 개발]에서 설명한 애플리케이션 개발 과정을 거쳐 완성된 샘플 애플리케이션을 다음의 위치에서 다운로드 할 수 있다. 하단의 링크에서 python-sample-app 디렉토리 전체를 다운로드하면 이미 완성된 샘플 애플리케이션을 이용하여 [2.4. 배포] 과정을 진행 할 수 있다. 
-Sample-App: [http://extdisk.hancom.com:8080/share.cgi?ssid=0icB5ZW](http://extdisk.hancom.com:8080/share.cgi?ssid=0icB5ZW)
+[2.3. 개발]에서 설명한 애플리케이션 개발 과정을 거쳐 완성된 샘플 애플리케이션을 다음의 위치에서 다운로드 할 수 있다. 하단의 링크에서 python-sample-app 디렉토리 전체를 다운로드하면 이미 완성된 샘플 애플리케이션을 이용하여 [2.4. 배포] 과정을 진행 할 수 있다.  
+Sample-App: [https://nextcloud.paas-ta.org/index.php/s/x8Tg37WDFiL5ZDi/download](https://nextcloud.paas-ta.org/index.php/s/x8Tg37WDFiL5ZDi/download)
 
 ##### <div id='2-4-2'></div> 2.4.2. 개방형 클라우드 플랫폼 로그인
 
