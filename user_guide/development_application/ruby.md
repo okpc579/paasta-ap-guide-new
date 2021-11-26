@@ -138,7 +138,7 @@ Ruby 샘플 애플리케이션을 개발하기 위한 애플리케이션의 생�
 
  완성된 샘플 애플리케이션은 아래 링크의 /OpenPaaSSample/ruby-sample-app 에서 받을 수 있다.
 
-> http://extdisk.hancom.com:8080/share.cgi?ssid=0icB5ZW#0icB5ZW
+> https://nextcloud.paas-ta.org/index.php/s/x8Tg37WDFiL5ZDi/download
 
 <div id='11'></div>
 ##### 2.3.1.	애플리케이션 생성
