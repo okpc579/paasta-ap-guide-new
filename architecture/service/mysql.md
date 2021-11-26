@@ -10,7 +10,7 @@
 ![MySQL Service Architecture](image/mysql_architecture.png)
 
 <br>
-1vCPU / 2GB RAM
+
 | 구분  | 스펙 |
 |-------|----|
 | arbitrator | 1vCPU / 2GB RAM |
