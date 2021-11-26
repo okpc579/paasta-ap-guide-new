@@ -951,9 +951,7 @@ module.exports = client;
 아래의 과정을 수행하기 위해서 개방형 플랫폼에 로그인
 
 >$ cf api --skip-ssl-validation https://api.cf.open-paas.com # 개방형 플랫폼 TARGET 지정<br>
-># cf api [target url]<br><br>
 >$ cf login -u testUser -o sample_test -s sample_space # 로그인 요청<br>
-># cf login –u [user name] –o [org name] –s [space name]
 ![2-4-1-0]
 
 
