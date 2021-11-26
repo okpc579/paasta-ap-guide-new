@@ -55,15 +55,15 @@
 본 문서의 범위는 전자정부표준프레임워크 기반의 Open PaaS 프로젝트의 서비스팩개발에 대한 내용으로 한정되어 있다.
 
 ##### <a name="5"/>1.1.3. 참고 자료
-http://docs.cloudfoundry.org/services/
-http://bosh.io/docs/create-release.html
-https://github.com/cloudfoundry/bosh-sample-release
-https://github.com/cloudfoundry/cf-mysql-release/
-https://github.com/cloudfoundry-community/cf-mysql-java-broker-boshrelease
-https://github.com/cloudfoundry-community/cf-mysql-java-broker
-http://rubykr.github.io/rails_guides/getting_started.html
-http://www.appdirect.com
-
+http://docs.cloudfoundry.org/services/  
+http://bosh.io/docs/create-release.html  
+https://github.com/cloudfoundry/bosh-sample-release  
+https://github.com/cloudfoundry/cf-mysql-release/  
+https://github.com/cloudfoundry-community/cf-mysql-java-broker-boshrelease  
+https://github.com/cloudfoundry-community/cf-mysql-java-broker  
+http://rubykr.github.io/rails_guides/getting_started.html  
+http://www.appdirect.com  
+ 
 ### <a name="6"/>2. Service Broker API 개발 가이드
 #### <a name="7"/>2.1. 개요
 개방형 클라우드 플랫폼 Service API는 Cloud Controller와 Service Broker  사이의 규약을 정의한다. Broker는 HTTP (or HTTPS) endpoints URI 형식으로 구현된다. 하나 이상의 Service가 하나의 Broker 에 의해 제공 될 수 있고, 로드 밸런싱이 가능하게 수평 확장성 있게 제공 될 수 있다.
