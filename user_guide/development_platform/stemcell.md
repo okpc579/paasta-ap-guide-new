@@ -16,8 +16,7 @@
 3. [기본 OS 이미지 생성](#3--기본-os-이미지-생성)
      * [Ubuntu OS 이미지 생성](#31--ubuntu-os-이미지-생성)
      * [RHEL OS 이미지 생성](#32--rhel-os-이미지-생성)
-     * [PHOTON OS 이미지 생성](#33--photon-os-이미지-생성)
-     * [생성한 기본 OS 이미지의 보관장소](#34--생성한-기본-os-이미지의-보관장소)
+     * [생성한 기본 OS 이미지의 보관장소](#33--생성한-기본-os-이미지의-보관장소)
 4. [BOSH 스템셀 생성](#4--BOSH-스템셀-생성)
      * [원격지의 OS 이미지를 사용한 스템셀 생성](#41--원격지의-os-이미지를-사용한-스템셀-생성)
      * [로컬의 OS 이미지를 사용한 스템셀 생성](#42--로컬의-os-이미지를-사용한-스템셀-생성)
@@ -406,35 +405,7 @@ RHEL OS 이미지를 생성하는 절차를 기술한다.
 	***※ 기본 RHEL OS 이미지 생성 시 오류가 발생할 경우, RHEL에서 기본 RHEL OS 이미지를 제공받아 스템셀을 생성한다.***
 
 
-## 3.3.  PHOTON OS 이미지 생성 
-
-PHOTON OS 이미지를 생성하는 절차를 기술한다.
-
-
-1.  PHOTON iso 이미지를 다운로드 받아서 스템셀 생성 VM에 업로드 한다. ※TP2버전 이상을 다운 받는다.
-  
-	[https://packages.vmware.com/photon/](https://packages.vmware.com/photon/)
-
-2.  실행 환경 구성
-
-		#스템셀 생성 VM에 접속
-		$ cd ~/workspace/bosh/bosh-stemcell
-		$ vagrant ssh remote
-
-		#PHOTON 이미지 마운트
-		$ sudo mkdir -p /mnt/photon
-		$ sudo mount photon.iso /mnt/photon
-
-
-3.  Build\_os\_image 실행
-  
-		#스템셀 생성 VM에서 build_os_image 실행
-		$ cd /bosh
-		$ bundle exec rake stemcell:build_os_image[photon,TP2,/tmp/photon_TP2_base_image.tgz]
-
-	※ 기본 Photon OS 이미지는 BOSH에서 제공하지 않는다.
-
-## 3.4.  생성한 기본 OS 이미지의 보관장소 
+## 3.3.  생성한 기본 OS 이미지의 보관장소 
 
 1.  생성한 기본 OS 이미지 확인
 
