@@ -72,8 +72,7 @@ API 서비스 및 해당 API 서비스를 사용하는 애플리케이션을 Nod
   </tr>
   <tr>
     <td>서비스 브로커 API</td>
-    <td>Cloud Controller와 Service Broker 사이의 규약으로써 서비스 브로커 API 개발에 대해서는 다음을 참조한다.<br>
-      <u><b><a href="https://github.com/OpenPaaSRnD/Documents/blob/master/Development-Guide/ServicePack_develope_guide.md#11">https://github.com/OpenPaaSRnD/Documents/blob/master/Development-Guide/ServicePack_develope_guide.md#11</a></b></u>
+    <td>Cloud Controller와 Service Broker 사이의 규약으로써 서비스 브로커 API 개발에 대해서는 서비스팩 개발 가이드를 참조한다.<br>
     </td>
   </tr>
   <tr>
@@ -132,9 +131,7 @@ Node.js는 javascript기반의 언어로 Notepad++, Sublim Text, EditPlus등 문
 
 ### <div id='10'></div> 2.3 샘플 API 서비스 브로커 및 대시보드 개발
 
-별도 제공하는 서비스 브로커 개발 가이드를 참고하여 서비스 브로커 및
-대시보드를 개발한다.
-**<a href="https://github.com/OpenPaaSRnD/Documents/blob/master/Development-Guide/ServicePack_develope_guide.md#6">https://github.com/OpenPaaSRnD/Documents/blob/master/Development-Guide/ServicePack_develope_guide.md#6</a>**
+서비스 브로커 개발 가이드를 참고하여 서비스 브로커 및 대시보드를 개발한다.
 
 ### <div id='11'></div> 2.4 샘플 API 서비스 개발
 
