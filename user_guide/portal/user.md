@@ -822,6 +822,7 @@ PaaS-TA 사용자 포탈은 조직, 공간, 애플리케이션을 관리하는 �
 [3-2-1-3-5-3-0]:./images/user-portal/3-2-1-3-5-3-0.png
 [3-2-1-3-5-3-1]:./images/user-portal/3-2-1-3-5-3-1.png
 [3-2-1-3-6-0]:./images/user-portal/3-2-1-3-6-0.png
+[3-2-1-3-6-1-0]:./images/user-portal/3-2-1-3-6-1-0.png
 [3-2-1-3-6-2-0]:./images/user-portal/3-2-1-3-6-2-0.png
 [3-2-1-3-7-0]:./images/user-portal/3-2-1-3-7-0.png
 [3-2-1-3-7-1-0]:./images/user-portal/3-2-1-3-7-1-0.png
