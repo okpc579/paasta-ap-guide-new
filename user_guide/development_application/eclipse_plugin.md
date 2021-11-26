@@ -115,14 +115,14 @@ http://docs.run.pivotal.io/buildpacks/java/sts.html
 
 ### 2.3 전자정부 표준프레임워크 설치
 
-전자정부 표준프레임워크 설치는 전자정부 표준프레임워크의 개발자 개발 환경 설치 가이드의 개발자 개발환경 설치(http://www.egovframe.go.kr/wiki/doku.php?id=egovframework:dev2:clntinstall)를 참고한다.  
+전자정부 표준프레임워크 설치는 전자정부 표준프레임워크의 [개발자 개발 환경 설치 가이드의 개발자 개발환경 설치](http://www.egovframe.go.kr/wiki/doku.php?id=egovframework:dev2:clntinstall)를 참고한다.  
 > **버전은 3.1.1 버전을 사용한다**
 
 ### 2.4 이클립스 통합개발환경 케플러 버전 설치
 
 이클립스 통합개발환경 케플러 버전의 설치 절차는 다음과 같다.
 
-1. 이클립스 홈페이지의 이클립스 통합개발환경 다운로드 페이지(**http://www.eclipse.org/downloads/**)에 접속한다.  
+1. 이클립스 홈페이지의 [이클립스 통합개발환경 다운로드 페이지](http://www.eclipse.org/downloads/)에 접속한다.  
      ![](./images/openpaas-eclipse/image7.png)
 
 2. 이클립스 통합개발환경 케플러 버전을 설치하기 위해서는 다운로드 페이지의 오른쪽 사이드바에 “MORE DOWNLOADS”에 “Eclipse Kepler(4.3)”을 클릭한다.  
