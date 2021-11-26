@@ -34,20 +34,16 @@
  
 
 
-<div id='1'></div>
-# 1. 문서 개요
+# <div id='1'></div> 1. 문서 개요
 
-<div id='2'></div>
-### 1.1 목적
+### <div id='2'></div> 1.1 목적
 
 본 문서(node.js API 서비스 미터링 애플리케이션 개발 가이드)는 파스-타 플랫폼 프로젝트의 미터링 플러그인과 Node.js API 애플리케이션을 연동시켜 API 서비스를 미터링하는 방법에 대해 기술 하였다.
 
-<div id='3'></div>
-### 1.2 범위
+### <div id='3'></div> 1.2 범위
 본 문서의 범위는 파스-타 플랫폼 프로젝트의 Node.js API 서비스 애플리케이션 개발과 CF-Abacus 연동에 대한 내용으로 한정되어 있다.
 
-<div id='4'></div>
-### 1.3 참고자료
+### <div id='4'></div> 1.3 참고자료
 **<https://docs.cloudfoundry.org/devguide/>**  
 **<https://docs.cloudfoundry.org/buildpacks/node/node-tips.html>**  
 **<https://nodejs.org/>**  
@@ -55,11 +51,9 @@
 **<https://github.com/cloudfoundry-incubator/cf-abacus>**  
 
 
-<div id='5'></div>
-# 2. Node.js API 미터링 개발가이드
+# <div id='5'></div> 2. Node.js API 미터링 개발가이드
 
-<div id='6'></div>
-### 2.1 개요
+### <div id='6'></div> 2.1 개요
 
 API 서비스 및 해당 API 서비스를 사용하는 애플리케이션을 Node.js 언어로 작성 한다. API 서비스를 사용하는 애플리케이션과 API 서비스를 바인딩하고 해당 애플리케이션에 바인딩된 환경정보(VCAP_SERVICES)를 이용해 각 서비스별 접속정보를 획득하여 애플리케이션에 적용하여 API 서비스를 호출하는 애플리케이션을 작성 한다. 또한 API 서비스는 서비스 요청을 처리함과 동시에 API 사용 내역을 CF-ABACUS에 전송하는 애플리케이션을 작성 한다.
 
@@ -100,8 +94,7 @@ API 서비스 및 해당 API 서비스를 사용하는 애플리케이션을 Nod
 
 ※ 본 개발 가이드는 <u>**API****서비스**</u> 개발에 대해서만 기술하며, 다른 컴포넌트의 개발 또는 설치에 대해서 링크한 사이트를 참조한다.
 
-<div id='7'></div>
-### 2.2 개발환경 구성
+### <div id='7'></div> 2.2 개발환경 구성
 
 Node.js 애플리케이션 개발을 위해 다음과 같은 환경으로 개발환경을 구성 한다.
 
@@ -110,8 +103,7 @@ Node.js 애플리케이션 개발을 위해 다음과 같은 환경으로 개발
 -   Node.js: v5.11.1
 -   npm: v3.8.6
 
-<div id='8'></div>
-### 2.2.1 Node.js 및 npm 설치
+### <div id='8'></div> 2.2.1 Node.js 및 npm 설치
 
 #### 1.  Node.js 및 npm 설치  
 
@@ -134,20 +126,17 @@ Node.js 애플리케이션 개발을 위해 다음과 같은 환경으로 개발
 ※ 개발도구  
 Node.js는 javascript기반의 언어로 Notepad++, Sublim Text, EditPlus등 문서편집기를 개발도구로 사용할 수 있다. 또한 Eclipse의 플러그인 Nodeclipse를 설치하여 사용할 수 있다. 그리고 상용 개발 도구로써는 WebStome 등이 있다.
 
-<div id='9'></div>
-### 2.2.2 CF-Abacus 설치
+### <div id='9'></div> 2.2.2 CF-Abacus 설치
 
 별도 제공하는 Abacus 설치 가이드를 참고하여 CF-Abacus를 설치한다.
 
-<div id='10'></div>
-### 2.3 샘플 API 서비스 브로커 및 대시보드 개발
+### <div id='10'></div> 2.3 샘플 API 서비스 브로커 및 대시보드 개발
 
 별도 제공하는 서비스 브로커 개발 가이드를 참고하여 서비스 브로커 및
 대시보드를 개발한다.
 **<a href="https://github.com/OpenPaaSRnD/Documents/blob/master/Development-Guide/ServicePack_develope_guide.md#6">https://github.com/OpenPaaSRnD/Documents/blob/master/Development-Guide/ServicePack_develope_guide.md#6</a>**
 
-<div id='11'></div>
-### 2.4 샘플 API 서비스 개발
+### <div id='11'></div> 2.4 샘플 API 서비스 개발
 
 샘플 api 서비스는 서비스 요청이 있는 경우, 해당 요청에 대한 응답 처리와 api 서비스 요청에 대한 미터링 정보를 CF-ABACUS에 전송하는 처리를 한다.
 
@@ -208,8 +197,7 @@ Node.js는 javascript기반의 언어로 Notepad++, Sublim Text, EditPlus등 문
   </tr>
 </table>
      
-<div id='12'></div>
-### 2.4.1 샘플 API 서비스 애플리케이션 코드 구현
+### <div id='12'></div> 2.4.1 샘플 API 서비스 애플리케이션 코드 구현
 
 #### 1.  Package.json 샘플 애플리케이션의 코드 구성에 대해 기술한다.
 
@@ -627,8 +615,7 @@ applications:
 
 
 
-<div id='13'></div>
-### 2.4.2 샘플 API 서비스 애플리케이션 미터링 연동 항목
+### <div id='13'></div> 2.4.2 샘플 API 서비스 애플리케이션 미터링 연동 항목
 
 #### 1.  미터링 정보 전송 API 엔드포인
 
@@ -734,8 +721,7 @@ applications:
 참고: <u><b><a href="https://github.com/cloudfoundry-incubator/cf-abacus/blob/master/doc/api.md">https://github.com/cloudfoundry-incubator/cf-abacus/blob/master/doc/api.md</a></b></u>
 
 
-<div id='14'></div>
-### 2.5 API 서비스 연동 샘플 애플리케이션 개발
+### <div id='14'></div> 2.5 API 서비스 연동 샘플 애플리케이션 개발
 
   Api 서비스를 이용하는 애플리케이션으로 본 샘플은 웹 화면을 통행 단순히 api 서비스를 요청하는 기능만을 구현 하였다.
 
@@ -819,8 +805,7 @@ applications:
   </tr>
 </table>
 
-<div id='15'></div>
-### 2.5.1 API 서비스 연동 샘플 애플리케이션 코드
+### <div id='15'></div> 2.5.1 API 서비스 연동 샘플 애플리케이션 코드
 
 #### 1.  Package.json  
 샘플 애플리케이션의 코드 구성에 대해 기술한다.
@@ -1221,8 +1206,7 @@ Api 서비스를 요청하는 웹 화면
 	</html>
 
 
-<div id='16'></div>
-### 2.5.2 API 서비스 연동 샘플 애플리케이션 인터페이스 항목
+### <div id='16'></div> 2.5.2 API 서비스 연동 샘플 애플리케이션 인터페이스 항목
 
 #### 1.  API 서비스 엔드포인트
 
@@ -1310,8 +1294,7 @@ Api 서비스를 요청하는 웹 화면
 	}
 
 
-<div id='17'></div>
-### 2.5.3 VCAP_SERVICES 환경설정 정보
+### <div id='17'></div> 2.5.3 VCAP_SERVICES 환경설정 정보
 
 파스-타 플랫폼에 배포되는 애플리케이션이 바인딩된 서비스별 접속 정보를 얻기 위해서는 애플리케이션별로 등록되어있는 VCAP_SERVICES 환경설정 정보를 읽어들여 정보를 획득 할 수 있다.
 
@@ -1373,13 +1356,11 @@ Api 서비스를 요청하는 웹 화면
 
  		process.env.VCAP_SERVICES
 
-<div id='18'></div>
-### 2.6 미터링/등급/과금 정책
+### <div id='18'></div> 2.6 미터링/등급/과금 정책
 
 서비스, 그리고 서비스 제공자 마다 미터링/등급/과금 정책 다르기 때문에 본 가이드에서는 정책의 개발 예제를 다루지는 않는다. 다만 CF-ABACUS에 적용할 수 있는 형식에 대해 설명한다.
 
-<div id='19'></div>
-### 2.6.1 미터링 정책
+### <div id='19'></div> 2.6.1 미터링 정책
 
 미터링 정책이란 수집한 미터링 정보에서 미터링 대상의 지정 및 집계 방식을 정의한 JSON 형식의 오브젝트이다. 서비스 제공자는 미터링 정책 스키마에 맞춰 서비스에 대한 정책을 개발한다.
 
@@ -1500,8 +1481,7 @@ Api 서비스를 요청하는 웹 화면
 	}
 
 
-<div id='20'></div>
-### 2.6.2 등급 정책
+### <div id='20'></div> 2.6.2 등급 정책
 
 등급 정책이란 각 서비스의 사용 가중치를 정의한 JSON 형식의 오브젝트이다.
 서비스 제공자는 등급 정책 스키마에 맞춰 서비스에 대한 정책을 개발한다.
@@ -1571,8 +1551,7 @@ Api 서비스를 요청하는 웹 화면
 
 
 
-<div id='21'></div>
-### 2.6.3 과금 정책
+### <div id='21'></div> 2.6.3 과금 정책
 
 과금 정책이란 각 서비스에 대한 사용 단가를 정의한 JSON 형식의 오브젝트이다. 서비스 제공자는 과금 정책 스키마에 맞춰 서비스에 대한 정책을 개발한다.
 
@@ -1672,8 +1651,7 @@ Api 서비스를 요청하는 웹 화면
 	}
 
 
-<div id='22'></div>
-### 2.6.4 정책 등록
+### <div id='22'></div> 2.6.4 정책 등록
 
 정책은 2가지 방식 중 하나의 방법으로 CF-ABACUS에 등록할 수 있다.
 
@@ -1734,13 +1712,11 @@ Api 서비스를 요청하는 웹 화면
 
 
 
-<div id='23'></div>
-### 2.7 배포
+### <div id='23'></div> 2.7 배포
 
 파스-타 플랫폼에 애플리케이션을 배포하면 배포한 애플리케이션과 파스-타 플랫폼이 제공하는 서비스를 연결하여 사용할 수 있다. 파스-타 플랫폼상에서 실행을 해야만 파스-타 플랫폼의 애플리케이션 환경변수에 접근하여 서비스에 접속할 수 있다.
 
-<div id='24'></div>
-### 2.7.1 파스-타 플랫폼 로그인
+### <div id='24'></div> 2.7.1 파스-타 플랫폼 로그인
 
 아래의 과정을 수행하기 위해서 파스-타 플랫폼에 로그인
 
@@ -1749,8 +1725,7 @@ Api 서비스를 요청하는 웹 화면
 	$ cf login -u <user name> -o <org name> -s <space name> # 로그인 요청
 
 
-<div id='25'></div>
-### 2.7.2  API 서비스 브로커 생성
+### <div id='25'></div> 2.7.2  API 서비스 브로커 생성
 
 애플리케이션에서 사용할 서비스를 파스-타 플랫폼을 통하여 생성한다. 별도의 서비스 설치과정 없이 생성할 수 있으며, 애플리케이션과
 바인딩과정을 통해 접속정보를 얻을 수있다.
@@ -1809,8 +1784,7 @@ Api 서비스를 요청하는 웹 화면
 		$ cf enable-service-access standard_obejct_storage_light_api_calls -p standard
 
 
-<div id='26'></div>
-### 2.7.3 API 서비스 애플리케이션 배포 및 서비스 등록
+### <div id='26'></div> 2.7.3 API 서비스 애플리케이션 배포 및 서비스 등록
 
 API 서비스 애플리케이션을 파스-타 플랫폼에 배포한다. 서비스 등록한 API는 다른 애플리케이션과 바인드하여 API 서비스를 할 수 있다.
 
@@ -1837,8 +1811,7 @@ API 서비스 애플리케이션을 파스-타 플랫폼에 배포한다. 서비
 
 
 
-<div id='27'></div>
-### 2.7.4 API 서비스 연동 샘플 애플리케이션 배포 및 서비스 연결
+### <div id='27'></div> 2.7.4 API 서비스 연동 샘플 애플리케이션 배포 및 서비스 연결
 
 애플리케이션과 서비스를 연결하는 과정을 '바인드(bind)라고 하며, 이 과정을 통해 서비스에 접근할 수 있는 접속정보를 생성한다.
 
@@ -1879,8 +1852,7 @@ API 서비스 애플리케이션을 파스-타 플랫폼에 배포한다. 서비
 		sample-api-node-caller    started           1/1         512M     512M   sample-api-node-caller.bosh-lite.com
 
 
-<div id='28'></div>
-### 2.8 테스트
+### <div id='28'></div> 2.8 테스트
 
 샘플 애플리케이션은 REST 서비스로 구현되어 있으며, 코드 체크, 테스트 및 커버리스 체크를 위해서 eslint/mocha/Istanbul 모듈을 사용하였다. 테스트를 진행하기 위해서는 mocha 모듈을 포함한 package.json 안의 devDependencies모듈이 설치 되어 있어야한다. (npm install)
 
@@ -2083,8 +2055,7 @@ API 서비스 애플리케이션을 파스-타 플랫폼에 배포한다. 서비
 		
 		Run time 686ms
 
-<div id='29'></div>
-### 2.9 API 및 CF-Abacus 연동 테스트
+### <div id='29'></div> 2.9 API 및 CF-Abacus 연동 테스트
 
 API 연동 샘플 애플리케이션의 url을 통해 웹 브라우저에서 접속하면 API 연동 및 API 사용량에 대한 CF-Abacus 연동 테스트를 진행 할 수 있다.
 
@@ -2137,12 +2108,11 @@ API 연동 샘플 애플리케이션의 url을 통해 웹 브라우저에서 접
 	예)
 	$ curl 'http://abacus-usage-reporting.bosh-lite.com/v1/metering/organizations/877d01b2-d177-4209-95b0-00de794d9bba/aggregated/usage'
 
-<div id='30'/>
-### 2.10. 샘플코드
+### <div id='30'/> 2.10. 샘플코드
 
 샘플코드는 아래의 사이트에 다운로드 할 수 있다.
 
-[다운로드](https://paas-ta.kr/data/packages/2.0/PaaSTA-Metering.zip)
+[다운로드](https://nextcloud.paas-ta.org/index.php/s/mEbGNcJjrEj7GWx/download)
 
 
 [Development_Guide_Nodejs_Image01]:./images/nodejs_Service_Metering/2-0-0.png
