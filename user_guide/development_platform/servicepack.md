@@ -1053,8 +1053,7 @@ BOSH release 는 jobs(packages 구동 스크립트, monit 스크립트 등), pac
 #### <a name="20"/>3.2.	Bosh Architecture
  
 >![openpaas-servicepack-33]  
-
-[그림출처]: http://www.cloudsofchange.com/2012/05/fork-in-road-to-cloud.html
+> [그림출처]: http://www.cloudsofchange.com/2012/05/fork-in-road-to-cloud.html
 
 -	개방형 클라우드 플랫폼 아키텍쳐와 흡사함 (Message Bus, Health Monitor, Blobstore 등)
 -	Director 는 Cloud Controller 와 유사한 기능
@@ -1062,8 +1061,7 @@ BOSH release 는 jobs(packages 구동 스크립트, monit 스크립트 등), pac
 -	Worker 들은 Director에 의해 결정된 task 들을 실행시키는 역할을 함
 
 >![openpaas-servicepack-34]  
-
-[그림출처]: https://www.ibm.com/developerworks/community/blogs/fe313521-2e95-46f2-817d-44a4f27eba32/entry/porting_cloud_foundry_on_power8_ubuntu_le?lang=en
+> [그림출처]: https://www.ibm.com/developerworks/community/blogs/fe313521-2e95-46f2-817d-44a4f27eba32/entry/porting_cloud_foundry_on_power8_ubuntu_le?lang=en
 
 #### <a name="21"/>3.3.	Release Directory 구조
 디랙토리 구조는 Bosh release 로 구성 할수 있게 되어 있다. Bosh는 릴리스 엔지니어링, 배포 및 대규모 분산 서비스의 라이프 사이클 관리를위한 오픈 소스 도구이다.
