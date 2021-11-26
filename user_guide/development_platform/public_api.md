@@ -324,7 +324,7 @@ API 서비스 브로커를 통해 서비스되는 서비스들이 공통적으�
   ```
   $ curl http://username:password@broker-url/v2/service_instances/:instance_id -d '{
   "plan_id": "Service1 PublicPerformance Plan2 special PlanID"
-}' -X PATCH -H "X-Broker-API-Version: 2.4" -H "Content-Type: application/json"
+  }' -X PATCH -H "X-Broker-API-Version: 2.4" -H "Content-Type: application/json"
   ```
   ※ 'username:password'는 서비스 브로커의 인증ID와 인증Password를 의미한다. 서비스 브로커 구현 시, 라이브러리에 정의된 값이다. 정의되어 있는 인증ID는 'admin', 인증Password는 'cluoudfoundry'이다.
 
