@@ -4,7 +4,6 @@
 - Application Platform
   - [BOSH CLI](./application_platform/bosh_cli.md)  
   - [cf CLI](./application_platform/cf_cli.md)  
-  - [기타 CLI](./application_platform/bosh.md)  
 
 + Portal
   + [사용자 포털](./portal/user.md)   
