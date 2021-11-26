@@ -71,9 +71,9 @@ Open PaaS 개발환경을 설치하고, Open PaaS 개발환경을 통해 자바 
 
 ### 1.3 참고자료
 본 문서는 클라우드 파운드리(Cloud Foundry)의 클라우드 파운드리 이클립스
-플러그인 문서를 참조하였다.
+플러그인 문서를 참조하였다.  
 클라우드 파운드리 이클립스 플러그인 문서 :
-http://docs.run.pivotal.io/buildpacks/java/sts.html
+http://www.eclipse.org/cft/documentation/projectPageLink/CFTProjectPagedocumentation.html
 
 # 2. 개발환경 설치 전 준비사항
 
