@@ -796,10 +796,10 @@ src/main/resources/egovframework/spring/context-datasource.xml 파일을 열어 
 
 4. **데이터베이스 초기화 스크립트 등록**
 ```xml
-     <jdbc:initialize-database data-source="dataSource">
-     <jdbc:script location="classpath:egovframework/script/script_mysql.sql" />
-     <jdbc:script location="classpath:egovframework/script/data_mysql.sql" />
-     </jdbc:initialize-database>
+<jdbc:initialize-database data-source="dataSource">
+<jdbc:script location="classpath:egovframework/script/script_mysql.sql" />
+<jdbc:script location="classpath:egovframework/script/data_mysql.sql" />
+</jdbc:initialize-database>
 ```
  
 
