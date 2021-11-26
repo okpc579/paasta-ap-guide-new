@@ -316,7 +316,7 @@ API 서비스 브로커를 통해 서비스되는 서비스들이 공통적으�
 ##### <div id='24'></div> 4.4.1 요청
 - Route
   ```
- PATCH /v2/service_instances/:instance_id
+  PATCH /v2/service_instances/:instance_id
   ```
   ※ instance_id는 프로비전에서 생성된 서비스 인스턴스의 고유(Unique)ID
   
