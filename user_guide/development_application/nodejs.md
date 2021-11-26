@@ -172,7 +172,7 @@ Node.js는 javascript기반의 언어로 Notepad++, Sublim Text, EditPlus등 문
 
 - 완성된 샘플 애플리케이션은 아래 링크의 /OpenPaaSSample/node-sample-app 에서 받을 수 있다.
 
-> http://extdisk.hancom.com:8080/share.cgi?ssid=0icB5ZW#0icB5ZW
+> https://nextcloud.paas-ta.org/index.php/s/x8Tg37WDFiL5ZDi/download
 
 ##### 2. Node.js 샘플 애플리케이션 경로로 이동
 
