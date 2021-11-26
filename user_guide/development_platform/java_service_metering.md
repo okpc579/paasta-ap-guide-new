@@ -875,7 +875,7 @@ PLAN_EXTRA_QUANTITY 등은 임의로 정한 수치 이다. 서비스에 맞게 �
 |    title     |  String | X   | 등급 정책 명    |
 
 
-####2.  **등급 정책 예제**
+#### 2.  **등급 정책 예제**
 
 	{
 	  "plan_id": "standard",
