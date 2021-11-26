@@ -413,7 +413,7 @@ PHOTON OS 이미지를 생성하는 절차를 기술한다.
 
 1.  PHOTON iso 이미지를 다운로드 받아서 스템셀 생성 VM에 업로드 한다. ※TP2버전 이상을 다운 받는다.
   
-	[https://vmware.bintray.com/photon/iso/](https://vmware.bintray.com/photon/iso/)
+	[https://packages.vmware.com/photon/](https://packages.vmware.com/photon/)
 
 2.  실행 환경 구성
 
