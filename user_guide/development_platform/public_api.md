@@ -1123,8 +1123,6 @@ VCAP_SERVICES 정보를 확인하면 그림과 같이 각각의 서비스 별로
 [7-7-0-3]:./images/openpaas-service/publicapi/7-7-0-3.png
 
 
-```
-
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP User Guide](../README.md) > Public API 개발
