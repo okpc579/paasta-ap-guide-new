@@ -67,35 +67,29 @@
      * [7.7. 샘플 어플리케이션 동작 확인](#63)
 
 
-<div id='1'></div>
-# 1. 문서 개요
+# <div id='1'></div> 1. 문서 개요
 
-<div id='2'></div>
-### 1.1. 목적
+### <div id='2'></div> 1.1. 목적
 개방형 클라우드 플랫폼(OpenPaas)에 배포되는 어플리케이션은 서비스 브로커를 통해 외부에서 제공하는 서비스들을 사용할 수 있게 된다. 본 문서는 외부 API 서비스들을 개방형 클라우드 플랫폼에서 사용할 수 있도록 서비스 브로커를 구현하고 검증한다. 이를 통해 플랫폼 운영자는 개발자에게 필요한 API 서비스를 개방형 클라우드 플랫폼의 마켓 플레이스에 등록할 수 있고, 이 과정에 대한 이해를 돕는 것이 본 문서의 목적이다.
 
-<div id='3'></div>
-### 1.2. 범위 
+### <div id='3'></div> 1.2. 범위 
 플랫폼 운영자는 개발자들이 사용하게 될 서비스를 개방형 클라우드 플랫폼의 마켓 플레이스에 노출시킨다. 따라서 본 문서는 API 서비스 브로커의 구현과 배포, API 서비스를 추가하는 방법을 기술한다.(2장~6장) 또한, 어플리케이션에서 API 서비스를 사용하는 방법을 안내하는데(7장), 이는 플랫폼 운영자가 아닌 어플리케이션 개발자의 영역이지만, 검증을 위해 필요하므로 함께 기술한다.
 본 문서의 [4장 API 서비스 브로커 구현]을 이해하기 위해서 [서비스팩 개발 가이드](../Development-Guide/ServicePack_develope_guide.md)문서의 [2장 Service Broker API 개발가이드]를 숙지하여야 하며, 본 문서는 그 중 JAVA 방식 구현에 대해서만 기술하였다.
 
-<div id='4'></div>
-### 1.3. 참고자료
+### <div id='4'></div> 1.3. 참고자료
 - [서비스팩 개발 가이드](../Development-Guide/ServicePack_develope_guide.md)
 - CF document
 - 인천문화예술정보 공공 Open API 센터(**<http://iq.ifac.or.kr/openAPI/look/culture_guide.php>**)
 - 네이버 개발자 센터(**<http://developer.naver.com/wiki/pages/Tutorial_JavaScript>**)
 
-<div id='5'></div>
-#   2. API 서비스 선정
+# <div id='5'></div>  2. API 서비스 선정
 개방형 클라우드 플랫폼 운영자는 플랫폼 사용자(개발자)들에게 제공할 API를 선정하여, 서비스 브로커를 통해 플랫폼에서 제공한다. 서비스 브로커를 통한 API 서비스의 제공은 플랫폼 운영자의 권한이 필요하기 때문에, 개발자들은 필요한 API 서비스를 제공해줄 것을 운영자에게 요청할 수 있다. 서비스 브로커는 서비스를 제공/소개하는 포털에 따라서 구현방식에 차이가 있을 수 있기 때문에 각각의 API 포털 별로 별도로 구현한다. 예를 들면, 공공 데이터 포털(https://www.data.go.kr/) API 서비스는 공공 데이터 포털 API 서비스를 구현하여 제공하고 네이버(http://www.naver.com/) API 서비스는 네이버 API 서비스 브로커를 구현하여 제공한다.
 
 ※ 공공 API 서비스는 각각의 공공 기관에서 서비스를 제공하고 이러한 API 서비스를 데이터 포털에서 통합하여 소개하는 형태로 일반에 공개된다. 대표적인 데이터 포털로는 공공 데이터 포털(https://www.data.go.kr/), 서울 열린 데이터 광장(http://data.seoul.go.kr/) 등이 있다.
 
 ※ 본 문서는 공공 데이터 포털(https://www.data.go.kr/)을 기준으로 안내를 기술한다. 각각의 포털이나 API 서비스에 따라 세부적인 내용은 차이가 있을 수 있다.
 
-<div id='6'></div>
-### 2.1. 데이터 포털 회원가입 및 로그인
+### <div id='6'></div> 2.1. 데이터 포털 회원가입 및 로그인
 ※ 대부분의 데이터 포털은 서비스키 발급을 로그인 된 사용자에게만 허용한다. 서비스키 발급은 플랫폼 운영자가 아닌 개발자의 역할이지만 본 문서의 7장(API 서비스 브로커 검증)을 진행하기 위해서는 서비스키를 발급받아야 하기 때문에 회원가입 및 로그인 절차를 안내한다. 
 
 공공데이터 포털의 API를 사용하기 위해서는 반드시 회원가입이 되어 있어야 한다. 공공데이터포털(https://www.data.go.kr)에 접속하여 상단 [회원가입] 버튼을 눌러 회원가입을 진행한다.
@@ -135,8 +129,7 @@
 
 아이디와 비밀번호를 입력하고 로그인 한다.
 
-<div id='7'></div>
-### 2.2. API 검색
+### <div id='7'></div>  2.2. API 검색
 API 서비스를 검색하기 위해 데이터 포털에 접속한다. 데이터 포털의 Open API 서비스를 확인한다.
 
 ![2-2-0-0]
@@ -169,14 +162,11 @@ Oepn API 카테고리로 이동하면, ①API 서비스 명으로 검색하거�
 | 요청주소(Endpoint)   | API 서비스를 사용하기 위한 URL. 서비스 브로커에서는 Endpoint라는 용어를 사용한다. |
 | 허용 트래픽    | 서비스 제공자가 허락하는 요청 횟수와 그 단위. 서비스에 따라 일/1,000회, 월/100,000회 등으로 허용 횟수와 단위가 다르다. |
 
-<div id='8'></div>
-#   3. API 서비스 브로커 개요
-<div id='9'></div>
-### 3.1. 개요
+# <div id='8'></div>   3. API 서비스 브로커 개요
+### <div id='9'></div>  3.1. 개요
 서비스 브로커는 개방형 클라우드 플랫폼과 플랫폼 외부의 서비스를 연결하는 역할을 한다. 서비스 브로커는 플랫폼 운영자가 직접 개발하거나 플랫폼 내에 서비스를 제공하고자 하는 외부 서비스의 제공자(provider)가 개발하여 플랫폼 운영자에게 제공할 수 있다. 서비스 브로커 개발은 카탈로그(Catalog), 프로비전(Provision), 업데이트(Update), 바인드(Bind), 언바인드(Unbind), 디프로비전(Deprovision)의 6개 API를 구현함으로써 이루어진다. 서비스 브로커의 개발은 제공하고자 하는 서비스의 특성 또는 서비스 정책에 따라 상이하므로 개발 이전에 제공하고자 하는 서비스에 대한 이해가 바탕이 되어야 한다. 본 문서에서 안내를 제공하는 2개의 API 서비스 브로커는 API 서비스의 특성에 맞게 설계되었다.
 
-<div id='10'></div>
-### 3.2. 서비스 브로커 APIs
+### <div id='10'></div> 3.2. 서비스 브로커 APIs
 - 카탈로그(Catalog): 서비스의 목록을 생성한다.
 - 프로비전(Provision): 서비스 인스턴스를 생성한다.
 - 업데이트(Update): 카탈로그를 업데이트 한다.
@@ -194,18 +184,14 @@ Oepn API 카테고리로 이동하면, ①API 서비스 명으로 검색하거�
 | 디프로비전(Deprovision)    | cf delete-service [서비스 인스턴스명] <br>확인: cf services |
 ※ 서비스 브로커 APIs에 대한 상세 정보는 [서비스팩 개발 가이드](../Development-Guide/ServicePack_develope_guide.md)문서의 [2.5 개발가이드]를 참고한다.
 
-<div id='11'></div>
-### 3.3. API 서비스 브로커 동작구조
+### <div id='11'></div> 3.3. API 서비스 브로커 동작구조
 ![3-3-0-0]
 
 API 서비스 브로커는 API 포털에 소개된 API 서비스 중, 사용하고자 하는 서비스에 대한 정보를 설정파일에 담고 있는다. 플랫폼 운영자 또는 플랫폼 사용자가 개방형 클라우드 플랫폼에 명령어를 입력하여 API 요청을 서비스 브로커로 보내면, API 서비스 브로커는 설정 파일에 정의된 정보를 이용하여 플랫폼이 요구하는 형태로 응답을 보낸다. 이를 바탕으로 플랫폼은 각각의 명령어에 대한 동작을 실행하게 된다. 서비스 브로커의 구현 플랫폼과 통신하는 6개의 API를 구현함으로써 이루어진다.
 
-<div id='12'></div>
-#   4. API 서비스 브로커 구현
-<div id='13'></div>
-### 4.1. API 서비스 브로커 설정 파일
-<div id='14'></div>
-##### 4.1.1 공통 설정 값
+# <div id='12'></div>   4. API 서비스 브로커 구현
+### <div id='13'></div> 4.1. API 서비스 브로커 설정 파일
+##### <div id='14'></div> 4.1.1 공통 설정 값
 API 서비스 브로커를 통해 서비스되는 서비스들이 공통적으로 갖게 되는 값을 설정파일에 정의하였다.
 
 | <b>키(Key) 값</b>      | <b>설명</b> | <b>Value 값 예시</b> |
@@ -213,8 +199,7 @@ API 서비스 브로커를 통해 서비스되는 서비스들이 공통적으�
 | DashboardUrl    | 대시보드 URL. 포털의 URL로 이해할 수 있으며, API를 제공하는 포털에 따라 서비스 브로커를 구분하기 때문에 하나의 서비스 브로커의 서비스들은 공통의 대시보드 URL을 갖는다. | http://www.data.go.kr |
 | SupportUrl | 개방형 클라우드 플랫폼의 공식 사이트 주소를 입력한다. | http://www.openpaas.org |
 
-<div id='15'></div>
-##### 4.1.2 서비스 설정 값
+##### <div id='15'></div> 4.1.2 서비스 설정 값
 각각의 서비스마다 별도로 가지는 값을 설정파일에 정의하였다. 키 값에 서비스 번호를 붙여 서로 다른 서비스들을 구분한다. 서비스를 추가함에 따라 서비스 번호를 늘려갈 수 있으며, 서비스 번호는 1번부터 순서대로 부여되어야 한다.
 
 | <b>키(Key) 값</b>      | <b>설명</b> | <b>Value 값 예시</b> |
@@ -225,8 +210,7 @@ API 서비스 브로커를 통해 서비스되는 서비스들이 공통적으�
 | Service1.DocumentUrl | API 서비스에 대한 기술문서, 가이드문서 등을 확인할 수 있는 URL이다. | https://www.data.go.kr/subMain.jsp#/L3B1YnIvd....(생략) |
 | Service1.Endpoint | API 서비스의 서비스 URL/URI이다. | http://www.culture.go.kr/openapi/rest/publicperformancedisplays |
 
-<div id='16'></div>
-##### 4.1.3 플랜 설정 값
+##### <div id='16'></div> 4.1.3 플랜 설정 값
 각각의 서비스에 대해서 최소한 한 개 이상의 플랜을 설정파일에 정의해 주어야 한다. 플랜이 정의되어 있지 않으면 개방형 클라우드 플랫폼에서 해당 서비스를 사용할 수 없다. 플랜의 키 값은 서비스번호와 플랜번호를 포함하는데, 예를 들어 키 값이 [Service1.Plan1.Name]이라면 1번 서비스의 첫 번째 플랜의 명칭이라는 의미이다. 플랜번호는 1번부터 순서대로 부여되어야 한다.
 
 | <b>키(Key) 값</b>      | <b>설명</b> | <b>Value 값 예시</b> |
@@ -236,11 +220,9 @@ API 서비스 브로커를 통해 서비스되는 서비스들이 공통적으�
 | Service1.Plan1.Bullet | 플랜의 과금 정보. API 서비스이기 때문에 최대 허용 호출 수를 입력한다. 복수 입력을 하려면 코드의 수정이 필요하다. | 1,000,000 callsr |
 | Service1.Plan1.Unit | 최대 허용 호출 수의 단위를 입력한다. 예를 들면, per month, per day, weekly, total등으로 입력할 수 있다. | Total |
 
-<div id='17'></div>
-### 4.2. 카탈로그
-※ 세부정보는 [서비스팩 개발 가이드](../Development-Guide/ServicePack_develope_guide.md)문서의 [2.5.1. Catalog API 가이드]를 참고한다.
-<div id='18'></div>
-##### 4.2.1 요청
+### <div id='17'></div> 4.2. 카탈로그
+※ 세부정보는 서비스팩 개발 가이드문서의 [2.5.1. Catalog API 가이드]를 참고한다.  
+##### <div id='18'></div> 4.2.1 요청
 - Route
   ```
   GET /v2/catalog
@@ -252,8 +234,7 @@ API 서비스 브로커를 통해 서비스되는 서비스들이 공통적으�
   ```
   ※ 'username:password'는 서비스 브로커의 인증ID와 인증Password를 의미한다. 서비스 브로커 구현 시, 라이브러리에 정의된 값이다. 정의되어 있는 인증ID는 'admin', 인증Password는 'cluoudfoundry'이다.
   
-<div id='19'></div>
-##### 4.2.2 응답
+##### <div id='19'></div> 4.2.2 응답
 ※{1}은 코드 내에서 설정파일에 정의된 서비스와 플랜의 키(Key) 값을 순서대로 불러오기 위한 변수 값이다.
 <br>※ Key값의[ ](대괄호)내의 문자는 설정파일에 정의된 서비스의 키(Key) 값을 의미한다.
 
@@ -296,11 +277,9 @@ API 서비스 브로커를 통해 서비스되는 서비스들이 공통적으�
   | metadata.costs | 플랜의 비용 정보.Map타입의 amount와 String타입의 unit으로 구성. <br>amount 지정값: "KRW",0 <br>※KRW는 한국 통화단위 <br>unit Key값: [Service1.Plan1.Unit] | Json 구조 <br>"costs": [{"amount": {"KRW": 0} "unit": "total" }] |
   | metadata.displayName | 그래픽 클라이언트에 표시되는 플랜명 <br>Key값: [Service1.Plan1.Name] | basic |
 
-<div id='20'></div>
-### 4.3. 프로비전
-※ 세부정보는 [서비스팩 개발 가이드](../Development-Guide/ServicePack_develope_guide.md)문서의 [2.5.1  Provision 가이드]를 참고한다.
-<div id='21'></div>
-##### 4.3.1 요청
+### <div id='20'></div> 4.3. 프로비전
+※ 세부정보는 서비스팩 개발 가이드문서의 [2.5.1  Provision 가이드]를 참고한다.
+##### <div id='21'></div>  4.3.1 요청
 - Route
   ```
   PUT /v2/service_instances/:instance_id
@@ -327,17 +306,14 @@ API 서비스 브로커를 통해 서비스되는 서비스들이 공통적으�
   | organization_guid* | 프로비전을 요청한 사용자 Org의 GUID 값 | [클라우드 컨트롤러에서 Org 식별을 위해 사용하는 GUID 값] |
   | space_guid* | 프로비전을 요청한 사용자 Space의 GUID 값 | [클라우드 컨트롤러에서 Space 식별을 위해 사용하는 GUID 값] |
   
-<div id='22'></div>
-##### 4.3.2 응답
+##### <div id='22'></div> 4.3.2 응답
 | <b>응답필드</b>      | <b>설명</b> | <b>샘플데이터</b> |
 |-------------|-----------------------------|-----------------------------|
 | dashboard_url | 공공데이터포털 URL을 사용 <br>Key값: [DashboardUrl] | http://www.data.go.kr |
 
-<div id='23'></div>
-### 4.4. 업데이트
+### <div id='23'></div> 4.4. 업데이트
 ※ 세부정보는 [서비스팩 개발 가이드](../Development-Guide/ServicePack_develope_guide.md)문서의 [2.5.3  Update Instance API 가이드]를 참고한다.
-<div id='24'></div>
-##### 4.4.1 요청
+##### <div id='24'></div> 4.4.1 요청
 - Route
   ```
  PATCH /v2/service_instances/:instance_id
@@ -359,17 +335,14 @@ API 서비스 브로커를 통해 서비스되는 서비스들이 공통적으�
   | plan_id | 카탈로그에서 생성된, 변경할 플랜의 ID | Service1 PublicPerformance Plan2 special PlanID |
   | service_id* | 카탈로그에서 생성된, 플랜을 변경하고자 하는 서비스의 ID | Service1 PublicPerformance ServiceID |
 
-<div id='25'></div>
-##### 4.4.2 응답
+##### <div id='25'></div> 4.4.2 응답
 | <b>응답필드</b>      | <b>설명</b> |
 |-------------|-----------------------------|
 | {} | 업데이트가 성공적으로 진행되었을 경우, "{}"의 형태로 응답된다. |
 
-<div id='26'></div>
-### 4.5. 바인드
+### <div id='26'></div> 4.5. 바인드
 ※ 세부정보는 [서비스팩 개발 가이드](../Development-Guide/ServicePack_develope_guide.md)문서의 [2.5.5  Bind API 가이드]를 참고한다.
-<div id='27'></div>
-##### 4.5.1 요청
+##### <div id='27'></div> 4.5.1 요청
 - Route
   ```
   PUT /v2/service_instances/:instance_id/service_bindings/:binding_id
@@ -394,8 +367,7 @@ API 서비스 브로커를 통해 서비스되는 서비스들이 공통적으�
   | service_id | 카탈로그에서 생성된, 바인드하는 서비스 인스턴스의 서비스ID | Service1 PublicPerformance ServiceID |
   | app_guid | 바인드하는 어플리케이션의 GUID | 바인드하는 어플리케이션의 GUID |
 
-<div id='28'></div>
-##### 4.5.2 응답
+##### <div id='28'></div> 4.5.2 응답
 - body
 
   | <b>응답필드</b>      | <b>설명</b> | <b>샘플데이터</b> |
@@ -411,11 +383,9 @@ API 서비스 브로커를 통해 서비스되는 서비스들이 공통적으�
   | serviceKey | API 서비스를 사용하기 위해 서비스 제공자로부터 발급받은 인증키 <br>※ 서비스 바인드 시, 입력 | [사용자가 발급받은 키값] |
   | documentUrl | API 서비스의 기술문서, 개발 가이드 등을 확인할 수 있는 URL <br>Key값: [Service1.DocumentationUrl] | https://www.data.go.kr/subMain.jsp#/L3B1YnIvdXNlL3ByaS... (생략) |
   
-<div id='29'></div>
-### 4.6. 언바인드
-※ 세부정보는 [서비스팩 개발 가이드](../Development-Guide/ServicePack_develope_guide.md)문서의 [2.5.6  Unbind API 가이드]를 참고한다.
-<div id='30'></div>
-##### 4.6.1 요청
+### <div id='29'></div> 4.6. 언바인드
+※ 세부정보는 서비스팩 개발 가이드문서의 [2.5.6  Unbind API 가이드]를 참고한다.
+##### <div id='30'></div> 4.6.1 요청
 - Route
   ```
   DELETE /v2/service_instances/:instance_id/service_bindings/:binding_id
@@ -435,19 +405,16 @@ service_bindings/:binding_id?service_id=Service1 PublicPerformance ServiceID &pl
   | service_id | 카탈로그에서 생성된, 언바인드하는 서비스 인스턴스의 서비스ID | Service1 PublicPerformance ServiceID |
   | plan_id | 카탈로그에서 생성된, 언바인드하는 서비스 인스턴스의 플랜ID | Service1 PublicPerformance Plan1 basic PlanID |
 
-<div id='31'></div>
-##### 4.6.2 응답
+##### <div id='31'></div> 4.6.2 응답
 - body
 
   | <b>응답</b>      | <b>설명</b> |
   |-------------|-----------------------------|
   | {} | 언바인드가 성공적으로 진행되었을 경우, "{}"의 형태로 응답된다. |
 
-<div id='32'></div>
-### 4.6. 디프로비전
-※ 세부정보는 [서비스팩 개발 가이드](../Development-Guide/ServicePack_develope_guide.md)문서의 [2.5.4  Deprovision API 가이드]를 참고한다.
-<div id='33'></div>
-##### 4.7.1 요청
+### <div id='32'></div> 4.6. 디프로비전
+※ 세부정보는 서비스팩 개발 가이드문서의 [2.5.4  Deprovision API 가이드]를 참고한다.
+##### <div id='33'></div> 4.7.1 요청
 - Route
   ```
   DELETE /v2/service_instances/:instance_id
@@ -467,20 +434,17 @@ Service1 PublicPerformance ServiceID plan_id=Service1 PublicPerformance Plan1 ba
   | service_id | 카탈로그에서 생성된, 디프로비전하는 서비스 인스턴스의 서비스ID | Service1 PublicPerformance ServiceID |
   | plan_id | 카탈로그에서 생성된, 디프로비전하는 서비스 인스턴스의 플랜ID | Service1 PublicPerformance Plan1 basic PlanID |
 
-<div id='34'></div>
-##### 4.7.2 응답
+##### <div id='34'></div> 4.7.2 응답
 - body
 
   | <b>응답</b>      | <b>설명</b> |
   |-------------|-----------------------------|
   | {} | 모든 응답은 Body는 JSON Object "{}" 형식으로 한다. |
 
-<div id='35'></div>
-#   5. API 서비스 브로커 배포
+# <div id='35'></div>   5. API 서비스 브로커 배포
 개방형 클라우드 플랫폼에서 사용하기 위해서 서비스 브로커를 구동한다. 서비스 브로커는 하나의 어플리케이션으로 개방형 클라우드 플랫폼 내에 어플리케이션 형태로 구동하여 사용할 수 있지만, 본 문서는 외부 서버에서 구동하여 개방형 클라우드 플랫폼에서 사용하는 방법을 안내한다. 서비스 브로커가 구동되는 외부 서버는 개방형 클라우드 플랫폼과 통신이 가능한 환경을 구성하여야 한다. 서비스 브로커 구동에 대한 안내는 따로 진행하지 않는다.
 
-<div id='36'></div>
-### 5.1. 개방형 클라우드 플랫폼 로그인
+### <div id='36'></div> 5.1. 개방형 클라우드 플랫폼 로그인
 개방형 클라우드 플랫폼에서 서비스 브로커를 생성한다. 서비스 브로커 생성을 위해서는 개방형 클라우드 플랫폼의 관리자 권한이 필요하다. 하단의 명령어를 통해 개방형 클라우드 플랫폼에 관리자 계정으로 로그인 한다.
 ```
   $ cf login
@@ -493,12 +457,10 @@ Service1 PublicPerformance ServiceID plan_id=Service1 PublicPerformance Plan1 ba
   Password> 123456
 ```
 
-<div id='37'></div>
-### 5.2. 서비스 브로커 생성
+### <div id='37'></div> 5.2. 서비스 브로커 생성
 개방형 클라우드 플랫폼에서 서비스 브로커를 생성한다. 아래 명령어와 같은 서비스 브로커 생성 명령어를 입력했을 때, 카탈로그(Catalog)가 진행되면서, 설정 파일의 서비스 정보를 기반으로 서비스를 정의한다.
 
-<div id='38'></div>
-##### 5.2.1 서비스 브로커 생성
+##### <div id='38'></div> 5.2.1 서비스 브로커 생성
 ```
   $ cf create-service-broker [서비스 브로커 명] [인증ID] [인증Password] [서비스 브로커 주소]
 ```
@@ -509,8 +471,7 @@ Service1 PublicPerformance ServiceID plan_id=Service1 PublicPerformance Plan1 ba
   $ cf create-service-broker public-api-sb admin cloudfoundry http://10.30.60.100:8080
 ```
 
-<div id='39'></div>
-##### 5.2.2 서비스 브로커 생성 확인
+##### <div id='39'></div> 5.2.2 서비스 브로커 생성 확인
 서비스 브로커의 목록을 확인하는 명령어를 이용하여 서비스 브로커가 정상적으로 생성된 것을 확인할 수 있다.
 ```
   $ cf service-brokers
@@ -518,8 +479,7 @@ Service1 PublicPerformance ServiceID plan_id=Service1 PublicPerformance Plan1 ba
 
 ![5-2-2-0]
 
-<div id='40'></div>
-##### 5.2.3 카탈로그(Catalog) 확인
+##### <div id='40'></div> 5.2.3 카탈로그(Catalog) 확인
 서비스 브로커가 개방형 클라우드 플랫폼에 생성될 때, 서비스 브로커를 통해 서비스되는 API 서비스의 목록을 생성하는 카탈로그를 진행한다. 카탈로그 된 서비스들은 서비스 접근(service access) 목록에 추가되는데, 이 서비스 접근 목록을 확인함으로써, 정상적으로 카탈로그가 이루어졌음을 확인할 수 있다.
 ```
   $ cf service-access
@@ -527,8 +487,7 @@ Service1 PublicPerformance ServiceID plan_id=Service1 PublicPerformance Plan1 ba
 
 ![5-2-3-0]
 
-<div id='41'></div>
-### 5.3. 서비스 접근 허용
+### <div id='41'></div> 5.3. 서비스 접근 허용
 [5.2.3. 카탈로그(Catalog)확인]의 서비스 접근목록 확인을 보면 카탈로그 된 서비스들은 접근(access)이 none으로 설정되어 있다. 이 설정을 접근 가능하게 바꿔 주어야 마켓 플레이스에 서비스 목록이 노출된다. 아래 명령어를 이용하여 서비스에 대한 접근을 허용한다.
 
 ```
@@ -548,8 +507,7 @@ Service1 PublicPerformance ServiceID plan_id=Service1 PublicPerformance Plan1 ba
 
 ![5-3-0-0]
 
-<div id='42'></div>
-### 5.4. 마켓 플레이스 확인
+### <div id='42'></div> 5.4. 마켓 플레이스 확인
 접근을 허용한 서비스들은 마켓 플레이스에 등록됨으로써 개발자들이 사용할 수 있는 상태가 된다. 명령어를 이용해 마켓 플레이스를 확인한다.
 
 ```
@@ -558,8 +516,7 @@ Service1 PublicPerformance ServiceID plan_id=Service1 PublicPerformance Plan1 ba
 
 ![5-4-0-0]
 
-<div id='43'></div>
-#   6. API 서비스 추가/제거
+# <div id='43'></div>   6. API 서비스 추가/제거
 샘플 서비스 브로커에서 API 서비스의 추가 또는 제거는 [4.1 서비스 브로커 설정 파일]에 정보를 삽입하거나 삭제함으로써 이루어진다. 샘플 서비스 브로커는 설정 파일의 키(key)값을 통해, 필요한 정보를 읽어 서비스 카탈로그(catalog)와 바인드(bind)에서 사용하도록 설계되어있다. 설정 파일의 파일명은 'application-mvc.properties'이고 샘플 서비스 브로커에서 요구하는 API 서비스에 대한 정보는 다음과 같다.
 ※ 샘플 서비스 브로커는 서비스나 플랜을 서비스 번호, 플랜 번호를 순서대로 읽도록 설계되었다.
 서비스 번호, 플랜번호가 1번부터 순서대로 입력되지 않으면, 정상적으로 서비스나 플랜을 읽어 올 수 없다. 서비스나 플랜을 추가 또는 제거 한 이후에 서비스 번호나 플랜 번호가 1번부터 빠짐없이 이어질 수 있도록 주의한다.
@@ -576,8 +533,7 @@ Service1 PublicPerformance ServiceID plan_id=Service1 PublicPerformance Plan1 ba
 | Service[서비스 번호].Plan[플랜번호].Bullet | 해당 서비스의 해당 플랜의 서비스 제한 형태. 일반적으로 API 서비스는 호출 수에 제한을 두어 서비스를 관리한다. |
 | Service[서비스 번호].Plan[플랜번호].Unit | 해당 서비스의 해당 플랜의 제한 단위. 일반적으로 API 서비스는 일별 또는 월별 호출 수에 제한을 둔다. |
 
-<div id='44'></div>
-### 6.1. 공공 API 서비스 브로커 설정파일 정의
+### <div id='44'></div> 6.1. 공공 API 서비스 브로커 설정파일 정의
 제공되는 2개의 샘플 서비스 브로커 중 공공 API 서비스 브로커의 서비스 목록은 다음과 같이 정의 되어있다.
 
 | <b>설정 파일 키(key) 값</b>      | <b>Value 값</b> |
@@ -623,8 +579,7 @@ Service1 PublicPerformance ServiceID plan_id=Service1 PublicPerformance Plan1 ba
 | Service4.Plan1.Bullet | 5,000 calls |
 | Service4.Plan1.Unit | per day |
 
-<div id='45'></div>
-### 6.2. 네이버 API 서비스 브로커 설정파일 정의
+### <div id='45'></div> 6.2. 네이버 API 서비스 브로커 설정파일 정의
 제공되는 2개의 샘플 서비스 브로커 중, 네이버 API 서비스 브로커의 서비스 목록은 다음과 같이 정의 되어있다.
 
 | <b>설정 파일 키(key) 값</b>      | <b>Value 값</b> |
@@ -660,20 +615,16 @@ Service1 PublicPerformance ServiceID plan_id=Service1 PublicPerformance Plan1 ba
 | Service3.Plan1.Bullet | 25,000 calls |
 | Service3.Plan1.Unit | per day |
 
-<div id='46'></div>
-#   7. API 서비스 브로커 검증
+# <div id='46'></div>   7. API 서비스 브로커 검증
 ※ 플랫폼 사용자(개발자)가 API 서비스를 어플리케이션에 바인드하여 사용할 수 있는지 확인한다. 이를 위해 API 서비스를 사용하는 샘플 어플리케이션을 제작해 정상 작동 여부를 검증한다.
 <br>※ 검증에 필요한 API 서비스들을 사용하기 위해 공공 데이터 포털 서비스 브로커와 네이버 Open API 서비스 브로커의 구현이 완료된 상태에서 검증을 진행한다.
 
 
-<div id='47'></div>
-### 7.1. 샘플 어플리케이션 개요
+### <div id='47'></div> 7.1. 샘플 어플리케이션 개요
 전국 각지의 지방자치단체별로 제공하는 지역 문화행사 API 서비스를 이용하여 행사 장소를 지도에 표시한다. 네이버 지도 API를 통해 지도를 화면에 출력하고 하단에 셀렉트 박스를 만들어 사용자가 지역을 선택할 수 있도록 한다. 선택된 지역에 따라서 해당 지역에서 제공하는 문화행사 API를 사용하여 행사 위치를 지도에 마커로 표시한다.
 
-<div id='48'></div>
-### 7.2. 사용 API 서비스
-<div id='49'></div>
-##### 7.2.1. 공공 데이터 포털 API 서비스
+### <div id='48'></div> 7.2. 사용 API 서비스
+##### <div id='49'></div> 7.2.1. 공공 데이터 포털 API 서비스
 ##### 7.2.1.1 공연전시정보조회 서비스
   1. API 소개<br>
   전국 단위의 공연전시 정보를 제공하는 서비스이다. 문화포털(http://www.culture.go.kr)에서 서비스하고 있으며, 지역별, 기간별, 분야별 검색이 가능하다. 서비스 키는 공공 데이터 포털을 통해 발급한다. 서비스키 신청을 하면, 승인까지 1~2일 가량의 대기기간을 가져야 한다.<br>
@@ -789,8 +740,7 @@ Service1 PublicPerformance ServiceID plan_id=Service1 PublicPerformance Plan1 ba
   | NEWADDR | 관광지의 주소이다. 좌표 값을 응답하지 않기 때문에, 네이버 주소-좌표 변환 API를 사용하여 해당 주소에 대한 좌표 값을 얻는다 |
   | MASTERIMG | 관광지의 이미지 URL이다. |
 
-<div id='50'></div>
-##### 7.2.1. 네이버 Open API 서비스
+##### <div id='50'></div> 7.2.1. 네이버 Open API 서비스
 ##### 7.2.1.1 네이버 지도
   1. API 소개<br>
   네이버 개발자센터 Open API(http://developer.naver.com/wiki/pages/OpenAPI)에서 제공하는 지도 API이다. 샘플 어플리케이션에서는 자바스크립트를 이용하여 네이버 지도를 사용한다. 이를 위해서 HTML파일에 다음과 같은 태그를 작성하게 된다.
@@ -856,10 +806,8 @@ Service1 PublicPerformance ServiceID plan_id=Service1 PublicPerformance Plan1 ba
   | mapx | 검색을 요청한 주소에 대한 X좌표 값이다. 카텍좌표계 값으로 다른 API와는 다른 좌표계를 사용한다. |
   | mapy | 검색을 요청한 주소에 대한 Y좌표 값이다. 카텍좌표계 값으로 다른 API와는 다른 좌표계를 사용한다. |
 
-<div id='51'></div>
-### 7.3. API 서비스키 획득
-<div id='52'></div>
-##### 7.3.1. 공공 데이터 포털 API 서비스
+### <div id='51'></div> 7.3. API 서비스키 획득
+##### <div id='52'></div> 7.3.1. 공공 데이터 포털 API 서비스
 공공 데이터 포털에 소개된 대부분의 API는 공공 데이터 포털에서 서비스키 발급이 가능하지만 일부는 서비스 제공 기관에 직접 서비스키 신청을 해야 한다. 본 문서에서 설명하는 4개의 공공 데이터 포털 API 중, [7.2.1.1. 공연전시정보조회 서비스], [7.2.1.3. 대전광역시 문화축제], [7.2.1.4 전시공연/테마파크 정보]는 공공 데이터 포털에서 서비스키 발급이 가능하다. 반면, [7.2.1.2. 인천광역시 문화행사]의 경우, 인천문화예술정보 공공 Open API 센터(http://iq.ifac.or.kr/openAPI)에서만 서비스키 발급이 가능하기 때문에 공공 데이터 포털의 서비스키 획득 절차와 인천문화예술정보 공공 Open API 센터의 서비스키 획득 절차를 나누어 기술한다.
 ##### 7.3.1.1 공공 데이터 포털 서비스키 획득 절차
   1. 회원가입 및 로그인<br>
@@ -936,8 +884,7 @@ Service1 PublicPerformance ServiceID plan_id=Service1 PublicPerformance Plan1 ba
   인증키 관리 화면으로 이동하면 (1) 서비스키, (2) 트래픽, (3) 승인 상태를 확인할 수 있고 (4) 서비스키 삭제도 가능하다.<br>
   ※ [7.2.1.2. 인천광역시 문화행사]의 경우 API서비스 제공자에게 직접 서비스키 신청을 하게 되기 때문에 공공 데이터 포털에서 서비스키 신청을 하는 경우와 달리 대기기간이 없고 승인 역시 자동승인 되므로 신청 절차만 완료하면 바로 사용할 수 있다.
 
-<div id='53'></div>
-##### 7.3.2 네이버 Open API 서비스 키 획득
+##### <div id='53'></div> 7.3.2 네이버 Open API 서비스 키 획득
 [2.2.1. 네이버 지도], [2.2.2. 네이버 주소-좌표 변환], [2.2.3. 네이버 검색] API 서비스키를 발급받기 위해서는 네이버 ID로 로그인이 되어 있어야 한다. 네이버 개발자센터의 Open API 페이지(http://developer.naver.com/wiki/pages/OpenAPI)에 접속하여 네이버 ID로 로그인하거나 회원가입을 진행한다.<br>
 
   1. 회원가입 및 로그인<br>
@@ -993,10 +940,8 @@ Service1 PublicPerformance ServiceID plan_id=Service1 PublicPerformance Plan1 ba
   ![7-3-2-12]<br>
   네이버에서 제공하는 API 서비스의 서비스키 전체를 관리할 수 있는 화면으로 이동한다. 각각의 API별로 ①발급된 사용자의 서비스 키와 등록 URL과 ②API 호출 수를 확인 할 수 있다. ③키 추가 및 ④수정/삭제 또한 이 화면에서 이루어 진다. [7.2.2.3. 네이버 검색] API 서비스는 상단의 검색 API의 발급 키로 사용이 가능하고 [7.2.2.1. 네이버 지도]와 [7.2.2.2. 네이버 주소-좌표 변환] API 서비스는 지도 API의 발급 키로 사용이 가능하다.
 
-<div id='54'></div>
-### 7.4. 샘플 어플리케이션 배포
-<div id='55'></div>
-##### 7.4.1. 개방형 클라우드 플랫폼 로그인
+### <div id='54'></div> 7.4. 샘플 어플리케이션 배포
+##### <div id='55'></div> 7.4.1. 개방형 클라우드 플랫폼 로그인
 개방형 클라우드 플랫폼에 개발자 계정으로 로그인 한다. 개발자 계정은 운영자가 계정을 생성하고 개발자 권한을 부여함으로써 사용할 수 있게 된다. 개발자 계정 생성 및 권한 부여에 대한 설명은 기술하지 않는다. 본 문서에 기술된 검증절차는 관리자 계정으로 접속하여 검증하여도 무방하다.
 
 ```
@@ -1010,8 +955,7 @@ Service1 PublicPerformance ServiceID plan_id=Service1 PublicPerformance Plan1 ba
   Password> asd20kwl
 ```
 
-<div id='56'></div>
-##### 7.4.2. 어플리케이션 배포
+##### <div id='56'></div> 7.4.2. 어플리케이션 배포
 개방형 클라우드 플랫폼에 어플리케이션을 배포(Deploy)한다. 어플리케이션 배포는 아래와 같은 명령어를 사용한다.
 
 ```
@@ -1029,12 +973,10 @@ Service1 PublicPerformance ServiceID plan_id=Service1 PublicPerformance Plan1 ba
   $ cf push public-naver -p /home/kimdojun/sample/openpaas-service-java-broker-public-naver-api-sample.war -b java_buildpack -m 1024M --no-start
 ```
 
-<div id='57'></div>
-### 7.5. 서비스 인스턴스 생성
+### <div id='57'></div> 7.5. 서비스 인스턴스 생성
 마켓 플레이스에 등록된 서비스에 대해서 인스턴스 생성이 가능해진다.<br>
 ※ 서비스를 마켓 플레이스에 등록하는 것은 플랫폼 운영자의 역할이다. 마켓 플레이스에 서비스를 등록하는 방법은 본 문서의 [5.3. 서비스 접근 허용]을 참고한다.
-<div id='58'></div>
-##### 7.5.1. 서비스 인스턴스 생성
+##### <div id='58'></div> 7.5.1. 서비스 인스턴스 생성
 ```
   $ cf create-service [서비스명] [플랜명] [서비스 인스턴스명]
 ```
@@ -1057,8 +999,7 @@ Service1 PublicPerformance ServiceID plan_id=Service1 PublicPerformance Plan1 ba
   $ cf create-service PublicPerformance basic publicPerformance
 ```
 
-<div id='59'></div>
-##### 7.5.2. 서비스 인스턴스 확인
+##### <div id='59'></div> 7.5.2. 서비스 인스턴스 확인
 서비스 인스턴스의 생성을 통해 개방형 클라우드 플랫폼에서 서비스와 어플리케이션의 바인드가 가능해진다. 서비스 인스턴스의 생성을 확인하기 위해서, 서비스 인스턴스 목록을 노출하는 명령어를 사용한다.
 
 ```
@@ -1068,11 +1009,9 @@ Service1 PublicPerformance ServiceID plan_id=Service1 PublicPerformance Plan1 ba
 생성된 서비스의 인스턴스명과 서비스명, 플랜, 바인드 된 어플리케이션을 확인할 수 있다. bound apps의 값이 바인드 된 어플리케이션을 의미한다.<br>
 ![7-5-2-0]
 
-<div id='60'></div>
-### 7.6. 서비스 바인드
+### <div id='60'></div> 7.6. 서비스 바인드
 [7.5. 서비스 인스턴스 생성]에서 생성된 서비스 인스턴스를 어플리케이션과 바인드하여 어플리케이션에서 API서비스를 사용할 수 있게 된다.
-<div id='61'></div>
-##### 7.6.1. 서비스 바인드
+##### <div id='61'></div> 7.6.1. 서비스 바인드
 생성된 서비스 인스턴스와 어플리케이션을 바인드한다. 바인드 시, -c 옵션을 주어 사용자가 직접 발급받은 해당 서비스의 서비스키를 입력할 수 있도록 한다. 샘플 서비스 브로커의 경우는 서비스 키를 입력하지 않을 경우 바인드가 정상적으로 진행되지 않도록 설계되어 있다.
 
 ```
@@ -1086,8 +1025,7 @@ Service1 PublicPerformance ServiceID plan_id=Service1 PublicPerformance Plan1 ba
 ```
 위와 같은 형태로 어플리케이션이 사용할 7개의 API 서비스를 모두 바인드한다.
 
-<div id='62'></div>
-##### 7.6.2. 서비스 바인드 확인
+##### <div id='62'></div> 7.6.2. 서비스 바인드 확인
 어플리케이션과 서비스를 바인드하면 바인드 된 각각의 서비스에 대한 정보는 어플리케이션의 VCAP_SERVICES 정보에서 확인할 수 있다.
 
 ```
@@ -1101,8 +1039,7 @@ Service1 PublicPerformance ServiceID plan_id=Service1 PublicPerformance Plan1 ba
 ![7-6-2-0]<br>
 VCAP_SERVICES 정보를 확인하면 그림과 같이 각각의 서비스 별로 플랜, 엔드포인트, 바인드에서 -c 옵션을 통해 입력한 서비스키 등의 서비스 정보를 확인 할 수 있다. 샘플 어플리케이션은 이 VCAP_SERVICES 정보에서 엔드포인트와 서비스키를 가져와 필요한 API 서비스를 사용한다.
 
-<div id='62'></div>
-### 7.7. 샘플 어플리케이션 동작 확인
+### <div id='62'></div> 7.7. 샘플 어플리케이션 동작 확인
 명령어를 통해 어플리케이션의 URL을 확인할 수 있다.
 
 ```
