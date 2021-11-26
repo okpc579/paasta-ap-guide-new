@@ -69,27 +69,27 @@ http://www.appdirect.com
 개방형 클라우드 플랫폼 Service API는 Cloud Controller와 Service Broker  사이의 규약을 정의한다. Broker는 HTTP (or HTTPS) endpoints URI 형식으로 구현된다. 하나 이상의 Service가 하나의 Broker 에 의해 제공 될 수 있고, 로드 밸런싱이 가능하게 수평 확장성 있게 제공 될 수 있다.
 
 #### <a name="8"/>2.2. Service Architecture
->![openpaas-servicepack-01]
+>![openpaas-servicepack-01]  
 [그림출처]: http://docs.cloudfoundry.org/services/overview.html
 
 Services 는 Service Broker API 라고 불리우는 cloud controller 클라이언트 API를 구현하여 개방형 클라우드 플랫폼에서 사용된다. Services API는 독립적인 cloud controller API의 버전이다.
 이는 플랫폼에서 외부 application을 이용 가능하게 한다. (database, message queue, rest endpoint , etc)
 
 #### <a name="9"/>2.3. Service Broker API Architecture
->![openpaas-servicepack-02]
+>![openpaas-servicepack-02]  
 [그림출처]: http://docs.cloudfoundry.org/services/api.html
 
 개방형 클라우드 플랫폼 Service API는 Cloud Controller 와 Service Broker 사이의 규약 (catalog, provision, deprovision, update provision plan, bind, unbind)이고 Service Broker 는 RESTful API 로 구현하고 Cloud Controller 에 등록한다.
 
 #### <a name="10"/>2.4. Pivotal(Cloud Foundry) Marketplace Model
->![openpaas-servicepack-03]
+>![openpaas-servicepack-03]  
 [그림출처]: http://www.slideshare.net/platformcf/cloud-foundry-marketplacepowered-by-appdirect
 
 AppDirect: 클라우드 서비스 marketplace 및 관리 솔루션의 선두 업체이고 많은 글로벌 회사의 marketplace를 구축하였다. (삼성, Cloud Foundry, ETC)
 AppDirect는 Cloud Foundry 서비스 중개(brokerage) 기능과 부가 서비스를 제공한다. 
 
 Service Provider 및 Cloud Foundry 통합에 관련 설명
->![openpaas-servicepack-04]
+>![openpaas-servicepack-04]  
 [그림출처]: http://www.slideshare.net/platformcf/cloud-foundry-marketplacepowered-by-appdirect
 
 #### <a name="11"/>2.5. 개발 가이드
@@ -308,7 +308,7 @@ Catalog API 경우에는 서비스의 종류와 관계없이 Service 및 Plan �
 
 
 ◎ Pivotal 서비스 Plan 예시
-- clearDB plan 예
+- clearDB plan 예  
 [그림출처] :http://run.pivotal.io/
 
 >![openpaas-servicepack-14]
@@ -320,7 +320,7 @@ Catalog API 경우에는 서비스의 종류와 관계없이 Service 및 Plan �
 >![openpaas-servicepack-17]
 
 ◎ Pivotal 서비스 Dashboard 예시
-- clearDB Dashboard 예
+- clearDB Dashboard 예  
 [그림출처] :https://www.cleardb.com/
 >![openpaas-servicepack-18]
 
@@ -1052,7 +1052,7 @@ BOSH release 는 jobs(packages 구동 스크립트, monit 스크립트 등), pac
 
 #### <a name="20"/>3.2.	Bosh Architecture
  
->![openpaas-servicepack-33]
+>![openpaas-servicepack-33]  
 
 [그림출처]: http://www.cloudsofchange.com/2012/05/fork-in-road-to-cloud.html
 
@@ -1061,7 +1061,7 @@ BOSH release 는 jobs(packages 구동 스크립트, monit 스크립트 등), pac
 -	IaaS 종류에 따라 CPIs 구현 내용이 달라짐. (CPI : Cloud Provider Interface)
 -	Worker 들은 Director에 의해 결정된 task 들을 실행시키는 역할을 함
 
->![openpaas-servicepack-34]
+>![openpaas-servicepack-34]  
 
 [그림출처]: https://www.ibm.com/developerworks/community/blogs/fe313521-2e95-46f2-817d-44a4f27eba32/entry/porting_cloud_foundry_on_power8_ubuntu_le?lang=en
 
@@ -1225,9 +1225,9 @@ bosh document 에서는 pre_packaging 파일의 사용은 권장되지 않으며
 4	패키지 spec 파일을 편집 절차
 4.1	모든 컴파일 시간 종속성을 확인한다. 패키지가 다른 패키지에 의존하는 경우 컴파일시 의존성이 발생한다. (4.2 spec 파일 생성후 dependeny 가 있을 경우에 dependencies 내용을 추가)
 예) dependency 그래프
-[그림출처]: https://bosh.io/docs/create-release.html
  
->![openpaas-servicepack-44]
+>![openpaas-servicepack-44]  
+[그림출처]: https://bosh.io/docs/create-release.html
 
 4.2	“bosh generate package PACKAGE_NAME” 명령어로 spec script file 를 자동생성한다.
 4.2.1	예) $ bosh generate package test (service release 폴더에서 실행)
