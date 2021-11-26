@@ -400,7 +400,7 @@ OK
 
 <br>
 
-#### 생성된 rabbitmq 서비스 인스턴스를 확인한다.
+- 생성된 rabbitmq 서비스 인스턴스를 확인한다.
 
 > $ cf services
 
