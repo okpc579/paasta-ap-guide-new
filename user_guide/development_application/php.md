@@ -517,7 +517,8 @@ Opencloud를 사용하기 위해 선언을 합니다.
 
 
 3)	개방형 플랫폼 서비스 생성
-$ cf marketplace# 마켓플레이스 목록 요청
+
+        $ cf marketplace# 마켓플레이스 목록 요청
 
         service         plans                   description
         p-mysql	100mb, 1gb		MySQL databases on demand   
