@@ -293,7 +293,7 @@ API 서비스 브로커를 통해 서비스되는 서비스들이 공통적으�
   "plan_id":           "Service1 PublicPerformance Plan1 basic PlanID",
   "organization_guid": "[org-guid-here]",
   "space_guid":        "[space-guid-here]"
-}' -X PUT -H "X-Broker-API-Version: 2.5" -H "Content-Type: application/json"
+  }' -X PUT -H "X-Broker-API-Version: 2.5" -H "Content-Type: application/json"
   ```
   ※ ''username:password'는 서비스 브로커의 인증ID와 인증Password를 의미한다. 서비스 브로커 구현 시, 라이브러리에 정의된 값이다. 정의되어 있는 인증ID는 'admin', 인증Password는 'cluoudfoundry'이다.
 
