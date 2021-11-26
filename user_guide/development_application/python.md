@@ -822,9 +822,6 @@ $ cf bind-service python-sample-app python-rabbitmq
 
 [**http://www.eclipse.org/downloads/**](http://www.eclipse.org/downloads/)
 
-※ 작성자의 경우, 다운로드 받은 파일의 파일명은 'eclipse-jee-mars-1-win32-x86_64.zip'이며 다운로드 링크는 아래와 같다. 
-[**http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/mars/1/eclipse-jee-mars-1-win32-x86_64.zip**](http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/mars/1/eclipse-jee-mars-1-win32-x86_64.zip)
-
 다운로드가 완료되면 압축을 풀고 이클립스를 실행한다.
 
 ## <div id='3-2'></div> 3.2.	이클립스 python 설정
