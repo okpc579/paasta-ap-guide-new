@@ -28,7 +28,7 @@
      * [스템셀 생성 소스 수정](#61--스템셀-생성-소스-수정)
 
 
-#1.  문서 개요
+# 1.  문서 개요
 
 ## 1.1.  목적 
 
@@ -47,7 +47,7 @@ Bosh 스템셀 생성:
 [https://github.com/cloudfoundry/bosh-linux-stemcell-builder/blob/master/README.md](https://github.com/cloudfoundry/bosh-linux-stemcell-builder/blob/master/README.md)
 
 
-#2.  환경 준비
+# 2.  환경 준비
 
 ## 2.1.  설치전 준비사항
 
@@ -337,7 +337,7 @@ Vagrant는 가상 환경을 구축해 주는 오픈 소스이다. 스템셀을 �
 		$ vagrant provision remote
 
 
-#3.  기본 OS 이미지 생성 
+# 3.  기본 OS 이미지 생성 
 
 사용자 환경에 맞는 사용자 정의의 OS로 구성한 스템셀이 필요한 경우, 기본 OS 이미지부터 생성한다. 기본 OS 이미지는 스템셀이 요구하는 최소한의 OS 기능과 Bosh agent 및 bosh 모니터로 구성 되어 있다.
 
@@ -449,7 +449,7 @@ PHOTON OS 이미지를 생성하는 절차를 기술한다.
 		$ vagrant scp remote:/tmp/<생성한 기본 OS 이미지명> <다운받을 로컬 경로>
 
 
-#4.  BOSH 스템셀 생성 
+# 4.  BOSH 스템셀 생성 
 
 ## 4.1.  원격지의 OS 이미지를 사용한 스템셀 생성 
 
@@ -571,7 +571,7 @@ PHOTON OS 이미지를 생성하는 절차를 기술한다.
 		$ vagrant scp remote:/bosh/tmp/<생성한 스템셀명> <다운받을 로컬 경로>
 
 
-#5.  BOSH Light 스템셀 생성 
+# 5.  BOSH Light 스템셀 생성 
 
 ## 5.1.  Bosh Light 스템셀 생성
 
@@ -604,7 +604,7 @@ Bosh light 스템셀은 AWS (N. Virgina region 한정)에서만 사용가능한 
 	※ 필수 항목이 아닌 곳에 대해서는 ‘’을 입력한다.
 
 
-#6.  스템셀 커스터마이징 
+# 6.  스템셀 커스터마이징 
 
 ## 6.1.  스템셀 생성 소스 수정 
 
