@@ -179,7 +179,7 @@ Windows x86-64 MSI installer
 ※샘플 애플리케이션 다운로드
 완성된 샘플 애플리케이션은 하단 링크의 /OpenPaas-Sample/python-sample-app 에서 다운로드 할 수 있다.
 <br>
-Sample-App: [http://extdisk.hancom.com:8080/share.cgi?ssid=0icB5ZW](http://extdisk.hancom.com:8080/share.cgi?ssid=0icB5ZW)
+Sample-App: [https://nextcloud.paas-ta.org/index.php/s/x8Tg37WDFiL5ZDi/download](https://nextcloud.paas-ta.org/index.php/s/x8Tg37WDFiL5ZDi/download)
 
 
 ##### <div id='2-3-1'></div> 2.3.1. django 애플리케이션 생성
