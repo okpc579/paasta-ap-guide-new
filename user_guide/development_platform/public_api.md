@@ -74,10 +74,10 @@
 
 ### <div id='3'></div> 1.2. 범위 
 플랫폼 운영자는 개발자들이 사용하게 될 서비스를 개방형 클라우드 플랫폼의 마켓 플레이스에 노출시킨다. 따라서 본 문서는 API 서비스 브로커의 구현과 배포, API 서비스를 추가하는 방법을 기술한다.(2장~6장) 또한, 어플리케이션에서 API 서비스를 사용하는 방법을 안내하는데(7장), 이는 플랫폼 운영자가 아닌 어플리케이션 개발자의 영역이지만, 검증을 위해 필요하므로 함께 기술한다.
-본 문서의 [4장 API 서비스 브로커 구현]을 이해하기 위해서 [서비스팩 개발 가이드](../Development-Guide/ServicePack_develope_guide.md)문서의 [2장 Service Broker API 개발가이드]를 숙지하여야 하며, 본 문서는 그 중 JAVA 방식 구현에 대해서만 기술하였다.
+본 문서의 [4장 API 서비스 브로커 구현]을 이해하기 위해서 서비스팩 개발 가이드 문서의 [2장 Service Broker API 개발가이드]를 숙지하여야 하며, 본 문서는 그 중 JAVA 방식 구현에 대해서만 기술하였다.
 
 ### <div id='4'></div> 1.3. 참고자료
-- [서비스팩 개발 가이드](../Development-Guide/ServicePack_develope_guide.md)
+- 서비스팩 개발 가이드
 - CF document
 - 인천문화예술정보 공공 Open API 센터(**<http://iq.ifac.or.kr/openAPI/look/culture_guide.php>**)
 - 네이버 개발자 센터(**<http://developer.naver.com/wiki/pages/Tutorial_JavaScript>**)
@@ -182,7 +182,7 @@ Oepn API 카테고리로 이동하면, ①API 서비스 명으로 검색하거�
 | 바인드(Bind)    | cf bind-service [어플리케이션명] [서비스 인스턴스명] <br>확인: cf env [어플리케이션명] |
 | 언바인드(Unbind)    | cf unbind-service [어플리케이션명] [서비스 인스턴스명] <br>확인: cf env |
 | 디프로비전(Deprovision)    | cf delete-service [서비스 인스턴스명] <br>확인: cf services |
-※ 서비스 브로커 APIs에 대한 상세 정보는 [서비스팩 개발 가이드](../Development-Guide/ServicePack_develope_guide.md)문서의 [2.5 개발가이드]를 참고한다.
+※ 서비스 브로커 APIs에 대한 상세 정보는 서비스팩 개발 가이드 문서의 [2.5 개발가이드]를 참고한다.
 
 ### <div id='11'></div> 3.3. API 서비스 브로커 동작구조
 ![3-3-0-0]
@@ -312,7 +312,7 @@ API 서비스 브로커를 통해 서비스되는 서비스들이 공통적으�
 | dashboard_url | 공공데이터포털 URL을 사용 <br>Key값: [DashboardUrl] | http://www.data.go.kr |
 
 ### <div id='23'></div> 4.4. 업데이트
-※ 세부정보는 [서비스팩 개발 가이드](../Development-Guide/ServicePack_develope_guide.md)문서의 [2.5.3  Update Instance API 가이드]를 참고한다.
+※ 세부정보는 서비스팩 개발 가이드 문서의 [2.5.3  Update Instance API 가이드]를 참고한다.
 ##### <div id='24'></div> 4.4.1 요청
 - Route
   ```
@@ -341,7 +341,7 @@ API 서비스 브로커를 통해 서비스되는 서비스들이 공통적으�
 | {} | 업데이트가 성공적으로 진행되었을 경우, "{}"의 형태로 응답된다. |
 
 ### <div id='26'></div> 4.5. 바인드
-※ 세부정보는 [서비스팩 개발 가이드](../Development-Guide/ServicePack_develope_guide.md)문서의 [2.5.5  Bind API 가이드]를 참고한다.
+※ 세부정보는 서비스팩 개발 가이드 문서의 [2.5.5  Bind API 가이드]를 참고한다.
 ##### <div id='27'></div> 4.5.1 요청
 - Route
   ```
