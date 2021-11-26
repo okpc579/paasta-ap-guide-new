@@ -765,7 +765,7 @@ src/main/resources/egovframework/spring/context-datasource.xml 파일을
 2. **스크립트 파일 수정**  
 script\_mysql.sql 파일을 수정한다.  
 기존 sql은 실행이 되지 않으므로 일부 수정한다. db생성 구문을 없애고 Drop Table 구문에 IF EXISTS를 추가한다.
-     ```sql
+```sql
 --CREATE DATABASE EASYCOMPANY;
 
 DROP TABLE IF EXISTS `IDS`;
@@ -779,7 +779,7 @@ DROP TABLE IF EXISTS `RTETNCTGRY`;
 DROP TABLE IF EXISTS `RTETNGOODSIMAGE`;
 DROP TABLE IF EXISTS `RTETNMBER`;
 DROP TABLE IF EXISTS `RTETCCODE`;
-     ```
+```
 
 3. **jdbc 네임스페이스 추가**  
 src/main/resources/egovframework/spring/context-datasource.xml 파일을 열어 jdbc 네임스페이스를 추가한다.
