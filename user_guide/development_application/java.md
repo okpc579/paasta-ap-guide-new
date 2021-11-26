@@ -37,7 +37,7 @@ Java 애플리케이션 개발을 위해 다음과 같은 환경으로 개발환
 
 1.   다운로드 JDK1.8
 
-    <img src="./images/java/image1.png" width="612" height="151" />
+<img src="./images/java/image1.png" width="612" height="151" />
 
 2. JDK 설치
 
