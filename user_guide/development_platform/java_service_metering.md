@@ -65,9 +65,7 @@ Foundry) 서비스를 미터링 하는 방법에 대해 기술 한다.
 본 문서는 mongo-db 서비스 팩이 설치 되어 있는 개발 환경을 전제로 기술
 한다.
 
-mongo-db 서비스 팩 설치는 별로 로 제공 되는 문서를 참고 하여 설치 한다.
-
-**[https://github.com/OpenPaaSRnD/Documents/blob/master/Service-Guide/NOSQL/OpenPaaS_PaaSTA_ServicePack_MongoDB_BOSH-Lite_install_guide.md](https://github.com/OpenPaaSRnD/Documents/blob/master/Service-Guide/NOSQL/OpenPaaS_PaaSTA_ServicePack_MongoDB_BOSH-Lite_install_guide.md)**
+mongo-db 서비스 팩 설치는 Mongo-DB 설치 문서를 참고 하여 설치 한다.
 
 
 본 문서는 cf-abacus 가 설치 되어 있는 개발 환경을 전제로 기술 한다.
