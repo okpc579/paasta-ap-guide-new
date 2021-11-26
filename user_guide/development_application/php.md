@@ -150,9 +150,9 @@ BOSH는 스템셀을 생성하는 VM을 AWS에 생성하고 관리한다. 스템
  
 ### <div id='2.2.5'> 2.2.5.  Mongo 드라이버 설치
 
-  Mongo 드라이브 설치는 개방형 플랫폼에서 지원하는 Mongo 드라이버를 설치하기 위함입니다. 관련문서는 http://docs.php.net/manual/en/mongo.installation.php#mongo.installation.windows에 있습니다. 라이브러리 파일을 다운받고 config 파일에 정보를 추가하면 됩니다.
+  Mongo 드라이브 설치는 개방형 플랫폼에서 지원하는 Mongo 드라이버를 설치하기 위함입니다. 관련문서는 http://docs.php.net/manual/en/mongo.installation.php#mongo.installation.windows 에 있습니다. 라이브러리 파일을 다운받고 config 파일에 정보를 추가하면 됩니다.
   
-  1.	먼저 문서에 PECL 홈페이지(http://pecl.php.net/package/mongo)에서 DLL를 다운로드 받아야 합니다. 본 가이드는 1.6.12 버전을 을 선택하였습니다. 
+  1.	먼저 문서에 PECL 홈페이지(http://pecl.php.net/package/mongo )에서 DLL를 다운로드 받아야 합니다. 본 가이드는 1.6.12 버전을 을 선택하였습니다. 
    
   위의 링크중 DLL 부분을 눌러서 선택하고 "5.5 Thread Safe (TS) x86"를 다운로드 받습니다. 압축을 해제하면 php_mongo.dll이 있는데 이 파일만 있으면 됩니다.
   
@@ -515,7 +515,6 @@ Opencloud를 사용하기 위해 선언을 합니다.
         Org:            sample_test
         Space:          sample_space
 
-$
 
 3)	개방형 플랫폼 서비스 생성
 $ cf marketplace# 마켓플레이스 목록 요청
