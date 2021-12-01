@@ -275,7 +275,7 @@ BOSH 설치에 대한 상세 내용은 BOSH 설치 가이드를 참고한다.
 | deploy-cpi-registry-secondary.yml | BOSH를 설치하는 인프라가 vSphere 일 경우 사용 |
 
 - 예제1. AWS - Openstack BOSH 설치
-> vi deploy-aws.sh
+> $ vi deploy-aws.sh
 ```diff
  bosh create-env bosh.yml \
  	--state=aws/state.json \
@@ -290,7 +290,7 @@ BOSH 설치에 대한 상세 내용은 BOSH 설치 가이드를 참고한다.
 ```
 
 - 예제2. AWS - vSphere BOSH 설치
-> vi deploy-aws.sh
+> $ vi deploy-aws.sh
 ```diff
  bosh create-env bosh.yml \
  	--state=aws/state.json \
@@ -306,7 +306,7 @@ BOSH 설치에 대한 상세 내용은 BOSH 설치 가이드를 참고한다.
 
 
 - 예제3. Openstack - vSphere BOSH 설치
-> vi deploy-openstack.sh
+> $ vi deploy-openstack.sh
 ```diff
  bosh create-env bosh.yml \
  	--state=openstack/state.json \
@@ -322,7 +322,7 @@ BOSH 설치에 대한 상세 내용은 BOSH 설치 가이드를 참고한다.
 ```
 
 - 예제4. vSphere - AWS BOSH 설치
-> vi deploy-vsphere.sh
+> $ vi deploy-vsphere.sh
 ```diff
  bosh create-env bosh.yml \
  	--state=vsphere/state.json \
@@ -371,7 +371,7 @@ CPI에 대한 추가 설정을 진행한다.
 #### <div id='2.4.3.1'/>2.4.3.1. 같은 IaaS를 사용 할 경우
 
 - 예제 AWS - AWS를 사용할 경우
-> vi multi-cpi/cpi-vars.yml
+> $ vi multi-cpi/cpi-vars.yml
 ```
 ... ((생략)) ...
 
@@ -396,7 +396,7 @@ aws_second_region: "ap-northeast-2"                            # AWS Second Regi
 ... ((생략)) ...
 ```
 
-> vi multi-cpi/cpi-config.yml (사용할 IaaS 정보를 주석 해제한다.)
+> $ vi multi-cpi/cpi-config.yml (사용할 IaaS 정보를 주석 해제한다.)
 ```
 #### DIFFRENT IAAS CPI
 
@@ -433,7 +433,7 @@ $ bosh update-cpi-config multi-cpi/cpi-config.yml -l multi-cpi/cpi-vars.yml
 
 #### <div id='2.4.3.2'/>2.4.3.2. 다른 IaaS를 사용 할 경우
 - 예제 AWS - OpenStack을 사용할 경우
-> vi multi-cpi/cpi-vars.yml
+> $ vi multi-cpi/cpi-vars.yml
 ```
 ... ((생략)) ...
 
@@ -565,7 +565,7 @@ $ cd ~/workspace/paasta-deployment/paasta
 ```
 
 - diego-cell zone 변경
-> vi vars.yml
+> $ vi vars.yml
 ```
 ... ((생략)) ...
 
