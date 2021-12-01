@@ -24,7 +24,7 @@
 　2.4.4. [Cloud Config 설정](#2.4.4)    
 　　2.4.4.1. [같은 IaaS를 사용할 경우](#2.4.4.1)    
 　　2.4.4.2. [다른 IaaS를 사용할 경우](#2.4.4.2)    
-　2.4.5. [Multi CPI 설정 테스트](#2.4.5)    
+　2.4.5. [Multi CPI를 이용한 AP 설치 테스트](#2.4.5)    
  
 # <div id='1'/>1.  문서 개요
 
@@ -549,12 +549,42 @@ $ bosh update-cloud-config ~/workspace/bosh/multi-cpi/cloud-config-vsphere-aws.y
 
 - Cloud Config 적용
 ```
-$ bosh update-cloud-config ~/workspace/cloud-config/cloud-config-{iaas}-{iaas}.yml 
+$ bosh update-cloud-config ~/workspace/bosh/multi-cpi/cloud-config-{iaas}-{iaas}.yml 
 ```
 
 
-### <div id='2.4.5'/>2.4.5. Multi CPI 설정 테스트
-AP 설치~~~~~~~
+### <div id='2.4.5'/>2.4.5. Multi CPI를 이용한 AP 설치 테스트
+Multi CPI 설정을 완료한 뒤, PaaS-TA AP를 설치하여 상호간 통신이 원활하게 진행되는지 테스트를 진행한다.
+PaaS-TA AP에 필요한 runtime-config 설정이나 변수 설정에 관한 설명은 PaaS-TA AP 가이드를 참조한다.
+
+본 가이드에서는 AWS - OpenStack 기준으로 Diego-cell을 OpenStack에, 나머지 VM을 AWS에 설치하여 진행하였다.
+
+- PaaS-TA AP 설치 폴더 이동
+```
+$ cd ~/workspace/paasta-deployment/paasta
+```
+
+- diego-cell zone 변경
+> vi vars.yml
+```
+... ((생략)) ...
+
+# DIEGO-CELL
+diego_cell_azs: ["z4", "z5"]		# Diego-Cell 가용 존
+diego_cell_instances: 3			# Diego-Cell 인스턴스 수
+
+... ((생략)) ...
+```
+
+- PaaS-TA AP 설치
+```
+$ source deploy-?????.sh
+```
+
+
+PaaS-TA AP 설치 완료 후 Test APP을 Push하여 App이 정상작동하는지 확인한다.
+
+
 
 
 ### [Index](https://github.com/okpc579/paasta-guide-new/blob/main/README.md) > [AP Install](../README.md) > PaaS-TA Multi CPI
