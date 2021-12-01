@@ -16,7 +16,16 @@
 　2.3.4. [OpenVPN 연결 확인](#2.3.4)  
 　2.3.5. [정적 라우팅 추가 (선택)](#2.3.5)  
  2.4. [Multi CPI 설정](#2.4)   
-
+　2.4.1. [BOSH 설치](#2.4.1)    
+　2.4.2. [Stemcell 업로드](#2.4.2)    
+　2.4.3. [CPI Config 설정](#2.4.3)    
+　　2.4.3.1. [같은 IaaS를 사용할 경우](#2.4.3.1)    
+　　2.4.3.2. [다른 IaaS를 사용할 경우](#2.4.3.2)    
+　2.4.4. [Cloud Config 설정](#2.4.4)    
+　　2.4.4.1. [같은 IaaS를 사용할 경우](#2.4.4.1)    
+　　2.4.4.2. [다른 IaaS를 사용할 경우](#2.4.4.2)    
+　2.4.5. [Multi CPI 설정 테스트](#2.4.5)    
+ 
 # <div id='1'/>1.  문서 개요
 
 ## <div id='1.1'/>1.1. 목적
@@ -45,12 +54,14 @@ OpenVPN : [https://openvpn.net/](https://openvpn.net/)
 # <div id='2'/>2.  Multi CPI
 BOSH에 Multi CPI를 설정할 경우 하나의 BOSH를 통하여 상이한 IaaS 환경에서 VM을 각각 배포할 수 있다.  
 본 가이드에서는 OpenVPN을 상이한 IaaS 환경에 각각 설치한 후, BOSH를 설치한 뒤 Multi CPI 설정을 진행한다.  
-이 때 IaaS의 종류가 같을경우 기존 BOSH 설치 가이드와 동일하게 BOSH를 설치하며, IaaS의 종류가 다를경우 추가 옵션을 설정하여 BOSH를 설치한다.  
+이 때 IaaS의 종류가 같을경우(e.g. A OpenStack <-> B OpenStack) 기존 BOSH 설치 가이드와 동일하게 BOSH를 설치하며, IaaS의 종류가 다를경우(e.g. Openstack <-> AWS) 추가 옵션을 설정하여 BOSH를 설치한다.  
+
 ## <div id='2.1'/>2.1. Prerequisite
 
-본 설치 가이드는 Linux 환경에서 설치하는 것을 기준으로 하였다.
-서비스팩 설치를 위해서는 먼저 BOSH CLI가 설치 되어 있어야 한다.
-BOSH CLI가 설치 되어 있지 않을 경우 먼저 BOSH 설치 가이드 문서를 참고 하여 BOSH CLI를 설치를 하고 사용법을 숙지 해야 한다.
+본 가이드는 Linux 환경에서 진행하는 것을 기준으로 하였다.  
+본 가이드는 BOSH에 대한 기본 이해도가 있다는 전제 하에 가이드를 진행하였다.  
+또한 Multi CPI 설정를 위해서는 먼저 BOSH CLI가 설치 되어 있어야 한다.  
+BOSH에 대한 기본 이해도가 없거나 BOSH CLI가 설치 되어 있지 않을 경우 먼저 BOSH 설치 가이드 문서를 참고 하여 BOSH CLI를 설치를 하고 사용법을 숙지 해야 한다.  
 
 <br>
 
@@ -205,7 +216,7 @@ $ ifconfig
 ```
 
 ### <div id='2.3.5'/>2.3.5. 정적 라우팅 추가 (선택)
-클라이언트 터널을 사용하기 위하여 정적 라우팅을 추가할 수 있다.
+클라이언트 터널을 사용하기 위하여 정적 라우팅을 추가할 수 있다.  
 IaaS에서 ???을 지원하지 않는 경우 ??? VM에서 해당 명령어를 통하여 정적 라우팅을 설정한다.
 ```
 $ sudo ip route add {remote_network_cidr_block} via {lan_ip}
@@ -214,9 +225,66 @@ e.g.) sudo ip route add 20.0.20.0/24 via 10.0.10.10
 $ ping {remote_network_ip}
 ```
 
+ 2.4. [Multi CPI 설정](#2.4)   
+　2.4.1. [BOSH 설치](#2.4.1)    
+　2.4.2. [Stemcell 업로드](#2.4.2)    
+　2.4.3. [CPI Config 설정](#2.4.3)    
+　　2.4.3.1. [같은 IaaS를 사용 할 경우](#2.4.3.1)    
+　　2.4.3.2. [다른 IaaS를 사용 할 경우](#2.4.3.2)    
+　2.4.4. [Cloud Config 설정](#2.4.4)    
+　　2.4.4.1. [같은 IaaS를 사용 할 경우](#2.4.4.1)    
+　　2.4.4.2. [다른 IaaS를 사용 할 경우](#2.4.4.2)    
+　2.4.5. [Multi CPI 설정 테스트](#2.4.5)    
+
+## <div id='2.4'/>2.4. Multi CPI 설정
+BOSH를 설치하고 Multi CPI를 설정하여 하나의 BOSH로 상이한 IaaS 환경에서 VM을 배포할 수 있다.  
+이 때 같은 IaaS의 상이한 IaaS 환경(e.g. A OpenStack <-> B OpenStack)의 경우 다른 옵션을 추가하지 않고 BOSH를 설치하며, IaaS의 종류가 다를경우(e.g. Openstack <-> AWS) 옵션을 추가하여 BOSH 설치를 진행한다.  
+
+### <div id='2.4.1'/>2.4.1. BOSH 설치
+본 가이드에서는 추가되는 옵션에대한 설명을 진행하고 BOSH 설치에대한 상세 내용은 BOSH 설치 가이드를 참고한다.
+
+- Multi CPI 관련 Option 파일
+
+|파일명|설명|
+|------|---|
+| deploy-cpi-aws-secondary.yml | 새 인프라가 AWS 일 경우 사용 |
+| deploy-cpi-openstack-secondary.yml	 | 새 인프라가 OpenStack 일 경우 사용 |
+| deploy-cpi-vsphere-secondary.yml	 | 새 인프라가 vSphere 일 경우 사용 |
+| deploy-cpi-registry-secondary.yml | 기존 인프라가 vSphere 일 경우 사용 |
+
+- 예제1. AWS - Openstack BOSH 설치
+> vi ~/workspace/bosh/deploy-aws.sh
+```
+ bosh create-env bosh.yml \
+ 	--state=aws/state.json \
+ 	--vars-store=aws/creds.yml \
+ 	-o aws/cpi.yml \
++ 	-o multi-cpi/deploy-cpi-openstack-secondary.yml \
+ 	-o uaa.yml \
+ 	-o credhub.yml \
+ 	-o jumpbox-user.yml \
+ 	-o cce.yml \
+ 	-l aws-vars.yml
+```
 
 
 
+
+
+
+
+
+
+### <div id='2.4.2'/>2.4.2. Stemcell 업로드
+### <div id='2.4.3'/>2.4.3. CPI Config 설정
+#### <div id='2.4.3.1'/>2.4.3.1. 같은 IaaS를 사용 할 경우
+#### <div id='2.4.3.2'/>2.4.3.2. 다른 IaaS를 사용 할 경우
+### <div id='2.4.4'/>2.4.4. Cloud Config 설정
+#### <div id='2.4.4.1'/>2.4.4.1. 같은 IaaS를 사용 할 경우
+#### <div id='2.4.4.2'/>2.4.4.2. 다른 IaaS를 사용 할 경우
+
+### <div id='2.4.5'/>2.4.5. Multi CPI 설정 테스트
+AP 말고 다른 가벼운거 Deplyoyment로 테스트해도 가능할지??? 문의
 
 
 
