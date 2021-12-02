@@ -377,7 +377,7 @@ aws_region: "ap-northeast-2"                            # AWS Region
 
 # IF USE SAME IAAS, CPI MULTI-CPI VARIABLE
 
-## MULTI-CPI VARIABLE :: aws second
+## MULTI-CPI VARIABLE :: AWS second
 aws_second_access_key_id: "XXXXXXXXXXXXXXX"                    # AWS Second Access Key
 aws_second_secret_access_key: "XXXXXXXXXXXXX"                  # AWS Second Secret Key
 aws_second_default_key_name: "paasta-key"                      # AWS Second Key Name
@@ -486,7 +486,7 @@ $ bosh update-cpi-config multi-cpi/cpi-config.yml -l multi-cpi/cpi-vars.yml
 
 ### <div id='2.4.4'/>2.4.4. Cloud Config 설정
 Cloud Config에 대한 추가 설정을 진행한다.  
-같은 IaaS를 사용할 경우 paasta-deployment 폴더의 cloud-config 파일을 이용하며, 다른 IaaS를 사용할 경우 bosh/multi-cpi 폴더의 cloud-config 파일을 이용한다.  
+Same IaaS AZ의 경우 paasta-deployment 폴더의 cloud-config 파일을 이용하며, Different IaaS AZ의 경우 bosh/multi-cpi 폴더의 cloud-config 파일을 이용한다.  
 
 #### <div id='2.4.4.1'/>2.4.4.1. Same IaaS AZ의 경우
 
@@ -514,7 +514,7 @@ cloud-config 의 azs 에서 각 인프라의 cpi-name 을 지정
  ...
 ```
 
-- Cloud Config 적용 (테스트 필요)
+- Cloud Config 적용
 ```
 $ bosh update-cloud-config ~/workspace/cloud-config/{iaas}-cloud-config.yml 
 ```
