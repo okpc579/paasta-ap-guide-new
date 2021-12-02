@@ -196,7 +196,28 @@ drwxrwxr-x 4 ubuntu ubuntu  4096 Jul 21 01:47 ../
 ```
 
 ### <div id='2.3.3'/>2.3.3. OpenVPN 설치
-생성된 인증서를 사용하여 OpenVPN az1, OpenVPN az2 설치를 진행한다.
+- deploy-vpn-\*.sh에 사용할 IaaS에 대한 옵션을 추가한다.
+```
+### OpenVPN az1 IaaS 설정
+$ vi deploy-vpn-az1.sh
+
+ex) Choose one and add it.
+-o operations/init-aws.yml \
+-o operations/init-openstack.yml \
+-o operations/init-vsphere.yml \
+
+
+### OpenVPN az2 IaaS 설정 
+$ vi deploy-vpn-az2.sh
+
+ex) Choose one and add it.
+-o operations/init-aws.yml \
+-o operations/init-openstack.yml \
+-o operations/init-vsphere.yml \
+```
+
+
+- 생성된 인증서를 사용하여 OpenVPN az1, OpenVPN az2 설치를 진행한다.
 ```
 ### OpenVPN az1 설치
 $ source deploy-vpn-az1.sh
