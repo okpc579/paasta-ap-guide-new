@@ -36,22 +36,61 @@
 ## <div id='1.2'/>1.2. 범위
 multi-cpi-deployment는 paasta-deployment v5.6.2의 설치를 기준으로 가이드를 작성하였다.  
 multi-cpi-deployment는 AWS, OpenStack, vSphere 에서 설정이 가능하다.  
-분류는 크게 Main IaaS AZ와 Second IaaS AZ가 같은 경우 (e.g. A OpenStack ↔ B OpenStack, 이하 Same IaaS) 와 Main IaaS AZ와 Second IaaS AZ가 다른 경우 (e.g. Openstack ↔ AWS, 이하 Different IaaS)를 기준으로 작성하였다.
+분류는 크게 Main IaaS AZ와 Second IaaS AZ가 같은 경우 (e.g. A OpenStack ↔ B OpenStack, 이하 Same IaaS AZ) 와 Main IaaS AZ와 Second IaaS AZ가 다른 경우 (e.g. Openstack ↔ AWS, 이하 Different IaaS AZ)를 기준으로 작성하였다.
 
 설정 가능한 IaaS 케이스는 다음과 같다.  
 
-| Main IaaS AZ | Second IaaS AZ | Category |
-|----|---|---|
-| AWS | OpenStack | Different IaaS AZ |
-| AWS | vSphere | Different IaaS AZ |
-| OpenStack | AWS | Different IaaS AZ |
-| OpenStack | vSphere | Different IaaS AZ |
-| vSphere | AWS | Different IaaS AZ |
-| vSphere | OpenStack | Different IaaS AZ |
-| AWS | AWS | Same IaaS AZ |
-| OpenStack | OpenStack | Same IaaS AZ |
-| vSphere | vSphere | Same IaaS AZ |
 
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-9wq8">Category</th>
+    <th class="tg-9wq8">Main IaaS AZ</th>
+    <th class="tg-9wq8">Second IaaS AZ</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-9wq8" rowspan="6">Different IaaS AZ</td>
+    <td class="tg-0pky">AWS</td>
+    <td class="tg-0pky">OpenStack</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">AWS</td>
+    <td class="tg-0pky">vSphere</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">OpenStack</td>
+    <td class="tg-0pky">AWS</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">OpenStack</td>
+    <td class="tg-0pky">vSphere</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">vSphere</td>
+    <td class="tg-0lax">AWS</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">vSphere</td>
+    <td class="tg-0lax">OpenStack</td>
+  </tr>
+  <tr>
+    <td class="tg-nrix" rowspan="3">Same IaaS AZ</td>
+    <td class="tg-0lax">AWS</td>
+    <td class="tg-0lax">AWS</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">OpenStack</td>
+    <td class="tg-0lax">OpenStack</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">vSphere</td>
+    <td class="tg-0lax">vSphere</td>
+  </tr>
+</tbody>
+</table>
+   
 <br>
 
 ## <div id='1.3'/>1.3. 참고 자료
@@ -77,8 +116,7 @@ BOSH에 Multi CPI를 설정할 경우 하나의 BOSH를 통하여 Main IaaS AZ�
 본 가이드는 Linux 환경에서 진행하는 것을 기준으로 하였다.  
 본 가이드는 BOSH와 PaaS-TA AP에 대한 기본 이해도가 있다는 전제 하에 가이드를 진행하였다.  
 또한 Multi CPI 설정를 위해서는 먼저 BOSH CLI가 설치 되어 있어야 한다.  
-BOSH CLI가 설치 되어 있지 않을 경우 먼저 BOSH 설치 가이드 문서를 참고 하여 BOSH CLI를 설치를 하고 사용법을 숙지 해야 하며,  
-BOSH나 PaaS-TA AP 대한 기본 이해도가 없거나 해당 Document를 참고한다.
+BOSH CLI가 설치 되어 있지 않을 경우 먼저 BOSH 설치 가이드 문서를 참고 하여 BOSH CLI를 설치를 진행 한다.
 
 
 <br>
