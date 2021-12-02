@@ -570,7 +570,7 @@ diego_cell_instances: 3			# Diego-Cell 인스턴스 수
 
 - PaaS-TA AP 설치
 ```
-$ source deploy-?????.sh
+$ source deploy-aws.sh
 ```
 
 
