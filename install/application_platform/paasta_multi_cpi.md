@@ -29,27 +29,28 @@
 # <div id='1'/>1.  문서 개요
 
 ## <div id='1.1'/>1.1. 목적
-본 문서는 BOSH2(이하 BOSH)의 Multi CPI 설정 가이드 문서로, 하나의 BOSH를 통하여 상이한 IaaS 환경에서 VM을 배포하는 Multi CPI를 설정하고 사용하는 방법에 관해서 설명하였다.
+본 문서는 BOSH2(이하 BOSH)의 Multi CPI 설정 가이드 문서로, 하나의 BOSH를 통하여 BOSH가 설치된 IaaS 환경(이하 Main IaaS AZ)과 BOSH가 설치되지 않은 다른 IaaS 환경(이하 Second IaaS AZ)에서 VM을 배포하는 Multi CPI를 설정하고 사용하는 방법에 관해서 설명하였다.  
 
 <br>
 
 ## <div id='1.2'/>1.2. 범위
 multi-cpi-deployment는 paasta-deployment v5.6.2의 설치를 기준으로 가이드를 작성하였다.  
 multi-cpi-deployment는 AWS, OpenStack, vSphere 에서 설정이 가능하다.  
+분류는 크게 Main IaaS AZ와 Second IaaS AZ가 같은 경우 (e.g. A OpenStack ↔ B OpenStack, 이하 Same IaaS) 와 Main IaaS AZ와 Second IaaS AZ가 다른 경우 (e.g. Openstack ↔ AWS, 이하 Different IaaS)를 기준으로 작성하였다.
 
 설정 가능한 IaaS 케이스는 다음과 같다.  
 
-| z1 | z2 |
-|----|---|
-| AWS | OpenStack | 
-| AWS | vSphere | 
-| OpenStack | AWS | 
-| OpenStack | vSphere | 
-| vSphere | AWS | 
-| vSphere | OpenStack | 
-| AWS | AWS | 
-| OpenStack | OpenStack | 
-| vSphere | vSphere | 
+| Main IaaS AZ | Second IaaS AZ | Category |
+|----|---|---|
+| AWS | OpenStack | Different IaaS AZ |
+| AWS | vSphere | Different IaaS AZ |
+| OpenStack | AWS | Different IaaS AZ |
+| OpenStack | vSphere | Different IaaS AZ |
+| vSphere | AWS | Different IaaS AZ |
+| vSphere | OpenStack | Different IaaS AZ |
+| AWS | AWS | Same IaaS AZ |
+| OpenStack | OpenStack | Same IaaS AZ |
+| vSphere | vSphere | Same IaaS AZ |
 
 <br>
 
@@ -66,16 +67,17 @@ OpenVPN : [https://openvpn.net/](https://openvpn.net/)
 <br><br>
 
 # <div id='2'/>2.  Multi CPI
-BOSH에 Multi CPI를 설정할 경우 하나의 BOSH를 통하여 상이한 IaaS 환경에서 VM을 각각 배포할 수 있다.  
-본 가이드에서는 OpenVPN을 상이한 IaaS 환경에 각각 설치한 후, BOSH를 설치한 뒤 Multi CPI 설정을 진행한다.  
-이 때 IaaS의 종류가 같을경우(e.g. A OpenStack <-> B OpenStack) 기존 BOSH 설치 가이드와 동일하게 BOSH를 설치하며, IaaS의 종류가 다를경우(e.g. Openstack <-> AWS) 추가 옵션을 설정하여 BOSH를 설치한다.  
+BOSH에 Multi CPI를 설정할 경우 하나의 BOSH를 통하여 Main IaaS AZ와 Second IaaS AZ 두개의 환경에서 VM을 각각 배포할 수 있다.  
+본 가이드에서는 Main IaaS AZ와 Second IaaS AZ에 OpenVPN을 각각 설치한 후, Main IaaS AZ에 BOSH를 설치한 뒤 Multi CPI 설정을 진행한다.  
 
 ## <div id='2.1'/>2.1. Prerequisite
 
 본 가이드는 Linux 환경에서 진행하는 것을 기준으로 하였다.  
-본 가이드는 BOSH에 대한 기본 이해도가 있다는 전제 하에 가이드를 진행하였다.  
+본 가이드는 BOSH와 PaaS-TA AP에 대한 기본 이해도가 있다는 전제 하에 가이드를 진행하였다.  
 또한 Multi CPI 설정를 위해서는 먼저 BOSH CLI가 설치 되어 있어야 한다.  
-BOSH에 대한 기본 이해도가 없거나 BOSH CLI가 설치 되어 있지 않을 경우 먼저 BOSH 설치 가이드 문서를 참고 하여 BOSH CLI를 설치를 하고 사용법을 숙지 해야 한다.  
+BOSH CLI가 설치 되어 있지 않을 경우 먼저 BOSH 설치 가이드 문서를 참고 하여 BOSH CLI를 설치를 하고 사용법을 숙지 해야 하며,  
+BOSH나 PaaS-TA AP 대한 기본 이해도가 없거나 해당 Document를 참고한다.
+
 
 <br>
 
@@ -94,7 +96,7 @@ $ git clone https://github.com/PaaS-TA/multi-cpi-deployment.git -b v5.6.2
 <br>
 
 ## <div id='2.3'/>2.3. OpenVPN
-BOSH가 상이한 IaaS와의 통신을 진행하기 위하여 OpenVPN을 각각 상이한 IaaS 환경에 설치를 진행한다.
+BOSH가 Main IaaS AZ와 Second IaaS AZ의 통신을 진행하기 위하여 OpenVPN을 Main IaaS AZ와 Second IaaS AZ에  설치를 진행한다.
 
 ### <div id='2.3.1'/>2.3.1. 변수 설정
 ```
@@ -102,7 +104,7 @@ BOSH가 상이한 IaaS와의 통신을 진행하기 위하여 OpenVPN을 각각 
 $ cd ~/workspace/multi-cpi-deployment/openvpn
 ```
 
-- BOSH를 설치 할 IaaS 환경에 설치되는 OpenVPN az1 변수를 설정한다.  
+- Main IaaS AZ에 설치되는 OpenVPN az1 변수를 설정한다.  
   (OpenVPN을 설치할 IaaS 환경에 대한 주석을 해제하고 변수를 설정한다.)
 > $ vi vars-az1.yml
 ```
@@ -160,7 +162,7 @@ remote_vpn_ip: "XXX.XXX.XXX.XXX"                  # Used by OpenVPN Server-2 ip
 #vcenter_disks: "Disks"                            # vCenter Disk Name
 ```
 
-- BOSH가 설치되지 않은 상이한 IaaS 환경 설치되는 OpenVPN az2 변수를 설정한다.  
+- Second IaaS AZ에 설치되는 OpenVPN az2 변수를 설정한다.  
   (OpenVPN을 설치할 IaaS 환경에 대한 주석을 해제하고 변수를 설정한다.)
 > $ vi vars-az2.yml
 ```
@@ -231,7 +233,7 @@ $ ifconfig
 
 ### <div id='2.3.5'/>2.3.5. 정적 라우팅 추가 (선택)
 클라이언트 터널을 사용하기 위하여 정적 라우팅을 추가할 수 있다.  
-IaaS에서 ???을 지원하지 않는 경우 ??? VM에서 해당 명령어를 통하여 정적 라우팅을 설정한다.
+IaaS에서 정적 경로 추가를 지원하지 않는 경우 OpenVPN 의 네트워크를 사용할 모든 VM에서 해당 명령어를 통하여 정적 라우팅을 설정한다.
 ```
 $ sudo ip route add {remote_network_cidr_block} via {lan_ip}
 e.g.) sudo ip route add 20.0.20.0/24 via 10.0.10.10
@@ -240,7 +242,7 @@ $ ping {remote_network_ip}
 ```
 
 ## <div id='2.4'/>2.4. Multi CPI 설정
-BOSH를 설치하고 Multi CPI를 설정하여 하나의 BOSH로 상이한 IaaS 환경에서 VM을 배포할 수 있다.  
+BOSH를 설치하고 Multi CPI를 설정하여 하나의 BOSH로 Main IaaS AZ와 Second IaaS AZ에서 VM을 배포할 수 있다.  
 
 - Multi CPI 파일 BOSH 폴더로 이동
 ```
@@ -249,9 +251,9 @@ $ cd ~/workspace/paasta-deployment/bosh
 ```
 
 ### <div id='2.4.1'/>2.4.1. BOSH 설치
-같은 IaaS의 상이한 IaaS 환경(e.g. A OpenStack <-> B OpenStack)의 경우 다른 옵션을 추가하지 않고 BOSH를 설치하며, IaaS의 종류가 다를경우(e.g. Openstack <-> AWS) 옵션을 추가하여 BOSH 설치를 진행한다.    
+Same IaaS AZ의 경우 다른 옵션을 추가하지 않고 BOSH를 설치하며, Different IaaS AZ의 경우 옵션을 추가하여 BOSH 설치를 진행한다.    
 본 가이드에서는 추가되는 옵션에대한 설명을 진행한다.  
-본 가이드에서는 4개의 예제를 기술했지만 상황에 맞춰서 옵션과 배포파일을 변경하여 진행한다.
+본 가이드에서는 4개의 예제를 기술했지만 상황에 맞춰서 옵션과 배포파일을 변경하여 진행한다.  
 BOSH 설치에 대한 상세 내용은 BOSH 설치 가이드를 참고한다.
 
 - Multi CPI 관련 Option 파일
@@ -334,7 +336,7 @@ $ source deploy-{IaaS}.sh
 ```
 
 ### <div id='2.4.2'/>2.4.2. Stemcell 업로드
-설치된 BOSH에 로그인 후 사용하는 IaaS의 Stemcell 업로드를 진행한다. (e.g. AWS와 OpenStack의 두개의 환경을 사용할경우 해당 명령어를 두개 다 실행한다.)  
+설치된 BOSH에 로그인 후 사용하는 IaaS의 Stemcell 업로드를 진행한다. (e.g. AWS와 OpenStack의 두개의 환경을 사용 할 경우 해당 명령어를 두개 다 실행한다.)  
 ```
 # paasta-deployment v5.6.2와 동일한 Stemcell인 ubuntu-bionic 1.34를 사용한다.
 # AWS 스템셀의 경우 light Stemcell을 이용한다
@@ -357,7 +359,7 @@ CPI에 대한 추가 설정을 진행한다.
 | cpi-config.yml	 | multi-cpi 추가를 위한 cpi config file |
 | cpi-vars.yml	 | multi-cpi 설정 파일 |
 
-#### <div id='2.4.3.1'/>2.4.3.1. 같은 IaaS를 사용 할 경우
+#### <div id='2.4.3.1'/>2.4.3.1. Same IaaS AZ의 경우
 
 - 예제 AWS - AWS를 사용할 경우
 > $ vi multi-cpi/cpi-vars.yml
@@ -387,7 +389,7 @@ aws_second_region: "ap-northeast-2"                            # AWS Second Regi
 
 > $ vi multi-cpi/cpi-config.yml (사용할 IaaS 정보를 주석 해제한다.)
 ```
-#### DIFFRENT IAAS CPI
+#### DIFFERENT IAAS CPI
 
 cpis:
 - name: aws-cpi
@@ -420,7 +422,7 @@ cpis:
 $ bosh update-cpi-config multi-cpi/cpi-config.yml -l multi-cpi/cpi-vars.yml
 ```
 
-#### <div id='2.4.3.2'/>2.4.3.2. 다른 IaaS를 사용 할 경우
+#### <div id='2.4.3.2'/>2.4.3.2. Different IaaS AZ의 경우
 - 예제 AWS - OpenStack을 사용할 경우
 > $ vi multi-cpi/cpi-vars.yml
 ```
@@ -448,7 +450,7 @@ openstack_default_security_groups: ["paasta-security"]  # OpenStack Security Gro
 
 > vi multi-cpi/cpi-config.yml (사용할 정보를 주석 해제한다.)
 ```
-#### DIFFRENT IAAS CPI
+#### DIFFERENT IAAS CPI
 
 cpis:
 - name: aws-cpi
@@ -486,7 +488,7 @@ $ bosh update-cpi-config multi-cpi/cpi-config.yml -l multi-cpi/cpi-vars.yml
 Cloud Config에 대한 추가 설정을 진행한다.  
 같은 IaaS를 사용할 경우 paasta-deployment 폴더의 cloud-config 파일을 이용하며, 다른 IaaS를 사용할 경우 bosh/multi-cpi 폴더의 cloud-config 파일을 이용한다.  
 
-#### <div id='2.4.4.1'/>2.4.4.1. 같은 IaaS를 사용 할 경우
+#### <div id='2.4.4.1'/>2.4.4.1. Same IaaS AZ의 경우
 
 ```diff
 cloud-config 의 azs 에서 각 인프라의 cpi-name 을 지정
@@ -517,7 +519,7 @@ cloud-config 의 azs 에서 각 인프라의 cpi-name 을 지정
 $ bosh update-cloud-config ~/workspace/cloud-config/{iaas}-cloud-config.yml 
 ```
 
-#### <div id='2.4.4.2'/>2.4.4.2. 다른 IaaS를 사용 할 경우
+#### <div id='2.4.4.2'/>2.4.4.2. Different IaaS AZ의 경우
 
 |파일명|설명|
 |------|---|
@@ -543,10 +545,11 @@ $ bosh update-cloud-config ~/workspace/bosh/multi-cpi/cloud-config-{iaas}-{iaas}
 
 
 ### <div id='2.4.5'/>2.4.5. Multi CPI를 이용한 AP 설치 테스트
-Multi CPI 설정을 완료한 뒤, PaaS-TA AP를 설치하여 상호간 통신이 원활하게 진행되는지 테스트를 진행한다.
-PaaS-TA AP에 필요한 runtime-config 설정이나 변수 설정에 관한 설명은 PaaS-TA AP 가이드를 참조한다.
+Multi CPI 설정을 완료한 뒤, PaaS-TA AP를 설치하여 상호간 통신이 원활하게 진행되는지 테스트를 진행한다.  
+PaaS-TA AP에 필요한 runtime-config 설정이나 변수 설정에 관한 설명은 PaaS-TA AP 가이드를 참조한다.  
 
-본 가이드에서는 AWS - OpenStack 기준으로 Diego-cell을 OpenStack에, 나머지 VM을 AWS에 설치하여 진행하였다.
+본 가이드에서는 여러 케이스중 AWS - OpenStack 기준으로 Diego-cell을 OpenStack에, 나머지 VM을 AWS에 설치하여 진행하였다.  
+Diego-cell뿐 아니라 다른 VM도 분산 배포가 가능하니 해당되는 설정에 맞게 배포 방식을 변경하여 설치를 진행한다.  
 
 - PaaS-TA AP 설치 폴더 이동
 ```
