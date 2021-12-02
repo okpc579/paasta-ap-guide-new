@@ -95,12 +95,14 @@ multi-cpi-deployment는 AWS, OpenStack, vSphere 에서 설정이 가능하다.
 
 ## <div id='1.3'/>1.3. 참고 자료
 
-본 문서는 Cloud Foundry의 BOSH Document와 Open VPN을 참고로 작성하였다.
+본 문서는 Cloud Foundry의 BOSH Document와 cf-deployment, Open VPN을 참고로 작성하였다.
 
 BOSH Document: [https://bosh.io](https://bosh.io)  
+CF Document: [https://docs.cloudfoundry.org/](https://docs.cloudfoundry.org/)  
 BOSH cpi-config Document: [https://bosh.io/docs/cpi-config](https://bosh.io/docs/cpi-config)  
 BOSH guide-multi-cpi-aws Document: [https://bosh.io/docs/guide-multi-cpi-aws](https://bosh.io/docs/guide-multi-cpi-aws)  
 BOSH Deployment: [https://github.com/cloudfoundry/bosh-deployment](https://github.com/cloudfoundry/bosh-deployment)  
+CF Deployment: [https://github.com/cloudfoundry/cf-deployment](https://github.com/cloudfoundry/cf-deployment)  
 OpenVPN : [https://openvpn.net/](https://openvpn.net/)  
 
 <br><br>
