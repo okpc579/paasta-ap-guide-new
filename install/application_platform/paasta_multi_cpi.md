@@ -36,7 +36,7 @@
 ## <div id='1.2'/>1.2. 범위
 multi-cpi-deployment는 paasta-deployment v5.6.2의 설치를 기준으로 가이드를 작성하였다.  
 multi-cpi-deployment는 AWS, OpenStack, vSphere 에서 설정이 가능하다.  
-분류는 크게 Main IaaS AZ와 Second IaaS AZ가 같은 경우 (e.g. A OpenStack ↔ B OpenStack, 이하 Same IaaS AZ) 와 Main IaaS AZ와 Second IaaS AZ가 다른 경우 (e.g. Openstack ↔ AWS, 이하 Different IaaS AZ)를 기준으로 작성하였다.
+분류는 크게 Main IaaS AZ와 Second IaaS AZ가 같은 경우 (e.g. A OpenStack ⇔ B OpenStack, 이하 Same IaaS AZ) 와 Main IaaS AZ와 Second IaaS AZ가 다른 경우 (e.g. Openstack ⇔ AWS, 이하 Different IaaS AZ)를 기준으로 작성하였다.
 
 설정 가능한 IaaS 케이스는 다음과 같다.  
 
