@@ -392,7 +392,7 @@ $ bosh upload-stemcell https://storage.googleapis.com/bosh-core-stemcells/1.34/b
 <br>
 
 ### <div id='2.4.3'/>2.4.3. CPI Config 설정
-CPI에 대한 추가 설정을 진행한다.
+CPI에 대한 추가 설정을 진행한다.  
 해당되는 IaaS에 맞게 cpi-config.yml의 주석을 해제하여 진행한다.
 |파일명|설명|
 |------|---|
