@@ -399,8 +399,6 @@ CPI에 대한 추가 설정을 진행한다.
 | cpi-config.yml	 | multi-cpi 추가를 위한 cpi config file |
 | cpi-vars.yml	 | multi-cpi 설정 파일 |
 
-<br>
-
 #### <div id='2.4.3.1'/>2.4.3.1. Same IaaS AZ의 경우
 
 - 예제 AWS - AWS를 사용할 경우
@@ -463,8 +461,6 @@ cpis:
 ```
 $ bosh update-cpi-config multi-cpi/cpi-config.yml -l multi-cpi/cpi-vars.yml
 ```
-
-<br>
 
 #### <div id='2.4.3.2'/>2.4.3.2. Different IaaS AZ의 경우
 - 예제 AWS - OpenStack을 사용할 경우
@@ -533,8 +529,6 @@ $ bosh update-cpi-config multi-cpi/cpi-config.yml -l multi-cpi/cpi-vars.yml
 Cloud Config에 대한 추가 설정을 진행한다.  
 Same IaaS AZ의 경우 paasta-deployment 폴더의 cloud-config 파일을 이용하며, Different IaaS AZ의 경우 bosh/multi-cpi 폴더의 cloud-config 파일을 이용한다.  
 
-<br>
-
 #### <div id='2.4.4.1'/>2.4.4.1. Same IaaS AZ의 경우
 
 ```diff
@@ -565,8 +559,6 @@ cloud-config 의 azs 에서 각 인프라의 cpi-name 을 지정
 ```
 $ bosh update-cloud-config ~/workspace/cloud-config/{iaas}-cloud-config.yml 
 ```
-
-<br>
 
 #### <div id='2.4.4.2'/>2.4.4.2. Different IaaS AZ의 경우
 
