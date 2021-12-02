@@ -336,7 +336,8 @@ $ source deploy-{IaaS}.sh
 ```
 
 ### <div id='2.4.2'/>2.4.2. Stemcell 업로드
-설치된 BOSH에 로그인 후 사용하는 IaaS의 Stemcell 업로드를 진행한다. (e.g. AWS와 OpenStack의 두개의 환경을 사용 할 경우 해당 명령어를 두개 다 실행한다.)  
+설치된 BOSH에 로그인 후 사용하는 IaaS의 Stemcell 업로드를 진행한다.   
+(e.g. AWS와 OpenStack의 두개의 환경을 사용 할 경우 해당 명령어를 두개 다 실행한다.)  
 ```
 # paasta-deployment v5.6.2와 동일한 Stemcell인 ubuntu-bionic 1.34를 사용한다.
 # AWS 스템셀의 경우 light Stemcell을 이용한다
