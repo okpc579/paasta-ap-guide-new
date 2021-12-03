@@ -18,19 +18,19 @@
   　2.5.1 [kind](#2.5.1)  
   　2.5.2 [minikube](#2.5.2)  
 
-## <div id='1'> 1. 문서 개요
-### <div id='1.1'> 1.1. 목적
+# <div id='1'> 1. 문서 개요
+## <div id='1.1'> 1.1. 목적
 본 문서는 Local Kubenetes Cluster를 구성하고 해당 환경에서 cf-for-k8s 설치하기 위한 가이드를 제공하는 데 목적이 있다.
 
 <br>
 
-### <div id='1.2'> 1.2. 범위
+## <div id='1.2'> 1.2. 범위
 본 문서는 [cf-for-k8s v#.#.#](https://github.com/cloudfoundry/cf-for-k8s/tree/v5.2.0)을 기준으로 작성하였다. ##수정필요  
 본 문서는 [kind](https://kind.sigs.k8s.io/) 혹은 [minikube](https://minikube.sigs.k8s.io/docs/)로 Local Kubernetes Cluster를 구성 후 cf-for-k8s 설치 기준으로 작성하였다.
 
 <br>
 
-### <div id='1.3'> 1.3. 참고자료
+## <div id='1.3'> 1.3. 참고자료
 cf-for-k8s github : [https://github.com/cloudfoundry/cf-for-k8s](https://github.com/cloudfoundry/cf-for-k8s)  
 cf-for-k8s Document : [https://cf-for-k8s.io/docs/](https://cf-for-k8s.io/docs/)  
 kind Document :  [https://kind.sigs.k8s.io/](https://kind.sigs.k8s.io/)  
@@ -38,8 +38,8 @@ minikube Document : [https://minikube.sigs.k8s.io/docs/](https://minikube.sigs.k
 
 <br>
 
-## <div id='2'> 2. cf-for-k8s 설치
-### <div id='2.1'> 2.1. Prerequisite
+# <div id='2'> 2. cf-for-k8s 설치
+## <div id='2.1'> 2.1. Prerequisite
 cf-for-k8s 공식 문서에서는 Local Kubernetes Cluster 요구 조건을 다음과 같이 권고하고 있다.
 - 최소 4 CPU, 6GB Memory
 - 권장 6-8 CPU, 8-16GB Memory
@@ -47,7 +47,7 @@ cf-for-k8s 공식 문서에서는 Local Kubernetes Cluster 요구 조건을 다�
 
 <br>
 
-### <div id='2.2'> 2.2. 설치 파일 다운로드
+## <div id='2.2'> 2.2. 설치 파일 다운로드
 
 - git clone 명령을 통해 다음 경로에서 cf-for-k8s 다운로드를 진행한다. 본 설치 가이드에서의 cf-for-k8s의 버전은 v#.#.#이다. ## 수정필요
 ```
@@ -58,7 +58,7 @@ $ cd ~~~~~~~
 
 <br>
 
-### <div id='2.3'> 2.3. 실행 파일 소개 및 설치
+## <div id='2.3'> 2.3. 실행 파일 소개 및 설치
 
 - cf-for-k8s를 설치 & 활용하기 위해선 다음과 같은 실행파일이 필요하다.
 
@@ -97,9 +97,9 @@ Client Version: version.Info{Major:"1", Minor:"22", GitVersion:"v1.22.2", GitCom
 
 <br>
 
-### <div id='2.4'> 2.4. Local Kubernetes Cluster 구성
+## <div id='2.4'> 2.4. Local Kubernetes Cluster 구성
 본 가이드에서 제공되는 cluster 구성 도구 kind와 minikube를 선택하여 진행한다.  
-#### <div id='2.4.1'> 2.4.1. kind
+### <div id='2.4.1'> 2.4.1. kind
 
 - kind 다운로드
 ```
@@ -120,7 +120,7 @@ KubeDNS is running at https://127.0.0.1:43173/api/v1/namespaces/kube-system/serv
 
 <br>
 
-#### <div id='2.4.2'> 2.4.2. minikube
+### <div id='2.4.2'> 2.4.2. minikube
 
 - minikube 다운로드
 ```
@@ -142,8 +142,8 @@ KubeDNS is running at https://192.168.49.2:8443/api/v1/namespaces/kube-system/se
 
 <br>
 
-### <div id='2.5'> 2.5. cf-for-k8s 설치
-#### <div id='2.5.1'> 2.5.1. kind
+## <div id='2.5'> 2.5. cf-for-k8s 설치
+### <div id='2.5.1'> 2.5.1. kind
 
 - cf-for-k8s에서 사용할 변수(비밀번호, 인증키 등)를 생성한다.
 ```
