@@ -496,7 +496,7 @@ cpis:
 ... ((생략)) ...
 ```
 
-- CPI Config 적용 (테스트 필요)
+- CPI Config 적용
 ```
 $ bosh update-cpi-config multi-cpi/cpi-config.yml -l multi-cpi/cpi-vars.yml
 ```
@@ -557,7 +557,7 @@ cpis:
 ... ((생략)) ...
 ```
 
-- CPI Config 적용 (테스트 필요)
+- CPI Config 적용
 ```
 $ bosh update-cpi-config multi-cpi/cpi-config.yml -l multi-cpi/cpi-vars.yml
 ```
