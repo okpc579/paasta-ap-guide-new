@@ -299,7 +299,6 @@ $ ping {openvpn-az2-ip}
 ## ifconfig 확인 (네트워크 인터페이스 tun0, tun2 확인)
 $ sudo su
 $ ifconfig 
-<<<<<<<<<<<<<<<<<<<< 수정 예정(실제 배포 후 결과 드래그 예정)
 ```
 
 <br>
