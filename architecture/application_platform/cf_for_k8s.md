@@ -2,7 +2,6 @@
 
 ## 목적
 본 문서는 cf-for-k8s의 Architecture를 제공한다
-
 <br><br>
 
 ## 시스템 구성도
