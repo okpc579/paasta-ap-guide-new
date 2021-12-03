@@ -9,7 +9,7 @@
     - [PaaS-TA Multi CPI](./application_platform/paasta_multi_cpi.md)  
   - Kubernetes를 이용한 Container Type 배포
     - [cf-for-k8s (가칭)](./application_platform/cf_for_k8s.md)  
-    - [cf-for-k8s - local (가칭)](./application_platform/cf_for_k8s_single.md)  
+    - [cf-for-k8s - local (가칭)](./application_platform/cf_for_k8s_local.md)  
   - 기타 가이드
     - [Migration 가이드 (3.1 to 4.0)](./application_platform/4.0_migration.md)  
 
