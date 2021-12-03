@@ -29,27 +29,11 @@
 
 <br>
 
-### <div id='1.3'> 1.3. cf-for-k8s 컴포넌트 구성
-cf-for-k8s의 컴포넌트 구성은 다음과 같다.
-![cf-for-k8s-component](https://www.cloudfoundry.org/wp-content/uploads/cf4k8s-1024x576.png)
-- [istio](https://github.com/istio/istio)
-- [envoy](https://github.com/envoyproxy/envoy)
-- [fluentd](https://www.fluentd.org/)
-- [eirini](https://www.cloudfoundry.org/project-eirini/)
-- [kpack](https://github.com/pivotal/kpack)
-- [paketo buildpacks](https://paketo.io/)
-- [CF API / CAPI-k8s-release](https://github.com/cloudfoundry/capi-k8s-release)  
-- [cf-k8s-networking](https://github.com/cloudfoundry/cf-k8s-networking)  
-- [cf-k8s-logging](https://github.com/cloudfoundry/cf-k8s-logging)  
-- [UAA](https://github.com/cloudfoundry/uaa)  
-
-<br>
-
-### <div id='1.4'> 1.4. 참고자료
-> https://github.com/cloudfoundry/cf-for-k8s  
-> https://cf-for-k8s.io/docs/  
-> https://kind.sigs.k8s.io/  
-> https://minikube.sigs.k8s.io/docs/  
+### <div id='1.3'> 1.3. 참고자료
+cf-for-k8s github : [https://github.com/cloudfoundry/cf-for-k8s](https://github.com/cloudfoundry/cf-for-k8s)  
+cf-for-k8s Document : [https://cf-for-k8s.io/docs/](https://cf-for-k8s.io/docs/)  
+kind Document :  [https://kind.sigs.k8s.io/](https://kind.sigs.k8s.io/)  
+minikube Document : [https://minikube.sigs.k8s.io/docs/](https://minikube.sigs.k8s.io/docs/)  
 
 <br>
 
