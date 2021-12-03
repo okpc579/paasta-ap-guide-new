@@ -299,7 +299,7 @@ $ kind delete cluster
   
 
 
-#### <div id='2.5.2'> 2.5.2. minikube
+### <div id='2.5.2'> 2.5.2. minikube
 - Metrics-server를 활성화 한다.
 ```
 $ minikube addons enable metrics-server
