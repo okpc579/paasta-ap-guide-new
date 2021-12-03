@@ -33,20 +33,20 @@
   3.8. [cf-for-k8s 로그인 및 테스트 앱 배포](#3.8)  
     ※ [(참고) cf-for-k8s 삭제](#3.8.1)  
 
-## <div id='1'> 1. 문서 개요
-### <div id='1.1'> 1.1. 목적
+# <div id='1'> 1. 문서 개요
+## <div id='1.1'> 1.1. 목적
 본 문서는 PaaS-TA Container-Platform 단독 배포 시 사용되는 Kubespray로 Kubenetes Cluster를 구성하고 해당 환경에서 cf-for-k8s 설치하기 위한 가이드를 제공하는 데 목적이 있다.
 
 <br>
 
-### <div id='1.2'> 1.2. 범위
+## <div id='1.2'> 1.2. 범위
 본 문서는 [cf-for-k8s v#.#.#](https://github.com/cloudfoundry/cf-for-k8s/tree/v5.2.0), [paas-ta-container-platform v1.1.0](https://github.com/PaaS-TA/paas-ta-container-platform/tree/v1.1.0)을 기준으로 작성하였다. ##수정필요  
 본 문서는 AWS, Openstack 환경에 PaaS-TA Container-Platform 단독 배포(Kubespray)를 활용하여 Kubernetes Cluster를 구성 후 cf-for-k8s 설치 기준으로 작성하였다.
 
 <br>
 
 
-### <div id='1.3'> 1.3. 참고자료
+## <div id='1.3'> 1.3. 참고자료
 PaaS-TA 컨테이너 플랫폼 : [https://github.com/PaaS-TA/paas-ta-container-platform](https://github.com/PaaS-TA/paas-ta-container-platform)  
 Kubespray : [https://kubespray.io](https://kubespray.io)  
 Kubespray github : [https://github.com/kubernetes-sigs/kubespray](https://github.com/kubernetes-sigs/kubespray)  
@@ -55,13 +55,13 @@ cf-for-k8s Document : [https://cf-for-k8s.io/docs/](https://cf-for-k8s.io/docs/)
 
 <br>
 
-## <div id='2'> 2. Kubespray 사용 Kubernetes Cluster 구성
+# <div id='2'> 2. Kubespray 사용 Kubernetes Cluster 구성
 기본적인 Kubernetes Cluster 구성방법은 [PaaS-TA Container Platform 단독 배포 설치 가이드](https://github.com/PaaS-TA/paas-ta-container-platform/blob/v1.1.0/install-guide/standalone/paas-ta-container-platform-standalone-deployment-guide-v1.1.md)을 따라가되 일부 옵션이나 IaaS상에서 수정할 부분이 존재한다.
 본 가이드의 Kubernetes Cluster 구성은 위 링크된 단독 배포 설치 가이드를 간략하게 수정하였기 때문에 Kubernetes Cluster 구성에 대한 상세 설명은 링크된 단독 배포 설치 가이드를 참고한다.
 
 <br>
 
-### <div id='2.1'> 2.1. Prerequisite
+## <div id='2.1'> 2.1. Prerequisite
 Kubernetes Cluster 구성을 위한 주요 소프트웨어 및 패키지 Version 정보는 [링크](https://github.com/PaaS-TA/paas-ta-container-platform/blob/v1.1.0/install-guide/standalone/paas-ta-container-platform-standalone-deployment-guide-v1.1.md#-21-prerequisite)에서 확인 가능하다.  
 추가로 cf-for-k8s 공식 문서에서는 Kubernetes Cluster 요구 조건을 다음과 같이 권고하고 있다.
 - Kubernetes version : 1.19 ~ 1.21
@@ -74,7 +74,7 @@ Kubernetes Cluster 구성을 위한 주요 소프트웨어 및 패키지 Version
 
 <br>
 
-### <div id='2.2'> 2.2. AWS 설정 (AWS 환경 사용 시)
+## <div id='2.2'> 2.2. AWS 설정 (AWS 환경 사용 시)
 AWS에 cf-for-k8s용도의 Kubernetes Cluster를 구성 할 경우 LoadBalancer나 Storage의 사용을 위하여 Cluster를 구성하는 인스턴스에 IAM 권한이 필요하다.
 - IAM 역할을 생성하고 다음 정책을 추가한 뒤, 인스턴스 생성 시 적용한다.
 ```
@@ -143,7 +143,7 @@ value = member
 
 <br>
 
-### <div id='2.3'> 2.3. SSH Key 생성 및 배포
+## <div id='2.3'> 2.3. SSH Key 생성 및 배포
 SSH Key 생성 및 배포 이후의 모든 설치과정은 Master Node에서 진행한다.
 
 - Master Node에 접속하여 RSA 공개키를 생성한다.
@@ -189,7 +189,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC5QrbqzV6g4iZT4iR1u+EKKVQGqBy4DbGqH7/PVfmA
 ```
 <br>
 
-### <div id='2.4'> 2.4. Kubespray 다운로드
+## <div id='2.4'> 2.4. Kubespray 다운로드
 - git clone 명령을 통해 다음 경로에서 Kubespray 다운로드를 진행한다. 본 설치 가이드에서의 paas-ta-container-platform의 버전은 v1.1.0이며 Kubespray 버전은 v2.16.0 이다.
 ```
 $ git clone https://github.com/PaaS-TA/paas-ta-container-platform-deployment.git -b v1.1.0
@@ -197,7 +197,7 @@ $ git clone https://github.com/PaaS-TA/paas-ta-container-platform-deployment.git
 
 <br>
 
-### <div id='2.5'> 2.5. Ubuntu, Python Package 설치
+## <div id='2.5'> 2.5. Ubuntu, Python Package 설치
 Kubespray 설치에 필요한 Ansible, Jinja 등 Python Package 설치를 진행한다.
 
 - apt-get update를 진행한다.
@@ -229,7 +229,7 @@ $ sudo pip3 install -r requirements.txt
 
 <br>
 
-### <div id='2.6'> 2.6. Kubespray 파일 수정
+## <div id='2.6'> 2.6. Kubespray 파일 수정
 
 - mycluster 디렉토리의 inventory.ini 파일을 설정한다.
 ```
@@ -312,7 +312,7 @@ master_node_hostname: {MASTER_NODE_HOSTNAME}
 
 <br>
 
-### <div id='2.7'> 2.7. cf-for-k8s 설치용 Kubespray 설정 변경
+## <div id='2.7'> 2.7. cf-for-k8s 설치용 Kubespray 설정 변경
 
 - ingress_nginx_enabled 를 비활성화 한다. (AWS, Openstack 공통)
 ```
@@ -331,7 +331,7 @@ enable_nodelocaldns: false
 ```
 <br>
 
-#### <div id='2.7.1'> 2.7.1. AWS
+### <div id='2.7.1'> 2.7.1. AWS
 - AWS 환경 사용 시 cloud_provider를 AWS로 설정한다.
 ```
 $ vi inventory/mycluster/group_vars/all/all.yml
@@ -356,7 +356,7 @@ aws_ebs_csi_plugin_image_tag: latest
 
 <br>
 
-#### <div id='2.7.2'> 2.7.2. Openstack
+### <div id='2.7.2'> 2.7.2. Openstack
 - Openstack 환경 사용 시 Octavia LoadBalancer를 사용한다면 Octavia에 대한 설정을 추가한다. (선택)
 ```
 $ vi inventory/mycluster/group_vars/all/openstack.yml
@@ -378,8 +378,8 @@ external_openstack_lbaas_internal_lb: false
 ```
 <br>
 
-### <div id='2.8'> 2.8. Kuberspray를 통한 Kubernetes Cluster 구성
-#### <div id='2.8.1'> 2.8.1. AWS
+## <div id='2.8'> 2.8. Kuberspray를 통한 Kubernetes Cluster 구성
+### <div id='2.8.1'> 2.8.1. AWS
 
 - AWS 환경 사용 시 다음 명령어를 통해 Cluster 구성을 진행한다.
 ```
@@ -388,7 +388,7 @@ $ ansible-playbook -i ./inventory/mycluster/inventory.ini ./cluster.yml -e ansib
 
 <br>
 
-#### <div id='2.8.2'> 2.8.2. Openstack
+### <div id='2.8.2'> 2.8.2. Openstack
 Openstack 환경 사용 시 기존 Container-Platform 단독 배포 설치 가이드와 동일하게 진행한다.
 - 인벤토리 빌더로 Ansible 인벤토리 파일을 업데이트한다.
 ```
@@ -502,7 +502,7 @@ snapshot-controller-0                         1/1     Running   0          7m33s
 
 <br>
 
-#### <div id='2.9.1'> ※ (참고) Kubespray 사용 Kubernetes Cluster 삭제
+### <div id='2.9.1'> ※ (참고) Kubespray 사용 Kubernetes Cluster 삭제
 Ansible playbook을 이용하여 Kubespray 삭제를 진행한다.
 
 ```
@@ -515,8 +515,8 @@ $ ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=roo
 
 <br>
 
-## <div id='3'> 3. cf-for-k8s 설치
-### <div id='3.1'> 3.1. 실행파일 소개
+# <div id='3'> 3. cf-for-k8s 설치
+## <div id='3.1'> 3.1. 실행파일 소개
 - cf-for-k8s를 설치 & 활용하기 위해선 다음과 같은 실행파일이 필요하다.
 
 | 이름   |      설명      |
@@ -546,7 +546,7 @@ $ ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=roo
 
 <br>
 
-### <div id='3.2'> 3.2. 실행파일 다운로드
+## <div id='3.2'> 3.2. 실행파일 다운로드
 
 - git clone 명령을 통해 다음 경로에서 cf-for-k8s 다운로드를 진행한다. 본 설치 가이드에서의 cf-for-k8s의 버전은 v#.#.#이다. ## 수정필요
 ```
@@ -563,7 +563,7 @@ $ source utils-install.sh
 ```
 <br>
 
-### <div id='3.3'> 3.3. variable 설정
+## <div id='3.3'> 3.3. variable 설정
 - variables.yml 파일을 편집하여 cf-for-k8s 설치 시 옵션들을 설정한다.
 ```
 $ vi variables.yml ## 수정필요
@@ -629,7 +629,7 @@ external_db_cert_path=support-files/db.ca                   # if DB use cert -->
 
 <br>
 
-### <div id='3.4'> 3.4. Storageclass Default 설정
+## <div id='3.4'> 3.4. Storageclass Default 설정
 cf-for-k8s를 설치하기 위해서는 사용 중인 Storageclass를 default 설정 할 필요가 있다.
 
 - AWS 사용 시 EBS를 사용한다면 EBS Storageclass를 배포한다. (선택)
@@ -666,7 +666,7 @@ ebs-sc (default)   ebs.csi.aws.com   Delete          WaitForFirstConsumer   fals
   
 <br>
 
-### <div id='3.5'> 3.5. cf-for-k8s values 생성
+## <div id='3.5'> 3.5. cf-for-k8s values 생성
 - cf-for-k8s 설치 시 사용 할 values를 생성하는 스크립트를 실행한다.
 ```
 $ source 2.generate-values.sh
@@ -703,7 +703,7 @@ app_registry:
 
 <br>
 
-### <div id='3.6'> 3.6. cf-for-k8s 배포 YAML 생성
+## <div id='3.6'> 3.6. cf-for-k8s 배포 YAML 생성
 
 - 만들어진 cf-values.yml 파일을 이용하여 cf-for-k8s를 설치할 YAML을 렌더링하여 생성한다.
 ```
@@ -731,7 +731,7 @@ metadata:
 
 <br>
 
-### <div id='3.7'> 3.7. cf-for-k8s 설치
+## <div id='3.7'> 3.7. cf-for-k8s 설치
 - 생성된 YAML파일을 이용하여 cf-for-k8s를 설치한다.
 ```
 $ source 4.deploy-cffork8s.sh
@@ -788,7 +788,7 @@ kpack          kpack-webhook-7b57486ddf-zwfnx                2/2     Running    
 
 <br>
 
-#### <div id='3.7.1'> ※ AWS 기반 cf-for-k8s 설치 시 LoadBalancer 도메인 연결
+### <div id='3.7.1'> ※ AWS 기반 cf-for-k8s 설치 시 LoadBalancer 도메인 연결
 AWS의 LoadBalancer를 사용할 경우 Route53을 이용한 도메인의 연결이 필요하다.
 - AWS LoadBalancer 이름 확인
 
@@ -804,7 +804,7 @@ istio-ingressgateway   LoadBalancer   10.233.28.216   a0c35cf15801c4557a9b49b3a9
 
 <br>
 
-### <div id='3.8'> 3.8. cf-for-k8s 로그인 및 테스트 앱 배포
+## <div id='3.8'> 3.8. cf-for-k8s 로그인 및 테스트 앱 배포
 - 테스트 앱을 배포하여 앱이 정상 배포되는지 확인한다.
 ```
 # 배포 자동 테스트
@@ -919,7 +919,7 @@ Hello World
 
 <br>
   
-#### <div id='3.8.1'> ※ (참고) cf-for-k8s 삭제
+### <div id='3.8.1'> ※ (참고) cf-for-k8s 삭제
 ```
 $ source delete-cffork8s.sh
 ```
