@@ -5,8 +5,6 @@
 <br><br>
 
 ## 시스템 구성도
-
-cf-for-k8s의 컴포넌트 구성은 다음과 같다.
 ![cf-for-k8s-component](https://www.cloudfoundry.org/wp-content/uploads/cf4k8s-1024x576.png)
 - [istio](https://github.com/istio/istio)
 - [envoy](https://github.com/envoyproxy/envoy)
@@ -22,9 +20,9 @@ cf-for-k8s의 컴포넌트 구성은 다음과 같다.
 <br>
 
 ## 참고자료
-> https://github.com/PaaS-TA/paas-ta-container-platform  
-> https://kubespray.io  
-> https://github.com/kubernetes-sigs/kubespray  
-> https://github.com/cloudfoundry/cf-for-k8s  
-> https://cf-for-k8s.io/docs/  
+PaaS-TA 컨테이너 플랫폼 : [https://github.com/PaaS-TA/paas-ta-container-platform](https://github.com/PaaS-TA/paas-ta-container-platform)  
+Kubespray : [https://kubespray.io](https://kubespray.io)  
+Kubespray github : [https://github.com/kubernetes-sigs/kubespray](https://github.com/kubernetes-sigs/kubespray)  
+cf-for-k8s github : [https://github.com/cloudfoundry/cf-for-k8s](https://github.com/cloudfoundry/cf-for-k8s)  
+cf-for-k8s Document : [https://cf-for-k8s.io/docs/](https://cf-for-k8s.io/docs/)  
 
