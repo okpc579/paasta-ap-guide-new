@@ -56,7 +56,7 @@ cf-for-k8s Document : [https://cf-for-k8s.io/docs/](https://cf-for-k8s.io/docs/)
 <br>
 
 # <div id='2'> 2. Kubespray 사용 Kubernetes Cluster 구성
-기본적인 Kubernetes Cluster 구성방법은 [PaaS-TA Container Platform 단독 배포 설치 가이드](https://github.com/PaaS-TA/paas-ta-container-platform/blob/v1.1.0/install-guide/standalone/paas-ta-container-platform-standalone-deployment-guide-v1.1.md)을 따라가되 일부 옵션이나 IaaS상에서 수정할 부분이 존재한다.
+기본적인 Kubernetes Cluster 구성방법은 PaaS-TA Container Platform 단독 배포 설치 가이드를 따라가되 일부 옵션이나 IaaS상에서 수정할 부분이 존재한다.
 본 가이드의 Kubernetes Cluster 구성은 위 링크된 단독 배포 설치 가이드를 간략하게 수정하였기 때문에 Kubernetes Cluster 구성에 대한 상세 설명은 링크된 단독 배포 설치 가이드를 참고한다.
 
 <br>
