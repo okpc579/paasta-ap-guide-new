@@ -8,7 +8,7 @@
     - [PaaS-TA AP - min](./application_platform/paasta_ap_min.md)  
     - [PaaS-TA Multi CPI](./application_platform/paasta_multi_cpi.md)  
   - Kubernetes를 이용한 Container Type 배포
-    - [cf-for-k8s (가칭)](./application_platform/cf_for_k8s.md)  
+    - [PaaS-TA Sidecar](./application_platform/sidecar.md)  
 
 + Portal
   + [BOSH를 이용한 포탈 VM Type](./portal/vm_type.md)   
