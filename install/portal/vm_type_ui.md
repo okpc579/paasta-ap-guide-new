@@ -442,6 +442,7 @@ Paas-TA Portal 각각 Instance의 log를 확인 할 수 있다.
 ### <div id="3.5"/> 3.5. 카탈로그 적용
 ##### 1. Catalog 빌드팩, 서비스팩 추가
 Paas-TA Portal 설치 후에 관리자 포탈에서 빌드팩, 서비스팩을 등록해야 사용자 포탈에서 사용이 가능하다.
+- [카탈로그 이미지 다운로드](https://nextcloud.paas-ta.org/index.php/s/EmzfJw38H4GQKTr/download)
 
  1. 관리자 포탈에 접속한다.(portal-web-admin.[public ip].nip.io)
     >![paas-ta-portal-15]
