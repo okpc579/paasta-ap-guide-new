@@ -14,7 +14,7 @@
   2.4. [Kubespray 다운로드](#2.4)  
   2.5. [Ubuntu, Python Package 설치](#2.5)  
   2.6. [Kubespray 파일 수정](#2.6)  
-  2.7. [cf-for-k8s 설치용 Kubespray 설정 변경](#2.7)  
+  2.7. [Sidecar 설치용 Kubespray 설정 변경](#2.7)  
   　2.7.1 [AWS](#2.7.1)  
   　2.7.2 [Openstack](#2.7.2)  
   2.8. [Kuberspray를 통한 Kubernetes Cluster 구성](#2.8)  
@@ -23,27 +23,27 @@
   2.9. [Kubernetes Cluster 사용 설정 & 설치 확인](#2.9)  
     ※ [(참고) Kubespray 사용 Kubernetes Cluster 삭제](#2.9.1)  
 
-3. [cf-for-k8s 설치](#3)  
+3. [Sidecar 설치](#3)  
   3.1. [실행파일 소개](#3.1)  
   3.2. [실행파일 다운로드](#3.2)  
   3.3. [variable 설정](#3.3)  
   3.4. [Storageclass Default 설정](#3.4)  
-  3.5. [cf-for-k8s values 생성](#3.5)  
-  3.6. [cf-for-k8s 배포 YAML 생성](#3.6)  
-  3.7. [cf-for-k8s 설치](#3.7)  
-  　※ [AWS 기반 cf-for-k8s 설치 시 LoadBalancer 도메인 연결](#3.7.1)  
-  3.8. [cf-for-k8s 로그인 및 테스트 앱 배포](#3.8)  
-    ※ [(참고) cf-for-k8s 삭제](#3.8.1)  
+  3.5. [Sidecar values 생성](#3.5)  
+  3.6. [Sidecar 배포 YAML 생성](#3.6)  
+  3.7. [Sidecar 설치](#3.7)  
+  　※ [AWS 기반 Sidecar 설치 시 LoadBalancer 도메인 연결](#3.7.1)  
+  3.8. [Sidecar 로그인 및 테스트 앱 배포](#3.8)  
+    ※ [(참고) Sidecar 삭제](#3.8.1)  
 
 # <div id='1'> 1. 문서 개요
 ## <div id='1.1'> 1.1. 목적
-본 문서는 PaaS-TA Container-Platform 단독 배포 시 사용되는 Kubespray로 Kubenetes Cluster를 구성하고 해당 환경에서 cf-for-k8s 설치하기 위한 가이드를 제공하는 데 목적이 있다.
+본 문서는 PaaS-TA Container-Platform 단독 배포 시 사용되는 Kubespray로 Kubenetes Cluster를 구성하고 해당 환경에서 PaaS-TA Sidecar(이하 Sidecar)를 설치하기 위한 가이드를 제공하는 데 목적이 있다.
 
 <br>
 
 ## <div id='1.2'> 1.2. 범위
-본 문서는 [cf-for-k8s v#.#.#](https://github.com/cloudfoundry/cf-for-k8s/tree/v5.2.0), [paas-ta-container-platform v1.1.0](https://github.com/PaaS-TA/paas-ta-container-platform/tree/v1.1.0)을 기준으로 작성하였다. ##수정필요  
-본 문서는 AWS, Openstack 환경에 PaaS-TA Container-Platform 단독 배포(Kubespray)를 활용하여 Kubernetes Cluster를 구성 후 cf-for-k8s 설치 기준으로 작성하였다.
+본 문서는 [cf-for-k8s v5.3.0](https://github.com/cloudfoundry/cf-for-k8s/tree/v5.3.0), [paas-ta-container-platform v1.1.0](https://github.com/PaaS-TA/paas-ta-container-platform/tree/v1.1.0)을 기준으로 작성하였다.    
+본 문서는 AWS, Openstack 환경에 PaaS-TA Container-Platform 단독 배포(Kubespray)를 활용하여 Kubernetes Cluster를 구성 후 Sidecar 설치 기준으로 작성하였다.
 
 <br>
 
@@ -77,7 +77,7 @@ Kubernetes Cluster 구성을 위한 주요 소프트웨어 및 패키지 Version
 <br>
 
 ## <div id='2.2'> 2.2. AWS 설정 (AWS 환경 사용 시)
-AWS에 cf-for-k8s용도의 Kubernetes Cluster를 구성 할 경우 LoadBalancer나 Storage의 사용을 위하여 Cluster를 구성하는 인스턴스에 IAM 권한이 필요하다.
+AWS에 Sidecar용도의 Kubernetes Cluster를 구성 할 경우 LoadBalancer나 Storage의 사용을 위하여 Cluster를 구성하는 인스턴스에 IAM 권한이 필요하다.
 - IAM 역할을 생성하고 다음 정책을 추가한 뒤, 인스턴스 생성 시 적용한다.
 ```
 # iam_policy.json
@@ -314,7 +314,7 @@ master_node_hostname: {MASTER_NODE_HOSTNAME}
 
 <br>
 
-## <div id='2.7'> 2.7. cf-for-k8s 설치용 Kubespray 설정 변경
+## <div id='2.7'> 2.7. Sidecar 설치용 Kubespray 설정 변경
 
 - ingress_nginx_enabled 를 비활성화 한다. (AWS, Openstack 공통)
 ```
@@ -517,31 +517,31 @@ $ ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=roo
 
 <br>
 
-# <div id='3'> 3. cf-for-k8s 설치
+# <div id='3'> 3. Sidecar 설치
 ## <div id='3.1'> 3.1. 실행파일 소개
-- cf-for-k8s를 설치 & 활용하기 위해선 다음과 같은 실행파일이 필요하다.
+- Sidecar를 설치 & 활용하기 위해선 다음과 같은 실행파일이 필요하다.
 
 | 이름   |      설명      |
 |----------|-------------|
-| [ytt](https://carvel.dev/ytt/) | cf-for-k8s을 배포 시 사용 되는 YAML을 생성하는 툴 |
-| [kapp](https://carvel.dev/kapp/) | cf-for-k8s의 라이프사이클을 관리하는 툴 |
+| [ytt](https://carvel.dev/ytt/) | Sidecar를 배포 시 사용 되는 YAML을 생성하는 툴 |
+| [kapp](https://carvel.dev/kapp/) | Sidecar의 라이프사이클을 관리하는 툴 |
 | [kubectl](https://github.com/kubernetes/kubectl) | Kubernetes Cluster를 제어하는 툴 |
-| [bosh cli](https://github.com/cloudfoundry/bosh-cli) | cf-for-k8s에서 사용될 임의의 비밀번호와 certificate를 생성하는 툴 |
-| [cf cli](https://github.com/cloudfoundry/cli) (v7+) | cf-for-k8s와 상호 작용하는 툴 |
+| [bosh cli](https://github.com/cloudfoundry/bosh-cli) | Sidecar에서 사용될 임의의 비밀번호와 certificate를 생성하는 툴 |
+| [cf cli](https://github.com/cloudfoundry/cli) (v7+) | Sidecar와 상호 작용하는 툴 |
 
 <br>
 
-- cf-for-k8s를 설치 시 사용되는 스크립트는 다음과 같다.
+- Sidecar를 설치 시 사용되는 스크립트는 다음과 같다.
 
 | 이름   |      설명      | 비고 |
 |----------|-------------|----|
-| utils-install.sh | cf-for-k8s 설치 & 활용 시 사용되는 툴 설치 스크립트 | ytt, kapp, bosh cli, cf cli 설치 |
-| variables.yml | cf-for-k8s 설치 시 적용하는 변수 설정 파일 ||
-| 1.storageclass-config.sh | cf-for-k8s 설치 시 사용 할 Storageclass를 default로 정의하는 스크립트 ||
-| 2.generate-values.sh | cf-for-k8s 설치 시 사용 할 비밀번호, certificate등의 설정을 갖고있는 Manifest를 생성하는 스크립트 ||
+| utils-install.sh | Sidecar 설치 & 활용 시 사용되는 툴 설치 스크립트 | ytt, kapp, bosh cli, cf cli 설치 |
+| variables.yml | Sidecar 설치 시 적용하는 변수 설정 파일 ||
+| 1.storageclass-config.sh | Sidecar 설치 시 사용 할 Storageclass를 default로 정의하는 스크립트 ||
+| 2.generate-values.sh | Sidecar 설치 시 사용 할 비밀번호, certificate등의 설정을 갖고있는 Manifest를 생성하는 스크립트 ||
 | 3.rendering-values.sh | 비밀번호, certificate등의 설정을 갖고있는 Manifest를 활용해 YAML을 생성하는 스크립트 ||
-| 4.deploy-cffork8s.sh | 생성된 YAML을 이용하여 cf-for-k8s를 설치하는 스크립트 ||
-| delete-cffork8s.sh | cf-for-k8s를 삭제하는 스크립트 ||
+| 4.deploy-cffork8s.sh | 생성된 YAML을 이용하여 Sidecar를 설치하는 스크립트 ||
+| delete-cffork8s.sh | Sidecar를 삭제하는 스크립트 ||
 | deploy-ebs-sc.sh | EBS Storageclass를 배포하는 스크립트 | AWS EBS 사용 시 적용|
 | inject-self-signed-certificate.sh | 자체 서명된 인증서를 사용하는 Private 레지스트리 사용 시 POD에 CA를 삽입하는 보조 스크립트 | 자세한 가이드는 inject-self-signed-certificate.sh 파일 안 설명이나 [cert-injection-webhook](https://github.com/vmware-tanzu/cert-injection-webhook) 참고 |
 | install-test.sh | 설치 후 Test App을 배포하여 확인하는 스크립트 ||
@@ -550,7 +550,7 @@ $ ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=roo
 
 ## <div id='3.2'> 3.2. 실행파일 다운로드
 
-- git clone 명령을 통해 다음 경로에서 cf-for-k8s 다운로드를 진행한다. 본 설치 가이드에서의 cf-for-k8s의 버전은 v#.#.#이다. ## 수정필요
+- git clone 명령을 통해 다음 경로에서 Sidecar 다운로드를 진행한다. 본 설치 가이드에서의 Sidecar의 버전은 베타 버전이다. ## 수정필요
 ```
 $ cd $HOME
 $ git clone ~~~~.git -b ~~~
@@ -559,14 +559,14 @@ $ cd ~~~~~~~
 
 <br>
 
-- utils-install.sh 파일을 실행하여 cf-for-k8s 설치 시 필요한 실행 파일을 설치한다.
+- utils-install.sh 파일을 실행하여 Sidecar 설치 시 필요한 실행 파일을 설치한다.
 ```
 $ source utils-install.sh
 ```
 <br>
 
 ## <div id='3.3'> 3.3. variable 설정
-- variables.yml 파일을 편집하여 cf-for-k8s 설치 시 옵션들을 설정한다.
+- variables.yml 파일을 편집하여 Sidecar 설치 시 옵션들을 설정한다.
 ```
 $ vi variables.yml ## 수정필요
 
@@ -620,7 +620,7 @@ external_db_cert_path=support-files/db.ca                   # if DB use cert -->
 | 이름   |      설명      |
 |----------|-------------|
 | iaas | Cluster가 구성된 IaaS (aws, openstack) |
-| system_domain | cf-for-k8s의 도메인 |
+| system_domain | Sidecar의 도메인 |
 | use_lb | LoadBalancer 사용 여부 (사용 안할 시 system_domain을 Cluster Worker의 PublicIP와 연결된 system_domain으로 설정) <br> (e.g. Cluster Worker Floating IP : 3.50.50.50 -> system_domain : 3.50.50.50.nip.io 혹은 연결된 도메인 설정)|
 | public_ip | LoadBalancer의 IP(Openstack의 Octavia 사용 시) |
 | storageclass_name | 사용할 Storageclass (Openstack : cinder-csi, AWS : ebs-sc) |
@@ -632,7 +632,7 @@ external_db_cert_path=support-files/db.ca                   # if DB use cert -->
 <br>
 
 ## <div id='3.4'> 3.4. Storageclass Default 설정
-cf-for-k8s를 설치하기 위해서는 사용 중인 Storageclass를 default 설정 할 필요가 있다.
+Sidecar를 설치하기 위해서는 사용 중인 Storageclass를 default 설정 할 필요가 있다.
 
 - AWS 사용 시 EBS를 사용한다면 EBS Storageclass를 배포한다. (선택)
 ```
@@ -668,17 +668,17 @@ ebs-sc (default)   ebs.csi.aws.com   Delete          WaitForFirstConsumer   fals
   
 <br>
 
-## <div id='3.5'> 3.5. cf-for-k8s values 생성
-- cf-for-k8s 설치 시 사용 할 values를 생성하는 스크립트를 실행한다.
+## <div id='3.5'> 3.5. Sidecar values 생성
+- Sidecar 설치 시 사용 할 values를 생성하는 스크립트를 실행한다.
 ```
 $ source 2.generate-values.sh
 ```
 <br>
 
-- Manifest 파일은 manifest/cf-values.yml 에 생성되며 각종 values를 확인, 수정 가능하다.
+- Manifest 파일은 manifest/sidecar-values.yml 에 생성되며 각종 values를 확인, 수정 가능하다.
 
 ```
-$ vi manifest/cf-values.yml
+$ vi manifest/sidecar-values.yml
 
 #@data/values
 ---
@@ -705,18 +705,18 @@ app_registry:
 
 <br>
 
-## <div id='3.6'> 3.6. cf-for-k8s 배포 YAML 생성
+## <div id='3.6'> 3.6. Sidecar 배포 YAML 생성
 
-- 만들어진 cf-values.yml 파일을 이용하여 cf-for-k8s를 설치할 YAML을 렌더링하여 생성한다.
+- 만들어진 sidecar-values.yml 파일을 이용하여 Sidecar를 설치할 YAML을 렌더링하여 생성한다.
 ```
 $ source 3.rendering-values.sh
 ```
 <br>
 
-- YAML 파일은 manifest/cf-for-k8s-rendered.yml에 생성되며 Kubernetes를 통해 배포되는 리소스의 확인, 수정이 가능하다.
+- YAML 파일은 manifest/sidecar-rendered.yml에 생성되며 Kubernetes를 통해 배포되는 리소스의 확인, 수정이 가능하다.
 
 ```
-$ vi manifest/cf-for-k8s-rendered.yml
+$ vi manifest/sidecar-rendered.yml
 
 apiVersion: kapp.k14s.io/v1alpha1
 kind: Config
@@ -733,8 +733,8 @@ metadata:
 
 <br>
 
-## <div id='3.7'> 3.7. cf-for-k8s 설치
-- 생성된 YAML파일을 이용하여 cf-for-k8s를 설치한다.
+## <div id='3.7'> 3.7. Sidecar 설치
+- 생성된 YAML파일을 이용하여 Sidecar를 설치한다.
 ```
 $ source 4.deploy-cffork8s.sh
 
@@ -749,7 +749,7 @@ Succeeded
 
 ```
 
-- cf-for-k8s가 정상 설치되면 POD는 다음과 같이 구성된다.
+- Sidecar가 정상 설치되면 POD는 다음과 같이 구성된다.
 ```
 $ kubectl get pods -A
 
@@ -790,7 +790,7 @@ kpack          kpack-webhook-7b57486ddf-zwfnx                2/2     Running    
 
 <br>
 
-### <div id='3.7.1'> ※ AWS 기반 cf-for-k8s 설치 시 LoadBalancer 도메인 연결
+### <div id='3.7.1'> ※ AWS 기반 Sidecar 설치 시 LoadBalancer 도메인 연결
 AWS의 LoadBalancer를 사용할 경우 Route53을 이용한 도메인의 연결이 필요하다.
 - AWS LoadBalancer 이름 확인
 
@@ -806,7 +806,7 @@ istio-ingressgateway   LoadBalancer   10.233.28.216   a0c35cf15801c4557a9b49b3a9
 
 <br>
 
-## <div id='3.8'> 3.8. cf-for-k8s 로그인 및 테스트 앱 배포
+## <div id='3.8'> 3.8. Sidecar 로그인 및 테스트 앱 배포
 - 테스트 앱을 배포하여 앱이 정상 배포되는지 확인한다.
 ```
 # 배포 자동 테스트
@@ -841,7 +841,7 @@ Hello World
 
 
 # 배포 수동 테스트
-$ cf login -a api.$(grep system_domain ./tmp/cf-values.yml | cut -d" " -f2 | sed -e 's/\"//g') --skip-ssl-validation -u admin -p "$(grep cf_admin_password ./tmp/cf-values.yml | cut -d" " -f2)"
+$ cf login -a api.$(grep system_domain ./tmp/sidecar-values.yml | cut -d" " -f2 | sed -e 's/\"//g') --skip-ssl-validation -u admin -p "$(grep cf_admin_password ./tmp/sidecar-values.yml | cut -d" " -f2)"
 
 Authenticating...
 OK
@@ -921,9 +921,9 @@ Hello World
 
 <br>
   
-### <div id='3.8.1'> ※ (참고) cf-for-k8s 삭제
+### <div id='3.8.1'> ※ (참고) Sidecar 삭제
 ```
-$ source delete-cffork8s.sh
+$ source delete-sidecar.sh
 ```
 
 <br>
