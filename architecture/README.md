@@ -2,11 +2,10 @@
 
 ## Application Platform (AP) - Architecture
 - Application Platform  
-  - BOSH를 이용한 VM Type 배포
-    - [BOSH](./application_platform/bosh.md)  
-    - [PaaS-TA AP](./application_platform/paasta_ap.md)  
-    - [PaaS-TA AP - min](./application_platform/paasta_ap_min.md)  
-    - [PaaS-TA Multi CPI](./application_platform/paasta_multi_cpi.md)  
+  - [BOSH](./application_platform/bosh.md)  
+  - [PaaS-TA AP](./application_platform/paasta_ap.md)  
+  - [PaaS-TA AP - min](./application_platform/paasta_ap_min.md)  
+  - [PaaS-TA Multi CPI](./application_platform/paasta_multi_cpi.md)  
 
 + Portal
   + [BOSH를 이용한 포탈 VM Type](./portal/vm_type.md)   
