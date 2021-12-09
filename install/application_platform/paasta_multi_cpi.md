@@ -411,26 +411,10 @@ $ vi {IaaS}-vars.yml
 $ source deploy-{IaaS}.sh
 ```
 
-### <div id='2.4.2'/>2.4.2. Stemcell 업로드
-설치된 BOSH에 로그인 후 사용하는 IaaS의 Stemcell 업로드를 진행한다.   
-(e.g. AWS와 OpenStack의 두개의 환경을 사용 할 경우 해당 명령어를 두개 다 실행한다.)  
-```
-# paasta-deployment v5.6.2와 동일한 Stemcell인 ubuntu-bionic 1.34를 사용한다.
-# AWS 스템셀의 경우 light Stemcell을 이용한다
-
-# AWS
-$ bosh upload-stemcell https://storage.googleapis.com/bosh-aws-light-stemcells/1.34/light-bosh-stemcell-1.34-aws-xen-hvm-ubuntu-bionic-go_agent.tgz --fix
-
-# OpenStack
-$ bosh upload-stemcell https://storage.googleapis.com/bosh-core-stemcells/1.34/bosh-stemcell-1.34-openstack-kvm-ubuntu-bionic-go_agent.tgz --fix
-
-# vSphere
-$ bosh upload-stemcell https://storage.googleapis.com/bosh-core-stemcells/1.34/bosh-stemcell-1.34-vsphere-esxi-ubuntu-bionic-go_agent.tgz --fix
-```
-
 <br>
 
-### <div id='2.4.3'/>2.4.3. CPI Config 설정
+
+### <div id='2.4.2'/>2.4.2. CPI Config 설정
 CPI에 대한 추가 설정을 진행한다.  
 해당되는 IaaS에 맞게 cpi-config.yml의 주석을 해제하여 진행한다.
 |파일명|설명|
@@ -438,7 +422,7 @@ CPI에 대한 추가 설정을 진행한다.
 | cpi-config.yml	 | multi-cpi 추가를 위한 cpi config file |
 | cpi-vars.yml	 | multi-cpi 설정 파일 |
 
-#### <div id='2.4.3.1'/>2.4.3.1. Same IaaS AZ의 경우
+#### <div id='2.4.2.1'/>2.4.2.1. Same IaaS AZ의 경우
 
 - 예제 AWS - AWS를 사용할 경우
 > $ vi multi-cpi/cpi-vars.yml
@@ -501,7 +485,7 @@ cpis:
 $ bosh update-cpi-config multi-cpi/cpi-config.yml -l multi-cpi/cpi-vars.yml
 ```
 
-#### <div id='2.4.3.2'/>2.4.3.2. Different IaaS AZ의 경우
+#### <div id='2.4.2.2'/>2.4.2.2. Different IaaS AZ의 경우
 - 예제 AWS - OpenStack을 사용할 경우
 > $ vi multi-cpi/cpi-vars.yml
 ```
@@ -564,11 +548,11 @@ $ bosh update-cpi-config multi-cpi/cpi-config.yml -l multi-cpi/cpi-vars.yml
 
 <br>
 
-### <div id='2.4.4'/>2.4.4. Cloud Config 설정
+### <div id='2.4.3'/>2.4.3. Cloud Config 설정
 Cloud Config에 대한 추가 설정을 진행한다.  
 Same IaaS AZ의 경우 paasta-deployment 폴더의 cloud-config 파일을 이용하며, Different IaaS AZ의 경우 bosh/multi-cpi 폴더의 cloud-config 파일을 이용한다.  
 
-#### <div id='2.4.4.1'/>2.4.4.1. Same IaaS AZ의 경우
+#### <div id='2.4.3.1'/>2.4.3.1. Same IaaS AZ의 경우
 
 ```diff
 cloud-config 의 azs 에서 각 인프라의 cpi-name 을 지정
@@ -599,7 +583,7 @@ cloud-config 의 azs 에서 각 인프라의 cpi-name 을 지정
 $ bosh update-cloud-config ~/workspace/cloud-config/{iaas}-cloud-config.yml 
 ```
 
-#### <div id='2.4.4.2'/>2.4.4.2. Different IaaS AZ의 경우
+#### <div id='2.4.3.2'/>2.4.3.2. Different IaaS AZ의 경우
 
 |파일명|설명|
 |------|---|
@@ -624,6 +608,26 @@ $ bosh update-cloud-config ~/workspace/bosh/multi-cpi/cloud-config-{iaas}-{iaas}
 ```
 
 <br>
+
+### <div id='2.4.4'/>2.4.4. Stemcell 업로드
+설치된 BOSH에 로그인 후 사용하는 IaaS의 Stemcell 업로드를 진행한다.   
+(e.g. AWS와 OpenStack의 두개의 환경을 사용 할 경우 해당 명령어를 두개 다 실행한다.)  
+```
+# paasta-deployment v5.6.2와 동일한 Stemcell인 ubuntu-bionic 1.34를 사용한다.
+# AWS 스템셀의 경우 light Stemcell을 이용한다
+
+# AWS
+$ bosh upload-stemcell https://storage.googleapis.com/bosh-aws-light-stemcells/1.34/light-bosh-stemcell-1.34-aws-xen-hvm-ubuntu-bionic-go_agent.tgz --fix
+
+# OpenStack
+$ bosh upload-stemcell https://storage.googleapis.com/bosh-core-stemcells/1.34/bosh-stemcell-1.34-openstack-kvm-ubuntu-bionic-go_agent.tgz --fix
+
+# vSphere
+$ bosh upload-stemcell https://storage.googleapis.com/bosh-core-stemcells/1.34/bosh-stemcell-1.34-vsphere-esxi-ubuntu-bionic-go_agent.tgz --fix
+```
+
+<br>
+
 
 ### <div id='2.4.5'/>2.4.5. Multi CPI를 이용한 AP 설치 테스트
 Multi CPI 설정을 완료한 뒤, PaaS-TA AP를 설치하여 상호간 통신이 원활하게 진행되는지 테스트를 진행한다.  
