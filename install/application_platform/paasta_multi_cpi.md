@@ -634,7 +634,7 @@ Multi CPI 설정을 완료한 뒤, PaaS-TA AP를 설치하여 상호간 통신�
 PaaS-TA AP에 필요한 runtime-config 설정이나 변수 설정에 관한 설명은 PaaS-TA AP 가이드를 참조한다.  
 
 본 가이드에서는 여러 케이스중 AWS - OpenStack 기준으로 Diego-cell을 OpenStack에, 나머지 VM을 AWS에 설치하여 진행하였다.  
-Diego-cell뿐 아니라 다른 VM도 분산 배포가 가능하니 해당되는 설정에 맞게 배포 방식을 변경하여 설치를 진행한다.  
+Diego-cell뿐 아니라 다른 VM도 분산 배포가 가능하고 Diego-cell을 각각 다른 IaaS에 분산하여 배포도 가능하니 해당되는 설정에 맞게 배포 방식을 변경하여 설치를 진행한다.  
 
 - PaaS-TA AP 설치 폴더 이동
 ```
@@ -647,7 +647,7 @@ $ cd ~/workspace/paasta-deployment/paasta
 ... ((생략)) ...
 
 # DIEGO-CELL
-diego_cell_azs: ["z1", "z4"]		# Diego-Cell 가용 존
+diego_cell_azs: ["z4", "z5"]		# Diego-Cell 가용 존
 diego_cell_instances: 3			# Diego-Cell 인스턴스 수
 
 ... ((생략)) ...
