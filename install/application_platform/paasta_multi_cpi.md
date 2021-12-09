@@ -647,7 +647,7 @@ $ cd ~/workspace/paasta-deployment/paasta
 ... ((생략)) ...
 
 # DIEGO-CELL
-diego_cell_azs: ["z4", "z5"]		# Diego-Cell 가용 존
+diego_cell_azs: ["z1", "z4"]		# Diego-Cell 가용 존
 diego_cell_instances: 3			# Diego-Cell 인스턴스 수
 
 ... ((생략)) ...
