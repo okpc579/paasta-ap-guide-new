@@ -570,7 +570,7 @@ App이 정상적으로 Redis 서비스를 사용하는지 확인한다.
 
 ```
 $ export APP=redis-example-app.[CF Domain]
-$ curl -X PUT $APP/foo -d 'data=bar
+$ curl -X PUT $APP/foo -d 'data=bar'
 success
 $ curl -X GET $APP/foo
 bar
